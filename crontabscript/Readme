@@ -1,0 +1,19 @@
+How to run SendSms.php every 30 minutes using crontab
+-----------------------------------------------------
+#PHP installation required!
+#Make sure to make the file named SendSms.log & FillNotificationQueue.log writeable and adjust the paths
+#Scripts will run at xx:00 and xx:30 between 6:00 and 22:00 / once a day at 02:00
+
+# Make SendSms.php & runSendSms.sh executable using the following commands:
+sudo chmod +x '/opt/lampp/htdocs/mch-registry/crontabscript/SendSms.php' 
+sudo chmod +x '/opt/lampp/htdocs/mch-registry/crontabscript/FillNotificationQueue.php' 
+sudo chmod +x '/opt/lampp/htdocs/mch-registry/crontabscript/runSendSms.sh' 
+sudo chmod +x '/opt/lampp/htdocs/mch-registry/crontabscript/runFillNotificationQueue.sh' 
+
+# Command: sudo crontab -e
+# Add the following lines:
+
+0,30 6-22 * * * [ $(date +\%H\%M) -le 2215 ] && '/opt/lampp/htdocs/mch-registry/crontabscript/runSendSms.sh' >> '/opt/lampp/htdocs/mch-registry/crontabscript/SendSms.log' 2>&1
+* 2 * * * '/opt/lampp/htdocs/mch-registry/crontabscript/runFillNotificationQueue.sh' >> '/opt/lampp/htdocs/mch-registry/crontabscript/FillNotificationQueue.log' 2>&1
+
+

@@ -76,6 +76,8 @@ class FillNotificationQueue {
 			}				
 			
 			gc_enable(); // Enable Garbage Collector
+			$tempDate = new datetime(date('Y-m-d'));
+			$todayDate = $tempDate->format('Y-m-d');
 			
 			//Fill queue for each type
 			for ($i = 1; $i <= 7; $i++) {	
@@ -111,8 +113,8 @@ class FillNotificationQueue {
 				}catch(Exception $e){
 					$catchedError = true;
 					echo date("Y-m-d H:i:s") . ' Caught exception while filling '.$notificationTypeName[$i].' notification into queue. Message: ',  $e->getMessage(), '<br \>'."\n";
-				}
-				if(!$catchedError){$dbConn->exec("UPDATE notificationqueuelastfill SET lastFillDate = CURDATE() WHERE NotificationTypeID=".$i.";");}				
+				}				
+				if(!$catchedError){$dbConn->exec("UPDATE notificationqueuelastfill SET lastFillDate = '" . $todayDate . "' WHERE NotificationTypeID=".$i.";");}				
 			}		
 			
 			//Move expired messages to the Notification Queue History
@@ -125,20 +127,20 @@ class FillNotificationQueue {
 					0 as SucessfullySent,
 					NULL as DateTimeSent
 				FROM notificationqueue
-				WHERE DATE(LatestBy) < curdate();
+				WHERE DATE(LatestBy) < '" . $todayDate . "';
 		   ");
 			echo date("Y-m-d H:i:s") , ' Moved ', $rowCount, ' expired message(s) to the  Notification Queue History.<br \>'."\n";
 			
 			//Delete expired messages from Notification Queue after moving
 			$rowCount = $dbConn->exec("
-				DELETE FROM notificationqueue WHERE DATE(LatestBy) < curdate();
+				DELETE FROM notificationqueue WHERE DATE(LatestBy) < '" . $todayDate . "';
 		   ");
 			//echo date("Y-m-d H:i:s") , ' Deleted ', $rowCount, ' expired message(s) from the Notification Queue after moving them to the  Notification Queue History.<br \>'."\n";
 		
 			//Clean Notification Queue History
 			$rowCount = $dbConn->exec("
 				DELETE FROM notificationqueuehistory
-				WHERE DATEDIFF(DateTimeToSend, curdate()) >". $GLOBALS['DAYS_TO_KEEP_HISTORY'] .";
+				WHERE DATEDIFF(DateTimeToSend, '" . $todayDate . "') >". $GLOBALS['DAYS_TO_KEEP_HISTORY'] .";
 		   ");
 			echo date("Y-m-d H:i:s") , ' Removed ', $rowCount, ' message(s) older than '. $GLOBALS['DAYS_TO_KEEP_HISTORY'] .' days from the Notification Queue History.<br \>'."\n";
 		
@@ -156,24 +158,25 @@ class FillNotificationQueue {
 		
 	}
 	
+	
 	private function getStatement($notificationTypeID, $currentDate){
 		switch ($notificationTypeID) {
 			case 1:
-				return "CALL fillRecommendationNotificationForPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', '". $GLOBALS['DEFAULT_RECOMMENDATIONS_TIME'] ."', " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
+				return "CALL fillRecommendationNotificationForPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate . "', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', '". $GLOBALS['DEFAULT_RECOMMENDATIONS_TIME'] ."', " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", '" . quotemeta(quotemeta($GLOBALS['FOLDER_PATH'] . "Recommendations" . $currentDate . ".csv")) . "', @nrOfNotifications);";
 			case 2:
-				return "CALL fillVisitReminderNotificationForPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_REMINDERS_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
+				return "CALL fillVisitReminderNotificationForPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_REMINDERS_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", '" . quotemeta(quotemeta($GLOBALS['FOLDER_PATH'] . "Reminders" . $currentDate . ".csv")) . "', @nrOfNotifications);";
 			case 3:
-				return "CALL fillHighRiskVisitReminderNotificationForDoctors('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_ON'] . ", @nrOfNotifications);";
+				return "CALL fillHighRiskVisitReminderNotificationForDoctors('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_ON'] . ", @nrOfNotifications);";
 			case 4:
-				return "CALL fillHighRiskPregnancySummaryNotificationForOblastUsers('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_DAY_OF_MONTH'] .", '" . $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_TIME'] .  "', ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_ON'] .", ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_ON_EMPLOYEE_LEVEL'] .", @nrOfNotifications);";
+				return "CALL fillHighRiskPregnancySummaryNotificationForOblastUsers('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_DAY_OF_MONTH'] .", '" . $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_TIME'] .  "', ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_ON'] .", ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_ON_EMPLOYEE_LEVEL'] .", @nrOfNotifications);";
 			case 5:
-				return "CALL fillPatientDischargedFromHospitalisationNotificationToDoctors('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_TIME'] ."', " . $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_ON'] .", @nrOfNotifications);";
+				return "CALL fillPatientDischargedFromHospitalisationNotificationToDoctors('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_TIME'] ."', " . $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_ON'] .", @nrOfNotifications);";
 			case 6:
-				return "CALL fillSubscribeToPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_SUBSCRIBE_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_SUBSCRIBE_TIME'] ."', " . $GLOBALS['DEFAULT_SUBSCRIBE_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
+				return "CALL fillSubscribeToPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_SUBSCRIBE_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_SUBSCRIBE_TIME'] ."', " . $GLOBALS['DEFAULT_SUBSCRIBE_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
 			case 7:
-				return "CALL fillUnsubscribeToPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_UNSUBSCRIBE_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_UNSUBSCRIBE_TIME'] ."', " . $GLOBALS['DEFAULT_UNSUBSCRIBE_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
+				return "CALL fillUnsubscribeToPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_UNSUBSCRIBE_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_UNSUBSCRIBE_TIME'] ."', " . $GLOBALS['DEFAULT_UNSUBSCRIBE_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
 			case 0:
-				return "CALL fillVisitReminderHospitalisationNotificationForPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_REMINDERS_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
+				return "CALL fillVisitReminderHospitalisationNotificationForPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_REMINDERS_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", '" . quotemeta(quotemeta($GLOBALS['FOLDER_PATH'] . "RemindersHosp" . $currentDate . ".csv")) . "', @nrOfNotifications);";
 			default:
 				throw (new Exception('Notification Type ' . $notificationTypeID . ' unknown. <br>' ."\n"));
 				break;

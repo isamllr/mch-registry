@@ -7,6 +7,8 @@ $DB_USER = 'root';  // MySQL username
 $DB_PASS = '';      // password
 
 $USE_TIMEZONE = 'Europe/Kiev'; //Supported timezones: http://php.net/manual/en/timezones.php
+$USE_MYSQL_TIMEZONE = '+02:00';
+$FOLDER_PATH = 'C:\\xamppv3\\htdocs\\mch-registry\\crontabscript\\google_appengine\\'; //don't forget the ending //, use double slashes
 
 //SMS PROVIDER SETTINGS
 //---------------------
