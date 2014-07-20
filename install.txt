@@ -1,0 +1,55 @@
+Welcome to MCH-Registry
+
+MCH-Registry is a web-based application and this means you need to install it on a server and run the application using your web browser. The following steps describe the "manual" installation of the software for the purpose of development and testing. 
+
+## How to install and run MCH-Registry in Microsoft Windows
+
+1. Installation of XAMPP 
+-------------------------------
+- Download XAMPP from the Apache Friends organization's Web site. (http://www.apachefriends.org/de/xampp.html)
+- Find your way to the download site. Make sure you download the "installer" package.
+- Install the distribution. Just unpack and run the .exe file
+- During the installation process, create the main directory in C:\xampp
+- You will be informed about installing Apache, mySQL and Filezilla services - Agree with all the default settings. If you plan to run MCH-Registry regularly, Install Apache and mySQL as service (tick the checkboxes) and the servers will be launched automatically at the start of Windows.
+
+2. Start the Servers
+-------------------------
+- open 'XAMPP Control Panel' from the location of XAMPP in the Start Menu. 
+- Start the services Apache and MySQL by pressing the Start-Buttons next to the respective descriptions (NOTE: In order for Apache to run, HTTP Port 80 must be available - In case you're running Skype, stop the skype connection, start Apache and restart the skype connection)
+-"Unblock" the service from your Windows Firewall
+- Click 'Admin...' from the Apache service modules. It should open your browser and show a welcome screen with this URL http://localhost/xampp/
+
+3. Installation of MCH-Registry
+------------------------------------
+- If you haven't already done so, download the latest distribution from http://sourceforge.net/projects/mch-registry/
+- Create a folder called 'registry' in C:\xampp\htdocs and add to it the application files.
+
+4. Initialize the database
+- ---------------------------
+- Open PHPmyAdmin by typing http://localhost/phpmyadmin/ in your browser or start the application in the XAMPP welcome screen
+- Create a new database by typing "registry" in the field "Create new database". 
+- Select "utf8_bin" under "MySQL connection collation" 
+- Press "create"
+- Click on the newly created database and go to "import" on the top of the page
+- Load the mysql-script provided along with the software (MCHRegistry_db.sql). 
+
+
+6. Launch the application
+-------------------------------
+- Start Web browser and type in http://localhost/registry/
+- Login using "admin" as username and password for the first time
+- If you can now see the dashboard.php, you're done.
+
+
+Important Security Note: 
+-------------------------------
+XAMPP is not meant for production use but only for developers in a development environment. The way XAMPP is configured is to be open as possible and allowing the developer anything he/she wants. For development environments this is great but in a production environment it could be fatal. Here a list of missing security in XAMPP:
+
+    * The MySQL administrator (root) has no password.
+    * The MySQL daemon is accessible via network.
+    * phpMyAdmin is accessible via network.
+    * Examples are accessible via network.
+
+To get your XAMPP secured, just click on 'Security' on the sidebar when you are in the http://localhost/xampp/ page. Just follow the instructions.
+
+

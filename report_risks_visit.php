@@ -1,0 +1,2461 @@
+<?php
+//Include Common Files @1-2C759B45
+define("RelativePath", ".");
+define("PathToCurrentPage", "/");
+define("FileName", "report_risks_visit.php");
+include_once(RelativePath . "/Common.php");
+include_once(RelativePath . "/Template.php");
+include_once(RelativePath . "/Sorter.php");
+include_once(RelativePath . "/Navigator.php");
+//End Include Common Files
+
+//Include Page implementation @2-203FAEA1
+include_once(RelativePath . "/topmenu.php");
+//End Include Page implementation
+
+class clsRecordReport2 { //Report2 Class @36-40449E32
+
+//Variables @36-9E315808
+
+    // Public variables
+    public $ComponentType = "Record";
+    public $ComponentName;
+    public $Parent;
+    public $HTMLFormAction;
+    public $PressedButton;
+    public $Errors;
+    public $ErrorBlock;
+    public $FormSubmitted;
+    public $FormEnctype;
+    public $Visible;
+    public $IsEmpty;
+
+    public $CCSEvents = "";
+    public $CCSEventResult;
+
+    public $RelativePath = "";
+
+    public $InsertAllowed = false;
+    public $UpdateAllowed = false;
+    public $DeleteAllowed = false;
+    public $ReadAllowed   = false;
+    public $EditMode      = false;
+    public $ds;
+    public $DataSource;
+    public $ValidatingControls;
+    public $Controls;
+    public $Attributes;
+
+    // Class variables
+//End Variables
+
+//Class_Initialize Event @36-E2CFDC30
+    function clsRecordReport2($RelativePath, & $Parent)
+    {
+
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->Visible = true;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Record Report2/Error";
+        $this->ReadAllowed = true;
+        $this->Visible = (CCSecurityAccessCheck("3") == "success");
+        if($this->Visible)
+        {
+            $this->ReadAllowed = $this->ReadAllowed && CCUserInGroups(CCGetGroupID(), "3");
+            $this->ComponentName = "Report2";
+            $this->Attributes = new clsAttributes($this->ComponentName . ":");
+            $CCSForm = explode(":", CCGetFromGet("ccsForm", ""), 2);
+            if(sizeof($CCSForm) == 1)
+                $CCSForm[1] = "";
+            list($FormName, $FormMethod) = $CCSForm;
+            $this->FormEnctype = "application/x-www-form-urlencoded";
+            $this->FormSubmitted = ($FormName == $this->ComponentName);
+            $Method = $this->FormSubmitted ? ccsPost : ccsGet;
+            $this->Button_DoSearch = new clsButton("Button_DoSearch", $Method, $this);
+            $this->s_PregnancyRecNr = new clsControl(ccsTextBox, "s_PregnancyRecNr", "s_PregnancyRecNr", ccsText, "", CCGetRequestParam("s_PregnancyRecNr", $Method, NULL), $this);
+            $this->s_PatientID = new clsControl(ccsTextBox, "s_PatientID", $CCSLocales->GetText("PatientID"), ccsInteger, "", CCGetRequestParam("s_PatientID", $Method, NULL), $this);
+            $this->s_VisitDate = new clsControl(ccsTextBox, "s_VisitDate", "s_VisitDate", ccsDate, $DefaultDateFormat, CCGetRequestParam("s_VisitDate", $Method, NULL), $this);
+            $this->DatePicker_s_BirthDate = new clsDatePicker("DatePicker_s_BirthDate", "Report2", "s_VisitDate", $this);
+            $this->s_VisitDate1 = new clsControl(ccsTextBox, "s_VisitDate1", "s_VisitDate1", ccsDate, $DefaultDateFormat, CCGetRequestParam("s_VisitDate1", $Method, NULL), $this);
+            $this->DatePicker_s_BirthDate1 = new clsDatePicker("DatePicker_s_BirthDate1", "Report2", "s_VisitDate1", $this);
+        }
+    }
+//End Class_Initialize Event
+
+//Validate Method @36-44A22892
+    function Validate()
+    {
+        global $CCSLocales;
+        $Validation = true;
+        $Where = "";
+        $Validation = ($this->s_PregnancyRecNr->Validate() && $Validation);
+        $Validation = ($this->s_PatientID->Validate() && $Validation);
+        $Validation = ($this->s_VisitDate->Validate() && $Validation);
+        $Validation = ($this->s_VisitDate1->Validate() && $Validation);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "OnValidate", $this);
+        $Validation =  $Validation && ($this->s_PregnancyRecNr->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_PatientID->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_VisitDate->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_VisitDate1->Errors->Count() == 0);
+        return (($this->Errors->Count() == 0) && $Validation);
+    }
+//End Validate Method
+
+//CheckErrors Method @36-048F154B
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->s_PregnancyRecNr->Errors->Count());
+        $errors = ($errors || $this->s_PatientID->Errors->Count());
+        $errors = ($errors || $this->s_VisitDate->Errors->Count());
+        $errors = ($errors || $this->DatePicker_s_BirthDate->Errors->Count());
+        $errors = ($errors || $this->s_VisitDate1->Errors->Count());
+        $errors = ($errors || $this->DatePicker_s_BirthDate1->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//MasterDetail @36-ED598703
+function SetPrimaryKeys($keyArray)
+{
+    $this->PrimaryKeys = $keyArray;
+}
+function GetPrimaryKeys()
+{
+    return $this->PrimaryKeys;
+}
+function GetPrimaryKey($keyName)
+{
+    return $this->PrimaryKeys[$keyName];
+}
+//End MasterDetail
+
+//Operation Method @36-874A58CC
+    function Operation()
+    {
+        if(!$this->Visible)
+            return;
+
+        global $Redirect;
+        global $FileName;
+
+        if(!$this->FormSubmitted) {
+            return;
+        }
+
+        if($this->FormSubmitted) {
+            $this->PressedButton = "Button_DoSearch";
+            if($this->Button_DoSearch->Pressed) {
+                $this->PressedButton = "Button_DoSearch";
+            }
+        }
+        $Redirect = "report_risks_visit.php";
+        if($this->Validate()) {
+            if($this->PressedButton == "Button_DoSearch") {
+                $Redirect = "report_risks_visit.php" . "?" . CCMergeQueryStrings(CCGetQueryString("Form", array("Button_DoSearch", "Button_DoSearch_x", "Button_DoSearch_y")));
+                if(!CCGetEvent($this->Button_DoSearch->CCSEvents, "OnClick", $this->Button_DoSearch)) {
+                    $Redirect = "";
+                }
+            }
+        } else {
+            $Redirect = "";
+        }
+    }
+//End Operation Method
+
+//Show Method @36-8391AC88
+    function Show()
+    {
+        global $CCSUseAmp;
+        global $Tpl;
+        global $FileName;
+        global $CCSLocales;
+        $Error = "";
+
+        if(!$this->Visible)
+            return;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $RecordBlock = "Record " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $RecordBlock;
+        $this->EditMode = $this->EditMode && $this->ReadAllowed;
+        if (!$this->FormSubmitted) {
+        }
+
+        if($this->FormSubmitted || $this->CheckErrors()) {
+            $Error = "";
+            $Error = ComposeStrings($Error, $this->s_PregnancyRecNr->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_PatientID->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_VisitDate->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DatePicker_s_BirthDate->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_VisitDate1->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DatePicker_s_BirthDate1->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Errors->ToString());
+            $Tpl->SetVar("Error", $Error);
+            $Tpl->Parse("Error", false);
+        }
+        $CCSForm = $this->EditMode ? $this->ComponentName . ":" . "Edit" : $this->ComponentName;
+        $this->HTMLFormAction = $FileName . "?" . CCAddParam(CCGetQueryString("QueryString", ""), "ccsForm", $CCSForm);
+        $Tpl->SetVar("Action", !$CCSUseAmp ? $this->HTMLFormAction : str_replace("&", "&amp;", $this->HTMLFormAction));
+        $Tpl->SetVar("HTMLFormName", $this->ComponentName);
+        $Tpl->SetVar("HTMLFormEnctype", $this->FormEnctype);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        $this->Attributes->Show();
+        if(!$this->Visible) {
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+
+        $this->Button_DoSearch->Show();
+        $this->s_PregnancyRecNr->Show();
+        $this->s_PatientID->Show();
+        $this->s_VisitDate->Show();
+        $this->DatePicker_s_BirthDate->Show();
+        $this->s_VisitDate1->Show();
+        $this->DatePicker_s_BirthDate1->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+    }
+//End Show Method
+
+} //End Report2 Class @36-FCB6E20C
+
+class clsRecordreport3 { //report3 Class @156-A029CD25
+
+//Variables @156-9E315808
+
+    // Public variables
+    public $ComponentType = "Record";
+    public $ComponentName;
+    public $Parent;
+    public $HTMLFormAction;
+    public $PressedButton;
+    public $Errors;
+    public $ErrorBlock;
+    public $FormSubmitted;
+    public $FormEnctype;
+    public $Visible;
+    public $IsEmpty;
+
+    public $CCSEvents = "";
+    public $CCSEventResult;
+
+    public $RelativePath = "";
+
+    public $InsertAllowed = false;
+    public $UpdateAllowed = false;
+    public $DeleteAllowed = false;
+    public $ReadAllowed   = false;
+    public $EditMode      = false;
+    public $ds;
+    public $DataSource;
+    public $ValidatingControls;
+    public $Controls;
+    public $Attributes;
+
+    // Class variables
+//End Variables
+
+//Class_Initialize Event @156-46FC5D53
+    function clsRecordreport3($RelativePath, & $Parent)
+    {
+
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->Visible = true;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Record report3/Error";
+        $this->ReadAllowed = true;
+        $this->Visible = (CCSecurityAccessCheck("1;2") == "success");
+        if($this->Visible)
+        {
+            $this->ReadAllowed = $this->ReadAllowed && CCUserInGroups(CCGetGroupID(), "1;2");
+            $this->ComponentName = "report3";
+            $this->Attributes = new clsAttributes($this->ComponentName . ":");
+            $CCSForm = explode(":", CCGetFromGet("ccsForm", ""), 2);
+            if(sizeof($CCSForm) == 1)
+                $CCSForm[1] = "";
+            list($FormName, $FormMethod) = $CCSForm;
+            $this->FormEnctype = "application/x-www-form-urlencoded";
+            $this->FormSubmitted = ($FormName == $this->ComponentName);
+            $Method = $this->FormSubmitted ? ccsPost : ccsGet;
+            $this->Button_DoSearch = new clsButton("Button_DoSearch", $Method, $this);
+            $this->s_PregnancyRecNr = new clsControl(ccsTextBox, "s_PregnancyRecNr", "s_PregnancyRecNr", ccsText, "", CCGetRequestParam("s_PregnancyRecNr", $Method, NULL), $this);
+            $this->s_FacilityID = new clsControl(ccsListBox, "s_FacilityID", "s_FacilityID", ccsText, "", CCGetRequestParam("s_FacilityID", $Method, NULL), $this);
+            $this->s_FacilityID->DSType = dsTable;
+            $this->s_FacilityID->DataSource = new clsDBregistry_db();
+            $this->s_FacilityID->ds = & $this->s_FacilityID->DataSource;
+            $this->s_FacilityID->DataSource->SQL = "SELECT * \n" .
+"FROM facilities {SQL_Where} {SQL_OrderBy}";
+            list($this->s_FacilityID->BoundColumn, $this->s_FacilityID->TextColumn, $this->s_FacilityID->DBFormat) = array("FacilityID", "FacilityName", "");
+            $this->s_PatientID = new clsControl(ccsTextBox, "s_PatientID", $CCSLocales->GetText("PatientID"), ccsInteger, "", CCGetRequestParam("s_PatientID", $Method, NULL), $this);
+            $this->s_VisitDate = new clsControl(ccsTextBox, "s_VisitDate", "s_VisitDate", ccsDate, $DefaultDateFormat, CCGetRequestParam("s_VisitDate", $Method, NULL), $this);
+            $this->DatePicker_s_BirthDate = new clsDatePicker("DatePicker_s_BirthDate", "report3", "s_VisitDate", $this);
+            $this->s_VisitDate1 = new clsControl(ccsTextBox, "s_VisitDate1", "s_VisitDate1", ccsDate, $DefaultDateFormat, CCGetRequestParam("s_VisitDate1", $Method, NULL), $this);
+            $this->DatePicker_s_BirthDate1 = new clsDatePicker("DatePicker_s_BirthDate1", "report3", "s_VisitDate1", $this);
+        }
+    }
+//End Class_Initialize Event
+
+//Validate Method @156-9D13BA03
+    function Validate()
+    {
+        global $CCSLocales;
+        $Validation = true;
+        $Where = "";
+        $Validation = ($this->s_PregnancyRecNr->Validate() && $Validation);
+        $Validation = ($this->s_FacilityID->Validate() && $Validation);
+        $Validation = ($this->s_PatientID->Validate() && $Validation);
+        $Validation = ($this->s_VisitDate->Validate() && $Validation);
+        $Validation = ($this->s_VisitDate1->Validate() && $Validation);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "OnValidate", $this);
+        $Validation =  $Validation && ($this->s_PregnancyRecNr->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_FacilityID->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_PatientID->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_VisitDate->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_VisitDate1->Errors->Count() == 0);
+        return (($this->Errors->Count() == 0) && $Validation);
+    }
+//End Validate Method
+
+//CheckErrors Method @156-2AEF2627
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->s_PregnancyRecNr->Errors->Count());
+        $errors = ($errors || $this->s_FacilityID->Errors->Count());
+        $errors = ($errors || $this->s_PatientID->Errors->Count());
+        $errors = ($errors || $this->s_VisitDate->Errors->Count());
+        $errors = ($errors || $this->DatePicker_s_BirthDate->Errors->Count());
+        $errors = ($errors || $this->s_VisitDate1->Errors->Count());
+        $errors = ($errors || $this->DatePicker_s_BirthDate1->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//MasterDetail @156-ED598703
+function SetPrimaryKeys($keyArray)
+{
+    $this->PrimaryKeys = $keyArray;
+}
+function GetPrimaryKeys()
+{
+    return $this->PrimaryKeys;
+}
+function GetPrimaryKey($keyName)
+{
+    return $this->PrimaryKeys[$keyName];
+}
+//End MasterDetail
+
+//Operation Method @156-874A58CC
+    function Operation()
+    {
+        if(!$this->Visible)
+            return;
+
+        global $Redirect;
+        global $FileName;
+
+        if(!$this->FormSubmitted) {
+            return;
+        }
+
+        if($this->FormSubmitted) {
+            $this->PressedButton = "Button_DoSearch";
+            if($this->Button_DoSearch->Pressed) {
+                $this->PressedButton = "Button_DoSearch";
+            }
+        }
+        $Redirect = "report_risks_visit.php";
+        if($this->Validate()) {
+            if($this->PressedButton == "Button_DoSearch") {
+                $Redirect = "report_risks_visit.php" . "?" . CCMergeQueryStrings(CCGetQueryString("Form", array("Button_DoSearch", "Button_DoSearch_x", "Button_DoSearch_y")));
+                if(!CCGetEvent($this->Button_DoSearch->CCSEvents, "OnClick", $this->Button_DoSearch)) {
+                    $Redirect = "";
+                }
+            }
+        } else {
+            $Redirect = "";
+        }
+    }
+//End Operation Method
+
+//Show Method @156-5C7501A0
+    function Show()
+    {
+        global $CCSUseAmp;
+        global $Tpl;
+        global $FileName;
+        global $CCSLocales;
+        $Error = "";
+
+        if(!$this->Visible)
+            return;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+        $this->s_FacilityID->Prepare();
+
+        $RecordBlock = "Record " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $RecordBlock;
+        $this->EditMode = $this->EditMode && $this->ReadAllowed;
+        if (!$this->FormSubmitted) {
+        }
+
+        if($this->FormSubmitted || $this->CheckErrors()) {
+            $Error = "";
+            $Error = ComposeStrings($Error, $this->s_PregnancyRecNr->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_FacilityID->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_PatientID->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_VisitDate->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DatePicker_s_BirthDate->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_VisitDate1->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DatePicker_s_BirthDate1->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Errors->ToString());
+            $Tpl->SetVar("Error", $Error);
+            $Tpl->Parse("Error", false);
+        }
+        $CCSForm = $this->EditMode ? $this->ComponentName . ":" . "Edit" : $this->ComponentName;
+        $this->HTMLFormAction = $FileName . "?" . CCAddParam(CCGetQueryString("QueryString", ""), "ccsForm", $CCSForm);
+        $Tpl->SetVar("Action", !$CCSUseAmp ? $this->HTMLFormAction : str_replace("&", "&amp;", $this->HTMLFormAction));
+        $Tpl->SetVar("HTMLFormName", $this->ComponentName);
+        $Tpl->SetVar("HTMLFormEnctype", $this->FormEnctype);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        $this->Attributes->Show();
+        if(!$this->Visible) {
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+
+        $this->Button_DoSearch->Show();
+        $this->s_PregnancyRecNr->Show();
+        $this->s_FacilityID->Show();
+        $this->s_PatientID->Show();
+        $this->s_VisitDate->Show();
+        $this->DatePicker_s_BirthDate->Show();
+        $this->s_VisitDate1->Show();
+        $this->DatePicker_s_BirthDate1->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+    }
+//End Show Method
+
+} //End report3 Class @156-FCB6E20C
+
+
+
+//district_report ReportGroup class @347-E7CB31CC
+class clsReportGroupdistrict_report {
+    public $GroupType;
+    public $mode; //1 - open, 2 - close
+    public $FacilityName, $_FacilityNameAttributes;
+    public $PatientID, $_PatientIDPage, $_PatientIDParameters, $_PatientIDAttributes;
+    public $PregnancyRecNr, $_PregnancyRecNrPage, $_PregnancyRecNrParameters, $_PregnancyRecNrAttributes;
+    public $VisitDate, $_VisitDateAttributes;
+    public $Antenatal_Problems, $_Antenatal_ProblemsAttributes;
+    public $Report_CurrentDateTime, $_Report_CurrentDateTimeAttributes;
+    public $Report_CurrentPage, $_Report_CurrentPageAttributes;
+    public $Report_TotalPages, $_Report_TotalPagesAttributes;
+    public $Attributes;
+    public $ReportTotalIndex = 0;
+    public $PageTotalIndex;
+    public $PageNumber;
+    public $RowNumber;
+    public $Parent;
+    public $FacilityNameTotalIndex;
+    public $PatientIDTotalIndex;
+    public $PregnancyRecNrTotalIndex;
+
+    function clsReportGroupdistrict_report(& $parent) {
+        $this->Parent = & $parent;
+        $this->Attributes = $this->Parent->Attributes->GetAsArray();
+    }
+    function SetControls($PrevGroup = "") {
+        $this->FacilityName = $this->Parent->FacilityName->Value;
+        $this->PatientID = $this->Parent->PatientID->Value;
+        $this->PregnancyRecNr = $this->Parent->PregnancyRecNr->Value;
+        $this->VisitDate = $this->Parent->VisitDate->Value;
+        $this->Antenatal_Problems = $this->Parent->Antenatal_Problems->Value;
+    }
+
+    function SetTotalControls($mode = "", $PrevGroup = "") {
+        $this->_PatientIDPage = $this->Parent->PatientID->Page;
+        $this->_PatientIDParameters = $this->Parent->PatientID->Parameters;
+        $this->_PregnancyRecNrPage = $this->Parent->PregnancyRecNr->Page;
+        $this->_PregnancyRecNrParameters = $this->Parent->PregnancyRecNr->Parameters;
+        $this->_FacilityNameAttributes = $this->Parent->FacilityName->Attributes->GetAsArray();
+        $this->_PatientIDAttributes = $this->Parent->PatientID->Attributes->GetAsArray();
+        $this->_PregnancyRecNrAttributes = $this->Parent->PregnancyRecNr->Attributes->GetAsArray();
+        $this->_VisitDateAttributes = $this->Parent->VisitDate->Attributes->GetAsArray();
+        $this->_Antenatal_ProblemsAttributes = $this->Parent->Antenatal_Problems->Attributes->GetAsArray();
+        $this->_Report_CurrentDateTimeAttributes = $this->Parent->Report_CurrentDateTime->Attributes->GetAsArray();
+        $this->_Report_CurrentPageAttributes = $this->Parent->Report_CurrentPage->Attributes->GetAsArray();
+        $this->_Report_TotalPagesAttributes = $this->Parent->Report_TotalPages->Attributes->GetAsArray();
+        $this->_NavigatorAttributes = $this->Parent->Navigator->Attributes->GetAsArray();
+    }
+    function SyncWithHeader(& $Header) {
+        $this->FacilityName = $Header->FacilityName;
+        $Header->_FacilityNameAttributes = $this->_FacilityNameAttributes;
+        $this->Parent->FacilityName->Value = $Header->FacilityName;
+        $this->Parent->FacilityName->Attributes->RestoreFromArray($Header->_FacilityNameAttributes);
+        $this->PatientID = $Header->PatientID;
+        $this->_PatientIDPage = $Header->_PatientIDPage;
+        $this->_PatientIDParameters = $Header->_PatientIDParameters;
+        $Header->_PatientIDAttributes = $this->_PatientIDAttributes;
+        $this->Parent->PatientID->Value = $Header->PatientID;
+        $this->Parent->PatientID->Attributes->RestoreFromArray($Header->_PatientIDAttributes);
+        $this->PregnancyRecNr = $Header->PregnancyRecNr;
+        $this->_PregnancyRecNrPage = $Header->_PregnancyRecNrPage;
+        $this->_PregnancyRecNrParameters = $Header->_PregnancyRecNrParameters;
+        $Header->_PregnancyRecNrAttributes = $this->_PregnancyRecNrAttributes;
+        $this->Parent->PregnancyRecNr->Value = $Header->PregnancyRecNr;
+        $this->Parent->PregnancyRecNr->Attributes->RestoreFromArray($Header->_PregnancyRecNrAttributes);
+        $this->VisitDate = $Header->VisitDate;
+        $Header->_VisitDateAttributes = $this->_VisitDateAttributes;
+        $this->Parent->VisitDate->Value = $Header->VisitDate;
+        $this->Parent->VisitDate->Attributes->RestoreFromArray($Header->_VisitDateAttributes);
+        $this->Antenatal_Problems = $Header->Antenatal_Problems;
+        $Header->_Antenatal_ProblemsAttributes = $this->_Antenatal_ProblemsAttributes;
+        $this->Parent->Antenatal_Problems->Value = $Header->Antenatal_Problems;
+        $this->Parent->Antenatal_Problems->Attributes->RestoreFromArray($Header->_Antenatal_ProblemsAttributes);
+    }
+    function ChangeTotalControls() {
+    }
+}
+//End district_report ReportGroup class
+
+//district_report GroupsCollection class @347-FBB370AA
+class clsGroupsCollectiondistrict_report {
+    public $Groups;
+    public $mPageCurrentHeaderIndex;
+    public $mFacilityNameCurrentHeaderIndex;
+    public $mPatientIDCurrentHeaderIndex;
+    public $mPregnancyRecNrCurrentHeaderIndex;
+    public $PageSize;
+    public $TotalPages = 0;
+    public $TotalRows = 0;
+    public $CurrentPageSize = 0;
+    public $Pages;
+    public $Parent;
+    public $LastDetailIndex;
+
+    function clsGroupsCollectiondistrict_report(& $parent) {
+        $this->Parent = & $parent;
+        $this->Groups = array();
+        $this->Pages  = array();
+        $this->mFacilityNameCurrentHeaderIndex = 1;
+        $this->mPatientIDCurrentHeaderIndex = 2;
+        $this->mPregnancyRecNrCurrentHeaderIndex = 3;
+        $this->mReportTotalIndex = 0;
+        $this->mPageTotalIndex = 1;
+    }
+
+    function & InitGroup() {
+        $group = new clsReportGroupdistrict_report($this->Parent);
+        $group->RowNumber = $this->TotalRows + 1;
+        $group->PageNumber = $this->TotalPages;
+        $group->PageTotalIndex = $this->mPageCurrentHeaderIndex;
+        $group->FacilityNameTotalIndex = $this->mFacilityNameCurrentHeaderIndex;
+        $group->PatientIDTotalIndex = $this->mPatientIDCurrentHeaderIndex;
+        $group->PregnancyRecNrTotalIndex = $this->mPregnancyRecNrCurrentHeaderIndex;
+        return $group;
+    }
+
+    function RestoreValues() {
+        $this->Parent->FacilityName->Value = $this->Parent->FacilityName->initialValue;
+        $this->Parent->PatientID->Value = $this->Parent->PatientID->initialValue;
+        $this->Parent->PregnancyRecNr->Value = $this->Parent->PregnancyRecNr->initialValue;
+        $this->Parent->VisitDate->Value = $this->Parent->VisitDate->initialValue;
+        $this->Parent->Antenatal_Problems->Value = $this->Parent->Antenatal_Problems->initialValue;
+    }
+
+    function OpenPage() {
+        $this->TotalPages++;
+        $Group = & $this->InitGroup();
+        $this->Parent->Page_Header->CCSEventResult = CCGetEvent($this->Parent->Page_Header->CCSEvents, "OnInitialize", $this->Parent->Page_Header);
+        if ($this->Parent->Page_Header->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Page_Header->Height;
+        $Group->SetTotalControls("GetNextValue");
+        $this->Parent->Page_Header->CCSEventResult = CCGetEvent($this->Parent->Page_Header->CCSEvents, "OnCalculate", $this->Parent->Page_Header);
+        $Group->SetControls();
+        $Group->Mode = 1;
+        $Group->GroupType = "Page";
+        $Group->PageTotalIndex = count($this->Groups);
+        $this->mPageCurrentHeaderIndex = count($this->Groups);
+        $this->Groups[] =  & $Group;
+        $this->Pages[] =  count($this->Groups) == 2 ? 0 : count($this->Groups) - 1;
+    }
+
+    function OpenGroup($groupName) {
+        $Group = "";
+        $OpenFlag = false;
+        if ($groupName == "Report") {
+            $Group = & $this->InitGroup(true);
+            $this->Parent->Report_Header->CCSEventResult = CCGetEvent($this->Parent->Report_Header->CCSEvents, "OnInitialize", $this->Parent->Report_Header);
+            if ($this->Parent->Report_Header->Visible) 
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Report_Header->Height;
+                $Group->SetTotalControls("GetNextValue");
+            $this->Parent->Report_Header->CCSEventResult = CCGetEvent($this->Parent->Report_Header->CCSEvents, "OnCalculate", $this->Parent->Report_Header);
+            $Group->SetControls();
+            $Group->Mode = 1;
+            $Group->GroupType = "Report";
+            $this->Groups[] = & $Group;
+            $this->OpenPage();
+        }
+        if ($groupName == "FacilityName") {
+            $GroupFacilityName = & $this->InitGroup(true);
+            $this->Parent->FacilityName_Header->CCSEventResult = CCGetEvent($this->Parent->FacilityName_Header->CCSEvents, "OnInitialize", $this->Parent->FacilityName_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->FacilityName_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->FacilityName_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->FacilityName_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->FacilityName_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->FacilityName_Header->Height;
+                $GroupFacilityName->SetTotalControls("GetNextValue");
+            $this->Parent->FacilityName_Header->CCSEventResult = CCGetEvent($this->Parent->FacilityName_Header->CCSEvents, "OnCalculate", $this->Parent->FacilityName_Header);
+            $GroupFacilityName->SetControls();
+            $GroupFacilityName->Mode = 1;
+            $OpenFlag = true;
+            $GroupFacilityName->GroupType = "FacilityName";
+            $this->mFacilityNameCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupFacilityName;
+        }
+        if ($groupName == "PatientID" or $OpenFlag) {
+            $GroupPatientID = & $this->InitGroup(true);
+            $this->Parent->PatientID_Header->CCSEventResult = CCGetEvent($this->Parent->PatientID_Header->CCSEvents, "OnInitialize", $this->Parent->PatientID_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->PatientID_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->PatientID_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->PatientID_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->PatientID_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->PatientID_Header->Height;
+                $GroupPatientID->SetTotalControls("GetNextValue");
+            $this->Parent->PatientID_Header->CCSEventResult = CCGetEvent($this->Parent->PatientID_Header->CCSEvents, "OnCalculate", $this->Parent->PatientID_Header);
+            $GroupPatientID->SetControls();
+            $GroupPatientID->Mode = 1;
+            $OpenFlag = true;
+            $GroupPatientID->GroupType = "PatientID";
+            $this->mPatientIDCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupPatientID;
+        }
+        if ($groupName == "PregnancyRecNr" or $OpenFlag) {
+            $GroupPregnancyRecNr = & $this->InitGroup(true);
+            $this->Parent->PregnancyRecNr_Header->CCSEventResult = CCGetEvent($this->Parent->PregnancyRecNr_Header->CCSEvents, "OnInitialize", $this->Parent->PregnancyRecNr_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->PregnancyRecNr_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->PregnancyRecNr_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->PregnancyRecNr_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->PregnancyRecNr_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->PregnancyRecNr_Header->Height;
+                $GroupPregnancyRecNr->SetTotalControls("GetNextValue");
+            $this->Parent->PregnancyRecNr_Header->CCSEventResult = CCGetEvent($this->Parent->PregnancyRecNr_Header->CCSEvents, "OnCalculate", $this->Parent->PregnancyRecNr_Header);
+            $GroupPregnancyRecNr->SetControls();
+            $GroupPregnancyRecNr->Mode = 1;
+            $GroupPregnancyRecNr->GroupType = "PregnancyRecNr";
+            $this->mPregnancyRecNrCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupPregnancyRecNr;
+        }
+    }
+
+    function ClosePage() {
+        $Group = & $this->InitGroup();
+        $this->Parent->Page_Footer->CCSEventResult = CCGetEvent($this->Parent->Page_Footer->CCSEvents, "OnInitialize", $this->Parent->Page_Footer);
+        $Group->SetTotalControls("GetPrevValue");
+        $Group->SyncWithHeader($this->Groups[$this->mPageCurrentHeaderIndex]);
+        $this->Parent->Page_Footer->CCSEventResult = CCGetEvent($this->Parent->Page_Footer->CCSEvents, "OnCalculate", $this->Parent->Page_Footer);
+        $Group->SetControls();
+        $this->RestoreValues();
+        $this->CurrentPageSize = 0;
+        $Group->Mode = 2;
+        $Group->GroupType = "Page";
+        $this->Groups[] = & $Group;
+    }
+
+    function CloseGroup($groupName)
+    {
+        $Group = "";
+        if ($groupName == "Report") {
+            $Group = & $this->InitGroup(true);
+            $this->Parent->Report_Footer->CCSEventResult = CCGetEvent($this->Parent->Report_Footer->CCSEvents, "OnInitialize", $this->Parent->Report_Footer);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->Report_Footer->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->Report_Footer->Height;
+            if (($this->PageSize > 0) and $this->Parent->Report_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            $Group->SetTotalControls("GetPrevValue");
+            $Group->SyncWithHeader($this->Groups[0]);
+            if ($this->Parent->Report_Footer->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Report_Footer->Height;
+            $this->Parent->Report_Footer->CCSEventResult = CCGetEvent($this->Parent->Report_Footer->CCSEvents, "OnCalculate", $this->Parent->Report_Footer);
+            $Group->SetControls();
+            $this->RestoreValues();
+            $Group->Mode = 2;
+            $Group->GroupType = "Report";
+            $this->Groups[] = & $Group;
+            $this->ClosePage();
+            return;
+        }
+        $GroupPregnancyRecNr = & $this->InitGroup(true);
+        $this->Parent->PregnancyRecNr_Footer->CCSEventResult = CCGetEvent($this->Parent->PregnancyRecNr_Footer->CCSEvents, "OnInitialize", $this->Parent->PregnancyRecNr_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->PregnancyRecNr_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->PregnancyRecNr_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->PregnancyRecNr_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupPregnancyRecNr->SetTotalControls("GetPrevValue");
+        $GroupPregnancyRecNr->SyncWithHeader($this->Groups[$this->mPregnancyRecNrCurrentHeaderIndex]);
+        if ($this->Parent->PregnancyRecNr_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->PregnancyRecNr_Footer->Height;
+        $this->Parent->PregnancyRecNr_Footer->CCSEventResult = CCGetEvent($this->Parent->PregnancyRecNr_Footer->CCSEvents, "OnCalculate", $this->Parent->PregnancyRecNr_Footer);
+        $GroupPregnancyRecNr->SetControls();
+        $this->RestoreValues();
+        $GroupPregnancyRecNr->Mode = 2;
+        $GroupPregnancyRecNr->GroupType ="PregnancyRecNr";
+        $this->Groups[] = & $GroupPregnancyRecNr;
+        if ($groupName == "PregnancyRecNr") return;
+        $GroupPatientID = & $this->InitGroup(true);
+        $this->Parent->PatientID_Footer->CCSEventResult = CCGetEvent($this->Parent->PatientID_Footer->CCSEvents, "OnInitialize", $this->Parent->PatientID_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->PatientID_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->PatientID_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->PatientID_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupPatientID->SetTotalControls("GetPrevValue");
+        $GroupPatientID->SyncWithHeader($this->Groups[$this->mPatientIDCurrentHeaderIndex]);
+        if ($this->Parent->PatientID_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->PatientID_Footer->Height;
+        $this->Parent->PatientID_Footer->CCSEventResult = CCGetEvent($this->Parent->PatientID_Footer->CCSEvents, "OnCalculate", $this->Parent->PatientID_Footer);
+        $GroupPatientID->SetControls();
+        $this->RestoreValues();
+        $GroupPatientID->Mode = 2;
+        $GroupPatientID->GroupType ="PatientID";
+        $this->Groups[] = & $GroupPatientID;
+        if ($groupName == "PatientID") return;
+        $GroupFacilityName = & $this->InitGroup(true);
+        $this->Parent->FacilityName_Footer->CCSEventResult = CCGetEvent($this->Parent->FacilityName_Footer->CCSEvents, "OnInitialize", $this->Parent->FacilityName_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->FacilityName_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->FacilityName_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->FacilityName_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupFacilityName->SetTotalControls("GetPrevValue");
+        $GroupFacilityName->SyncWithHeader($this->Groups[$this->mFacilityNameCurrentHeaderIndex]);
+        if ($this->Parent->FacilityName_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->FacilityName_Footer->Height;
+        $this->Parent->FacilityName_Footer->CCSEventResult = CCGetEvent($this->Parent->FacilityName_Footer->CCSEvents, "OnCalculate", $this->Parent->FacilityName_Footer);
+        $GroupFacilityName->SetControls();
+        $this->RestoreValues();
+        $GroupFacilityName->Mode = 2;
+        $GroupFacilityName->GroupType ="FacilityName";
+        $this->Groups[] = & $GroupFacilityName;
+    }
+
+    function AddItem()
+    {
+        $Group = & $this->InitGroup(true);
+        $this->Parent->Detail->CCSEventResult = CCGetEvent($this->Parent->Detail->CCSEvents, "OnInitialize", $this->Parent->Detail);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->Detail->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->Detail->Height;
+        if (($this->PageSize > 0) and $this->Parent->Detail->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $this->TotalRows++;
+        if ($this->LastDetailIndex)
+            $PrevGroup = & $this->Groups[$this->LastDetailIndex];
+        else
+            $PrevGroup = "";
+        $Group->SetTotalControls("", $PrevGroup);
+        if ($this->Parent->Detail->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Detail->Height;
+        $this->Parent->Detail->CCSEventResult = CCGetEvent($this->Parent->Detail->CCSEvents, "OnCalculate", $this->Parent->Detail);
+        $Group->SetControls($PrevGroup);
+        $this->LastDetailIndex = count($this->Groups);
+        $this->Groups[] = & $Group;
+    }
+}
+//End district_report GroupsCollection class
+
+class clsReportdistrict_report { //district_report Class @347-4349EAE0
+
+//district_report Variables @347-2AE56B40
+
+    public $ComponentType = "Report";
+    public $PageSize;
+    public $ComponentName;
+    public $Visible;
+    public $Errors;
+    public $CCSEvents = array();
+    public $CCSEventResult;
+    public $RelativePath = "";
+    public $ViewMode = "Web";
+    public $TemplateBlock;
+    public $PageNumber;
+    public $RowNumber;
+    public $TotalRows;
+    public $TotalPages;
+    public $ControlsVisible = array();
+    public $IsEmpty;
+    public $Attributes;
+    public $DetailBlock, $Detail;
+    public $Report_FooterBlock, $Report_Footer;
+    public $Report_HeaderBlock, $Report_Header;
+    public $Page_FooterBlock, $Page_Footer;
+    public $Page_HeaderBlock, $Page_Header;
+    public $FacilityName_HeaderBlock, $FacilityName_Header;
+    public $FacilityName_FooterBlock, $FacilityName_Footer;
+    public $PatientID_HeaderBlock, $PatientID_Header;
+    public $PatientID_FooterBlock, $PatientID_Footer;
+    public $PregnancyRecNr_HeaderBlock, $PregnancyRecNr_Header;
+    public $PregnancyRecNr_FooterBlock, $PregnancyRecNr_Footer;
+    public $SorterName, $SorterDirection;
+
+    public $ds;
+    public $DataSource;
+    public $UseClientPaging = false;
+
+    //Report Controls
+    public $StaticControls, $RowControls, $Report_FooterControls, $Report_HeaderControls;
+    public $Page_FooterControls, $Page_HeaderControls;
+    public $FacilityName_HeaderControls, $FacilityName_FooterControls;
+    public $PatientID_HeaderControls, $PatientID_FooterControls;
+    public $PregnancyRecNr_HeaderControls, $PregnancyRecNr_FooterControls;
+//End district_report Variables
+
+//Class_Initialize Event @347-E7DBB275
+    function clsReportdistrict_report($RelativePath = "", & $Parent)
+    {
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->ComponentName = "district_report";
+        $this->Visible = True;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Attributes = new clsAttributes($this->ComponentName . ":");
+        $this->Detail = new clsSection($this);
+        $MinPageSize = 0;
+        $MaxSectionSize = 0;
+        $this->Detail->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->Detail->Height);
+        $this->Report_Footer = new clsSection($this);
+        $this->Report_Header = new clsSection($this);
+        $this->Page_Footer = new clsSection($this);
+        $this->Page_Footer->Height = 1;
+        $MinPageSize += $this->Page_Footer->Height;
+        $this->Page_Header = new clsSection($this);
+        $this->FacilityName_Footer = new clsSection($this);
+        $this->FacilityName_Header = new clsSection($this);
+        $this->FacilityName_Header->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->FacilityName_Header->Height);
+        $this->PatientID_Footer = new clsSection($this);
+        $this->PatientID_Header = new clsSection($this);
+        $this->PatientID_Header->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->PatientID_Header->Height);
+        $this->PregnancyRecNr_Footer = new clsSection($this);
+        $this->PregnancyRecNr_Header = new clsSection($this);
+        $this->PregnancyRecNr_Header->Height = 2;
+        $MaxSectionSize = max($MaxSectionSize, $this->PregnancyRecNr_Header->Height);
+        $this->Errors = new clsErrors();
+        $this->DataSource = new clsdistrict_reportDataSource($this);
+        $this->ds = & $this->DataSource;
+        $PageSize = CCGetParam($this->ComponentName . "PageSize", "");
+        if(is_numeric($PageSize) && $PageSize > 0) {
+            $this->PageSize = $PageSize;
+        } else {
+            if (!is_numeric($PageSize) || $PageSize < 0)
+                $this->PageSize = 10000;
+             else if ($PageSize == "0")
+                $this->PageSize = 100;
+             else 
+                $this->PageSize = min(100, $PageSize);
+        }
+        $MinPageSize += $MaxSectionSize;
+        if ($this->PageSize && $MinPageSize && $this->PageSize < $MinPageSize)
+            $this->PageSize = $MinPageSize;
+        $this->PageNumber = $this->ViewMode == "Print" ? 1 : intval(CCGetParam($this->ComponentName . "Page", 1));
+        if ($this->PageNumber <= 0 ) {
+            $this->PageNumber = 1;
+        }
+        $this->Visible = (CCSecurityAccessCheck("1;2") == "success");
+
+        $this->FacilityName = new clsControl(ccsReportLabel, "FacilityName", "FacilityName", ccsText, "", "", $this);
+        $this->PatientID = new clsControl(ccsLink, "PatientID", "PatientID", ccsMemo, "", CCGetRequestParam("PatientID", ccsGet, NULL), $this);
+        $this->PatientID->Page = "patient_maint_district.php";
+        $this->PregnancyRecNr = new clsControl(ccsLink, "PregnancyRecNr", "PregnancyRecNr", ccsText, "", CCGetRequestParam("PregnancyRecNr", ccsGet, NULL), $this);
+        $this->PregnancyRecNr->Page = "pregnancy_maint.php";
+        $this->VisitDate = new clsControl(ccsReportLabel, "VisitDate", "VisitDate", ccsText, "", "", $this);
+        $this->Antenatal_Problems = new clsControl(ccsReportLabel, "Antenatal_Problems", "Antenatal_Problems", ccsText, "", "", $this);
+        $this->NoRecords = new clsPanel("NoRecords", $this);
+        $this->Report_CurrentDateTime = new clsControl(ccsReportLabel, "Report_CurrentDateTime", "Report_CurrentDateTime", ccsText, array('ShortDate', ' ', 'ShortTime'), "", $this);
+        $this->Report_CurrentPage = new clsControl(ccsReportLabel, "Report_CurrentPage", "Report_CurrentPage", ccsInteger, "", "", $this);
+        $this->Report_TotalPages = new clsControl(ccsReportLabel, "Report_TotalPages", "Report_TotalPages", ccsInteger, "", "", $this);
+        $this->Navigator = new clsNavigator($this->ComponentName, "Navigator", $FileName, 10, tpSimple, $this);
+        $this->Navigator->PageSizes = array("1", "5", "10", "25", "50");
+    }
+//End Class_Initialize Event
+
+//Initialize Method @347-6C59EE65
+    function Initialize()
+    {
+        if(!$this->Visible) return;
+
+        $this->DataSource->PageSize = $this->PageSize;
+        $this->DataSource->AbsolutePage = $this->PageNumber;
+        $this->DataSource->SetOrder($this->SorterName, $this->SorterDirection);
+    }
+//End Initialize Method
+
+//CheckErrors Method @347-DADF7802
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->FacilityName->Errors->Count());
+        $errors = ($errors || $this->PatientID->Errors->Count());
+        $errors = ($errors || $this->PregnancyRecNr->Errors->Count());
+        $errors = ($errors || $this->VisitDate->Errors->Count());
+        $errors = ($errors || $this->Antenatal_Problems->Errors->Count());
+        $errors = ($errors || $this->Report_CurrentDateTime->Errors->Count());
+        $errors = ($errors || $this->Report_CurrentPage->Errors->Count());
+        $errors = ($errors || $this->Report_TotalPages->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        $errors = ($errors || $this->DataSource->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//GetErrors Method @347-DBDF4505
+    function GetErrors()
+    {
+        $errors = "";
+        $errors = ComposeStrings($errors, $this->FacilityName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->PatientID->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->PregnancyRecNr->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->VisitDate->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Antenatal_Problems->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Report_CurrentDateTime->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Report_CurrentPage->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Report_TotalPages->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DataSource->Errors->ToString());
+        return $errors;
+    }
+//End GetErrors Method
+
+//Show Method @347-4EE75573
+    function Show()
+    {
+        global $Tpl;
+        global $CCSLocales;
+        if(!$this->Visible) return;
+
+        $ShownRecords = 0;
+
+        $this->DataSource->Parameters["urls_PatientID"] = CCGetFromGet("s_PatientID", NULL);
+        $this->DataSource->Parameters["urls_PregnancyRecNr"] = CCGetFromGet("s_PregnancyRecNr", NULL);
+        $this->DataSource->Parameters["urls_FacilityID"] = CCGetFromGet("s_FacilityID", NULL);
+        $this->DataSource->Parameters["urls_VisitDate"] = CCGetFromGet("s_VisitDate", NULL);
+        $this->DataSource->Parameters["urls_VisitDate1"] = CCGetFromGet("s_VisitDate1", NULL);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $this->DataSource->Prepare();
+        $this->DataSource->Open();
+
+        $FacilityNameKey = "";
+        $PatientIDKey = "";
+        $PregnancyRecNrKey = "";
+        $Groups = new clsGroupsCollectiondistrict_report($this);
+        $Groups->PageSize = $this->PageSize > 0 ? $this->PageSize : 0;
+
+        $is_next_record = $this->DataSource->next_record();
+        $this->IsEmpty = ! $is_next_record;
+        while($is_next_record) {
+            $this->DataSource->SetValues();
+            $this->FacilityName->SetValue($this->DataSource->FacilityName->GetValue());
+            $this->PatientID->SetValue($this->DataSource->PatientID->GetValue());
+            $this->PregnancyRecNr->SetValue($this->DataSource->PregnancyRecNr->GetValue());
+            $this->VisitDate->SetValue($this->DataSource->VisitDate->GetValue());
+            $this->Antenatal_Problems->SetValue($this->DataSource->Antenatal_Problems->GetValue());
+            $this->PatientID->Parameters = "";
+            $this->PatientID->Parameters = CCAddParam($this->PatientID->Parameters, "PatientID", $this->DataSource->f("PatientID"));
+            $this->PregnancyRecNr->Parameters = "";
+            $this->PregnancyRecNr->Parameters = CCAddParam($this->PregnancyRecNr->Parameters, "PatientID", $this->DataSource->f("PatientID"));
+            $this->PregnancyRecNr->Parameters = CCAddParam($this->PregnancyRecNr->Parameters, "PregnancyID", $this->DataSource->f("PregnancyID"));
+            if (count($Groups->Groups) == 0) $Groups->OpenGroup("Report");
+            if (count($Groups->Groups) == 2 or $FacilityNameKey != $this->DataSource->f("FacilityName")) {
+                $Groups->OpenGroup("FacilityName");
+            } elseif ($PatientIDKey != $this->DataSource->f("PatientID")) {
+                $Groups->OpenGroup("PatientID");
+            } elseif ($PregnancyRecNrKey != $this->DataSource->f("PregnancyRecNr")) {
+                $Groups->OpenGroup("PregnancyRecNr");
+            }
+            $Groups->AddItem();
+            $FacilityNameKey = $this->DataSource->f("FacilityName");
+            $PatientIDKey = $this->DataSource->f("PatientID");
+            $PregnancyRecNrKey = $this->DataSource->f("PregnancyRecNr");
+            $is_next_record = $this->DataSource->next_record();
+            if (!$is_next_record || $FacilityNameKey != $this->DataSource->f("FacilityName")) {
+                $Groups->CloseGroup("FacilityName");
+            } elseif ($PatientIDKey != $this->DataSource->f("PatientID")) {
+                $Groups->CloseGroup("PatientID");
+            } elseif ($PregnancyRecNrKey != $this->DataSource->f("PregnancyRecNr")) {
+                $Groups->CloseGroup("PregnancyRecNr");
+            }
+        }
+        if (!count($Groups->Groups)) 
+            $Groups->OpenGroup("Report");
+        else
+            $this->NoRecords->Visible = false;
+        $Groups->CloseGroup("Report");
+        $this->TotalPages = $Groups->TotalPages;
+        $this->TotalRows = $Groups->TotalRows;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        if(!$this->Visible) return;
+
+        $this->Attributes->Show();
+        $ReportBlock = "Report " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+
+        if($this->CheckErrors()) {
+            $Tpl->replaceblock("", $this->GetErrors());
+            $Tpl->block_path = $ParentPath;
+            return;
+        } else {
+            $items = & $Groups->Groups;
+            $i = $Groups->Pages[min($this->PageNumber, $Groups->TotalPages) - 1];
+            $this->ControlsVisible["FacilityName"] = $this->FacilityName->Visible;
+            $this->ControlsVisible["PatientID"] = $this->PatientID->Visible;
+            $this->ControlsVisible["PregnancyRecNr"] = $this->PregnancyRecNr->Visible;
+            $this->ControlsVisible["VisitDate"] = $this->VisitDate->Visible;
+            $this->ControlsVisible["Antenatal_Problems"] = $this->Antenatal_Problems->Visible;
+            do {
+                $this->Attributes->RestoreFromArray($items[$i]->Attributes);
+                $this->RowNumber = $items[$i]->RowNumber;
+                switch ($items[$i]->GroupType) {
+                    Case "":
+                        $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Detail";
+                        $this->Antenatal_Problems->SetValue($items[$i]->Antenatal_Problems);
+                        $this->Antenatal_Problems->Attributes->RestoreFromArray($items[$i]->_Antenatal_ProblemsAttributes);
+                        $this->Detail->CCSEventResult = CCGetEvent($this->Detail->CCSEvents, "BeforeShow", $this->Detail);
+                        $this->Attributes->Show();
+                        $this->Antenatal_Problems->Show();
+                        $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                        if ($this->Detail->Visible)
+                            $Tpl->parseto("Section Detail", true, "Section Detail");
+                        break;
+                    case "Report":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Report_Header->CCSEventResult = CCGetEvent($this->Report_Header->CCSEvents, "BeforeShow", $this->Report_Header);
+                            if ($this->Report_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Report_Header";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Report_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->Report_Footer->CCSEventResult = CCGetEvent($this->Report_Footer->CCSEvents, "BeforeShow", $this->Report_Footer);
+                            if ($this->Report_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Report_Footer";
+                                $this->NoRecords->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Report_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "Page":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Page_Header->CCSEventResult = CCGetEvent($this->Page_Header->CCSEvents, "BeforeShow", $this->Page_Header);
+                            if ($this->Page_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Page_Header";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Page_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2 && !$this->UseClientPaging || $items[$i]->Mode == 1 && $this->UseClientPaging) {
+                            $this->Report_CurrentDateTime->SetValue(CCFormatDate(CCGetDateArray(), $this->Report_CurrentDateTime->Format));
+                            $this->Report_CurrentDateTime->Attributes->RestoreFromArray($items[$i]->_Report_CurrentDateTimeAttributes);
+                            $this->Report_CurrentPage->SetValue($items[$i]->PageNumber);
+                            $this->Report_CurrentPage->Attributes->RestoreFromArray($items[$i]->_Report_CurrentPageAttributes);
+                            $this->Report_TotalPages->SetValue($Groups->TotalPages);
+                            $this->Report_TotalPages->Attributes->RestoreFromArray($items[$i]->_Report_TotalPagesAttributes);
+                            $this->Navigator->PageNumber = $items[$i]->PageNumber;
+                            $this->Navigator->TotalPages = $Groups->TotalPages;
+                            $this->Navigator->Visible = ("Print" != $this->ViewMode);
+                            $this->Page_Footer->CCSEventResult = CCGetEvent($this->Page_Footer->CCSEvents, "BeforeShow", $this->Page_Footer);
+                            if ($this->Page_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Page_Footer";
+                                $this->Report_CurrentDateTime->Show();
+                                $this->Report_CurrentPage->Show();
+                                $this->Report_TotalPages->Show();
+                                $this->Navigator->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Page_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "FacilityName":
+                        if ($items[$i]->Mode == 1) {
+                            $this->FacilityName->SetValue($items[$i]->FacilityName);
+                            $this->FacilityName->Attributes->RestoreFromArray($items[$i]->_FacilityNameAttributes);
+                            $this->FacilityName_Header->CCSEventResult = CCGetEvent($this->FacilityName_Header->CCSEvents, "BeforeShow", $this->FacilityName_Header);
+                            if ($this->FacilityName_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section FacilityName_Header";
+                                $this->Attributes->Show();
+                                $this->FacilityName->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section FacilityName_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->FacilityName_Footer->CCSEventResult = CCGetEvent($this->FacilityName_Footer->CCSEvents, "BeforeShow", $this->FacilityName_Footer);
+                            if ($this->FacilityName_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section FacilityName_Footer";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section FacilityName_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "PatientID":
+                        if ($items[$i]->Mode == 1) {
+                            $this->PatientID->SetValue($items[$i]->PatientID);
+                            $this->PatientID->Page = $items[$i]->_PatientIDPage;
+                            $this->PatientID->Parameters = $items[$i]->_PatientIDParameters;
+                            $this->PatientID->Attributes->RestoreFromArray($items[$i]->_PatientIDAttributes);
+                            $this->PatientID_Header->CCSEventResult = CCGetEvent($this->PatientID_Header->CCSEvents, "BeforeShow", $this->PatientID_Header);
+                            if ($this->PatientID_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section PatientID_Header";
+                                $this->Attributes->Show();
+                                $this->PatientID->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section PatientID_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->PatientID_Footer->CCSEventResult = CCGetEvent($this->PatientID_Footer->CCSEvents, "BeforeShow", $this->PatientID_Footer);
+                            if ($this->PatientID_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section PatientID_Footer";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section PatientID_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "PregnancyRecNr":
+                        if ($items[$i]->Mode == 1) {
+                            $this->PregnancyRecNr->SetValue($items[$i]->PregnancyRecNr);
+                            $this->PregnancyRecNr->Page = $items[$i]->_PregnancyRecNrPage;
+                            $this->PregnancyRecNr->Parameters = $items[$i]->_PregnancyRecNrParameters;
+                            $this->PregnancyRecNr->Attributes->RestoreFromArray($items[$i]->_PregnancyRecNrAttributes);
+                            $this->VisitDate->SetValue($items[$i]->VisitDate);
+                            $this->VisitDate->Attributes->RestoreFromArray($items[$i]->_VisitDateAttributes);
+                            $this->PregnancyRecNr_Header->CCSEventResult = CCGetEvent($this->PregnancyRecNr_Header->CCSEvents, "BeforeShow", $this->PregnancyRecNr_Header);
+                            if ($this->PregnancyRecNr_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section PregnancyRecNr_Header";
+                                $this->Attributes->Show();
+                                $this->PregnancyRecNr->Show();
+                                $this->VisitDate->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section PregnancyRecNr_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->PregnancyRecNr_Footer->CCSEventResult = CCGetEvent($this->PregnancyRecNr_Footer->CCSEvents, "BeforeShow", $this->PregnancyRecNr_Footer);
+                            if ($this->PregnancyRecNr_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section PregnancyRecNr_Footer";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section PregnancyRecNr_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                }
+                $i++;
+            } while ($i < count($items) && ($this->ViewMode == "Print" ||  !($i > 1 && $items[$i]->GroupType == 'Page' && $items[$i]->Mode == 1)));
+            $Tpl->block_path = $ParentPath;
+            $Tpl->parse($ReportBlock);
+            $this->DataSource->close();
+        }
+
+    }
+//End Show Method
+
+} //End district_report Class @347-FCB6E20C
+
+class clsdistrict_reportDataSource extends clsDBregistry_db {  //district_reportDataSource Class @347-7C0EB78C
+
+//DataSource Variables @347-ED53EF1A
+    public $Parent = "";
+    public $CCSEvents = "";
+    public $CCSEventResult;
+    public $ErrorBlock;
+    public $CmdExecution;
+
+    public $wp;
+
+
+    // Datasource fields
+    public $FacilityName;
+    public $PatientID;
+    public $PregnancyRecNr;
+    public $VisitDate;
+    public $Antenatal_Problems;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @347-DF2CC4C5
+    function clsdistrict_reportDataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Report district_report";
+        $this->Initialize();
+        $this->FacilityName = new clsField("FacilityName", ccsText, "");
+        
+        $this->PatientID = new clsField("PatientID", ccsMemo, "");
+        
+        $this->PregnancyRecNr = new clsField("PregnancyRecNr", ccsText, "");
+        
+        $this->VisitDate = new clsField("VisitDate", ccsText, "");
+        
+        $this->Antenatal_Problems = new clsField("Antenatal_Problems", ccsText, "");
+        
+
+    }
+//End DataSourceClass_Initialize Event
+
+//SetOrder Method @347-18D71ABC
+    function SetOrder($SorterName, $SorterDirection)
+    {
+        $this->Order = "pregnancy.PregnancyID ASC, Antenatal_Problems ASC";
+        $this->Order = CCGetOrder($this->Order, $SorterName, $SorterDirection, 
+            "");
+    }
+//End SetOrder Method
+
+//Prepare Method @347-867B8C72
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urls_PatientID", ccsText, "", "", $this->Parameters["urls_PatientID"], '%', false);
+        $this->wp->AddParameter("2", "urls_PregnancyRecNr", ccsText, "", "", $this->Parameters["urls_PregnancyRecNr"], '%', false);
+        $this->wp->AddParameter("3", "urls_FacilityID", ccsText, "", "", $this->Parameters["urls_FacilityID"], '%', false);
+        $this->wp->AddParameter("4", "urls_VisitDate", ccsDate, array("ShortDate"), array("yyyy", "-", "mm", "-", "dd", " ", "HH", ":", "nn", ":", "ss"), $this->Parameters["urls_VisitDate"], CCFormatDate(CCParseDate("1000-01-01",array("yyyy","-","mm","-","dd")),array("ShortDate")), false);
+        $this->wp->AddParameter("5", "urls_VisitDate1", ccsDate, array("ShortDate"), array("yyyy", "-", "mm", "-", "dd", " ", "HH", ":", "nn", ":", "ss"), $this->Parameters["urls_VisitDate1"], CCFormatDate(CCParseDate("2999-01-01",array("yyyy","-","mm","-","dd")),array("ShortDate")), false);
+    }
+//End Prepare Method
+
+//Open Method @347-3E326912
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->SQL = "\n" .
+        "\n" .
+        "\n" .
+        "SELECT FacilityName, PregnancyRecNr, pregnancy.PatientID AS PatientID, pregnancy.PregnancyID, \n" .
+        "CONCAT(DiseaseName, ' (', icd10_all.ICD10ID, ')') AS Antenatal_Problems, VisitDate\n" .
+        "\n" .
+        "FROM (((((patient INNER JOIN pregnancy ON patient.PatientID = pregnancy.PatientID) INNER JOIN visit ON\n" .
+        "visit.PregnancyID = pregnancy.PregnancyID) LEFT JOIN visitdisease ON\n" .
+        "visitdisease.VisitID = visit.VisitID) LEFT JOIN icd10_all ON\n" .
+        "visitdisease.ICD10ID = icd10_all.ICD10ID ) LEFT JOIN delivery ON delivery.PregnancyID = pregnancy.PregnancyID) \n" .
+        "INNER JOIN facilities ON pregnancy.FacilityID = facilities.FacilityID\n" .
+        "\n" .
+        "\n" .
+        "WHERE pregnancy.PatientID LIKE '" . $this->SQLValue($this->wp->GetDBValue("1"), ccsText) . "'\n" .
+        "AND patient.Discharged = 0\n" .
+        "AND PregnancyRecNr LIKE '" . $this->SQLValue($this->wp->GetDBValue("2"), ccsText) . "'\n" .
+        "AND visit.VisitDate >= '" . $this->SQLValue($this->wp->GetDBValue("4"), ccsDate) . "'\n" .
+        "AND visit.VisitDate <= '" . $this->SQLValue($this->wp->GetDBValue("5"), ccsDate) . "'\n" .
+        "AND visit.RiskGroup = 1 \n" .
+        "AND DataDelivery IS NULL \n" .
+        "AND pregnancy.FacilityID LIKE '" . $this->SQLValue($this->wp->GetDBValue("3"), ccsText) . "' \n" .
+        "\n" .
+        "AND visit.VisitID IN \n" .
+        "\n" .
+        "(SELECT MaxVisitIDs FROM (SELECT PregID, maxDate, (SELECT MAX(VisitID) FROM visit INNER JOIN pregnancy ON pregnancy.PregnancyID = visit.PregnancyID \n" .
+        "WHERE pregnancy.PregnancyID = PregID AND visit.VisitDate= maxDate) AS MaxVisitIDs \n" .
+        "FROM\n" .
+        "(SELECT pregnancy.PregnancyID AS PregID, MAX(visit.VisitDate) AS maxDate\n" .
+        "FROM visit INNER JOIN pregnancy ON pregnancy.PregnancyID = visit.PregnancyID\n" .
+        "WHERE CURDATE( ) < ADDDATE( Calc_DeliveryDate, 31 )\n" .
+        "GROUP BY pregnancy.PregnancyID) AS maxDates  ) AS maxd) {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        $this->query(CCBuildSQL($this->SQL, $this->Where, "FacilityName asc,PatientID asc,PregnancyRecNr asc" .  ($this->Order ? ", " . $this->Order: "")));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @347-AB6A26F4
+    function SetValues()
+    {
+        $this->FacilityName->SetDBValue($this->f("FacilityName"));
+        $this->PatientID->SetDBValue($this->f("PatientID"));
+        $this->PregnancyRecNr->SetDBValue($this->f("PregnancyRecNr"));
+        $this->VisitDate->SetDBValue($this->f("VisitDate"));
+        $this->Antenatal_Problems->SetDBValue($this->f("Antenatal_Problems"));
+    }
+//End SetValues Method
+
+} //End district_reportDataSource Class @347-FCB6E20C
+
+//district_report1 ReportGroup class @391-53A05572
+class clsReportGroupdistrict_report1 {
+    public $GroupType;
+    public $mode; //1 - open, 2 - close
+    public $FacilityName, $_FacilityNameAttributes;
+    public $PatientID, $_PatientIDPage, $_PatientIDParameters, $_PatientIDAttributes;
+    public $GivenName, $_GivenNameAttributes;
+    public $FamilyName, $_FamilyNameAttributes;
+    public $PregnancyRecNr, $_PregnancyRecNrPage, $_PregnancyRecNrParameters, $_PregnancyRecNrAttributes;
+    public $VisitDate, $_VisitDateAttributes;
+    public $FirstName, $_FirstNameAttributes;
+    public $LastName, $_LastNameAttributes;
+    public $Antenatal_Problems, $_Antenatal_ProblemsAttributes;
+    public $Report_CurrentDateTime, $_Report_CurrentDateTimeAttributes;
+    public $Report_CurrentPage, $_Report_CurrentPageAttributes;
+    public $Report_TotalPages, $_Report_TotalPagesAttributes;
+    public $Attributes;
+    public $ReportTotalIndex = 0;
+    public $PageTotalIndex;
+    public $PageNumber;
+    public $RowNumber;
+    public $Parent;
+    public $FacilityNameTotalIndex;
+    public $PatientIDTotalIndex;
+    public $PregnancyRecNrTotalIndex;
+
+    function clsReportGroupdistrict_report1(& $parent) {
+        $this->Parent = & $parent;
+        $this->Attributes = $this->Parent->Attributes->GetAsArray();
+    }
+    function SetControls($PrevGroup = "") {
+        $this->FacilityName = $this->Parent->FacilityName->Value;
+        $this->PatientID = $this->Parent->PatientID->Value;
+        $this->GivenName = $this->Parent->GivenName->Value;
+        $this->FamilyName = $this->Parent->FamilyName->Value;
+        $this->PregnancyRecNr = $this->Parent->PregnancyRecNr->Value;
+        $this->VisitDate = $this->Parent->VisitDate->Value;
+        $this->FirstName = $this->Parent->FirstName->Value;
+        $this->LastName = $this->Parent->LastName->Value;
+        $this->Antenatal_Problems = $this->Parent->Antenatal_Problems->Value;
+    }
+
+    function SetTotalControls($mode = "", $PrevGroup = "") {
+        $this->_PatientIDPage = $this->Parent->PatientID->Page;
+        $this->_PatientIDParameters = $this->Parent->PatientID->Parameters;
+        $this->_PregnancyRecNrPage = $this->Parent->PregnancyRecNr->Page;
+        $this->_PregnancyRecNrParameters = $this->Parent->PregnancyRecNr->Parameters;
+        $this->_FacilityNameAttributes = $this->Parent->FacilityName->Attributes->GetAsArray();
+        $this->_PatientIDAttributes = $this->Parent->PatientID->Attributes->GetAsArray();
+        $this->_GivenNameAttributes = $this->Parent->GivenName->Attributes->GetAsArray();
+        $this->_FamilyNameAttributes = $this->Parent->FamilyName->Attributes->GetAsArray();
+        $this->_PregnancyRecNrAttributes = $this->Parent->PregnancyRecNr->Attributes->GetAsArray();
+        $this->_VisitDateAttributes = $this->Parent->VisitDate->Attributes->GetAsArray();
+        $this->_FirstNameAttributes = $this->Parent->FirstName->Attributes->GetAsArray();
+        $this->_LastNameAttributes = $this->Parent->LastName->Attributes->GetAsArray();
+        $this->_Antenatal_ProblemsAttributes = $this->Parent->Antenatal_Problems->Attributes->GetAsArray();
+        $this->_Report_CurrentDateTimeAttributes = $this->Parent->Report_CurrentDateTime->Attributes->GetAsArray();
+        $this->_Report_CurrentPageAttributes = $this->Parent->Report_CurrentPage->Attributes->GetAsArray();
+        $this->_Report_TotalPagesAttributes = $this->Parent->Report_TotalPages->Attributes->GetAsArray();
+        $this->_NavigatorAttributes = $this->Parent->Navigator->Attributes->GetAsArray();
+    }
+    function SyncWithHeader(& $Header) {
+        $this->FacilityName = $Header->FacilityName;
+        $Header->_FacilityNameAttributes = $this->_FacilityNameAttributes;
+        $this->Parent->FacilityName->Value = $Header->FacilityName;
+        $this->Parent->FacilityName->Attributes->RestoreFromArray($Header->_FacilityNameAttributes);
+        $this->PatientID = $Header->PatientID;
+        $this->_PatientIDPage = $Header->_PatientIDPage;
+        $this->_PatientIDParameters = $Header->_PatientIDParameters;
+        $Header->_PatientIDAttributes = $this->_PatientIDAttributes;
+        $this->Parent->PatientID->Value = $Header->PatientID;
+        $this->Parent->PatientID->Attributes->RestoreFromArray($Header->_PatientIDAttributes);
+        $this->GivenName = $Header->GivenName;
+        $Header->_GivenNameAttributes = $this->_GivenNameAttributes;
+        $this->Parent->GivenName->Value = $Header->GivenName;
+        $this->Parent->GivenName->Attributes->RestoreFromArray($Header->_GivenNameAttributes);
+        $this->FamilyName = $Header->FamilyName;
+        $Header->_FamilyNameAttributes = $this->_FamilyNameAttributes;
+        $this->Parent->FamilyName->Value = $Header->FamilyName;
+        $this->Parent->FamilyName->Attributes->RestoreFromArray($Header->_FamilyNameAttributes);
+        $this->PregnancyRecNr = $Header->PregnancyRecNr;
+        $this->_PregnancyRecNrPage = $Header->_PregnancyRecNrPage;
+        $this->_PregnancyRecNrParameters = $Header->_PregnancyRecNrParameters;
+        $Header->_PregnancyRecNrAttributes = $this->_PregnancyRecNrAttributes;
+        $this->Parent->PregnancyRecNr->Value = $Header->PregnancyRecNr;
+        $this->Parent->PregnancyRecNr->Attributes->RestoreFromArray($Header->_PregnancyRecNrAttributes);
+        $this->VisitDate = $Header->VisitDate;
+        $Header->_VisitDateAttributes = $this->_VisitDateAttributes;
+        $this->Parent->VisitDate->Value = $Header->VisitDate;
+        $this->Parent->VisitDate->Attributes->RestoreFromArray($Header->_VisitDateAttributes);
+        $this->FirstName = $Header->FirstName;
+        $Header->_FirstNameAttributes = $this->_FirstNameAttributes;
+        $this->Parent->FirstName->Value = $Header->FirstName;
+        $this->Parent->FirstName->Attributes->RestoreFromArray($Header->_FirstNameAttributes);
+        $this->LastName = $Header->LastName;
+        $Header->_LastNameAttributes = $this->_LastNameAttributes;
+        $this->Parent->LastName->Value = $Header->LastName;
+        $this->Parent->LastName->Attributes->RestoreFromArray($Header->_LastNameAttributes);
+        $this->Antenatal_Problems = $Header->Antenatal_Problems;
+        $Header->_Antenatal_ProblemsAttributes = $this->_Antenatal_ProblemsAttributes;
+        $this->Parent->Antenatal_Problems->Value = $Header->Antenatal_Problems;
+        $this->Parent->Antenatal_Problems->Attributes->RestoreFromArray($Header->_Antenatal_ProblemsAttributes);
+    }
+    function ChangeTotalControls() {
+    }
+}
+//End district_report1 ReportGroup class
+
+//district_report1 GroupsCollection class @391-6A55A608
+class clsGroupsCollectiondistrict_report1 {
+    public $Groups;
+    public $mPageCurrentHeaderIndex;
+    public $mFacilityNameCurrentHeaderIndex;
+    public $mPatientIDCurrentHeaderIndex;
+    public $mPregnancyRecNrCurrentHeaderIndex;
+    public $PageSize;
+    public $TotalPages = 0;
+    public $TotalRows = 0;
+    public $CurrentPageSize = 0;
+    public $Pages;
+    public $Parent;
+    public $LastDetailIndex;
+
+    function clsGroupsCollectiondistrict_report1(& $parent) {
+        $this->Parent = & $parent;
+        $this->Groups = array();
+        $this->Pages  = array();
+        $this->mFacilityNameCurrentHeaderIndex = 1;
+        $this->mPatientIDCurrentHeaderIndex = 2;
+        $this->mPregnancyRecNrCurrentHeaderIndex = 3;
+        $this->mReportTotalIndex = 0;
+        $this->mPageTotalIndex = 1;
+    }
+
+    function & InitGroup() {
+        $group = new clsReportGroupdistrict_report1($this->Parent);
+        $group->RowNumber = $this->TotalRows + 1;
+        $group->PageNumber = $this->TotalPages;
+        $group->PageTotalIndex = $this->mPageCurrentHeaderIndex;
+        $group->FacilityNameTotalIndex = $this->mFacilityNameCurrentHeaderIndex;
+        $group->PatientIDTotalIndex = $this->mPatientIDCurrentHeaderIndex;
+        $group->PregnancyRecNrTotalIndex = $this->mPregnancyRecNrCurrentHeaderIndex;
+        return $group;
+    }
+
+    function RestoreValues() {
+        $this->Parent->FacilityName->Value = $this->Parent->FacilityName->initialValue;
+        $this->Parent->PatientID->Value = $this->Parent->PatientID->initialValue;
+        $this->Parent->GivenName->Value = $this->Parent->GivenName->initialValue;
+        $this->Parent->FamilyName->Value = $this->Parent->FamilyName->initialValue;
+        $this->Parent->PregnancyRecNr->Value = $this->Parent->PregnancyRecNr->initialValue;
+        $this->Parent->VisitDate->Value = $this->Parent->VisitDate->initialValue;
+        $this->Parent->FirstName->Value = $this->Parent->FirstName->initialValue;
+        $this->Parent->LastName->Value = $this->Parent->LastName->initialValue;
+        $this->Parent->Antenatal_Problems->Value = $this->Parent->Antenatal_Problems->initialValue;
+    }
+
+    function OpenPage() {
+        $this->TotalPages++;
+        $Group = & $this->InitGroup();
+        $this->Parent->Page_Header->CCSEventResult = CCGetEvent($this->Parent->Page_Header->CCSEvents, "OnInitialize", $this->Parent->Page_Header);
+        if ($this->Parent->Page_Header->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Page_Header->Height;
+        $Group->SetTotalControls("GetNextValue");
+        $this->Parent->Page_Header->CCSEventResult = CCGetEvent($this->Parent->Page_Header->CCSEvents, "OnCalculate", $this->Parent->Page_Header);
+        $Group->SetControls();
+        $Group->Mode = 1;
+        $Group->GroupType = "Page";
+        $Group->PageTotalIndex = count($this->Groups);
+        $this->mPageCurrentHeaderIndex = count($this->Groups);
+        $this->Groups[] =  & $Group;
+        $this->Pages[] =  count($this->Groups) == 2 ? 0 : count($this->Groups) - 1;
+    }
+
+    function OpenGroup($groupName) {
+        $Group = "";
+        $OpenFlag = false;
+        if ($groupName == "Report") {
+            $Group = & $this->InitGroup(true);
+            $this->Parent->Report_Header->CCSEventResult = CCGetEvent($this->Parent->Report_Header->CCSEvents, "OnInitialize", $this->Parent->Report_Header);
+            if ($this->Parent->Report_Header->Visible) 
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Report_Header->Height;
+                $Group->SetTotalControls("GetNextValue");
+            $this->Parent->Report_Header->CCSEventResult = CCGetEvent($this->Parent->Report_Header->CCSEvents, "OnCalculate", $this->Parent->Report_Header);
+            $Group->SetControls();
+            $Group->Mode = 1;
+            $Group->GroupType = "Report";
+            $this->Groups[] = & $Group;
+            $this->OpenPage();
+        }
+        if ($groupName == "FacilityName") {
+            $GroupFacilityName = & $this->InitGroup(true);
+            $this->Parent->FacilityName_Header->CCSEventResult = CCGetEvent($this->Parent->FacilityName_Header->CCSEvents, "OnInitialize", $this->Parent->FacilityName_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->FacilityName_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->FacilityName_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->FacilityName_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->FacilityName_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->FacilityName_Header->Height;
+                $GroupFacilityName->SetTotalControls("GetNextValue");
+            $this->Parent->FacilityName_Header->CCSEventResult = CCGetEvent($this->Parent->FacilityName_Header->CCSEvents, "OnCalculate", $this->Parent->FacilityName_Header);
+            $GroupFacilityName->SetControls();
+            $GroupFacilityName->Mode = 1;
+            $OpenFlag = true;
+            $GroupFacilityName->GroupType = "FacilityName";
+            $this->mFacilityNameCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupFacilityName;
+        }
+        if ($groupName == "PatientID" or $OpenFlag) {
+            $GroupPatientID = & $this->InitGroup(true);
+            $this->Parent->PatientID_Header->CCSEventResult = CCGetEvent($this->Parent->PatientID_Header->CCSEvents, "OnInitialize", $this->Parent->PatientID_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->PatientID_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->PatientID_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->PatientID_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->PatientID_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->PatientID_Header->Height;
+                $GroupPatientID->SetTotalControls("GetNextValue");
+            $this->Parent->PatientID_Header->CCSEventResult = CCGetEvent($this->Parent->PatientID_Header->CCSEvents, "OnCalculate", $this->Parent->PatientID_Header);
+            $GroupPatientID->SetControls();
+            $GroupPatientID->Mode = 1;
+            $OpenFlag = true;
+            $GroupPatientID->GroupType = "PatientID";
+            $this->mPatientIDCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupPatientID;
+        }
+        if ($groupName == "PregnancyRecNr" or $OpenFlag) {
+            $GroupPregnancyRecNr = & $this->InitGroup(true);
+            $this->Parent->PregnancyRecNr_Header->CCSEventResult = CCGetEvent($this->Parent->PregnancyRecNr_Header->CCSEvents, "OnInitialize", $this->Parent->PregnancyRecNr_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->PregnancyRecNr_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->PregnancyRecNr_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->PregnancyRecNr_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->PregnancyRecNr_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->PregnancyRecNr_Header->Height;
+                $GroupPregnancyRecNr->SetTotalControls("GetNextValue");
+            $this->Parent->PregnancyRecNr_Header->CCSEventResult = CCGetEvent($this->Parent->PregnancyRecNr_Header->CCSEvents, "OnCalculate", $this->Parent->PregnancyRecNr_Header);
+            $GroupPregnancyRecNr->SetControls();
+            $GroupPregnancyRecNr->Mode = 1;
+            $GroupPregnancyRecNr->GroupType = "PregnancyRecNr";
+            $this->mPregnancyRecNrCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupPregnancyRecNr;
+        }
+    }
+
+    function ClosePage() {
+        $Group = & $this->InitGroup();
+        $this->Parent->Page_Footer->CCSEventResult = CCGetEvent($this->Parent->Page_Footer->CCSEvents, "OnInitialize", $this->Parent->Page_Footer);
+        $Group->SetTotalControls("GetPrevValue");
+        $Group->SyncWithHeader($this->Groups[$this->mPageCurrentHeaderIndex]);
+        $this->Parent->Page_Footer->CCSEventResult = CCGetEvent($this->Parent->Page_Footer->CCSEvents, "OnCalculate", $this->Parent->Page_Footer);
+        $Group->SetControls();
+        $this->RestoreValues();
+        $this->CurrentPageSize = 0;
+        $Group->Mode = 2;
+        $Group->GroupType = "Page";
+        $this->Groups[] = & $Group;
+    }
+
+    function CloseGroup($groupName)
+    {
+        $Group = "";
+        if ($groupName == "Report") {
+            $Group = & $this->InitGroup(true);
+            $this->Parent->Report_Footer->CCSEventResult = CCGetEvent($this->Parent->Report_Footer->CCSEvents, "OnInitialize", $this->Parent->Report_Footer);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->Report_Footer->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->Report_Footer->Height;
+            if (($this->PageSize > 0) and $this->Parent->Report_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            $Group->SetTotalControls("GetPrevValue");
+            $Group->SyncWithHeader($this->Groups[0]);
+            if ($this->Parent->Report_Footer->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Report_Footer->Height;
+            $this->Parent->Report_Footer->CCSEventResult = CCGetEvent($this->Parent->Report_Footer->CCSEvents, "OnCalculate", $this->Parent->Report_Footer);
+            $Group->SetControls();
+            $this->RestoreValues();
+            $Group->Mode = 2;
+            $Group->GroupType = "Report";
+            $this->Groups[] = & $Group;
+            $this->ClosePage();
+            return;
+        }
+        $GroupPregnancyRecNr = & $this->InitGroup(true);
+        $this->Parent->PregnancyRecNr_Footer->CCSEventResult = CCGetEvent($this->Parent->PregnancyRecNr_Footer->CCSEvents, "OnInitialize", $this->Parent->PregnancyRecNr_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->PregnancyRecNr_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->PregnancyRecNr_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->PregnancyRecNr_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupPregnancyRecNr->SetTotalControls("GetPrevValue");
+        $GroupPregnancyRecNr->SyncWithHeader($this->Groups[$this->mPregnancyRecNrCurrentHeaderIndex]);
+        if ($this->Parent->PregnancyRecNr_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->PregnancyRecNr_Footer->Height;
+        $this->Parent->PregnancyRecNr_Footer->CCSEventResult = CCGetEvent($this->Parent->PregnancyRecNr_Footer->CCSEvents, "OnCalculate", $this->Parent->PregnancyRecNr_Footer);
+        $GroupPregnancyRecNr->SetControls();
+        $this->RestoreValues();
+        $GroupPregnancyRecNr->Mode = 2;
+        $GroupPregnancyRecNr->GroupType ="PregnancyRecNr";
+        $this->Groups[] = & $GroupPregnancyRecNr;
+        if ($groupName == "PregnancyRecNr") return;
+        $GroupPatientID = & $this->InitGroup(true);
+        $this->Parent->PatientID_Footer->CCSEventResult = CCGetEvent($this->Parent->PatientID_Footer->CCSEvents, "OnInitialize", $this->Parent->PatientID_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->PatientID_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->PatientID_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->PatientID_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupPatientID->SetTotalControls("GetPrevValue");
+        $GroupPatientID->SyncWithHeader($this->Groups[$this->mPatientIDCurrentHeaderIndex]);
+        if ($this->Parent->PatientID_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->PatientID_Footer->Height;
+        $this->Parent->PatientID_Footer->CCSEventResult = CCGetEvent($this->Parent->PatientID_Footer->CCSEvents, "OnCalculate", $this->Parent->PatientID_Footer);
+        $GroupPatientID->SetControls();
+        $this->RestoreValues();
+        $GroupPatientID->Mode = 2;
+        $GroupPatientID->GroupType ="PatientID";
+        $this->Groups[] = & $GroupPatientID;
+        if ($groupName == "PatientID") return;
+        $GroupFacilityName = & $this->InitGroup(true);
+        $this->Parent->FacilityName_Footer->CCSEventResult = CCGetEvent($this->Parent->FacilityName_Footer->CCSEvents, "OnInitialize", $this->Parent->FacilityName_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->FacilityName_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->FacilityName_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->FacilityName_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupFacilityName->SetTotalControls("GetPrevValue");
+        $GroupFacilityName->SyncWithHeader($this->Groups[$this->mFacilityNameCurrentHeaderIndex]);
+        if ($this->Parent->FacilityName_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->FacilityName_Footer->Height;
+        $this->Parent->FacilityName_Footer->CCSEventResult = CCGetEvent($this->Parent->FacilityName_Footer->CCSEvents, "OnCalculate", $this->Parent->FacilityName_Footer);
+        $GroupFacilityName->SetControls();
+        $this->RestoreValues();
+        $GroupFacilityName->Mode = 2;
+        $GroupFacilityName->GroupType ="FacilityName";
+        $this->Groups[] = & $GroupFacilityName;
+    }
+
+    function AddItem()
+    {
+        $Group = & $this->InitGroup(true);
+        $this->Parent->Detail->CCSEventResult = CCGetEvent($this->Parent->Detail->CCSEvents, "OnInitialize", $this->Parent->Detail);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->Detail->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->Detail->Height;
+        if (($this->PageSize > 0) and $this->Parent->Detail->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $this->TotalRows++;
+        if ($this->LastDetailIndex)
+            $PrevGroup = & $this->Groups[$this->LastDetailIndex];
+        else
+            $PrevGroup = "";
+        $Group->SetTotalControls("", $PrevGroup);
+        if ($this->Parent->Detail->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Detail->Height;
+        $this->Parent->Detail->CCSEventResult = CCGetEvent($this->Parent->Detail->CCSEvents, "OnCalculate", $this->Parent->Detail);
+        $Group->SetControls($PrevGroup);
+        $this->LastDetailIndex = count($this->Groups);
+        $this->Groups[] = & $Group;
+    }
+}
+//End district_report1 GroupsCollection class
+
+class clsReportdistrict_report1 { //district_report1 Class @391-BF0A4B24
+
+//district_report1 Variables @391-2AE56B40
+
+    public $ComponentType = "Report";
+    public $PageSize;
+    public $ComponentName;
+    public $Visible;
+    public $Errors;
+    public $CCSEvents = array();
+    public $CCSEventResult;
+    public $RelativePath = "";
+    public $ViewMode = "Web";
+    public $TemplateBlock;
+    public $PageNumber;
+    public $RowNumber;
+    public $TotalRows;
+    public $TotalPages;
+    public $ControlsVisible = array();
+    public $IsEmpty;
+    public $Attributes;
+    public $DetailBlock, $Detail;
+    public $Report_FooterBlock, $Report_Footer;
+    public $Report_HeaderBlock, $Report_Header;
+    public $Page_FooterBlock, $Page_Footer;
+    public $Page_HeaderBlock, $Page_Header;
+    public $FacilityName_HeaderBlock, $FacilityName_Header;
+    public $FacilityName_FooterBlock, $FacilityName_Footer;
+    public $PatientID_HeaderBlock, $PatientID_Header;
+    public $PatientID_FooterBlock, $PatientID_Footer;
+    public $PregnancyRecNr_HeaderBlock, $PregnancyRecNr_Header;
+    public $PregnancyRecNr_FooterBlock, $PregnancyRecNr_Footer;
+    public $SorterName, $SorterDirection;
+
+    public $ds;
+    public $DataSource;
+    public $UseClientPaging = false;
+
+    //Report Controls
+    public $StaticControls, $RowControls, $Report_FooterControls, $Report_HeaderControls;
+    public $Page_FooterControls, $Page_HeaderControls;
+    public $FacilityName_HeaderControls, $FacilityName_FooterControls;
+    public $PatientID_HeaderControls, $PatientID_FooterControls;
+    public $PregnancyRecNr_HeaderControls, $PregnancyRecNr_FooterControls;
+//End district_report1 Variables
+
+//Class_Initialize Event @391-802FA242
+    function clsReportdistrict_report1($RelativePath = "", & $Parent)
+    {
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->ComponentName = "district_report1";
+        $this->Visible = True;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Attributes = new clsAttributes($this->ComponentName . ":");
+        $this->Detail = new clsSection($this);
+        $MinPageSize = 0;
+        $MaxSectionSize = 0;
+        $this->Detail->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->Detail->Height);
+        $this->Report_Footer = new clsSection($this);
+        $this->Report_Header = new clsSection($this);
+        $this->Page_Footer = new clsSection($this);
+        $this->Page_Footer->Height = 1;
+        $MinPageSize += $this->Page_Footer->Height;
+        $this->Page_Header = new clsSection($this);
+        $this->FacilityName_Footer = new clsSection($this);
+        $this->FacilityName_Header = new clsSection($this);
+        $this->FacilityName_Header->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->FacilityName_Header->Height);
+        $this->PatientID_Footer = new clsSection($this);
+        $this->PatientID_Header = new clsSection($this);
+        $this->PatientID_Header->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->PatientID_Header->Height);
+        $this->PregnancyRecNr_Footer = new clsSection($this);
+        $this->PregnancyRecNr_Header = new clsSection($this);
+        $this->PregnancyRecNr_Header->Height = 2;
+        $MaxSectionSize = max($MaxSectionSize, $this->PregnancyRecNr_Header->Height);
+        $this->Errors = new clsErrors();
+        $this->DataSource = new clsdistrict_report1DataSource($this);
+        $this->ds = & $this->DataSource;
+        $PageSize = CCGetParam($this->ComponentName . "PageSize", "");
+        if(is_numeric($PageSize) && $PageSize > 0) {
+            $this->PageSize = $PageSize;
+        } else {
+            if (!is_numeric($PageSize) || $PageSize < 0)
+                $this->PageSize = 10000;
+             else if ($PageSize == "0")
+                $this->PageSize = 100;
+             else 
+                $this->PageSize = min(100, $PageSize);
+        }
+        $MinPageSize += $MaxSectionSize;
+        if ($this->PageSize && $MinPageSize && $this->PageSize < $MinPageSize)
+            $this->PageSize = $MinPageSize;
+        $this->PageNumber = $this->ViewMode == "Print" ? 1 : intval(CCGetParam($this->ComponentName . "Page", 1));
+        if ($this->PageNumber <= 0 ) {
+            $this->PageNumber = 1;
+        }
+        $this->Visible = (CCSecurityAccessCheck("3") == "success");
+
+        $this->FacilityName = new clsControl(ccsReportLabel, "FacilityName", "FacilityName", ccsText, "", "", $this);
+        $this->PatientID = new clsControl(ccsLink, "PatientID", "PatientID", ccsMemo, "", CCGetRequestParam("PatientID", ccsGet, NULL), $this);
+        $this->PatientID->Page = "patient_maint_fac.php";
+        $this->GivenName = new clsControl(ccsReportLabel, "GivenName", "GivenName", ccsText, "", "", $this);
+        $this->FamilyName = new clsControl(ccsReportLabel, "FamilyName", "FamilyName", ccsText, "", "", $this);
+        $this->PregnancyRecNr = new clsControl(ccsLink, "PregnancyRecNr", "PregnancyRecNr", ccsText, "", CCGetRequestParam("PregnancyRecNr", ccsGet, NULL), $this);
+        $this->PregnancyRecNr->Page = "pregnancy_maint.php";
+        $this->VisitDate = new clsControl(ccsReportLabel, "VisitDate", "VisitDate", ccsText, "", "", $this);
+        $this->FirstName = new clsControl(ccsReportLabel, "FirstName", "FirstName", ccsText, "", "", $this);
+        $this->LastName = new clsControl(ccsReportLabel, "LastName", "LastName", ccsText, "", "", $this);
+        $this->Antenatal_Problems = new clsControl(ccsReportLabel, "Antenatal_Problems", "Antenatal_Problems", ccsText, "", "", $this);
+        $this->NoRecords = new clsPanel("NoRecords", $this);
+        $this->Report_CurrentDateTime = new clsControl(ccsReportLabel, "Report_CurrentDateTime", "Report_CurrentDateTime", ccsText, array('ShortDate', ' ', 'ShortTime'), "", $this);
+        $this->Report_CurrentPage = new clsControl(ccsReportLabel, "Report_CurrentPage", "Report_CurrentPage", ccsInteger, "", "", $this);
+        $this->Report_TotalPages = new clsControl(ccsReportLabel, "Report_TotalPages", "Report_TotalPages", ccsInteger, "", "", $this);
+        $this->Navigator = new clsNavigator($this->ComponentName, "Navigator", $FileName, 10, tpSimple, $this);
+        $this->Navigator->PageSizes = array("1", "5", "10", "25", "50");
+    }
+//End Class_Initialize Event
+
+//Initialize Method @391-6C59EE65
+    function Initialize()
+    {
+        if(!$this->Visible) return;
+
+        $this->DataSource->PageSize = $this->PageSize;
+        $this->DataSource->AbsolutePage = $this->PageNumber;
+        $this->DataSource->SetOrder($this->SorterName, $this->SorterDirection);
+    }
+//End Initialize Method
+
+//CheckErrors Method @391-E8B7E98E
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->FacilityName->Errors->Count());
+        $errors = ($errors || $this->PatientID->Errors->Count());
+        $errors = ($errors || $this->GivenName->Errors->Count());
+        $errors = ($errors || $this->FamilyName->Errors->Count());
+        $errors = ($errors || $this->PregnancyRecNr->Errors->Count());
+        $errors = ($errors || $this->VisitDate->Errors->Count());
+        $errors = ($errors || $this->FirstName->Errors->Count());
+        $errors = ($errors || $this->LastName->Errors->Count());
+        $errors = ($errors || $this->Antenatal_Problems->Errors->Count());
+        $errors = ($errors || $this->Report_CurrentDateTime->Errors->Count());
+        $errors = ($errors || $this->Report_CurrentPage->Errors->Count());
+        $errors = ($errors || $this->Report_TotalPages->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        $errors = ($errors || $this->DataSource->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//GetErrors Method @391-540077ED
+    function GetErrors()
+    {
+        $errors = "";
+        $errors = ComposeStrings($errors, $this->FacilityName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->PatientID->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->GivenName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->FamilyName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->PregnancyRecNr->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->VisitDate->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->FirstName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->LastName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Antenatal_Problems->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Report_CurrentDateTime->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Report_CurrentPage->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Report_TotalPages->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DataSource->Errors->ToString());
+        return $errors;
+    }
+//End GetErrors Method
+
+//Show Method @391-D26C8BA5
+    function Show()
+    {
+        global $Tpl;
+        global $CCSLocales;
+        if(!$this->Visible) return;
+
+        $ShownRecords = 0;
+
+        $this->DataSource->Parameters["urls_PatientID"] = CCGetFromGet("s_PatientID", NULL);
+        $this->DataSource->Parameters["urls_PregnancyRecNr"] = CCGetFromGet("s_PregnancyRecNr", NULL);
+        $this->DataSource->Parameters["sess_Facilities"] = CCGetSession("s_Facilities", NULL);
+        $this->DataSource->Parameters["urls_VisitDate"] = CCGetFromGet("s_VisitDate", NULL);
+        $this->DataSource->Parameters["urls_VisitDate1"] = CCGetFromGet("s_VisitDate1", NULL);
+        $this->DataSource->Parameters["urls_icd10_all_ICD10ID1"] = CCGetFromGet("s_icd10_all_ICD10ID1", NULL);
+        $this->DataSource->Parameters["urls_icd10_all_ICD10ID2"] = CCGetFromGet("s_icd10_all_ICD10ID2", NULL);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $this->DataSource->Prepare();
+        $this->DataSource->Open();
+
+        $FacilityNameKey = "";
+        $PatientIDKey = "";
+        $PregnancyRecNrKey = "";
+        $Groups = new clsGroupsCollectiondistrict_report1($this);
+        $Groups->PageSize = $this->PageSize > 0 ? $this->PageSize : 0;
+
+        $is_next_record = $this->DataSource->next_record();
+        $this->IsEmpty = ! $is_next_record;
+        while($is_next_record) {
+            $this->DataSource->SetValues();
+            $this->FacilityName->SetValue($this->DataSource->FacilityName->GetValue());
+            $this->PatientID->SetValue($this->DataSource->PatientID->GetValue());
+            $this->GivenName->SetValue($this->DataSource->GivenName->GetValue());
+            $this->FamilyName->SetValue($this->DataSource->FamilyName->GetValue());
+            $this->PregnancyRecNr->SetValue($this->DataSource->PregnancyRecNr->GetValue());
+            $this->VisitDate->SetValue($this->DataSource->VisitDate->GetValue());
+            $this->FirstName->SetValue($this->DataSource->FirstName->GetValue());
+            $this->LastName->SetValue($this->DataSource->LastName->GetValue());
+            $this->Antenatal_Problems->SetValue($this->DataSource->Antenatal_Problems->GetValue());
+            $this->PatientID->Parameters = "";
+            $this->PatientID->Parameters = CCAddParam($this->PatientID->Parameters, "PatientID", $this->DataSource->f("PatientID"));
+            $this->PregnancyRecNr->Parameters = "";
+            $this->PregnancyRecNr->Parameters = CCAddParam($this->PregnancyRecNr->Parameters, "PatientID", $this->DataSource->f("PatientID"));
+            $this->PregnancyRecNr->Parameters = CCAddParam($this->PregnancyRecNr->Parameters, "PregnancyID", $this->DataSource->f("PregnancyID"));
+            if (count($Groups->Groups) == 0) $Groups->OpenGroup("Report");
+            if (count($Groups->Groups) == 2 or $FacilityNameKey != $this->DataSource->f("FacilityName")) {
+                $Groups->OpenGroup("FacilityName");
+            } elseif ($PatientIDKey != $this->DataSource->f("PatientID")) {
+                $Groups->OpenGroup("PatientID");
+            } elseif ($PregnancyRecNrKey != $this->DataSource->f("PregnancyRecNr")) {
+                $Groups->OpenGroup("PregnancyRecNr");
+            }
+            $Groups->AddItem();
+            $FacilityNameKey = $this->DataSource->f("FacilityName");
+            $PatientIDKey = $this->DataSource->f("PatientID");
+            $PregnancyRecNrKey = $this->DataSource->f("PregnancyRecNr");
+            $is_next_record = $this->DataSource->next_record();
+            if (!$is_next_record || $FacilityNameKey != $this->DataSource->f("FacilityName")) {
+                $Groups->CloseGroup("FacilityName");
+            } elseif ($PatientIDKey != $this->DataSource->f("PatientID")) {
+                $Groups->CloseGroup("PatientID");
+            } elseif ($PregnancyRecNrKey != $this->DataSource->f("PregnancyRecNr")) {
+                $Groups->CloseGroup("PregnancyRecNr");
+            }
+        }
+        if (!count($Groups->Groups)) 
+            $Groups->OpenGroup("Report");
+        else
+            $this->NoRecords->Visible = false;
+        $Groups->CloseGroup("Report");
+        $this->TotalPages = $Groups->TotalPages;
+        $this->TotalRows = $Groups->TotalRows;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        if(!$this->Visible) return;
+
+        $this->Attributes->Show();
+        $ReportBlock = "Report " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+
+        if($this->CheckErrors()) {
+            $Tpl->replaceblock("", $this->GetErrors());
+            $Tpl->block_path = $ParentPath;
+            return;
+        } else {
+            $items = & $Groups->Groups;
+            $i = $Groups->Pages[min($this->PageNumber, $Groups->TotalPages) - 1];
+            $this->ControlsVisible["FacilityName"] = $this->FacilityName->Visible;
+            $this->ControlsVisible["PatientID"] = $this->PatientID->Visible;
+            $this->ControlsVisible["GivenName"] = $this->GivenName->Visible;
+            $this->ControlsVisible["FamilyName"] = $this->FamilyName->Visible;
+            $this->ControlsVisible["PregnancyRecNr"] = $this->PregnancyRecNr->Visible;
+            $this->ControlsVisible["VisitDate"] = $this->VisitDate->Visible;
+            $this->ControlsVisible["FirstName"] = $this->FirstName->Visible;
+            $this->ControlsVisible["LastName"] = $this->LastName->Visible;
+            $this->ControlsVisible["Antenatal_Problems"] = $this->Antenatal_Problems->Visible;
+            do {
+                $this->Attributes->RestoreFromArray($items[$i]->Attributes);
+                $this->RowNumber = $items[$i]->RowNumber;
+                switch ($items[$i]->GroupType) {
+                    Case "":
+                        $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Detail";
+                        $this->Antenatal_Problems->SetValue($items[$i]->Antenatal_Problems);
+                        $this->Antenatal_Problems->Attributes->RestoreFromArray($items[$i]->_Antenatal_ProblemsAttributes);
+                        $this->Detail->CCSEventResult = CCGetEvent($this->Detail->CCSEvents, "BeforeShow", $this->Detail);
+                        $this->Attributes->Show();
+                        $this->Antenatal_Problems->Show();
+                        $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                        if ($this->Detail->Visible)
+                            $Tpl->parseto("Section Detail", true, "Section Detail");
+                        break;
+                    case "Report":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Report_Header->CCSEventResult = CCGetEvent($this->Report_Header->CCSEvents, "BeforeShow", $this->Report_Header);
+                            if ($this->Report_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Report_Header";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Report_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->Report_Footer->CCSEventResult = CCGetEvent($this->Report_Footer->CCSEvents, "BeforeShow", $this->Report_Footer);
+                            if ($this->Report_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Report_Footer";
+                                $this->NoRecords->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Report_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "Page":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Page_Header->CCSEventResult = CCGetEvent($this->Page_Header->CCSEvents, "BeforeShow", $this->Page_Header);
+                            if ($this->Page_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Page_Header";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Page_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2 && !$this->UseClientPaging || $items[$i]->Mode == 1 && $this->UseClientPaging) {
+                            $this->Report_CurrentDateTime->SetValue(CCFormatDate(CCGetDateArray(), $this->Report_CurrentDateTime->Format));
+                            $this->Report_CurrentDateTime->Attributes->RestoreFromArray($items[$i]->_Report_CurrentDateTimeAttributes);
+                            $this->Report_CurrentPage->SetValue($items[$i]->PageNumber);
+                            $this->Report_CurrentPage->Attributes->RestoreFromArray($items[$i]->_Report_CurrentPageAttributes);
+                            $this->Report_TotalPages->SetValue($Groups->TotalPages);
+                            $this->Report_TotalPages->Attributes->RestoreFromArray($items[$i]->_Report_TotalPagesAttributes);
+                            $this->Navigator->PageNumber = $items[$i]->PageNumber;
+                            $this->Navigator->TotalPages = $Groups->TotalPages;
+                            $this->Navigator->Visible = ("Print" != $this->ViewMode);
+                            $this->Page_Footer->CCSEventResult = CCGetEvent($this->Page_Footer->CCSEvents, "BeforeShow", $this->Page_Footer);
+                            if ($this->Page_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Page_Footer";
+                                $this->Report_CurrentDateTime->Show();
+                                $this->Report_CurrentPage->Show();
+                                $this->Report_TotalPages->Show();
+                                $this->Navigator->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Page_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "FacilityName":
+                        if ($items[$i]->Mode == 1) {
+                            $this->FacilityName->SetValue($items[$i]->FacilityName);
+                            $this->FacilityName->Attributes->RestoreFromArray($items[$i]->_FacilityNameAttributes);
+                            $this->FacilityName_Header->CCSEventResult = CCGetEvent($this->FacilityName_Header->CCSEvents, "BeforeShow", $this->FacilityName_Header);
+                            if ($this->FacilityName_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section FacilityName_Header";
+                                $this->Attributes->Show();
+                                $this->FacilityName->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section FacilityName_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->FacilityName_Footer->CCSEventResult = CCGetEvent($this->FacilityName_Footer->CCSEvents, "BeforeShow", $this->FacilityName_Footer);
+                            if ($this->FacilityName_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section FacilityName_Footer";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section FacilityName_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "PatientID":
+                        if ($items[$i]->Mode == 1) {
+                            $this->PatientID->SetValue($items[$i]->PatientID);
+                            $this->PatientID->Page = $items[$i]->_PatientIDPage;
+                            $this->PatientID->Parameters = $items[$i]->_PatientIDParameters;
+                            $this->PatientID->Attributes->RestoreFromArray($items[$i]->_PatientIDAttributes);
+                            $this->GivenName->SetValue($items[$i]->GivenName);
+                            $this->GivenName->Attributes->RestoreFromArray($items[$i]->_GivenNameAttributes);
+                            $this->FamilyName->SetValue($items[$i]->FamilyName);
+                            $this->FamilyName->Attributes->RestoreFromArray($items[$i]->_FamilyNameAttributes);
+                            $this->PatientID_Header->CCSEventResult = CCGetEvent($this->PatientID_Header->CCSEvents, "BeforeShow", $this->PatientID_Header);
+                            if ($this->PatientID_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section PatientID_Header";
+                                $this->Attributes->Show();
+                                $this->PatientID->Show();
+                                $this->GivenName->Show();
+                                $this->FamilyName->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section PatientID_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->PatientID_Footer->CCSEventResult = CCGetEvent($this->PatientID_Footer->CCSEvents, "BeforeShow", $this->PatientID_Footer);
+                            if ($this->PatientID_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section PatientID_Footer";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section PatientID_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "PregnancyRecNr":
+                        if ($items[$i]->Mode == 1) {
+                            $this->PregnancyRecNr->SetValue($items[$i]->PregnancyRecNr);
+                            $this->PregnancyRecNr->Page = $items[$i]->_PregnancyRecNrPage;
+                            $this->PregnancyRecNr->Parameters = $items[$i]->_PregnancyRecNrParameters;
+                            $this->PregnancyRecNr->Attributes->RestoreFromArray($items[$i]->_PregnancyRecNrAttributes);
+                            $this->VisitDate->SetValue($items[$i]->VisitDate);
+                            $this->VisitDate->Attributes->RestoreFromArray($items[$i]->_VisitDateAttributes);
+                            $this->FirstName->SetValue($items[$i]->FirstName);
+                            $this->FirstName->Attributes->RestoreFromArray($items[$i]->_FirstNameAttributes);
+                            $this->LastName->SetValue($items[$i]->LastName);
+                            $this->LastName->Attributes->RestoreFromArray($items[$i]->_LastNameAttributes);
+                            $this->PregnancyRecNr_Header->CCSEventResult = CCGetEvent($this->PregnancyRecNr_Header->CCSEvents, "BeforeShow", $this->PregnancyRecNr_Header);
+                            if ($this->PregnancyRecNr_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section PregnancyRecNr_Header";
+                                $this->Attributes->Show();
+                                $this->PregnancyRecNr->Show();
+                                $this->VisitDate->Show();
+                                $this->FirstName->Show();
+                                $this->LastName->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section PregnancyRecNr_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->PregnancyRecNr_Footer->CCSEventResult = CCGetEvent($this->PregnancyRecNr_Footer->CCSEvents, "BeforeShow", $this->PregnancyRecNr_Footer);
+                            if ($this->PregnancyRecNr_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section PregnancyRecNr_Footer";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section PregnancyRecNr_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                }
+                $i++;
+            } while ($i < count($items) && ($this->ViewMode == "Print" ||  !($i > 1 && $items[$i]->GroupType == 'Page' && $items[$i]->Mode == 1)));
+            $Tpl->block_path = $ParentPath;
+            $Tpl->parse($ReportBlock);
+            $this->DataSource->close();
+        }
+
+    }
+//End Show Method
+
+} //End district_report1 Class @391-FCB6E20C
+
+class clsdistrict_report1DataSource extends clsDBregistry_db {  //district_report1DataSource Class @391-EED44440
+
+//DataSource Variables @391-CDAA86D9
+    public $Parent = "";
+    public $CCSEvents = "";
+    public $CCSEventResult;
+    public $ErrorBlock;
+    public $CmdExecution;
+
+    public $wp;
+
+
+    // Datasource fields
+    public $FacilityName;
+    public $PatientID;
+    public $GivenName;
+    public $FamilyName;
+    public $PregnancyRecNr;
+    public $VisitDate;
+    public $FirstName;
+    public $LastName;
+    public $Antenatal_Problems;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @391-898CD424
+    function clsdistrict_report1DataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Report district_report1";
+        $this->Initialize();
+        $this->FacilityName = new clsField("FacilityName", ccsText, "");
+        
+        $this->PatientID = new clsField("PatientID", ccsMemo, "");
+        
+        $this->GivenName = new clsField("GivenName", ccsText, "");
+        
+        $this->FamilyName = new clsField("FamilyName", ccsText, "");
+        
+        $this->PregnancyRecNr = new clsField("PregnancyRecNr", ccsText, "");
+        
+        $this->VisitDate = new clsField("VisitDate", ccsText, "");
+        
+        $this->FirstName = new clsField("FirstName", ccsText, "");
+        
+        $this->LastName = new clsField("LastName", ccsText, "");
+        
+        $this->Antenatal_Problems = new clsField("Antenatal_Problems", ccsText, "");
+        
+
+    }
+//End DataSourceClass_Initialize Event
+
+//SetOrder Method @391-18D71ABC
+    function SetOrder($SorterName, $SorterDirection)
+    {
+        $this->Order = "pregnancy.PregnancyID ASC, Antenatal_Problems ASC";
+        $this->Order = CCGetOrder($this->Order, $SorterName, $SorterDirection, 
+            "");
+    }
+//End SetOrder Method
+
+//Prepare Method @391-3E741041
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urls_PatientID", ccsText, "", "", $this->Parameters["urls_PatientID"], '%', false);
+        $this->wp->AddParameter("2", "urls_PregnancyRecNr", ccsText, "", "", $this->Parameters["urls_PregnancyRecNr"], '%', false);
+        $this->wp->AddParameter("3", "sess_Facilities", ccsText, "", "", $this->Parameters["sess_Facilities"], 0, false);
+        $this->wp->AddParameter("4", "urls_VisitDate", ccsDate, array("ShortDate"), array("yyyy", "-", "mm", "-", "dd", " ", "HH", ":", "nn", ":", "ss"), $this->Parameters["urls_VisitDate"], CCFormatDate(CCParseDate("1000-01-01",array("yyyy","-","mm","-","dd")),array("ShortDate")), false);
+        $this->wp->AddParameter("5", "urls_VisitDate1", ccsDate, array("ShortDate"), array("yyyy", "-", "mm", "-", "dd", " ", "HH", ":", "nn", ":", "ss"), $this->Parameters["urls_VisitDate1"], CCFormatDate(CCParseDate("2999-01-01",array("yyyy","-","mm","-","dd")),array("ShortDate")), false);
+        $this->wp->AddParameter("6", "urls_icd10_all_ICD10ID1", ccsText, "", "", $this->Parameters["urls_icd10_all_ICD10ID1"], '%', false);
+        $this->wp->AddParameter("7", "urls_icd10_all_ICD10ID2", ccsText, "", "", $this->Parameters["urls_icd10_all_ICD10ID2"], '%', false);
+    }
+//End Prepare Method
+
+//Open Method @391-FAD1ECCD
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->SQL = "SELECT GivenName, FamilyName, FacilityName, PregnancyRecNr, pregnancy.PatientID AS PatientID, pregnancy.PregnancyID, \n" .
+        "CONCAT(DiseaseName, ' (', icd10_all.ICD10ID, ')') AS Antenatal_Problems, VisitDate, FirstName, LastName\n" .
+        "\n" .
+        "FROM ((((((patient INNER JOIN pregnancy ON patient.PatientID = pregnancy.PatientID) INNER JOIN visit ON\n" .
+        "visit.PregnancyID = pregnancy.PregnancyID) LEFT JOIN visitdisease ON\n" .
+        "visitdisease.VisitID = visit.VisitID) LEFT JOIN employees ON\n" .
+        "visit.EmployeeID = employees.EmployeeID) LEFT JOIN icd10_all ON\n" .
+        "visitdisease.ICD10ID = icd10_all.ICD10ID ) LEFT JOIN delivery ON delivery.PregnancyID = pregnancy.PregnancyID) \n" .
+        "INNER JOIN facilities ON pregnancy.FacilityID = facilities.FacilityID\n" .
+        "\n" .
+        "WHERE pregnancy.PatientID LIKE '" . $this->SQLValue($this->wp->GetDBValue("1"), ccsText) . "'\n" .
+        "AND patient.Discharged = 0\n" .
+        "AND PregnancyRecNr LIKE '" . $this->SQLValue($this->wp->GetDBValue("2"), ccsText) . "'\n" .
+        "AND visit.RiskGroup = 1 \n" .
+        "AND DataDelivery IS NULL \n" .
+        "\n" .
+        "AND visit.VisitDate >= '" . $this->SQLValue($this->wp->GetDBValue("4"), ccsDate) . "'\n" .
+        "AND visit.VisitDate <= '" . $this->SQLValue($this->wp->GetDBValue("5"), ccsDate) . "'\n" .
+        "\n" .
+        "\n" .
+        "AND pregnancy.FacilityID LIKE '" . $this->SQLValue($this->wp->GetDBValue("3"), ccsText) . "' \n" .
+        "AND visit.VisitID IN \n" .
+        "\n" .
+        "(SELECT MaxVisitIDs FROM (SELECT PregID, maxDate, (SELECT MAX(VisitID) FROM visit INNER JOIN pregnancy ON pregnancy.PregnancyID = visit.PregnancyID \n" .
+        "WHERE pregnancy.PregnancyID = PregID AND visit.VisitDate= maxDate) AS MaxVisitIDs \n" .
+        "FROM\n" .
+        "(SELECT pregnancy.PregnancyID AS PregID, MAX(visit.VisitDate) AS maxDate\n" .
+        "FROM visit INNER JOIN pregnancy ON pregnancy.PregnancyID = visit.PregnancyID\n" .
+        "WHERE CURDATE( ) < ADDDATE( Calc_DeliveryDate, 31 )\n" .
+        "GROUP BY pregnancy.PregnancyID) AS maxDates  ) AS maxd) {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        $this->query(CCBuildSQL($this->SQL, $this->Where, "FacilityName asc,PatientID asc,PregnancyRecNr asc" .  ($this->Order ? ", " . $this->Order: "")));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @391-B1F4BD8E
+    function SetValues()
+    {
+        $this->FacilityName->SetDBValue($this->f("FacilityName"));
+        $this->PatientID->SetDBValue($this->f("PatientID"));
+        $this->GivenName->SetDBValue($this->f("GivenName"));
+        $this->FamilyName->SetDBValue($this->f("FamilyName"));
+        $this->PregnancyRecNr->SetDBValue($this->f("PregnancyRecNr"));
+        $this->VisitDate->SetDBValue($this->f("VisitDate"));
+        $this->FirstName->SetDBValue($this->f("FirstName"));
+        $this->LastName->SetDBValue($this->f("LastName"));
+        $this->Antenatal_Problems->SetDBValue($this->f("Antenatal_Problems"));
+    }
+//End SetValues Method
+
+} //End district_report1DataSource Class @391-FCB6E20C
+
+//Initialize Page @1-5FA2D26C
+// Variables
+$FileName = "";
+$Redirect = "";
+$Tpl = "";
+$TemplateFileName = "";
+$BlockToParse = "";
+$ComponentName = "";
+$Attributes = "";
+
+// Events;
+$CCSEvents = "";
+$CCSEventResult = "";
+
+$FileName = FileName;
+$Redirect = "";
+$TemplateFileName = "report_risks_visit.html";
+$BlockToParse = "main";
+$TemplateEncoding = "UTF-8";
+$ContentType = "text/html";
+$PathToRoot = "./";
+$Charset = $Charset ? $Charset : "utf-8";
+//End Initialize Page
+
+//Check SSL @1-E30DD771
+CCCheckSSL();
+//End Check SSL
+
+//Authenticate User @1-0C179BD6
+CCSecurityRedirect("1;3;2", SecureURL . "" .  "noaccess.php");
+//End Authenticate User
+
+//Include events file @1-D7FED9EB
+include_once("./report_risks_visit_events.php");
+//End Include events file
+
+//Before Initialize @1-E870CEBC
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeInitialize", $MainPage);
+//End Before Initialize
+
+//Initialize Objects @1-1ECE94C5
+$DBregistry_db = new clsDBregistry_db();
+$MainPage->Connections["registry_db"] = & $DBregistry_db;
+$Attributes = new clsAttributes("page:");
+$MainPage->Attributes = & $Attributes;
+
+// Controls
+$topmenu = new clstopmenu("", "topmenu", $MainPage);
+$topmenu->Initialize();
+$Report2 = new clsRecordReport2("", $MainPage);
+$report3 = new clsRecordreport3("", $MainPage);
+$Report_Print = new clsControl(ccsLink, "Report_Print", "Report_Print", ccsText, "", CCGetRequestParam("Report_Print", ccsGet, NULL), $MainPage);
+$Report_Print->Page = "report_risks_visit.php";
+$district_report = new clsReportdistrict_report("", $MainPage);
+$district_report1 = new clsReportdistrict_report1("", $MainPage);
+$MainPage->topmenu = & $topmenu;
+$MainPage->Report2 = & $Report2;
+$MainPage->report3 = & $report3;
+$MainPage->Report_Print = & $Report_Print;
+$MainPage->district_report = & $district_report;
+$MainPage->district_report1 = & $district_report1;
+$Report_Print->Parameters = CCGetQueryString("QueryString", array("ccsForm"));
+$Report_Print->Parameters = CCAddParam($Report_Print->Parameters, "ViewMode", "Print");
+$district_report->Initialize();
+$district_report1->Initialize();
+
+BindEvents();
+
+$CCSEventResult = CCGetEvent($CCSEvents, "AfterInitialize", $MainPage);
+
+if ($Charset) {
+    header("Content-Type: " . $ContentType . "; charset=" . $Charset);
+} else {
+    header("Content-Type: " . $ContentType);
+}
+//End Initialize Objects
+
+//Initialize HTML Template @1-A06E9207
+$CCSEventResult = CCGetEvent($CCSEvents, "OnInitializeView", $MainPage);
+$Tpl = new clsTemplate($FileEncoding, $TemplateEncoding);
+$Tpl->LoadTemplate(PathToCurrentPage . $TemplateFileName, $BlockToParse, "UTF-8", "replace");
+$Tpl->block_path = "/$BlockToParse";
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeShow", $MainPage);
+$Attributes->SetValue("pathToRoot", "");
+$Attributes->Show();
+//End Initialize HTML Template
+
+//Execute Components @1-97EE604D
+$topmenu->Operations();
+$Report2->Operation();
+$report3->Operation();
+//End Execute Components
+
+//Go to destination page @1-F1480E0D
+if($Redirect)
+{
+    $CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+    $DBregistry_db->close();
+    header("Location: " . $Redirect);
+    $topmenu->Class_Terminate();
+    unset($topmenu);
+    unset($Report2);
+    unset($report3);
+    unset($district_report);
+    unset($district_report1);
+    unset($Tpl);
+    exit;
+}
+//End Go to destination page
+
+//Show Page @1-2352CDBA
+$topmenu->Show();
+$Report2->Show();
+$report3->Show();
+$district_report->Show();
+$district_report1->Show();
+$Report_Print->Show();
+$Tpl->block_path = "";
+$Tpl->Parse($BlockToParse, false);
+if (!isset($main_block)) $main_block = $Tpl->GetVar($BlockToParse);
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeOutput", $MainPage);
+if ($CCSEventResult) echo $main_block;
+//End Show Page
+
+//Unload Page @1-6A22E921
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+$DBregistry_db->close();
+$topmenu->Class_Terminate();
+unset($topmenu);
+unset($Report2);
+unset($report3);
+unset($district_report);
+unset($district_report1);
+unset($Tpl);
+//End Unload Page
+
+
+?>

@@ -1,0 +1,933 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>report_on_newborn_dead_all_facility</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css" />
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-18F7AF9C
+
+var delivery_facilities_newbo_DatePicker_s_BirthDate = new Object(); 
+delivery_facilities_newbo_DatePicker_s_BirthDate.format           = "ShortDate";
+delivery_facilities_newbo_DatePicker_s_BirthDate.style            = "Styles/{CCS_Style}/Style.css";
+delivery_facilities_newbo_DatePicker_s_BirthDate.relativePathPart = "";
+delivery_facilities_newbo_DatePicker_s_BirthDate.themeVersion = "3.0";
+
+var delivery_facilities_newbo_DatePicker_s_BirthDate1 = new Object(); 
+delivery_facilities_newbo_DatePicker_s_BirthDate1.format           = "ShortDate";
+delivery_facilities_newbo_DatePicker_s_BirthDate1.style            = "Styles/{CCS_Style}/Style.css";
+delivery_facilities_newbo_DatePicker_s_BirthDate1.relativePathPart = "";
+delivery_facilities_newbo_DatePicker_s_BirthDate1.themeVersion = "3.0";
+
+var delivery_facilities_newbo1_DatePicker_s_BirthDate = new Object(); 
+delivery_facilities_newbo1_DatePicker_s_BirthDate.format           = "ShortDate";
+delivery_facilities_newbo1_DatePicker_s_BirthDate.style            = "Styles/{CCS_Style}/Style.css";
+delivery_facilities_newbo1_DatePicker_s_BirthDate.relativePathPart = "";
+delivery_facilities_newbo1_DatePicker_s_BirthDate.themeVersion = "3.0";
+
+var delivery_facilities_newbo1_DatePicker_s_BirthDate1 = new Object(); 
+delivery_facilities_newbo1_DatePicker_s_BirthDate1.format           = "ShortDate";
+delivery_facilities_newbo1_DatePicker_s_BirthDate1.style            = "Styles/{CCS_Style}/Style.css";
+delivery_facilities_newbo1_DatePicker_s_BirthDate1.relativePathPart = "";
+delivery_facilities_newbo1_DatePicker_s_BirthDate1.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+</head>
+<body>
+<p>{topmenu}</p>
+<p>&nbsp; 
+<!-- BEGIN Record delivery_facilities_newbo -->
+<form id="delivery_facilities_newbo" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp; </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="delivery_facilities_newbos_BirthDate">{res:BirthDate}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from} </label><input id="delivery_facilities_newbos_BirthDate" value="{s_BirthDate}" maxlength="100" size="8" name="{s_BirthDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_BirthDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="delivery_facilities_newboDatePicker_s_BirthDate"><img id="delivery_facilities_newboDatePicker_s_BirthDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_BirthDate --><label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}</label></label> <input id="delivery_facilities_newbos_BirthDate1" value="{s_BirthDate1}" maxlength="100" size="8" name="{s_BirthDate1_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_BirthDate1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="delivery_facilities_newboDatePicker_s_BirthDate1"><img id="delivery_facilities_newboDatePicker_s_BirthDate1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_BirthDate1 --></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="delivery_facilities_newboButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record delivery_facilities_newbo --></p>
+<p>&nbsp;
+<!-- BEGIN Record delivery_facilities_newbo1 -->
+<form id="delivery_facilities_newbo1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp; </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="delivery_facilities_newbo1s_BirthDate">{res:BirthDate}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from} </label><input id="delivery_facilities_newbo1s_BirthDate" value="{s_BirthDate}" maxlength="100" size="8" name="{s_BirthDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_BirthDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="delivery_facilities_newbo1DatePicker_s_BirthDate"><img id="delivery_facilities_newbo1DatePicker_s_BirthDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_BirthDate --><label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}</label></label> <input id="delivery_facilities_newbo1s_BirthDate1" value="{s_BirthDate1}" maxlength="100" size="8" name="{s_BirthDate1_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_BirthDate1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="delivery_facilities_newbo1DatePicker_s_BirthDate1"><img id="delivery_facilities_newbo1DatePicker_s_BirthDate1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_BirthDate1 --></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="delivery_facilities_newbo1s_FacilityName">{res:FacilityName}</label></td> 
+            <td>
+              <select id="delivery_facilities_newbo1s_FacilityName" name="{s_FacilityName_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+ {s_FacilityName_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="delivery_facilities_newbo1Button_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record delivery_facilities_newbo1 --></p>
+<p><strong><font size="4">{res:Died_total}&nbsp;&nbsp; </font></strong>
+<table>
+  <tr valign="top">
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn9 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>{res:NewBorn2}&nbsp;</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn9 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn10 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>&lt;500</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex1}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn10 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn11 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>500-999</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn11 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn12 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>1000-1499</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn12 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn13 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>1500-1999</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn13 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn14 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>2000-2499</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn14 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn15 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>2500-2999</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn15 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn16 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>3000-3499</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn16 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn17 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>&gt;=3500</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn17 --></p>
+ </td> 
+  </tr>
+</table>
+</p>
+<p>
+<table>
+  <tr valign="top">
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn18 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>{res:NewBorn2}&nbsp;</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn18 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn19 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>&lt;500</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex1}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn19 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn20 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>500-999</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn20 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn21 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>1000-1499</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn21 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn22 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>1500-1999</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn22 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn23 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>2000-2499</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn23 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn24 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>2500-2999</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn24 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn25 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>3000-3499</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn25 --></p>
+ </td> 
+    <td></td> 
+    <td>
+      <p>
+      <!-- BEGIN Report NewBorn26 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>&gt;=3500</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header -->
+              <caption class="Row"><strong><font size="2"></font></strong><strong><font style="BACKGROUND-COLOR: #ffffff" size="2">{res:CCS_ReportTotal}: {Report_TotalRecords}</font></strong></caption>
+ <!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+              <!-- BEGIN Section Sex_Header -->
+              <tr class="Row">
+                <td style="BACKGROUND-COLOR: #ffffff" colspan="4">{GroupSex2}</td> 
+                <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{CountGroupSex}</td> 
+              </tr>
+ <!-- END Section Sex_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Sex_Footer --><!-- END Section Sex_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="5">{res:CCS_NoRecords}&nbsp;&nbsp; </td> 
+              </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Report NewBorn26 --></p>
+ </td> 
+  </tr>
+</table>
+</p>
+</body>
+</html>

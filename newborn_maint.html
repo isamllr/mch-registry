@@ -1,0 +1,1094 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:NewbornData}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script type="text/javascript" src="date.js"></script>
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+
+var available_ClinicalDiagnosis_all = new Array();
+var available_AnatomicPathology_all = new Array();
+var available_ClinicalTests_all = new Array();
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-73221EF7
+
+var newborn_DatePicker_DischargeDateTime = new Object(); 
+newborn_DatePicker_DischargeDateTime.format           = "ShortDate";
+newborn_DatePicker_DischargeDateTime.style            = "Styles/{CCS_Style}/Style.css";
+newborn_DatePicker_DischargeDateTime.relativePathPart = "";
+newborn_DatePicker_DischargeDateTime.themeVersion = "3.0";
+
+var newborn_DatePicker_DateOutcome = new Object(); 
+newborn_DatePicker_DateOutcome.format           = "ShortDate";
+newborn_DatePicker_DateOutcome.style            = "Styles/{CCS_Style}/Style.css";
+newborn_DatePicker_DateOutcome.relativePathPart = "";
+newborn_DatePicker_DateOutcome.themeVersion = "3.0";
+
+var newborn_DatePicker_DateReferral = new Object(); 
+newborn_DatePicker_DateReferral.format           = "ShortDate";
+newborn_DatePicker_DateReferral.style            = "Styles/{CCS_Style}/Style.css";
+newborn_DatePicker_DateReferral.relativePathPart = "";
+newborn_DatePicker_DateReferral.themeVersion = "3.0";
+
+var newborn_DatePicker_BirthDate = new Object(); 
+newborn_DatePicker_BirthDate.format           = "ShortDate";
+newborn_DatePicker_BirthDate.style            = "Styles/{CCS_Style}/Style.css";
+newborn_DatePicker_BirthDate.relativePathPart = "";
+newborn_DatePicker_BirthDate.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//newbornButton_Delete_OnClick @6-DD4D63D0
+function newbornButton_Delete_OnClick()
+{
+    var result = true;
+//End newbornButton_Delete_OnClick
+
+//Confirmation Message @7-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close newbornButton_Delete_OnClick @6-BC33A33A
+    return result;
+}
+//End Close newbornButton_Delete_OnClick
+
+function get_TreatedNICU_radio_value()
+{
+for (var i=0; i < document.newborn.TreatedNICU.length; i++)
+   {
+   if (document.newborn.TreatedNICU[i].checked)
+      {
+      var rad_val = document.newborn.TreatedNICU[i].value;
+      }
+   }
+   return rad_val;
+}
+
+
+function TreatedNICUShowHide(clear)
+{
+            var newbornDurationDays = document.getElementById("newbornDurationDays");
+                        var newbornDurationDays_Label = document.getElementById("newbornDurationDaysLabel");
+                if(get_TreatedNICU_radio_value() == 1)
+        {
+                newbornDurationDays.style.visibility="visible";
+                newbornDurationDays_Label.style.visibility="visible";
+                                if(clear == true)
+                        {
+                                newbornDurationDays.value = "";
+                        }
+
+        }
+        if(get_TreatedNICU_radio_value() == 0)
+        {
+                newbornDurationDays.value = 0;
+                newbornDurationDays.style.visibility="hidden";
+                newbornDurationDays_Label.style.visibility="hidden";
+        }
+}
+
+//newbornTreatedNICU_OnClick @23-3FF9092F
+function newbornTreatedNICU_OnClick()
+{
+    var result = true;
+//End newbornTreatedNICU_OnClick
+
+//Custom Code @113-2A29BDB7
+    // -------------------------
+    TreatedNICUShowHide(true)
+    // -------------------------
+//End Custom Code
+
+//Close newbornTreatedNICU_OnClick @23-BC33A33A
+    return result;
+}
+//End Close newbornTreatedNICU_OnClick
+
+//newbornResuscitation_OnClick @21-71A19EF6
+function newbornResuscitation_OnClick()
+{
+    var result = true;
+//End newbornResuscitation_OnClick
+
+//Custom Code @110-2A29BDB7
+    // -------------------------
+    ResuscitationShowHide(true)
+    // -------------------------
+//End Custom Code
+
+//Close newbornResuscitation_OnClick @21-BC33A33A
+    return result;
+}
+//End Close newbornResuscitation_OnClick
+
+//newbornNewBornOutcomeID_OnChange @28-D09E6FE5
+function newbornNewBornOutcomeID_OnChange()
+{
+    var result = true;
+//End newbornNewBornOutcomeID_OnChange
+
+//Custom Code @106-2A29BDB7
+    // -------------------------
+    NewbornTypeChangeView(document.newborn.NewBornOutcomeID.value, true);
+        NewbornOutcomeClearValues(document.newborn.NewBornOutcomeID.value);
+    // -------------------------
+//End Custom Code
+
+//Close newbornNewBornOutcomeID_OnChange @28-BC33A33A
+    return result;
+}
+//End Close newbornNewBornOutcomeID_OnChange
+
+//newbornNewBornOutcomeID_OnLoad @28-E6B7BF3C
+function newbornNewBornOutcomeID_OnLoad()
+{
+    var result = true;
+//End newbornNewBornOutcomeID_OnLoad
+
+//Custom Code @107-2A29BDB7
+    // -------------------------
+NewbornTypeChangeView(document.newborn.NewBornOutcomeID.value, false)
+    // -------------------------
+//End Custom Code
+
+//Close newbornNewBornOutcomeID_OnLoad @28-BC33A33A
+    return result;
+}
+//End Close newbornNewBornOutcomeID_OnLoad
+
+//newbornRightButton_ClinicalDiagnosis_OnClick @127-94CDA412
+function newbornRightButton_ClinicalDiagnosis_OnClick()
+{
+    var result = true;
+//End newbornRightButton_ClinicalDiagnosis_OnClick
+
+//Custom Code @128-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_ClinicalDiagnosis");
+   var LinkedLB = document.getElementById("linked_ClinicalDiagnosis");
+   for (var i=0; i < AvailableLB.length; i++) {
+     if (AvailableLB.options[i].selected == true) {
+         LinkedLB.options[LinkedLB.length] =
+         new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+         AvailableLB.options[i] = null;
+         i=i-1;
+     }
+   }
+addToolTipsSelect('SelectedClinicalDiagnosis[]');
+    // -------------------------
+//End Custom Code
+
+//Close newbornRightButton_ClinicalDiagnosis_OnClick @127-BC33A33A
+    return result;
+}
+//End Close newbornRightButton_ClinicalDiagnosis_OnClick
+
+//newbornLeftButton_ClinicalDiagnosis_OnClick @129-4B5073E5
+function newbornLeftButton_ClinicalDiagnosis_OnClick()
+{
+    var result = true;
+//End newbornLeftButton_ClinicalDiagnosis_OnClick
+
+//Custom Code @130-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_ClinicalDiagnosis");
+   var LinkedLB = document.getElementById("linked_ClinicalDiagnosis");
+   for (var i=0; i < LinkedLB.length; i++) {
+     if (LinkedLB.options[i].selected == true) {
+        AvailableLB.options[AvailableLB.length] =
+            new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+        LinkedLB.options[i] = null;
+        i=i-1;
+     }
+   }
+addToolTipsSelect('ListofClinicalDiagnosis[]');
+    // -------------------------
+//End Custom Code
+
+//Close newbornLeftButton_ClinicalDiagnosis_OnClick @129-BC33A33A
+    return result;
+}
+//End Close newbornLeftButton_ClinicalDiagnosis_OnClick
+
+//newbornRightButtonClinicalTests_OnClick @166-0E32E3A0
+function newbornRightButtonClinicalTests_OnClick()
+{
+    var result = true;
+//End newbornRightButtonClinicalTests_OnClick
+
+//Custom Code @167-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_ClinicalTests");
+   var LinkedLB = document.getElementById("linked_ClinicalTests");
+   for (var i=0; i < AvailableLB.length; i++) {
+     if (AvailableLB.options[i].selected == true) {
+         LinkedLB.options[LinkedLB.length] =
+         new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+         AvailableLB.options[i] = null;
+         i=i-1;
+     }
+   }
+   addToolTipsSelect('SelectedClinicalTests[]');
+    // -------------------------
+//End Custom Code
+
+//Close newbornRightButtonClinicalTests_OnClick @166-BC33A33A
+    return result;
+}
+//End Close newbornRightButtonClinicalTests_OnClick
+
+//newbornLeftButtonClinicalTests_OnClick @170-E5D2144D
+function newbornLeftButtonClinicalTests_OnClick()
+{
+    var result = true;
+//End newbornLeftButtonClinicalTests_OnClick
+
+//Custom Code @171-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_ClinicalTests");
+   var LinkedLB = document.getElementById("linked_ClinicalTests");
+   for (var i=0; i < LinkedLB.length; i++) {
+     if (LinkedLB.options[i].selected == true) {
+        AvailableLB.options[AvailableLB.length] =
+            new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+        LinkedLB.options[i] = null;
+        i=i-1;
+     }
+   }
+   addToolTipsSelect('ListofClinicalTests[]');
+    // -------------------------
+//End Custom Code
+
+//Close newbornLeftButtonClinicalTests_OnClick @170-BC33A33A
+    return result;
+}
+//End Close newbornLeftButtonClinicalTests_OnClick
+
+//newbornRightButton_AnatomicPathology_OnClick @146-70780F28
+function newbornRightButton_AnatomicPathology_OnClick()
+{
+    var result = true;
+//End newbornRightButton_AnatomicPathology_OnClick
+
+//Custom Code @147-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_AnatomicPathology");
+   var LinkedLB = document.getElementById("linked_AnatomicPathology");
+   for (var i=0; i < AvailableLB.length; i++) {
+     if (AvailableLB.options[i].selected == true) {
+         LinkedLB.options[LinkedLB.length] =
+         new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+         AvailableLB.options[i] = null;
+         i=i-1;
+     }
+   }
+addToolTipsSelect('SelectedAnatomicPathology[]');
+    // -------------------------
+//End Custom Code
+
+//Close newbornRightButton_AnatomicPathology_OnClick @146-BC33A33A
+    return result;
+}
+//End Close newbornRightButton_AnatomicPathology_OnClick
+
+//newbornLeftButton_AnatomicPathology_OnClick @148-AFE5D8DF
+function newbornLeftButton_AnatomicPathology_OnClick()
+{
+    var result = true;
+//End newbornLeftButton_AnatomicPathology_OnClick
+
+//Custom Code @149-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_AnatomicPathology");
+   var LinkedLB = document.getElementById("linked_AnatomicPathology");
+   for (var i=0; i < LinkedLB.length; i++) {
+     if (LinkedLB.options[i].selected == true) {
+        AvailableLB.options[AvailableLB.length] =
+            new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+        LinkedLB.options[i] = null;
+        i=i-1;
+     }
+   }
+   addToolTipsSelect('ListofAnatomicPathology[]');
+    // -------------------------
+//End Custom Code
+
+//Close newbornLeftButton_AnatomicPathology_OnClick @148-BC33A33A
+    return result;
+}
+//End Close newbornLeftButton_AnatomicPathology_OnClick
+
+//newbornBirthDate_OnLoad @12-D0826A85
+function newbornBirthDate_OnLoad()
+{
+    var result = true;
+//End newbornBirthDate_OnLoad
+
+//Custom Code @263-2A29BDB7
+    // -------------------------
+
+    var BirthDate;
+    BirthDate = Date.parseExact(document.getElementById("newbornBirthDateTemp").value, "yyyy-MM-dd");
+        if(BirthDate != null)
+        document.getElementById("newbornBirthDate").value = formatDate(BirthDate, parseDateFormat(getLocaleInfo("shortDate")));
+
+    // -------------------------
+//End Custom Code
+
+//Close newbornBirthDate_OnLoad @12-BC33A33A
+    return result;
+}
+//End Close newbornBirthDate_OnLoad
+
+//newbornDied_OnClick @280-A329F3A1
+function newbornDied_OnClick()
+{
+    var result = true;
+//End newbornDied_OnClick
+
+//Custom Code @282-2A29BDB7
+    // -------------------------
+DiedTypeClick(true);
+    // -------------------------
+//End Custom Code
+
+//Close newbornDied_OnClick @280-BC33A33A
+    return result;
+}
+//End Close newbornDied_OnClick
+
+function get_Resuscitation_radio_value()
+{
+for (var i=0; i < document.newborn.Resuscitation.length; i++)
+   {
+   if (document.newborn.Resuscitation[i].checked)
+      {
+      var rad_val = document.newborn.Resuscitation[i].value;
+      }
+   }
+   return rad_val;
+}
+
+function ResuscitationShowHide(clear)
+{
+            var newbornResuscitationID = document.getElementById("newbornResuscitationID");
+                if(get_Resuscitation_radio_value() == 1)
+        {
+                newbornResuscitationID.style.visibility="visible";
+                if(clear == true)
+                        {
+                                newbornResuscitationID.value = "";
+                        }
+        }
+        if(get_Resuscitation_radio_value() == 0)
+        {
+                newbornResuscitationID.selectedIndex = 1;
+                newbornResuscitationID.style.visibility="hidden";
+        }
+}
+
+// функцыя показу при скеруванны
+function NewbornTypeChangeView(NewbornType, clear){
+
+var newbornFacilityID = document.getElementById("newbornFacilityID");
+var newbornfacility_Label = document.getElementById("newbornfacility_Label");
+var newbornDepartmentID = document.getElementById("newbornDepartmentID");
+var newborndepartment_Label = document.getElementById("newborndepartment_Label");
+var newbornDateReferral_Label = document.getElementById("newbornDateReferral_Label");
+var newbornDateReferral = document.getElementById("newbornDateReferral");
+var newbornDatePicker_DateReferral = document.getElementById("newbornDatePicker_DateReferral");
+
+        if(NewbornType == 3)
+        {
+                                newbornFacilityID.style.visibility="visible";
+                        newbornfacility_Label.style.visibility="visible";
+                                                newbornDepartmentID.style.visibility="visible";
+                      newborndepartment_Label.style.visibility="visible";
+
+                        newbornDateReferral_Label.style.visibility="visible";
+                        newbornDateReferral.style.visibility="visible";
+                        newbornDatePicker_DateReferral.style.visibility="visible";            
+            if(clear == true)
+            {
+                newbornFacilityID.value = "";
+            }
+        }
+        else
+        {
+                            //    newbornFacilityID.selectedIndex = 1;
+                        newbornDateReferral.value = "";
+                                newbornFacilityID.style.visibility="hidden";
+                        newbornfacility_Label.style.visibility="hidden";
+                                                newbornDepartmentID.style.visibility="hidden";
+                        newborndepartment_Label.style.visibility="hidden";
+                        newbornDateReferral_Label.style.visibility="hidden";
+                        newbornDateReferral.style.visibility="hidden";
+                        newbornDatePicker_DateReferral.style.visibility="hidden";            
+        }
+}
+
+function NewBornOutcomeClearValues(OutcomeType){
+
+        var newbornFacilityID = document.getElementById("newbornFacilityID");
+        var newbornDepartmentID = document.getElementById("newbornDepartmentID");
+        if(OutcomeType == 3)
+        {
+                newbornFacilityID.value ="";
+                newbornDepartmentID.value= ""; 
+        }
+        else
+        {
+         newbornFacilityID.value ="2";
+         newbornDepartmentID.value= "4"; 
+        }
+}
+// Помер
+function GetTDiedTypeRadioValue()
+{
+for (var i=0; i < document.newborn.Died.length; i++)
+   {
+   if (document.newborn.Died[i].checked)
+      {
+      var rad_val = document.newborn.Died[i].value;
+      }
+   }
+   return rad_val;
+}
+
+
+function DiedTypeClick(clear)
+{
+    var newbornDiedType = document.getElementById("newbornDiedType");
+    
+    if(GetTDiedTypeRadioValue() != 1)
+    {
+       
+                newbornDiedType.style.visibility="hidden";
+        
+
+      
+        }
+
+    if(GetTDiedTypeRadioValue() == 1)
+    {
+        newbornDiedType.style.visibility="visible";
+        
+        
+                if(clear == true)
+        {
+            newbornDiedType.value = "";
+        }
+    }
+    
+    if(GetTDiedTypeRadioValue() == 0)
+    {
+        newbornDiedType.style.visibility="hidden";
+        
+
+        if(clear == true)
+        {
+            newbornDiedType.value = "";
+            
+        }
+        }
+
+
+}
+
+//newborn_OnLoad @3-177F63E9
+function newborn_OnLoad(form)
+{
+    var result = true;
+//End newborn_OnLoad
+
+//Custom Code @111-2A29BDB7
+    // -------------------------
+  ResuscitationShowHide(false)
+  TreatedNICUShowHide(false)
+CacheValues('available_ClinicalDiagnosis',available_ClinicalDiagnosis_all);
+CacheValues('available_AnatomicPathology',available_AnatomicPathology_all);
+CacheValues('available_ClinicalTests',available_ClinicalTests_all);
+
+        addToolTipsSelect('ListofClinicalDiagnosis[]');
+        addToolTipsSelect('SelectedClinicalDiagnosis[]');
+    addToolTipsSelect('ListofAnatomicPathology[]');
+        addToolTipsSelect('SelectedAnatomicPathology[]');
+        addToolTipsSelect('ListofClinicalTests[]');
+        addToolTipsSelect('SelectedClinicalTests[]');
+
+DiedTypeClick(false);
+    // -------------------------
+//End Custom Code
+
+//Close newborn_OnLoad @3-BC33A33A
+    return result;
+}
+//End Close newborn_OnLoad
+
+//newborn_OnSubmit @3-39823458
+function newborn_OnSubmit()
+{
+    var result = true;
+//End newborn_OnSubmit
+
+//Custom Code @137-2A29BDB7
+    // -------------------------
+var LinkedLB = document.getElementById("linked_ClinicalDiagnosis");
+ document.newborn.LinkedID_ClinicalDiagnosis.value = "";
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.newborn.LinkedID_ClinicalDiagnosis.value != "" ) {
+        document.newborn.LinkedID_ClinicalDiagnosis.value = document.newborn.LinkedID_ClinicalDiagnosis.value + ","
+        }
+        document.newborn.LinkedID_ClinicalDiagnosis.value = document.newborn.LinkedID_ClinicalDiagnosis.value + "'" + LinkedLB.options[i].value + "'"
+ }
+
+var LinkedLB = document.getElementById("linked_AnatomicPathology");
+ document.newborn.LinkedID_AnatomicPathology.value = "";
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.newborn.LinkedID_AnatomicPathology.value != "" ) {
+        document.newborn.LinkedID_AnatomicPathology.value = document.newborn.LinkedID_AnatomicPathology.value + ","
+        }
+        document.newborn.LinkedID_AnatomicPathology.value = document.newborn.LinkedID_AnatomicPathology.value + "'" + LinkedLB.options[i].value + "'"
+ }
+  var LinkedLB = document.getElementById("linked_ClinicalTests");
+ document.newborn.LinkedID_ClinicalTests.value = "";
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.newborn.LinkedID_ClinicalTests.value != "" ) {
+        document.newborn.LinkedID_ClinicalTests.value = document.newborn.LinkedID_ClinicalTests.value + ","
+        }
+        document.newborn.LinkedID_ClinicalTests.value = document.newborn.LinkedID_ClinicalTests.value + "'" + LinkedLB.options[i].value + "'"
+ }
+document.newborn.Reloaded.value = true;
+result = true;
+    // -------------------------
+//End Custom Code
+
+//Close newborn_OnSubmit @3-BC33A33A
+    return result;
+}
+//End Close newborn_OnSubmit
+
+//_OnLoad @1-9C4F01C0
+function _OnLoad()
+{
+    var result = true;
+//End _OnLoad
+
+//Custom Code @288-2A29BDB7
+    // -------------------------
+DiedTypeClick(true);
+    // -------------------------
+//End Custom Code
+
+//Close _OnLoad @1-BC33A33A
+    return result;
+}
+//End Close _OnLoad
+
+//newbornButton_Cancel_OnClick @8-39074066
+function newbornButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End newbornButton_Cancel_OnClick
+
+//bind_events @1-303F376B
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("newbornButton_Delete", "click", newbornButton_Delete_OnClick);
+    addEventHandler("newbornTreatedNICU", "click", newbornTreatedNICU_OnClick);
+    addEventHandler("newbornResuscitation", "click", newbornResuscitation_OnClick);
+    addEventHandler("newbornNewBornOutcomeID", "change", newbornNewBornOutcomeID_OnChange);
+    addEventHandler("newbornNewBornOutcomeID", "load", newbornNewBornOutcomeID_OnLoad);
+    addEventHandler("newbornRightButton_ClinicalDiagnosis", "click", newbornRightButton_ClinicalDiagnosis_OnClick);
+    addEventHandler("newbornLeftButton_ClinicalDiagnosis", "click", newbornLeftButton_ClinicalDiagnosis_OnClick);
+    addEventHandler("newbornRightButtonClinicalTests", "click", newbornRightButtonClinicalTests_OnClick);
+    addEventHandler("newbornLeftButtonClinicalTests", "click", newbornLeftButtonClinicalTests_OnClick);
+    addEventHandler("newbornRightButton_AnatomicPathology", "click", newbornRightButton_AnatomicPathology_OnClick);
+    addEventHandler("newbornLeftButton_AnatomicPathology", "click", newbornLeftButton_AnatomicPathology_OnClick);
+    addEventHandler("newbornBirthDate", "load", newbornBirthDate_OnLoad);
+    addEventHandler("newbornDied", "click", newbornDied_OnClick);
+    addEventHandler("newborn", "load", newborn_OnLoad);
+    addEventHandler("newborn", "submit", newborn_OnSubmit);
+    addEventHandler("", "load", _OnLoad);
+    addEventHandler("newbornButton_Cancel", "click", newbornButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+function CacheValues(selectboxID,Backup)
+{
+    var l =  document.getElementById(selectboxID);
+    for (var i=0; i < l.options.length; i++)
+    {
+              Backup[i] = l.options[i];
+    }
+}
+
+function SearchList(selectboxID,searchTextID,Backup)
+{
+        var l =  document.getElementById(selectboxID);
+        var tb = document.getElementById(searchTextID);
+   
+    l.options.length=0;
+ 
+    if(tb.value == "")
+    {
+      for (var i=0; i < Backup.length; i++)
+      {
+        l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+      }
+    }
+    else{
+ 
+      for (var i=0; i <Backup.length; i++)
+      {
+        if (Backup[i].text.toLowerCase().indexOf(tb.value.toLowerCase()) != -1)
+        {
+          l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+        }
+      }
+    }
+}
+  function ClearSelection(lb)
+  {
+    lb.selectedIndex = -1;
+  }
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record pregnancy_header -->
+<form id="pregnancy_header" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{FirstName}&nbsp;{FamiliyName}&nbsp;({BirthDate})</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_headerPatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header --></p>
+<p>
+<!-- BEGIN Record pregnancy_header1 -->
+<form id="pregnancy_header1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_header1PatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header1 --></p>
+<p>
+<!-- BEGIN Record newborn -->
+<form id="newborn" method="post" name="{HTMLFormName}" action="{Action}">
+  <table style="BORDER-RIGHT-WIDTH: thin; BORDER-TOP-WIDTH: thin; BORDER-BOTTOM-WIDTH: thin; BORDER-LEFT-WIDTH: thin" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table style="BORDER-RIGHT-WIDTH: thick; BORDER-TOP-WIDTH: thick; BORDER-BOTTOM-WIDTH: thick; BORDER-LEFT-WIDTH: thick" class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:newborn}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="26">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td colspan="26">
+              <h2>{res:NewBornInformation}</h2>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornNewBornN">{res:NewBornN}</label>&nbsp;</td> 
+            <td colspan="6"><input id="newbornNewBornN" value="{NewBornN}" maxlength="15" size="15" name="{NewBornN_Name}">&nbsp;</td> 
+            <td><label for="newbornSex">{res:Sex}</label>&nbsp;</td> 
+            <td colspan="18">&nbsp; 
+              <!-- BEGIN RadioButton Sex --><input id="newbornSex_{Sex:optionNumber}" value="{Value}" type="radio" name="{Sex_Name}" {Check}><label for="newbornSex_{Sex:optionNumber}">{Description}</label><!-- END RadioButton Sex -->&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornSex"><label for="newbornBirthDate">{res:BirthDateTime}</label>&nbsp;</label></td> 
+            <td colspan="6"><input id="newbornBirthDate" value="{BirthDate}" maxlength="100" size="8" name="{BirthDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_BirthDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="newbornDatePicker_BirthDate"><img id="newbornDatePicker_BirthDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_BirthDate --><input id="newbornBirthTime" value="{BirthTime}" size="2" name="{BirthTime_Name}"></td> 
+            <td>&nbsp;</td> 
+            <td colspan="18">&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="26">
+              <h2>&nbsp;{res:ClinicalInformation}</h2>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornWeight">{res:Weight1}</label>&nbsp;</td> 
+            <td colspan="6"><input id="newbornWeight" value="{Weight}" maxlength="12" size="12" name="{Weight_Name}"></td> 
+            <td>&nbsp;</td> 
+            <td colspan="18">&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornGestationAge"><label for="newbornLenght">{res:Lenght}</label>&nbsp;</label></td> 
+            <td colspan="6"><input id="newbornLenght" value="{Lenght}" maxlength="10" size="10" name="{Lenght_Name}"></td> 
+            <td><label for="newbornCircumference">{res:Circumference}</label></td> 
+            <td colspan="18"><input id="newbornCircumference" value="{Circumference}" maxlength="10" size="10" name="{Circumference_Name}">&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornLenght"><label for="newbornApgarScore1min">{res:ApgarScore1min}</label>&nbsp;</label></td> 
+            <td colspan="6"><input id="newbornApgarScore1min" value="{ApgarScore1min}" maxlength="10" size="10" name="{ApgarScore1min_Name}"></td> 
+            <td><label for="newbornApgarScore5min">{res:ApgarScore5min}</label>&nbsp;</td> 
+            <td colspan="18"><input id="newbornApgarScore5min" value="{ApgarScore5min}" maxlength="10" size="10" name="{ApgarScore5min_Name}">&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornCircumference"><label for="newbornSurfactant">{res:Surfactant}</label></label></td> 
+            <td colspan="25">
+              <p align="left">
+              <!-- BEGIN RadioButton Surfactant --><input id="newbornSurfactant_{Surfactant:optionNumber}" value="{Value}" type="radio" name="{Surfactant_Name}" {Check}><label for="newbornSurfactant_{Surfactant:optionNumber}">{Description}</label><!-- END RadioButton Surfactant --></p>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornApgarScore1min"><label for="newbornResuscitation">{res:Resuscitation}</label>&nbsp;</label></td> 
+            <td colspan="6">
+              <!-- BEGIN RadioButton Resuscitation --><input id="newbornResuscitation_{Resuscitation:optionNumber}" value="{Value}" type="radio" name="{Resuscitation_Name}" {Check}><label for="newbornResuscitation_{Resuscitation:optionNumber}">{Description}</label><!-- END RadioButton Resuscitation --></td> 
+            <td colspan="19">
+              <select id="newbornResuscitationID" name="{ResuscitationID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {ResuscitationID_Options}
+              </select>
+ &nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="8">
+              <h3>{res:ClinicalDiagnosis}&nbsp; &nbsp;&nbsp;</h3>
+            </td> 
+            <td colspan="18">
+              <h3 align="left">{res:AnatomicPathology}&nbsp;&nbsp;</h3>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" valign="middle">
+              <p><input style="WIDTH: 246px; HEIGHT: 16px" id="newbornFilterofClinicalDiagnosis" onkeyup="javascript:SearchList('available_ClinicalDiagnosis','newbornFilterofClinicalDiagnosis',available_ClinicalDiagnosis_all);addToolTipsSelect('ListofClinicalDiagnosis[]');" value="{FilterofClinicalDiagnosis}" name="{FilterofClinicalDiagnosis_Name}"><br>
+              <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 147px" id="available_ClinicalDiagnosis" multiple size="8" name="{ListofClinicalDiagnosis_Name}">
+                {ListofClinicalDiagnosis_Options}
+              </select>
+ </p>
+            </td> 
+            <td colspan="6">
+              <p align="center">&nbsp;</p>
+ 
+              <p align="center">{res:CCS_Insert}<br>
+              <!-- BEGIN Button RightButton_ClinicalDiagnosis --><input id="newbornRightButton_ClinicalDiagnosis" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButton_ClinicalDiagnosis --></p>
+ 
+              <p align="center">{res:CCS_Delete}<br>
+              <!-- BEGIN Button LeftButton_ClinicalDiagnosis --><input id="newbornLeftButton_ClinicalDiagnosis" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButton_ClinicalDiagnosis --></p>
+              &nbsp;</td> 
+            <td>
+              <p>&nbsp;</p>
+ 
+              <p>
+              <select style="WIDTH: 250px; HEIGHT: 140px" id="linked_ClinicalDiagnosis" multiple name="{SelectedClinicalDiagnosis_Name}">
+                {SelectedClinicalDiagnosis_Options}
+              </select>
+ </p>
+            </td> 
+            <td>
+              <p><label for="newbornFilterofAnatomicPathology" style="display: none;">&nbsp;</label><input style="WIDTH: 246px; HEIGHT: 16px" id="newbornFilterofAnatomicPathology" onkeyup="javascript:SearchList('available_AnatomicPathology','newbornFilterofAnatomicPathology',available_AnatomicPathology_all);addToolTipsSelect('ListofAnatomicPathology[]');" value="{FilterofAnatomicPathology}" name="{FilterofAnatomicPathology_Name}">
+              <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 150px" id="available_AnatomicPathology" multiple size="8" name="{ListofAnatomicPathology_Name}">
+                {ListofAnatomicPathology_Options}
+              </select>
+ </p>
+            </td> 
+            <td colspan="11">
+              <p>&nbsp;</p>
+ 
+              <p align="center">{res:CCS_Insert} 
+              <!-- BEGIN Button RightButton_AnatomicPathology --><input id="newbornRightButton_AnatomicPathology" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButton_AnatomicPathology --></p>
+ 
+              <p align="center">{res:CCS_Delete} 
+              <!-- BEGIN Button LeftButton_AnatomicPathology --><input id="newbornLeftButton_AnatomicPathology" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButton_AnatomicPathology --></p>
+            </td> 
+            <td colspan="6">
+              <p>&nbsp;</p>
+ 
+              <p>
+              <select style="WIDTH: 250px; HEIGHT: 140px" id="linked_AnatomicPathology" multiple size="8" name="{SelectedAnatomicPathology_Name}">
+                {SelectedAnatomicPathology_Options}
+              </select>
+ </p>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="26">
+              <h3 align="left">{res:ClinicalTests}&nbsp;</h3>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><br>
+              <p align="left"><input style="WIDTH: 246px; HEIGHT: 16px" id="newbornFilterofClinicalTests" onkeyup="javascript:SearchList('available_ClinicalTests','newbornFilterofClinicalTests',available_ClinicalTests_all);addToolTipsSelect('ListofClinicalTests[]');" value="{FilterofClinicalTests}" name="{FilterofClinicalTests_Name}">&nbsp;<br>
+              <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 134px" id="available_ClinicalTests" multiple size="8" name="{ListofClinicalTests_Name}">
+                {ListofClinicalTests_Options}
+              </select>
+ </p>
+            </td> 
+            <td colspan="6">
+              <p align="center">&nbsp;</p>
+ 
+              <p align="center">&nbsp;</p>
+ 
+              <p align="center">{res:CCS_Insert}<br>
+              <!-- BEGIN Button RightButtonClinicalTests --><input id="newbornRightButtonClinicalTests" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButtonClinicalTests --></p>
+ 
+              <p align="center">{res:CCS_Delete}<br>
+              <!-- BEGIN Button LeftButtonClinicalTests --><input id="newbornLeftButtonClinicalTests" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButtonClinicalTests --></p>
+            </td> 
+            <td>
+              <p>&nbsp;</p>
+ 
+              <p>
+              <select style="WIDTH: 250px; HEIGHT: 140px" id="linked_ClinicalTests" multiple name="{SelectedClinicalTests_Name}">
+                {SelectedClinicalTests_Options}
+              </select>
+ </p>
+            </td> 
+            <td colspan="18">&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="26">
+              <h2>{res:NeonatalIntensiveCareUnit}&nbsp;&nbsp;</h2>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornTreatedNICU">{res:TreatedNICU}</label></td> 
+            <td colspan="6">
+              <!-- BEGIN RadioButton TreatedNICU --><input id="newbornTreatedNICU_{TreatedNICU:optionNumber}" value="{Value}" type="radio" name="{TreatedNICU_Name}" {Check}><label for="newbornTreatedNICU_{TreatedNICU:optionNumber}">{Description}</label><!-- END RadioButton TreatedNICU --></td> 
+            <td class="th"><label for="newbornDurationDays" id="newbornDurationDaysLabel">{res:DurationDays}</label></td> 
+            <td colspan="18"><input id="newbornDurationDays" value="{DurationDays}" maxlength="10" size="10" name="{DurationDays_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornAntibiotics">{res:Antibiotics}</label></td> 
+            <td colspan="25">
+              <!-- BEGIN RadioButton Antibiotics --><input id="newbornAntibiotics_{Antibiotics:optionNumber}" value="{Value}" type="radio" name="{Antibiotics_Name}" {Check}><label for="newbornAntibiotics_{Antibiotics:optionNumber}">{Description}</label><!-- END RadioButton Antibiotics --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornAntibiotics"><label for="newbornALVdays">{res:ALVdays}</label>&nbsp;</label></td> 
+            <td colspan="6"><input id="newbornALVdays" value="{ALVdays}" maxlength="10" size="10" name="{ALVdays_Name}"></td> 
+            <td><label for="newbornCPAPdays">{res:CPAPdays}</label>&nbsp;&nbsp;</td> 
+            <td colspan="18"><input id="newbornCPAPdays" value="{CPAPdays}" maxlength="10" size="10" name="{CPAPdays_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornALVdays"><label for="newbornNewBornOutcomeID">{res:NewBornOutcomeID}</label>&nbsp;</label></td> 
+            <td colspan="25">
+              <select id="newbornNewBornOutcomeID" name="{NewBornOutcomeID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {NewBornOutcomeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornCPAPdays"><label for="newbornOutcomeDate">{res:DateTimeOutcome}</label>&nbsp;</label></td> 
+            <td colspan="25"><input id="newbornOutcomeDate" value="{OutcomeDate}" maxlength="100" size="8" name="{OutcomeDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_DateOutcome --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="newbornDatePicker_DateOutcome"><img id="newbornDatePicker_DateOutcome_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_DateOutcome -->&nbsp; <input id="newbornOutcomeTime" value="{OutcomeTime}" size="2" name="{OutcomeTime_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornNewBornOutcomeID"><label id="newbornfacility_Label" for="newbornDateReferral">{res:FacilityName}</label></label></td> 
+            <td colspan="25">
+              <select id="newbornFacilityID" name="{FacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {FacilityID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornNewBornOutcomeID"><label id="newborndepartment_Label" for="newbornDateReferral">{res:DepartmentID}</label></label></td> 
+            <td colspan="25">
+              <select style="WIDTH: 212px" id="newbornDepartmentID" name="{DepartmentID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {DepartmentID_Options}
+              </select>
+ &nbsp;&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornOutcomeDate" id="newbornDateReferral_Label">{res:DateReferral}</label></td> 
+            <td colspan="25"><input id="newbornDateReferral" value="{DateReferral}" maxlength="100" size="8" name="{DateReferral_Name}">
+              <!-- BEGIN DatePicker DatePicker_DateReferral --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="newbornDatePicker_DateReferral"><img id="newbornDatePicker_DateReferral_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a> <!-- END DatePicker DatePicker_DateReferral --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="26"><label for="newbornDateReferral">
+              <h2>{res:DischargeInformation}&nbsp;</label></h2>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:Died}</td> 
+            <td colspan="6">
+              <!-- BEGIN RadioButton Died --><input id="newbornDied_{Died:optionNumber}" value="{Value}" type="radio" name="{Died_Name}" {Check}><label for="newbornDied_{Died:optionNumber}">{Description}</label><!-- END RadioButton Died -->&nbsp;</td> 
+            <td>
+              
+              <select id="newbornDiedType" name="{DiedType_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {DiedType_Options}
+              </select>
+ </td> 
+            <td colspan="18">&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornVaccinationHepB">{res:VaccinationHepB}</label></td> 
+            <td colspan="6">
+              <!-- BEGIN RadioButton VaccinationHepB --><input id="newbornVaccinationHepB_{VaccinationHepB:optionNumber}" value="{Value}" type="radio" name="{VaccinationHepB_Name}" {Check}><label for="newbornVaccinationHepB_{VaccinationHepB:optionNumber}">{Description}</label><!-- END RadioButton VaccinationHepB --></td> 
+            <td><label for="newbornScreenningPUK">{res:ScreenningPUK}</label>&nbsp;</td> 
+            <td colspan="18">
+              <!-- BEGIN RadioButton ScreenningPUK --><input id="newbornScreenningPUK_{ScreenningPUK:optionNumber}" value="{Value}" type="radio" name="{ScreenningPUK_Name}" {Check}><label for="newbornScreenningPUK_{ScreenningPUK:optionNumber}">{Description}</label><!-- END RadioButton ScreenningPUK -->&nbsp;&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornVaccinationBCG">{res:VaccinationBCG}</label></td> 
+            <td colspan="6">
+              <!-- BEGIN RadioButton VaccinationBCG --><input id="newbornVaccinationBCG_{VaccinationBCG:optionNumber}" value="{Value}" type="radio" name="{VaccinationBCG_Name}" {Check}><label for="newbornVaccinationBCG_{VaccinationBCG:optionNumber}">{Description}</label><!-- END RadioButton VaccinationBCG -->&nbsp;</td> 
+            <td><label for="newbornScreenningHypoth">{res:ScreenningHypoth}</label>&nbsp;&nbsp;</td> 
+            <td colspan="18">
+              <!-- BEGIN RadioButton ScreenningHypoth --><input id="newbornScreenningHypoth_{ScreenningHypoth:optionNumber}" value="{Value}" type="radio" name="{ScreenningHypoth_Name}" {Check}><label for="newbornScreenningHypoth_{ScreenningHypoth:optionNumber}">{Description}</label><!-- END RadioButton ScreenningHypoth -->&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornAppliedBreastID">{res:BreastFeedingID}</label>&nbsp;</td> 
+            <td colspan="6">
+              <select id="newbornAppliedBreastID" name="{AppliedBreastID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {AppliedBreastID_Options}
+              </select>
+ </td> 
+            <td>{res:SkinToSkin}</td> 
+            <td colspan="18">
+              <!-- BEGIN RadioButton SkinToSkin --><input id="newbornSkinToSkin_{SkinToSkin:optionNumber}" value="{Value}" type="radio" name="{SkinToSkin_Name}" {Check}><label for="newbornSkinToSkin_{SkinToSkin:optionNumber}">{Description}</label><!-- END RadioButton SkinToSkin -->&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornVaccinationBCG"><label for="newbornFeedingID">{res:FeedingID}</label><font style="BACKGROUND-COLOR: #f7f7f7">&nbsp;</font>&nbsp;</label></td> 
+            <td colspan="6">
+              <select id="newbornFeedingID" name="{FeedingID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {FeedingID_Options}
+              </select>
+ </td> 
+            <td>{res:CommonStay}</td> 
+            <td colspan="18">
+              <!-- BEGIN RadioButton CommonStay --><input id="newbornCommonStay_{CommonStay:optionNumber}" value="{Value}" type="radio" name="{CommonStay_Name}" {Check}><label for="newbornCommonStay_{CommonStay:optionNumber}">{Description}</label><!-- END RadioButton CommonStay -->&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="newbornDischargeDate">{res:DischargeDateTime}</label></td> 
+            <td colspan="25"><input id="newbornDischargeDate" value="{DischargeDate}" maxlength="100" size="8" name="{DischargeDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_DischargeDateTime --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="newbornDatePicker_DischargeDateTime"><img id="newbornDatePicker_DischargeDateTime_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_DischargeDateTime -->&nbsp; <input id="newbornDischargeTime" value="{DischargeTime}" size="2" name="{DischargeTime_Name}">
+              <!-- BEGIN RadioButton Discharge --><input id="newbornDischarge_{Discharge:optionNumber}" value="{Value}" type="radio" name="{Discharge_Name}" {Check}><label for="newbornDischarge_{Discharge:optionNumber}">{Description}</label><!-- END RadioButton Discharge --></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="26" align="right">
+              <p align="left"><input id="newbornCurrentUser" value="{CurrentUser}" type="hidden" name="{CurrentUser_Name}">{res:LastUpdated}&nbsp;{lastmodified}&nbsp; ({user})&nbsp;</p>
+            </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="26" align="right"><input id="newbornBirthDateTemp" value="{birthDateTemp}" type="hidden" name="{birthDateTemp_Name}"><input id="newbornReloaded" value="{Reloaded}" type="hidden" name="{Reloaded_Name}"><input id="newbornDeliveryID" value="{DeliveryID}" type="hidden" name="{DeliveryID_Name}"><input id="newbornLinkedID_ClinicalDiagnosis" value="{LinkedID_ClinicalDiagnosis}" type="hidden" name="{LinkedID_ClinicalDiagnosis_Name}">&nbsp;<input id="LinkedID_AnatomicPathology" value="{LinkedID_AnatomicPathology}" type="hidden" name="{LinkedID_AnatomicPathology_Name}">&nbsp;<input id="LinkedID_ClinicalTests" value="{LinkedID_ClinicalTests}" type="hidden" name="{LinkedID_ClinicalTests_Name}">&nbsp;&nbsp;&nbsp; 
+              <!-- BEGIN Button Button_Insert --><input id="newbornButton_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="newbornButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input id="newbornButton_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input id="newbornButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record newborn --><br>
+</p>
+<p>&nbsp;</p>
+</body>
+</html>

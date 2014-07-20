@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:employees}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//login_OnLoad @103-128482BB
+function login_OnLoad(form)
+{
+    var result = true;
+//End login_OnLoad
+
+//Custom Code @181-2A29BDB7
+    // -------------------------
+       document.getElementById("commandsRow").style.display = 'none';
+    // -------------------------
+//End Custom Code
+
+//Close login_OnLoad @103-BC33A33A
+    return result;
+}
+//End Close login_OnLoad
+
+//employeesButton_Insert_OnClick @3-B2ADF7A5
+function employeesButton_Insert_OnClick()
+{
+    var result = true;
+//End employeesButton_Insert_OnClick
+
+//Custom Code @184-2A29BDB7
+    // -------------------------
+    document.login.Button_Update.click();
+    // -------------------------
+//End Custom Code
+
+//Close employeesButton_Insert_OnClick @3-BC33A33A
+    return result;
+}
+//End Close employeesButton_Insert_OnClick
+
+//employeesButton_Update_OnClick @4-259F47FD
+function employeesButton_Update_OnClick()
+{
+    var result = true;
+//End employeesButton_Update_OnClick
+
+//Custom Code @183-2A29BDB7
+    // -------------------------
+    document.login.Button_Update.click();
+    // -------------------------
+//End Custom Code
+
+//Close employeesButton_Update_OnClick @4-BC33A33A
+    return result;
+}
+//End Close employeesButton_Update_OnClick
+
+//DEL      // -------------------------
+//DEL          document.employees.Hidden_FacilityID.value = document.employees.FacilityID.value;
+//DEL      // -------------------------
+
+//employeesButton_Delete_OnClick @5-AD1D93C7
+function employeesButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End employeesButton_Delete_OnClick
+
+//employeesButton_Cancel_OnClick @182-89B71039
+function employeesButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employeesButton_Cancel_OnClick
+
+//DEL      // -------------------------
+//DEL          document.employees.Hidden_FacilityID.value = document.employees.FacilityID.value;
+//DEL      // -------------------------
+
+//bind_events @1-CE581E57
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("login", "load", login_OnLoad);
+    addEventHandler("employeesButton_Insert", "click", employeesButton_Insert_OnClick);
+    addEventHandler("employeesButton_Update", "click", employeesButton_Update_OnClick);
+    addEventHandler("employeesButton_Delete", "click", employeesButton_Delete_OnClick);
+    addEventHandler("employeesButton_Cancel", "click", employeesButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css" />
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record login -->
+<form id="login" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table style="WIDTH: 500px" class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>&nbsp;{res:myAccount} </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td style="WIDTH: 150px" class="th"><label for="loginusername">{res:username}</label></td> 
+            <td><input id="loginusername" value="{username}" maxlength="20" name="{username_Name}" size="20"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="loginpassword">{res:password}</label></td> 
+            <td><input id="loginpassword" value="{password}" maxlength="20" type="password" name="{password_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="loginlocale">{res:locale}</label></td> 
+            <td>
+              <select id="loginlocale" name="{locale_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+ {locale_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr id="commandsRow" class="Bottom">
+            <td colspan="2" align="right">&nbsp; 
+              <!-- BEGIN Button Button_Update --><input id="loginButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update --><input id="loginLoginID" value="{LoginID}" name="{LoginID_Name}"><input id="loginpassword_Shadow" value="{password_Shadow}" type="hidden" name="{password_Shadow_Name}"></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record login --></p>
+<!-- BEGIN Record employees -->
+<form id="employees" method="post" name="{HTMLFormName}" action="{Action}">
+  <table style="WIDTH: 500px" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <font size="2">
+          <!-- BEGIN Error --></font> 
+          <tr class="Error">
+            <td colspan="3"><font size="2">{Error}</font></td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td style="WIDTH: 150px" class="th"><label for="employeesFirstName">{res:FirstName}</label></td> 
+            <td colspan="2"><input id="employeesFirstName" value="{FirstName}" maxlength="100" size="40" name="{FirstName_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td style="WIDTH: 150px" class="th"><label for="employeesLastName">{res:LastName}</label></td> 
+            <td colspan="2"><input id="employeesLastName" value="{LastName}" maxlength="100" size="40" name="{LastName_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesPosition">{res:Position}</label></td> 
+            <td colspan="2">
+              <select id="employeesPosition" name="{Position_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+ {Position_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesLocationID">{res:LocationID}</label><input id="employeesLocationID" value="{LocationID}" type="hidden" name="{LocationID_Name}"></td> 
+            <td colspan="2">
+              <p>{res:FacilityName}{FacilityName}:<br>
+              {FacilityNameDB}</p>
+ 
+              <p>{res:DepartmentDesc}:<br>
+              {DepNameDB}</p>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesWorkPhone">{res:WorkPhone}</label></td> 
+            <td colspan="2"><input id="employeesWorkPhone" value="{WorkPhone}" maxlength="30" size="30" name="{WorkPhone_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesHandPhone">{res:HandPhone}</label></td> 
+            <td colspan="2"><input id="employeesHandPhone" value="{HandPhone}" maxlength="50" size="30" name="{HandPhone_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesEmail">{res:Email}</label></td> 
+            <td colspan="2"><input id="employeesEmail" value="{Email}" maxlength="50" size="40" name="{Email_Name}"></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="3" align="right"><label for="employeesLoginID_employee" style="display: none;">LoginID_employee</label><input id="employeesLoginID_employee" value="{LoginID_employee}" type="hidden" name="{LoginID_employee_Name}"><input id="employeesEmployeeID" value="{EmployeeID}" type="hidden" name="{EmployeeID_Name}">
+              <!-- BEGIN Button Button_Insert --><input id="employeesButton_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="employeesButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input id="employeesButton_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input id="employeesButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record employees --><br>
+</body>
+</html>

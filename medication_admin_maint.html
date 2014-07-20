@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:Medication}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//medicationatcode1Button_Cancel_OnClick @81-70AC9786
+function medicationatcode1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End medicationatcode1Button_Cancel_OnClick
+
+//bind_events @1-2F08DBB4
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("medicationatcode1Button_Cancel", "click", medicationatcode1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css" />
+</head>
+<body>
+<p>{topmenu}</p>
+<br>
+<!-- BEGIN Record medicationatcodeSearch -->
+<form id="medicationatcodeSearch" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix} {res:Medication} {res:CCS_SearchFormSuffix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="medicationatcodeSearchs_ATCode">{res:ATCode}</label></td> 
+            <td><input id="medicationatcodeSearchs_ATCode" value="{s_ATCode}" maxlength="25" size="25" name="{s_ATCode_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="medicationatcodeSearchs_MedicationName">{res:MedicationName}</label></td> 
+            <td><input id="medicationatcodeSearchs_MedicationName" value="{s_MedicationName}" maxlength="200" size="50" name="{s_MedicationName_Name}"></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="medicationatcodeSearchButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record medicationatcodeSearch --><br>
+<!-- BEGIN Grid medicationatcode -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_GridFormPrefix} {res:Medication} {res:CCS_GridFormSuffix} </strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+        </tr>
+ 
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="2">{res:CCS_TotalRecords}&nbsp;{medicationatcode_TotalRecords}</td> 
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_ATCode --><a href="{Sort_URL}" id="medicationatcodeSorter_ATCode">{res:ATCode}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_ATCode --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_MedicationName --><a href="{Sort_URL}" id="medicationatcodeSorter_MedicationName">{res:MedicationName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_MedicationName --></th>
+ 
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{ATCode}&nbsp;</td> 
+          <td><a href="{MedicationName_Src}" id="medicationatcodeMedicationName_{medicationatcode:rowNumber}">{MedicationName}</a>&nbsp;</td> 
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="2">{res:CCS_NoRecords}</td> 
+        </tr>
+ <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="2"><a href="{medicationatcode_Insert_Src}" id="medicationatcodemedicationatcode_Insert">{res:CCS_InsertLink}</a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input value="{Value}" type="hidden" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option selected value="">-</option>
+ {PageSize_Options} 
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td> 
+        </tr>
+ 
+      </table>
+ </td> 
+  </tr>
+</table>
+<!-- END Grid medicationatcode --><br>
+<!-- BEGIN Record medicationatcode1 -->
+<form id="medicationatcode1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:Medication} {res:CCS_RecordFormSuffix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="medicationatcode1ATCode">{res:ATCode}</label></td> 
+            <td><input id="medicationatcode1ATCode" value="{ATCode}" maxlength="25" size="25" name="{ATCode_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="medicationatcode1MedicationName">{res:MedicationName}</label></td> 
+            <td><input id="medicationatcode1MedicationName" value="{MedicationName}" maxlength="200" size="50" name="{MedicationName_Name}"></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_Insert --><input id="medicationatcode1Button_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="medicationatcode1Button_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Cancel --><input id="medicationatcode1Button_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record medicationatcode1 --><br>
+</body>
+</html>

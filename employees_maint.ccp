@@ -1,0 +1,423 @@
+<Page id="1" templateExtension="html" relativePath="." fullRelativePath="." secured="True" urlType="SSL" isIncluded="False" SSLAccess="True" isService="False" cachingEnabled="False" cachingDuration="1 minutes" wizardTheme="{CCS_Style}" wizardThemeVersion="3.0" needGeneration="0" pasteActions="pasteActions" accessDeniedPage="noaccess.ccp">
+	<Components>
+		<Record id="2" sourceType="Table" urlType="Relative" secured="True" allowInsert="True" allowUpdate="True" allowDelete="True" validateData="True" preserveParameters="GET" returnValueType="Number" returnValueTypeForDelete="Number" returnValueTypeForInsert="Number" returnValueTypeForUpdate="Number" connection="registry_db" name="employees" dataSource="employees" errorSummator="Error" wizardCaption="{res:CCS_RecordFormPrefix} {res:employees} {res:CCS_RecordFormSuffix}" wizardFormMethod="post" returnPage="employees_list.ccp" PathID="employees" activeCollection="UFormElements" pasteAsReplace="pasteAsReplace" pasteActions="pasteActions" removeParameters="LoginID;EmployeeID;FirstName" customInsert="employees" customInsertType="Table" customUpdate="employees" customUpdateType="Table" customDelete="employees" customDeleteType="Table" activeTableType="employees" visible="Dynamic">
+			<Components>
+				<Button id="3" urlType="Relative" enableValidation="True" isDefault="False" name="Button_Insert" operation="Insert" wizardCaption="{res:CCS_Insert}" PathID="employeesButton_Insert">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</Button>
+				<Button id="4" urlType="Relative" enableValidation="True" isDefault="False" name="Button_Update" operation="Update" wizardCaption="{res:CCS_Update}" PathID="employeesButton_Update">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</Button>
+				<Button id="5" urlType="Relative" enableValidation="False" isDefault="False" name="Button_Delete" operation="Delete" wizardCaption="{res:CCS_Delete}" PathID="employeesButton_Delete">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</Button>
+				<TextBox id="8" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="FirstName" fieldSource="FirstName" required="True" caption="{res:FirstName}" wizardCaption="{res:FirstName}" wizardSize="50" wizardMaxLength="100" wizardIsPassword="False" PathID="employeesFirstName">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</TextBox>
+				<TextBox id="9" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="LastName" fieldSource="LastName" required="False" caption="{res:LastName}" wizardCaption="{res:LastName}" wizardSize="50" wizardMaxLength="100" wizardIsPassword="False" PathID="employeesLastName">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</TextBox>
+				<TextBox id="13" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="WorkPhone" fieldSource="WorkPhone" required="False" caption="{res:WorkPhone}" wizardCaption="{res:WorkPhone}" wizardSize="30" wizardMaxLength="30" wizardIsPassword="False" PathID="employeesWorkPhone">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</TextBox>
+				<TextBox id="14" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="HandPhone" fieldSource="HandPhone" required="False" caption="{res:HandPhone}" wizardCaption="{res:HandPhone}" wizardSize="50" wizardMaxLength="50" wizardIsPassword="False" PathID="employeesHandPhone">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</TextBox>
+				<TextBox id="15" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="Email" fieldSource="Email" required="False" caption="{res:Email}" wizardCaption="{res:Email}" wizardSize="50" wizardMaxLength="50" wizardIsPassword="False" PathID="employeesEmail">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</TextBox>
+				<Hidden id="29" fieldSourceType="DBColumn" dataType="Integer" name="EmployeeID" PathID="employeesEmployeeID" fieldSource="EmployeeID">
+					<Components/>
+					<Events>
+					</Events>
+					<Attributes/>
+					<Features/>
+				</Hidden>
+				<Hidden id="12" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="LocationID" fieldSource="LocationID" required="True" caption="{res:LocationID}" wizardCaption="{res:LocationID}" wizardSize="10" wizardMaxLength="10" wizardIsPassword="False" PathID="employeesLocationID" sourceType="Table" connection="openmedis_db" dataSource="location, facilities" boundColumn="LocationID" textColumn="FacilityName">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+					<TableParameters/>
+					<SPParameters/>
+					<SQLParameters/>
+					<JoinTables>
+						<JoinTable id="21" tableName="location" posLeft="10" posTop="10" posWidth="115" posHeight="180"/>
+						<JoinTable id="23" tableName="facilities" posLeft="146" posTop="10" posWidth="95" posHeight="120"/>
+					</JoinTables>
+					<JoinLinks>
+						<JoinTable2 id="24" tableLeft="location" tableRight="facilities" fieldLeft="location.FacilityID" fieldRight="facilities.FacilityID" joinType="inner" conditionType="Equal"/>
+					</JoinLinks>
+					<Fields>
+						<Field id="22" tableName="location" fieldName="LocationID"/>
+						<Field id="26" tableName="facilities" fieldName="FacilityName"/>
+					</Fields>
+				</Hidden>
+				<ListBox id="45" visible="Yes" fieldSourceType="DBColumn" dataType="Integer" name="FacilityID" required="True" caption="{res:FacilityID}" wizardCaption="{res:FacilityID}" wizardSize="10" wizardMaxLength="10" wizardIsPassword="False" PathID="employeesFacilityID" sourceType="Table" connection="registry_db" dataSource="facilities" boundColumn="FacilityID" textColumn="FacilityName" orderBy="FacilityName">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+					<TableParameters/>
+					<SPParameters/>
+					<SQLParameters/>
+					<JoinTables>
+						<JoinTable id="46" tableName="facilities" posLeft="10" posTop="10" posWidth="95" posHeight="120"/>
+					</JoinTables>
+					<JoinLinks/>
+					<Fields>
+						<Field id="47" tableName="facilities" fieldName="FacilityID"/>
+						<Field id="48" tableName="facilities" fieldName="FacilityName"/>
+					</Fields>
+				</ListBox>
+				<ListBox id="49" visible="Yes" fieldSourceType="DBColumn" dataType="Integer" name="DeptID" required="True" caption="{res:DeptID}" wizardCaption="{res:DeptID}" wizardSize="10" wizardMaxLength="10" wizardIsPassword="False" PathID="employeesDeptID" sourceType="Table" connection="registry_db" dataSource="department" boundColumn="DeptID" textColumn="DepartmentDesc" orderBy="DepartmentDesc">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+					<TableParameters/>
+					<SPParameters/>
+					<SQLParameters/>
+					<JoinTables>
+						<JoinTable id="50" tableName="department" posLeft="10" posTop="10" posWidth="108" posHeight="88"/>
+					</JoinTables>
+					<JoinLinks/>
+					<Fields>
+						<Field id="51" tableName="department" fieldName="DeptID"/>
+						<Field id="52" tableName="department" fieldName="DepartmentDesc"/>
+					</Fields>
+				</ListBox>
+				<Hidden id="91" fieldSourceType="DBColumn" dataType="Integer" name="LoginID_employee" PathID="employeesLoginID_employee" fieldSource="LoginID" visible="Yes">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</Hidden>
+				<ListBox id="10" visible="Yes" fieldSourceType="DBColumn" dataType="Integer" name="Position" fieldSource="PositionID" required="True" caption="{res:Position}" wizardCaption="{res:Position}" wizardSize="50" wizardMaxLength="250" wizardIsPassword="False" PathID="employeesPosition" sourceType="Table" connection="registry_db" dataSource="position" boundColumn="PositionID" textColumn="PositionName">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+					<TableParameters/>
+					<SPParameters/>
+					<SQLParameters/>
+					<JoinTables>
+						<JoinTable id="112" tableName="position" posLeft="10" posTop="10" posWidth="95" posHeight="88"/>
+					</JoinTables>
+					<JoinLinks/>
+					<Fields/>
+				</ListBox>
+				<RadioButton id="174" visible="Dynamic" fieldSourceType="DBColumn" sourceType="ListOfValues" dataType="Integer" html="True" returnValueType="Number" name="HighRiskPregnanciesSummary" PathID="employeesHighRiskPregnanciesSummary" fieldSource="HighRiskPregnanciesSummaryNotification" connection="registry_db" dataSource="1;{res:RYes};0;{res:RNo}" required="False" caption="{res:ReminderNot}">
+					<Components/>
+					<Events/>
+					<TableParameters/>
+					<SPParameters/>
+					<SQLParameters/>
+					<JoinTables/>
+					<JoinLinks/>
+					<Fields/>
+					<Attributes/>
+					<Features/>
+				</RadioButton>
+			</Components>
+			<Events>
+				<Event name="BeforeShow" type="Server">
+					<Actions>
+						<Action actionName="Custom Code" actionCategory="General" id="53" eventType="Server"/>
+					</Actions>
+				</Event>
+				<Event name="BeforeInsert" type="Server">
+					<Actions>
+						<Action actionName="Custom Code" actionCategory="General" id="55" eventType="Server"/>
+					</Actions>
+				</Event>
+				<Event name="AfterUpdate" type="Server">
+					<Actions>
+						<Action actionName="Custom Code" actionCategory="General" id="56" eventType="Server"/>
+					</Actions>
+				</Event>
+				<Event name="AfterDelete" type="Server">
+					<Actions>
+						<Action actionName="Custom Code" actionCategory="General" id="57" eventType="Server"/>
+					</Actions>
+				</Event>
+				<Event name="BeforeUpdate" type="Server">
+					<Actions>
+						<Action actionName="Custom Code" actionCategory="General" id="116" eventType="Server"/>
+					</Actions>
+				</Event>
+			</Events>
+			<TableParameters>
+				<TableParameter id="6" conditionType="Parameter" useIsNull="False" field="EmployeeID" dataType="Text" logicOperator="And" searchConditionType="Equal" parameterType="URL" orderNumber="1" leftBrackets="0" rightBrackets="0" parameterSource="EmployeeID"/>
+			</TableParameters>
+			<SPParameters/>
+			<SQLParameters/>
+			<JoinTables>
+				<JoinTable id="31" tableName="employees" posLeft="10" posTop="10" posWidth="115" posHeight="245"/>
+			</JoinTables>
+			<JoinLinks/>
+			<Fields/>
+			<ISPParameters/>
+			<ISQLParameters/>
+			<IFormElements>
+				<CustomParameter id="58" field="LoginID" dataType="Integer" parameterType="Control" parameterSource="LoginID_employee" omitIfEmpty="True"/>
+				<CustomParameter id="59" field="FirstName" dataType="Text" parameterType="Control" parameterSource="FirstName" omitIfEmpty="True"/>
+				<CustomParameter id="60" field="LastName" dataType="Text" parameterType="Control" parameterSource="LastName" omitIfEmpty="True"/>
+				<CustomParameter id="61" field="PositionID" dataType="Integer" parameterType="Control" parameterSource="Position" omitIfEmpty="True"/>
+				<CustomParameter id="63" field="WorkPhone" dataType="Text" parameterType="Control" parameterSource="WorkPhone" omitIfEmpty="True"/>
+				<CustomParameter id="64" field="HandPhone" dataType="Text" parameterType="Control" parameterSource="HandPhone" omitIfEmpty="True"/>
+				<CustomParameter id="65" field="Email" dataType="Text" parameterType="Control" parameterSource="Email" omitIfEmpty="True"/>
+				<CustomParameter id="68" field="LocationID" dataType="Text" parameterType="Control" parameterSource="LocationID" omitIfEmpty="True"/>
+				<CustomParameter id="175" field="EmployeeID" dataType="Integer" parameterType="Control" parameterSource="EmployeeID" omitIfEmpty="True"/>
+				<CustomParameter id="176" field="HighRiskPregnanciesSummaryNotification" dataType="Boolean" parameterType="Control" parameterSource="HighRiskPregnanciesSummary" omitIfEmpty="True"/>
+				<CustomParameter id="177" field="HighRiskPregnanciesSummaryNotification" dataType="Integer" parameterType="Control" defaultValue="0" omitIfEmpty="False" parameterSource="HighRiskPregnanciesSummary"/>
+			</IFormElements>
+			<USPParameters/>
+			<USQLParameters/>
+			<UConditions>
+				<TableParameter id="117" conditionType="Parameter" useIsNull="False" field="EmployeeID" dataType="Text" parameterType="URL" parameterSource="EmployeeID" searchConditionType="Equal" logicOperator="And" orderNumber="1" leftBrackets="0" rightBrackets="0"/>
+			</UConditions>
+			<UFormElements>
+				<CustomParameter id="118" field="FirstName" dataType="Text" parameterType="Control" parameterSource="FirstName" omitIfEmpty="True"/>
+				<CustomParameter id="119" field="LastName" dataType="Text" parameterType="Control" parameterSource="LastName" omitIfEmpty="True"/>
+				<CustomParameter id="120" field="WorkPhone" dataType="Text" parameterType="Control" parameterSource="WorkPhone" omitIfEmpty="True"/>
+				<CustomParameter id="121" field="HandPhone" dataType="Text" parameterType="Control" parameterSource="HandPhone" omitIfEmpty="True"/>
+				<CustomParameter id="122" field="Email" dataType="Text" parameterType="Control" parameterSource="Email" omitIfEmpty="True"/>
+				<CustomParameter id="124" field="LocationID" dataType="Text" parameterType="Control" parameterSource="LocationID" omitIfEmpty="True"/>
+				<CustomParameter id="125" field="LoginID" dataType="Integer" parameterType="Control" parameterSource="LoginID_employee" omitIfEmpty="True"/>
+				<CustomParameter id="126" field="PositionID" dataType="Integer" parameterType="Control" parameterSource="Position" omitIfEmpty="True"/>
+				<CustomParameter id="178" field="HighRiskPregnanciesSummaryNotification" dataType="Integer" parameterType="Control" defaultValue="0" omitIfEmpty="False" parameterSource="HighRiskPregnanciesSummary"/>
+			</UFormElements>
+			<DSPParameters/>
+			<DSQLParameters/>
+			<DConditions>
+				<TableParameter id="127" conditionType="Parameter" useIsNull="False" field="EmployeeID" dataType="Text" parameterType="URL" parameterSource="EmployeeID" searchConditionType="Equal" logicOperator="And" orderNumber="1" leftBrackets="0" rightBrackets="0"/>
+			</DConditions>
+			<SecurityGroups>
+				<Group id="114" groupID="1" read="True" insert="True" update="True" delete="True"/>
+				<Group id="115" groupID="2" read="True"/>
+			</SecurityGroups>
+			<Attributes/>
+			<Features/>
+		</Record>
+		<IncludePage id="27" name="topmenu" PathID="topmenu" page="topmenu.ccp">
+			<Components/>
+			<Events/>
+			<Features/>
+		</IncludePage>
+		<Record id="141" sourceType="Table" urlType="Relative" secured="False" allowInsert="True" allowUpdate="True" allowDelete="True" validateData="True" preserveParameters="GET" returnValueType="Number" returnValueTypeForDelete="Number" returnValueTypeForInsert="Number" returnValueTypeForUpdate="Number" connection="registry_db" name="login" dataSource="login" errorSummator="Error" wizardCaption="{res:CCS_RecordFormPrefix} {res:login} {res:CCS_RecordFormSuffix}" wizardFormMethod="post" PathID="login" customInsertType="Table" customInsert="login" customUpdateType="Table" customUpdate="login">
+			<Components>
+				<Button id="143" urlType="Relative" enableValidation="True" isDefault="False" name="Button_Insert" operation="Insert" wizardCaption="{res:CCS_Insert}" PathID="loginButton_Insert">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</Button>
+				<Button id="145" urlType="Relative" enableValidation="True" isDefault="False" name="Button_Update" operation="Update" wizardCaption="{res:CCS_Update}" PathID="loginButton_Update">
+					<Components/>
+					<Events>
+						<Event name="OnClick" type="Server">
+							<Actions>
+								<Action actionName="Custom Code" actionCategory="General" id="173"/>
+							</Actions>
+						</Event>
+					</Events>
+					<Attributes/>
+					<Features/>
+				</Button>
+				<Button id="147" urlType="Relative" enableValidation="False" isDefault="False" name="Button_Delete" operation="Delete" wizardCaption="{res:CCS_Delete}" PathID="loginButton_Delete">
+					<Components/>
+					<Events>
+						<Event name="OnClick" type="Client">
+							<Actions>
+								<Action actionName="Confirmation Message" actionCategory="General" id="148" message="{res:CCS_DeleteConfirmation}" eventType="Client"/>
+							</Actions>
+						</Event>
+						<Event name="OnClick" type="Server">
+							<Actions>
+								<Action actionName="Custom Code" actionCategory="General" id="171"/>
+							</Actions>
+						</Event>
+					</Events>
+					<Attributes/>
+					<Features/>
+				</Button>
+				<Button id="149" urlType="Relative" enableValidation="False" isDefault="False" name="Button_Cancel" operation="Cancel" wizardCaption="{res:CCS_Cancel}" PathID="loginButton_Cancel">
+					<Components/>
+					<Events>
+						<Event name="OnClick" type="Server">
+							<Actions>
+								<Action actionName="Custom Code" actionCategory="General" id="172"/>
+							</Actions>
+						</Event>
+					</Events>
+					<Attributes/>
+					<Features/>
+				</Button>
+				<TextBox id="151" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="username" fieldSource="username" required="True" caption="{res:username}" wizardCaption="{res:username}" wizardSize="20" wizardMaxLength="20" wizardIsPassword="False" wizardUseTemplateBlock="False" PathID="loginusername" validationRule="preg_match(&quot;/^.*(?=.{6,})(?=.*\d)(?=.*[a-z]).*$/&quot;,$this-&gt;username-&gt;GetValue())" validationText="{res:LoginReq}">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</TextBox>
+				<TextBox id="152" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="password" fieldSource="password" required="True" caption="{res:password}" wizardCaption="{res:password}" wizardSize="50" wizardMaxLength="50" wizardIsPassword="True" wizardUseTemplateBlock="False" PathID="loginpassword" validationRule="preg_match(&quot;/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/&quot;,$this-&gt;password-&gt;GetValue())" validationText="{res:PwdReq}">
+					<Components/>
+					<Events>
+						<Event name="OnValidate" type="Server">
+							<Actions>
+								<Action actionName="Reset Password Validation" actionCategory="Security" id="153" passwordControlName="password" eventType="Server"/>
+							</Actions>
+						</Event>
+					</Events>
+					<Attributes/>
+					<Features/>
+				</TextBox>
+				<ListBox id="154" visible="Yes" fieldSourceType="DBColumn" sourceType="Table" dataType="Integer" returnValueType="Number" name="GroupID" fieldSource="GroupID" required="True" caption="{res:GroupID}" wizardCaption="{res:GroupID}" wizardSize="10" wizardMaxLength="10" wizardIsPassword="False" wizardUseTemplateBlock="False" wizardEmptyCaption="{res:CCS_SelectValue}" PathID="loginGroupID" connection="registry_db" dataSource="usergroups" boundColumn="GroupID" textColumn="GroupName">
+					<Components/>
+					<Events>
+<Event name="OnChange" type="Client">
+<Actions>
+<Action actionName="Custom Code" actionCategory="General" id="179"/>
+</Actions>
+</Event>
+</Events>
+					<TableParameters/>
+					<SPParameters/>
+					<SQLParameters/>
+					<JoinTables/>
+					<JoinLinks/>
+					<Fields/>
+					<Attributes/>
+					<Features/>
+				</ListBox>
+				<ListBox id="155" visible="Yes" fieldSourceType="DBColumn" dataType="Text" name="DefaultDB" fieldSource="DefaultDB" required="True" caption="{res:DefaultDB}" wizardCaption="{res:DefaultDB}" wizardSize="50" wizardMaxLength="250" wizardIsPassword="False" wizardUseTemplateBlock="False" PathID="loginDefaultDB" sourceType="SQL" connection="registry_db" dataSource="SHOW Databases" boundColumn="Database" textColumn="Database">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+					<TableParameters/>
+					<SPParameters/>
+					<SQLParameters/>
+					<JoinTables/>
+					<JoinLinks/>
+					<Fields/>
+				</ListBox>
+				<ListBox id="156" visible="Yes" fieldSourceType="DBColumn" sourceType="Table" dataType="Text" returnValueType="Number" name="locale" fieldSource="locale" required="True" caption="{res:locale}" wizardCaption="{res:locale}" wizardSize="5" wizardMaxLength="5" wizardIsPassword="False" wizardUseTemplateBlock="False" wizardEmptyCaption="{res:CCS_SelectValue}" PathID="loginlocale" connection="registry_db" dataSource="languages" boundColumn="locale" textColumn="Language">
+					<Components/>
+					<Events/>
+					<TableParameters/>
+					<SPParameters/>
+					<SQLParameters/>
+					<JoinTables/>
+					<JoinLinks/>
+					<Fields/>
+					<Attributes/>
+					<Features/>
+				</ListBox>
+				<Hidden id="157" fieldSourceType="DBColumn" dataType="Text" name="password_Shadow" PathID="loginpassword_Shadow">
+					<Components/>
+					<Events/>
+					<Attributes/>
+					<Features/>
+				</Hidden>
+			</Components>
+			<Events>
+				<Event name="BeforeShow" type="Server">
+					<Actions>
+						<Action actionName="Preserve Password" actionCategory="Security" id="142" passwordControlName="password" shadowControlName="password_Shadow" eventType="Server"/>
+					</Actions>
+				</Event>
+				<Event name="BeforeExecuteInsert" type="Server">
+					<Actions>
+						<Action actionName="Encrypt Password" actionCategory="Security" id="144" passwordControlName="password" shadowControlName="password_Shadow" eventType="Server"/>
+					</Actions>
+				</Event>
+				<Event name="BeforeExecuteUpdate" type="Server">
+					<Actions>
+						<Action actionName="Encrypt Password" actionCategory="Security" id="146" passwordControlName="password" shadowControlName="password_Shadow" eventType="Server"/>
+					</Actions>
+				</Event>
+				<Event name="AfterInsert" type="Server">
+					<Actions>
+						<Action actionName="Custom Code" actionCategory="General" id="169" eventType="Server"/>
+					</Actions>
+				</Event>
+				<Event name="OnLoad" type="Client">
+<Actions>
+<Action actionName="Custom Code" actionCategory="General" id="180"/>
+</Actions>
+</Event>
+</Events>
+			<TableParameters>
+				<TableParameter id="150" conditionType="Parameter" useIsNull="False" field="LoginID" parameterSource="LoginID" dataType="Integer" logicOperator="And" searchConditionType="Equal" parameterType="URL" orderNumber="1"/>
+			</TableParameters>
+			<SPParameters/>
+			<SQLParameters/>
+			<JoinTables/>
+			<JoinLinks/>
+			<Fields/>
+			<ISPParameters/>
+			<ISQLParameters/>
+			<IFormElements>
+				<CustomParameter id="158" field="username" dataType="Text" parameterType="Control" parameterSource="username" omitIfEmpty="True"/>
+				<CustomParameter id="159" field="password" dataType="Text" parameterType="Expression" parameterSource="&quot;{password}&quot;" omitIfEmpty="True"/>
+				<CustomParameter id="160" field="GroupID" dataType="Integer" parameterType="Control" parameterSource="GroupID" omitIfEmpty="True"/>
+				<CustomParameter id="161" field="DefaultDB" dataType="Text" parameterType="Control" parameterSource="DefaultDB" omitIfEmpty="True"/>
+				<CustomParameter id="162" field="locale" dataType="Text" parameterType="Control" parameterSource="locale" omitIfEmpty="True"/>
+			</IFormElements>
+			<USPParameters/>
+			<USQLParameters/>
+			<UConditions>
+				<TableParameter id="163" conditionType="Parameter" useIsNull="False" field="LoginID" dataType="Integer" parameterType="URL" parameterSource="LoginID" searchConditionType="Equal" logicOperator="And" orderNumber="1" omitIfEmpty="True"/>
+			</UConditions>
+			<UFormElements>
+				<CustomParameter id="164" field="username" dataType="Text" parameterType="Control" parameterSource="username" omitIfEmpty="True"/>
+				<CustomParameter id="165" field="password" dataType="Text" parameterType="Expression" parameterSource="&quot;{password}&quot;" omitIfEmpty="True"/>
+				<CustomParameter id="166" field="GroupID" dataType="Integer" parameterType="Control" parameterSource="GroupID" omitIfEmpty="True"/>
+				<CustomParameter id="167" field="DefaultDB" dataType="Text" parameterType="Control" parameterSource="DefaultDB" omitIfEmpty="True"/>
+				<CustomParameter id="168" field="locale" dataType="Text" parameterType="Control" parameterSource="locale" omitIfEmpty="True"/>
+			</UFormElements>
+			<DSPParameters/>
+			<DSQLParameters/>
+			<DConditions/>
+			<SecurityGroups/>
+			<Attributes/>
+			<Features/>
+		</Record>
+	</Components>
+	<CodeFiles>
+		<CodeFile id="Code" language="PHPTemplates" name="employees_maint.php" forShow="True" url="employees_maint.php" comment="//" codePage="utf-8"/>
+		<CodeFile id="Events" language="PHPTemplates" name="employees_maint_events.php" forShow="False" comment="//" codePage="utf-8"/>
+	</CodeFiles>
+	<SecurityGroups>
+		<Group id="170" groupID="1"/>
+	</SecurityGroups>
+	<CachingParameters/>
+	<Attributes/>
+	<Features/>
+	<Events/>
+</Page>

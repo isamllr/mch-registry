@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:report_visit_date2}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-415FE888
+
+var employees_patient_pregnan_s_EarliestVisitDateDatePicker = new Object(); 
+employees_patient_pregnan_s_EarliestVisitDateDatePicker.format           = "ShortDate";
+employees_patient_pregnan_s_EarliestVisitDateDatePicker.style            = "Styles/{CCS_Style}/Style.css";
+employees_patient_pregnan_s_EarliestVisitDateDatePicker.relativePathPart = "";
+employees_patient_pregnan_s_EarliestVisitDateDatePicker.themeVersion = "3.0";
+
+var employees_patient_pregnan_s_LatestVisitDateDatePicker = new Object(); 
+employees_patient_pregnan_s_LatestVisitDateDatePicker.format           = "ShortDate";
+employees_patient_pregnan_s_LatestVisitDateDatePicker.style            = "Styles/{CCS_Style}/Style.css";
+employees_patient_pregnan_s_LatestVisitDateDatePicker.relativePathPart = "";
+employees_patient_pregnan_s_LatestVisitDateDatePicker.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record employees_patient_pregnan -->
+<form id="employees_patient_pregnan" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp;</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employees_patient_pregnans_LastName">{res:LastNameDoctor}</label></td> 
+            <td><input id="employees_patient_pregnans_LastName" value="{s_LastName}" maxlength="30" size="30" name="{s_LastName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employees_patient_pregnans_FirstName">{res:FirstNameDoctor}</label></td> 
+            <td><input id="employees_patient_pregnans_FirstName" value="{s_FirstName}" maxlength="30" size="30" name="{s_FirstName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employees_patient_pregnans_NextVisit">{res:NextVisit}</label></td> 
+            <td>{res:from} <input id="s_EarliestVisitDate" value="{s_EarliestVisitDate}" maxlength="100" size="8" name="{s_EarliestVisitDate_Name}">
+              <!-- BEGIN DatePicker s_EarliestVisitDateDatePicker --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="s_EarliestVisitDateDatePicker"><img id="s_EarliestVisitDateDatePicker_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a> <!-- END DatePicker s_EarliestVisitDateDatePicker -->{res:to} <input id="s_LatestVisitDate" value="{s_LatestVisitDate}" maxlength="100" size="8" name="{s_LatestVisitDate_Name}">
+              <!-- BEGIN DatePicker s_LatestVisitDateDatePicker --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="s_LatestVisitDateDatePicker"><img id="s_LatestVisitDateDatePicker_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a> <!-- END DatePicker s_LatestVisitDateDatePicker --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:PatientID}</td> 
+            <td><input id="employees_patient_pregnans_PatientID" value="{s_PatientID}" name="{s_PatientID_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="delivery_patient_pregnancs_PregnancyRecNr">{res:PregnancyRecNr}</label></td> 
+            <td><label for="employees_patient_pregnans_PregnancyID" style="display: none;">&nbsp;</label><input id="employees_patient_pregnans_PregnancyRecNr" value="{s_PregnancyRecNr}" maxlength="10" size="10" name="{s_PregnancyRecNr_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employees_patient_pregnans_FamilyName">{res:FamilyNamePatient}</label></td> 
+            <td><input id="employees_patient_pregnans_FamilyName" value="{s_FamilyName}" size="50" name="{s_FamilyName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employees_patient_pregnans_GivenName">{res:GivenNamePatient}</label></td> 
+            <td><input id="employees_patient_pregnans_GivenName" value="{s_GivenName}" size="50" name="{s_GivenName_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="employees_patient_pregnanButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record employees_patient_pregnan --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print -->
+<p></p>
+<p>
+<!-- BEGIN Report visit_referral_pregnancy -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_ReportFormPrefix} {res:visitreferralpregnancypatientemployees} </strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">{res:CCS_TotalRecords}&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <thead style="DISPLAY: table-header-group">
+          <tr class="Caption">
+            <th scope="col">{res:employees_EmployeeID} &nbsp;</th>
+ 
+            <th scope="col"># &nbsp;</th>
+ 
+            <th scope="col">&nbsp; 
+            <!-- BEGIN Sorter PatientID1 --><a href="{Sort_URL}" id="visit_referral_pregnancyPage_HeaderPatientID1">{res:PatientID}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter PatientID1 -->&nbsp;</th>
+ 
+            <th scope="col">&nbsp; 
+            <!-- BEGIN Sorter Sorter_PregnancyRecNr --><a href="{Sort_URL}">{res:PregnancyRecNr}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_PregnancyRecNr --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter2 --><a href="{Sort_URL}" id="visit_referral_pregnancyPage_HeaderSorter2">{res:LastNamePatient1}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter2 -->&nbsp;</th>
+ 
+            <th scope="col">&nbsp; 
+            <!-- BEGIN Sorter Sorter1 --><a href="{Sort_URL}" id="visit_referral_pregnancyPage_HeaderSorter1">{res:FirstNamePatient1}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter1 -->&nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_NextVisit --><a href="{Sort_URL}">{res:NextVisit}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_NextVisit -->&nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_Town --><a href="{Sort_URL}">{res:Town}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Town -->&nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_MobilePhone --><a href="{Sort_URL}">{res:MobilePhone}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_MobilePhone -->&nbsp;</th>
+          </tr>
+ 
+        </thead>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tfoot style="DISPLAY: table-footer-group">
+          <tr class="Footer">
+            <td>{Report_CurrentDate}</td> 
+            <td colspan="9">
+              <!-- BEGIN Navigator Navigator -->
+              <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+              <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+              <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+              <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+              <!-- BEGIN Pages -->
+              <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+              <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+              <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+              <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+              <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+              <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+          </tr>
+        </tfoot>
+ <!-- END Section Page_Footer -->
+        <!-- BEGIN Section EmployeeID_Header -->
+        <tr class="GroupCaption">
+          <th style="TEXT-ALIGN: right" scope="col">{LastName}&nbsp;&nbsp;{FirstName}</th>
+ 
+          <th style="TEXT-ALIGN: right" scope="col">&nbsp; </th>
+ 
+          <th style="TEXT-ALIGN: right" scope="col">&nbsp;</th>
+ 
+          <th style="TEXT-ALIGN: right" scope="col">&nbsp;</th>
+ 
+          <th style="TEXT-ALIGN: right" scope="col">&nbsp; </th>
+ 
+          <th style="TEXT-ALIGN: right" scope="col">&nbsp; </th>
+ 
+          <th style="TEXT-ALIGN: right" scope="col">&nbsp; </th>
+ 
+          <th style="TEXT-ALIGN: right" scope="col">&nbsp;</th>
+ 
+          <th style="TEXT-ALIGN: right" scope="col">&nbsp; </th>
+        </tr>
+ <!-- END Section EmployeeID_Header -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right">&nbsp; </td> 
+          <td style="TEXT-ALIGN: right">{Report_Row_Number} </td> 
+          <td>&nbsp;<a href="{PatientID_Src}" id="visit_referral_pregnancyDetailPatientID_{visit_referral_pregnancy:rowNumber}">{PatientID}</a></td> 
+          <td>{PregnancyRecNr}</td> 
+          <td><a href="{FamilyName_Src}" id="visit_referral_pregnancyDetailFamilyName_{patients:rowNumber}">{FamilyName}</a>&nbsp;</td> 
+          <td>{GivenName} </td> 
+          <td>{NextVisit} </td> 
+          <td>{Town} </td> 
+          <td>{MobilePhone} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section EmployeeID_Footer --><!-- END Section EmployeeID_Footer -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="9">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report visit_referral_pregnancy --><br>
+</p>
+</body>
+</html>

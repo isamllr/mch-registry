@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>report_visit_outcome</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-B36D451C
+
+var facilities_patient_pregna_DatePicker_s_VisitDate = new Object(); 
+facilities_patient_pregna_DatePicker_s_VisitDate.format           = "ShortDate";
+facilities_patient_pregna_DatePicker_s_VisitDate.style            = "Styles/{CCS_Style}/Style.css";
+facilities_patient_pregna_DatePicker_s_VisitDate.relativePathPart = "";
+facilities_patient_pregna_DatePicker_s_VisitDate.themeVersion = "3.0";
+
+var facilities_patient_pregna_DatePicker_s_VisitDate1 = new Object(); 
+facilities_patient_pregna_DatePicker_s_VisitDate1.format           = "ShortDate";
+facilities_patient_pregna_DatePicker_s_VisitDate1.style            = "Styles/{CCS_Style}/Style.css";
+facilities_patient_pregna_DatePicker_s_VisitDate1.relativePathPart = "";
+facilities_patient_pregna_DatePicker_s_VisitDate1.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record facilities_patient_pregna -->
+<form id="facilities_patient_pregna" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp;</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="facilities_patient_pregnas_patient_PatientID">{res:PatientID}</label></td> 
+            <td><input id="facilities_patient_pregnas_patient_PatientID" value="{s_patient_PatientID}" maxlength="10" size="10" name="{s_patient_PatientID_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="facilities_patient_pregnas_FamilyName">{res:FamilyName}</label></td> 
+            <td><input id="facilities_patient_pregnas_FamilyName" value="{s_FamilyName}" size="50" name="{s_FamilyName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="facilities_patient_pregnas_GivenName">{res:GivenName}</label></td> 
+            <td><input id="facilities_patient_pregnas_GivenName" value="{s_GivenName}" size="50" name="{s_GivenName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="facilities_patient_pregnas_VisitDate">{res:VisitDate}</label></td> 
+            <td>{res:from}&nbsp;<input id="facilities_patient_pregnas_VisitDate" value="{s_VisitDate}" maxlength="100" size="8" name="{s_VisitDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_VisitDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="facilities_patient_pregnaDatePicker_s_VisitDate"><img id="facilities_patient_pregnaDatePicker_s_VisitDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_VisitDate -->&nbsp;{res:to} <input id="facilities_patient_pregnas_VisitDate1" value="{s_VisitDate1}" maxlength="100" size="8" name="{s_VisitDate1_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_VisitDate1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="facilities_patient_pregnaDatePicker_s_VisitDate1"><img id="facilities_patient_pregnaDatePicker_s_VisitDate1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_VisitDate1 --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="facilities_patient_pregnas_TypeName">{res:ReferralTypeID}</label></td> 
+            <td>
+              <select id="facilities_patient_pregnas_TypeName" name="{s_TypeName_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {s_TypeName_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="facilities_patient_pregnas_RefIndicationName"><label for="visitIndicationID" id="visitIndicationID_Label">{res:IndicationID}</label></label></td> 
+            <td>
+              <select id="facilities_patient_pregnas_RefIndicationName" name="{s_RefIndicationName_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {s_RefIndicationName_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="facilities_patient_pregnas_FacilityName">{res:FacilityName}</label></td> 
+            <td>
+              <select id="facilities_patient_pregnas_FacilityName" name="{s_FacilityName_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {s_FacilityName_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="facilities_patient_pregnaButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record facilities_patient_pregna --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print -->
+<p></p>
+<p>
+<!-- BEGIN Report visit_referral_referralty1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:ReferralType}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">{res:CCS_TotalRecords}&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <thead style="DISPLAY: table-header-group">
+          <tr class="Caption">
+            <th scope="col">{res:ReferralTypeID}</th>
+ 
+            <th scope="col"><label for="visitIndicationID" id="visitIndicationID_Label">{res:IndicationID}</label>&nbsp;</th>
+ 
+            <th scope="col">{res:FacilityName} &nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_VisitDate --><a href="{Sort_URL}">{res:VisitDate}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_VisitDate -->&nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_patient_PatientID --><a href="{Sort_URL}">{res:PatientID}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_patient_PatientID -->&nbsp;</th>
+ 
+            <th scope="col">{res:FamilyName} &nbsp;</th>
+ 
+            <th scope="col">{res:GivenName} &nbsp;</th>
+          </tr>
+ 
+        </thead>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tfoot style="DISPLAY: table-footer-group">
+          <tr class="Footer">
+            <td>{Report_CurrentDate}</td> 
+            <td colspan="6">
+              <!-- BEGIN Navigator Navigator -->
+              <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+              <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+              <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+              <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+              <!-- BEGIN Pages -->
+              <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+              <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+              <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+              <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+              <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+              <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+          </tr>
+        </tfoot>
+ <!-- END Section Page_Footer -->
+        <!-- BEGIN Section TypeName_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">{TypeName} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+        </tr>
+ <!-- END Section TypeName_Header -->
+        <!-- BEGIN Section RefIndicationName_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">{RefIndicationName} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+        </tr>
+ <!-- END Section RefIndicationName_Header -->
+        <!-- BEGIN Section FacilityName_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">{FacilityName} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+        </tr>
+ <!-- END Section FacilityName_Header -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>{VisitDate} </td> 
+          <td style="TEXT-ALIGN: right">{patient_PatientID} </td> 
+          <td>{FamilyName} </td> 
+          <td>{GivenName} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section FacilityName_Footer -->
+        <tr class="SubTotal">
+          <td>{res:facilitiesFacilityID}</td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; {Count_patient_PatientID2}</td> 
+          <td>&nbsp; </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td>
+        </tr>
+ <!-- END Section FacilityName_Footer -->
+        <!-- BEGIN Section RefIndicationName_Footer -->
+        <tr class="SubTotal">
+          <td><label for="visitIndicationID" id="visitIndicationID_Label">{res:IndicationID}</label>&nbsp; </td> 
+          <td>&nbsp; {Count_patient_PatientID1}</td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td>
+        </tr>
+ <!-- END Section RefIndicationName_Footer -->
+        <!-- BEGIN Section TypeName_Footer -->
+        <tr class="SubTotal">
+          <td>{res:ReferralTypeID}&nbsp;&nbsp; &nbsp;{Count_patient_PatientID}&nbsp;&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td>
+        </tr>
+ <!-- END Section TypeName_Footer -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="7">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalCount_patient_PatientID} </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report visit_referral_referralty1 --><br>
+</p>
+</body>
+</html>

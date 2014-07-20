@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:login}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//_OnLoad @1-9C4F01C0
+function _OnLoad()
+{
+    var result = true;
+//End _OnLoad
+
+//Set Focus @8-D20FE9BF
+    if (document.forms["Login"] && document.forms["Login"].login) document.forms["Login"].login.focus();
+//End Set Focus
+
+//Close _OnLoad @1-BC33A33A
+    return result;
+}
+//End Close _OnLoad
+
+//bind_events @1-B4BAE7CE
+function bind_events() {
+    addEventHandler("", "load", _OnLoad);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+</head>
+<body>
+<p><img id="topmenuImage1" alt="" src="topFrame3.gif"></p>
+<p>&nbsp;</p>
+{TimeoutMsg}
+<p>&nbsp;</p>
+<!-- BEGIN Record Login -->
+<form id="Login" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_Login_Form_Caption}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <font size="2">
+          <!-- BEGIN Error --></font> 
+          <tr class="Error">
+            <td colspan="2"><font size="2">{Error}</font></td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="Loginlogin">{res:CCS_Login}</label></td> 
+            <td><input id="Loginlogin" value="{login}" maxlength="100" name="{login_Name}" size="20"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="Loginpassword">{res:CCS_Password}</label></td> 
+            <td><input id="Loginpassword" value="{password}" maxlength="100" type="password" name="{password_Name}" size="20"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoLogin --><input id="LoginButton_DoLogin" class="Button" value="{res:CCS_LoginBtn}" alt="{res:CCS_LoginBtn}" type="submit" name="{Button_Name}"><!-- END Button Button_DoLogin --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record Login -->
+</body>
+</html>

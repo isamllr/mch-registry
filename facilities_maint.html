@@ -1,0 +1,437 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:facilities}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Include User Scripts @1-B93D65AC
+</script>
+<script language="JavaScript" src="js/pt/prototype.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include User Scripts
+
+//facilitiesButton_Delete_OnClick @118-09158763
+function facilitiesButton_Delete_OnClick()
+{
+    var result = true;
+//End facilitiesButton_Delete_OnClick
+
+//Confirmation Message @119-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close facilitiesButton_Delete_OnClick @118-BC33A33A
+    return result;
+}
+//End Close facilitiesButton_Delete_OnClick
+
+//facilitiesButton_Cancel_OnClick @120-D6E16E4C
+function facilitiesButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End facilitiesButton_Cancel_OnClick
+
+//facilitiesDistrictIDPTDependentListBoxDistrictID Start @151-D1487F47
+function facilitiesDistrictIDPTDependentListBoxDistrictID_start(sender) {
+    var dependentElement = $("facilitiesDistrictID" + sender.id.substring(20));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/DistrictID_from_Province_PTDependentListBox.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End facilitiesDistrictIDPTDependentListBoxDistrictID Start
+
+//facilitiesProvinceIDPTDependentListBoxProvinceID Start @145-34E5CA62
+function facilitiesProvinceIDPTDependentListBoxProvinceID_start(sender) {
+    var dependentElement = $("facilitiesProvinceID" + sender.id.substring(19));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/ProvinceID_from_Countries_PTDependentListBox.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End facilitiesProvinceIDPTDependentListBoxProvinceID Start
+
+//countries_districts_facils_province_ProvinceIDPTDependentListBox1 Start @153-B3236592
+function countries_districts_facils_province_ProvinceIDPTDependentListBox1_start(sender) {
+    var dependentElement = $("countries_districts_facils_province_ProvinceID" + sender.id.substring(46));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/ProvinceID_from_Countries_PTDependentListBox.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End countries_districts_facils_province_ProvinceIDPTDependentListBox1 Start
+
+//countries_districts_facils_districts_DistrictIDPTDependentListBox2 Start @154-570C8752
+function countries_districts_facils_districts_DistrictIDPTDependentListBox2_start(sender) {
+    var dependentElement = $("countries_districts_facils_districts_DistrictID" + sender.id.substring(46));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/DistrictID_from_Province_PTDependentListBox.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End countries_districts_facils_districts_DistrictIDPTDependentListBox2 Start
+
+//bind_events @1-70DAA590
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("facilitiesProvinceID", "change", facilitiesDistrictIDPTDependentListBoxDistrictID_start);
+    addEventHandler("facilitiesProvinceID", "load", facilitiesDistrictIDPTDependentListBoxDistrictID_start);
+    addEventHandler("facilitiesCountryID", "change", facilitiesProvinceIDPTDependentListBoxProvinceID_start);
+    addEventHandler("facilitiesCountryID", "load", facilitiesProvinceIDPTDependentListBoxProvinceID_start);
+    addEventHandler("countries_districts_facils_countries_CountryID", "change", countries_districts_facils_province_ProvinceIDPTDependentListBox1_start);
+    addEventHandler("countries_districts_facils_countries_CountryID", "load", countries_districts_facils_province_ProvinceIDPTDependentListBox1_start);
+    addEventHandler("countries_districts_facils_province_ProvinceID", "change", countries_districts_facils_districts_DistrictIDPTDependentListBox2_start);
+    addEventHandler("countries_districts_facils_province_ProvinceID", "load", countries_districts_facils_districts_DistrictIDPTDependentListBox2_start);
+    addEventHandler("facilitiesButton_Delete", "click", facilitiesButton_Delete_OnClick);
+    addEventHandler("facilitiesButton_Cancel", "click", facilitiesButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+{topmenu}<br>
+&nbsp; 
+<table style="WIDTH: 10%" cellspacing="5" border="0">
+  <tr valign="top">
+    <td valign="top" align="left">&nbsp; 
+      <!-- BEGIN Record countries_districts_facil -->
+      <form id="countries_districts_facil" method="post" name="{HTMLFormName}" action="{Action}">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Header" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                  <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp;{res:Search_Facilties} {res:CCS_SearchFormSuffix}</strong></td> 
+                  <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+                </tr>
+              </table>
+ 
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td>
+                </tr>
+                <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facils_countries_CountryID">{res:countriesCountryID}</label></td> 
+                  <td>
+                    <select id="countries_districts_facils_countries_CountryID" name="{s_countries_CountryID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+                      {s_countries_CountryID_Options}
+                    </select>
+ </td>
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facils_province_ProvinceID">{res:provinceProvinceID}</label></td> 
+                  <td>
+                    <!-- BEGIN ListBox s_province_ProvinceID -->
+                    <select id="countries_districts_facils_province_ProvinceID" name="{s_province_ProvinceID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+                      {s_province_ProvinceID_Options}
+                    </select>
+ <!-- END ListBox s_province_ProvinceID --></td>
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facils_districts_DistrictID">{res:districtsDistrictID}</label></td> 
+                  <td>
+                    <!-- BEGIN ListBox s_districts_DistrictID -->
+                    <select id="countries_districts_facils_districts_DistrictID" name="{s_districts_DistrictID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+                      {s_districts_DistrictID_Options}
+                    </select>
+ <!-- END ListBox s_districts_DistrictID --></td>
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facils_FacilityName">{res:FacilityName}</label></td> 
+                  <td><input id="countries_districts_facils_FacilityName" maxlength="250" size="50" value="{s_FacilityName}" name="{s_FacilityName_Name}"></td>
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facilfacilities_countries_provPageSize">{res:CCS_RecPerPage}</label></td> 
+                  <td>
+                    <select id="countries_districts_facilfacilities_countries_provPageSize" name="{facilities_countries_provPageSize_Name}">
+                      {facilities_countries_provPageSize_Options}
+                    </select>
+ </td>
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td colspan="2" align="right">
+                    <!-- BEGIN Button Button_DoSearch --><input id="countries_districts_facilButton_DoSearch" class="Button" alt="{res:CCS_Search}" type="submit" value="{res:CCS_Search}" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </form>
+      &nbsp;<!-- END Record countries_districts_facil --></td> 
+    <td>&nbsp;</td>
+  </tr>
+ 
+  <tr valign="top">
+    <td valign="top" align="left">&nbsp; 
+      <!-- BEGIN Grid countries_districts_facil1 -->
+      <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>{res:CCS_GridFormPrefix} {res:Search_Facilties}{res:CCS_GridFormSuffix} </strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+              </tr>
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <tr class="Caption">
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_FacilityName --><a href="{Sort_URL}" id="countries_districts_facil1Sorter_FacilityName">{res:FacilityName}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_FacilityName --></th>
+ 
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_DistrictName --><a href="{Sort_URL}" id="countries_districts_facil1Sorter_DistrictName">{res:DistrictName}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_DistrictName --></th>
+ 
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_ProvinceName --><a href="{Sort_URL}" id="countries_districts_facil1Sorter_ProvinceName">{res:ProvinceName}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_ProvinceName --></th>
+ 
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_Country --><a href="{Sort_URL}" id="countries_districts_facil1Sorter_Country">{res:Country}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_Country --></th>
+              </tr>
+ 
+              <!-- BEGIN Row -->
+              <tr class="Row">
+                <td><a href="{FacilityName_Src}" id="countries_districts_facil1FacilityName_{countries_districts_facil1:rowNumber}">{FacilityName}</a>&nbsp;</td> 
+                <td>{DistrictName}&nbsp;</td> 
+                <td>{ProvinceName}&nbsp;</td> 
+                <td>{Country}&nbsp;</td>
+              </tr>
+ <!-- END Row -->
+              <!-- BEGIN NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="4">{res:CCS_NoRecords}</td>
+              </tr>
+              <!-- END NoRecords -->
+              <tr class="Footer">
+                <td colspan="4"><a href="{countries_districts_facil1_Insert_Src}" id="countries_districts_facil1countries_districts_facil1_Insert">{res:CCS_InsertLink}</a>&nbsp; 
+                  <!-- BEGIN Navigator Navigator -->
+                  <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+                  <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+                    <option selected value="">-</option>
+ {PageSize_Options}
+                  </select>
+ 
+                  <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+                  <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+                  <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+                  <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+                  <!-- BEGIN Pages -->
+                  <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a><!-- END Page_On -->
+                  <!-- BEGIN Page_Off -->{Page_Number}<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+                  <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+                  <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+                  <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+                  <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off -->&nbsp;<!-- END Navigator Navigator -->&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      &nbsp;<!-- END Grid countries_districts_facil1 --></td> 
+    <td>&nbsp; 
+      <!-- BEGIN Record facilities -->
+      <form id="facilities" method="post" name="{HTMLFormName}" action="{Action}">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Header" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                  <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:facilities} {res:CCS_RecordFormSuffix}</strong></td> 
+                  <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+                </tr>
+              </table>
+ 
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <font size="2">
+                <!-- BEGIN Error --></font> 
+                <tr class="Error">
+                  <td colspan="2"><font size="2">{Error}</font></td>
+                </tr>
+                <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th"><label for="facilitiesProvinceID">{res:CountryID}</label></td> 
+                  <td class="th">
+                    <select id="facilitiesCountryID" name="{CountryID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+                      {CountryID_Options}
+                    </select>
+ </td>
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="facilitiesProvinceID">{res:ProvinceID}</label> 
+                    <td class="th">
+                      <select id="facilitiesProvinceID" name="{ProvinceID_Name}">
+                        <option selected value="">{res:CCS_SelectValue}</option>
+                        {ProvinceID_Options}
+                      </select>
+ </td> 
+                    <tr class="Controls">
+                      <td class="th"><label for="facilitiesDistrictID">{res:DistrictID}</label></td> 
+                      <td>
+                        <select id="facilitiesDistrictID" name="{DistrictID_Name}">
+                          <option selected value="">{res:CCS_SelectValue}</option>
+                          {DistrictID_Options}
+                        </select>
+ </td>
+                    </tr>
+ 
+                    <tr class="Controls">
+                      <td class="th"><label for="facilitiesFacilityName">{res:FacilityName}</label></td> 
+                      <td><input id="facilitiesFacilityName" maxlength="250" size="50" value="{FacilityName}" name="{FacilityName_Name}"></td>
+                    </tr>
+ 
+                    <tr class="Controls">
+                      <td class="th"><label for="facilitiesPhone">{res:PhoneNumber}</label></td> 
+                      <td><input id="facilitiesPhone" maxlength="250" size="50" value="{Phone}" name="{Phone_Name}"></td>
+                    </tr>
+ 
+                    <tr class="Bottom">
+                      <td colspan="2" align="right">
+                        <!-- BEGIN Button Button_Insert --><input id="facilitiesButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                        <!-- BEGIN Button Button_Update --><input id="facilitiesButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                        <!-- BEGIN Button Button_Delete --><input id="facilitiesButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete -->
+                        <!-- BEGIN Button Button_Cancel --><input id="facilitiesButton_Cancel" class="Button" alt="{res:CCS_Cancel}" type="submit" value="{res:CCS_Cancel}" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </form>
+          &nbsp;<!-- END Record facilities --></td>
+      </tr>
+    </table>
+    <br>
+    </body>
+    </html>

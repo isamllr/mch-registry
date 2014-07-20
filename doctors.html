@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:doctors}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//employeesButton_Delete_OnClick @42-AD1D93C7
+function employeesButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End employeesButton_Delete_OnClick
+
+//employeesButton_Cancel_OnClick @43-89B71039
+function employeesButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employeesButton_Cancel_OnClick
+
+//bind_events @1-0AA925A9
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("employeesButton_Delete", "click", employeesButton_Delete_OnClick);
+    addEventHandler("employeesButton_Cancel", "click", employeesButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p><br>
+<br>
+<!-- BEGIN Record employees -->
+<form id="employees" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_RecordFormPrefix}&nbsp;{res:DoctorsList} {res:CCS_RecordFormSuffix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employeesFirstName">{res:FirstName}</label></td> 
+            <td><input id="employeesFirstName" value="{FirstName}" maxlength="30" size="30" name="{FirstName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesLastName">{res:LastName}</label></td> 
+            <td><input id="employeesLastName" value="{LastName}" maxlength="30" size="30" name="{LastName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesfacility">{res:LocationID}</label><input id="employeesLocationID" value="{LocationID}" type="hidden" name="{LocationID_Name}"></td> 
+            <td>
+              <p>
+              <select id="employeesFacilityID" name="{FacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {FacilityID_Options}
+              </select>
+ </p>
+ 
+              <p>
+              <select id="employeesDeptID" name="{DeptID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {DeptID_Options}
+              </select>
+ </p>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesPositionID">{res:PositionID}</label></td> 
+            <td>
+              <select id="employeesPositionID" name="{PositionID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {PositionID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_Insert --><input id="employeesButton_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="employeesButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input id="employeesButton_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input id="employeesButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record employees --><br>
+</p>
+</body>
+</html>

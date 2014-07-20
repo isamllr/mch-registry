@@ -1,0 +1,746 @@
+/* htb - Horizontal Top to Bottom Menu */
+
+/* begin  hide/show blocks */
+	.Swiss_TPH1 .menu_htb .right2 {
+		display: none;
+	}
+/* end hide/show blocks */
+
+.Swiss_TPH1 .menu_htb a {
+	background-color: #525a63;
+	
+	height: auto;
+	width: auto;
+}
+
+.Swiss_TPH1 .menu_htb a:hover, .Swiss_TPH1 .menu_htb li:hover>a, .Swiss_TPH1 ul.menu_htb .selected a {
+	background-color: #353c45;
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_htb a:hover, .Swiss_TPH1 .menu_htb .adxmhoverA, .Swiss_TPH1 ul.menu_htb .selected a {		/* li:hover>a selector */
+	background-color: #353c45;
+	
+}
+
+.Swiss_TPH1 .menu_htb .text {
+	position: relative;
+	color: #e3e9f2;
+	margin-left: 1em; margin-right: 1em; 
+	padding-top: .2em; padding-bottom: .2em;
+	width: auto;
+	height: auto;
+	.display: inline; /* The IE Doubled Float-Margin Bug Fix */
+}
+
+html:first-child .Swiss_TPH1 .menu_htb .text { /* Opera */
+	display: block;
+	float: none;
+}
+
+.Swiss_TPH1 .menu_htb a:hover .text, .Swiss_TPH1 .menu_htb li:hover>a .text, .Swiss_TPH1 ul.menu_htb .selected a .text {
+	color: #e3e9f2;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_htb a:hover .text, .Swiss_TPH1 .menu_htb .adxmhoverA .text, .Swiss_TPH1 ul.menu_htb .selected a .text {
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_htb a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_htb a:hover, .Swiss_TPH1 .menu_htb li:hover>a, .Swiss_TPH1 ul.menu_htb .selected a {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_htb a:hover, .Swiss_TPH1 .menu_htb .adxmhoverA, .Swiss_TPH1 ul.menu_htb .selected a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_htb, .Swiss_TPH1 .menu_htb ul li {
+	background: transparent;
+}
+
+.Swiss_TPH1 .menu_htb li {
+	border: 0;
+}
+
+/* second level */
+
+/* begin  hide/show blocks */
+	.Swiss_TPH1 .menu_htb ul .right2 {
+		display: none;
+	}
+/* end hide/show blocks */
+
+.Swiss_TPH1 .menu_htb ul .submenu .right2 {
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 25%;
+	width: 10px;
+	height: 11px;
+	background-color: transparent;
+	background-image: url('Images/SubmenuArrow.gif');background-repeat: no-repeat;background-position: center left;
+}
+
+.Swiss_TPH1 .menu_htb ul>li .submenu .right2 {
+	right: 0;
+	top: 0;
+	width: 10px;
+	height: 100%;
+}
+
+.Swiss_TPH1 .menu_htb li li {	/* create borders around each item */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_htb ul .text, .Swiss_TPH1 ul.menu_htb .selected ul .text {
+	position: relative;
+	color: #e3e9f2;
+	height: auto;
+	margin-left: .3em; margin-right: .3em;
+	padding-top: .2em; padding-bottom: .2em;
+	.display: inline; /* The IE Doubled Float-Margin Bug Fix */
+}
+
+html:first-child .Swiss_TPH1 .menu_htb ul .text { /* Opera */
+	display: block;
+	float: none;
+}
+
+.Swiss_TPH1 .menu_htb ul a:hover .text, .Swiss_TPH1 .menu_htb ul li:hover>a .text, .Swiss_TPH1 ul.menu_htb .selected ul a:hover .text, .Swiss_TPH1 ul.menu_htb .selected ul li:hover>a .text {
+	color: #e3e9f2;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_htb ul a:hover .text, .Swiss_TPH1 .menu_htb ul .adxmhoverA .text, .Swiss_TPH1 ul.menu_htb .selected ul a:hover .text, .Swiss_TPH1 ul.menu_htb .selected ul .adxmhoverA .text {
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_htb ul a, .Swiss_TPH1 ul.menu_htb .selected ul a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_htb ul a:hover, .Swiss_TPH1 .menu_htb ul li:hover>a, .Swiss_TPH1 ul.menu_htb .selected ul a:hover, .Swiss_TPH1 ul.menu_htb .selected ul li:hover>a {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_htb ul a:hover, .Swiss_TPH1 .menu_htb ul .adxmhoverA, .Swiss_TPH1 ul.menu_htb .selected ul a:hover, .Swiss_TPH1 ul.menu_htb .selected ul .adxmhoverA {
+	border: 0;
+}
+
+.Swiss_TPH1 ul.menu_htb ul li a, .Swiss_TPH1 ul.menu_htb .selected ul li a { 
+	width: 100%;
+	height: auto;
+	background-color: #525a63;
+	
+}
+
+.Swiss_TPH1 .menu_htb ul a:hover, .Swiss_TPH1 .menu_htb ul li:hover>a, .Swiss_TPH1 ul.menu_htb .selected ul a:hover, .Swiss_TPH1 ul.menu_htb .selected ul li:hover>a {
+	background-color: #353c45;
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_htb ul a:hover, .Swiss_TPH1 .menu_htb ul .adxmhoverA, .Swiss_TPH1 ul.menu_htb .selected ul a:hover, .Swiss_TPH1 ul.menu_htb .selected ul .adxmhoverA {
+	background-color: #353c45;
+	
+}
+
+
+/* position of items */
+.Swiss_TPH1 .menu_htb ul {
+	width: 12.5em;
+}
+
+.Swiss_TPH1 .menu_htb a {
+	width: auto;
+	height: auto;
+	padding: 0;
+	cursor: hand;
+	float: left; /* is needed for ie, because it puts items to the next line */
+}
+
+html:first-child .Swiss_TPH1 .menu_htb a { /* Opera */
+	float: none;
+}
+
+.Swiss_TPH1 ul.menu_htb ul li a { 
+	width: 12.5em;
+	height: auto;
+	padding: 0;
+	overflow: hidden;
+	float: none;
+}
+
+.Swiss_TPH1 .menu_htb li li:hover>ul {	/* inset 2nd+ submenus, to show off overlapping */
+	top: 5px;
+	left: 100%;
+}
+
+.Swiss_TPH1 .menu_htb .adxmhoverUL .adxmhoverUL {	/* inset 2nd+ submenus, to show off overlapping */
+	top: 5px;
+	left: 100%;
+}
+
+
+/* hbt - Horizontal Bottom to Top */
+
+
+/* vlr - Vertical Left to Right */
+
+/* begin  hide/show blocks */
+	.Swiss_TPH1 .menu_vlr .right2 {
+		display: none;
+	}
+/* end hide/show blocks */
+
+.Swiss_TPH1 .menu_vlr a {
+	width: 100%;
+	height: auto;
+	background-color: #525a63;
+	
+}
+
+.Swiss_TPH1 .menu_vlr a:hover, .Swiss_TPH1 .menu_vlr li:hover>a, .Swiss_TPH1 ul.menu_vlr .selected a {
+	background-color: #353c45;
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr a:hover, .Swiss_TPH1 .menu_vlr .adxmhoverA, .Swiss_TPH1 ul.menu_vlr .selected a {		/* li:hover>a selector */
+	background-color: #353c45;
+	
+}
+
+.Swiss_TPH1 .menu_vlr .text {
+	position: relative;
+	height: auto;
+	width: 100%;
+	text-align: center;
+	color: #e3e9f2;
+	padding-top: .2em; padding-bottom: .2em;
+}
+
+.Swiss_TPH1 .menu_vlr a:hover .text, .Swiss_TPH1 .menu_vlr li:hover>a .text, .Swiss_TPH1 ul.menu_vlr .selected a .text {
+	color: #e3e9f2;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr a:hover .text, .Swiss_TPH1 .menu_vlr .adxmhoverA .text, .Swiss_TPH1 ul.menu_vlr .selected a .text {		/* li:hover>a selector */
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_vlr a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr a:hover, .Swiss_TPH1 .menu_vlr li:hover>a, .Swiss_TPH1 ul.menu_vlr .selected a {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr a:hover, .Swiss_TPH1 .menu_vlr .adxmhoverA, .Swiss_TPH1 ul.menu_vlr .selected a {		/* li:hover>a selector */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr, .Swiss_TPH1 .menu_vlr ul li {
+	background: transparent;
+}
+
+.Swiss_TPH1 .menu_vlr li {	/* create borders around each item */
+	border: 0;
+}
+
+/* second level */
+
+/* begin  hide/show blocks */
+	.Swiss_TPH1 .menu_vlr ul .right2 {
+		display: none;
+	}
+/* end hide/show blocks */
+
+.Swiss_TPH1 .menu_vlr ul li {	/* create borders around each item */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr ul .text, .Swiss_TPH1 ul.menu_vlr .selected ul .text {
+	position: relative;
+	height: auto;
+	width: auto;
+	color: #e3e9f2;
+	text-align: left;
+	margin-left: .3em; margin-right: .3em;
+	padding-top: .2em; padding-bottom: .2em;
+	display: inline; /* The IE Doubled Float-Margin Bug Fix */
+}
+
+.Swiss_TPH1 .menu_vlr ul a:hover .text, .Swiss_TPH1 .menu_vlr ul li:hover>a .text, .Swiss_TPH1 ul.menu_vlr .selected ul a:hover .text, .Swiss_TPH1 ul.menu_vlr .selected ul li:hover>a .text {
+	color: #e3e9f2;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr ul a:hover .text, .Swiss_TPH1 .menu_vlr ul .adxmhoverA .text, .Swiss_TPH1 ul.menu_vlr .selected ul a:hover .text, .Swiss_TPH1 ul.menu_vlr .selected ul .adxmhoverA .text {		/* li:hover>a selector */
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_vlr ul a, .Swiss_TPH1 ul.menu_vlr .selected ul a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr ul a:hover, .Swiss_TPH1 .menu_vlr ul li:hover>a, .Swiss_TPH1 ul.menu_vlr .selected ul a:hover, .Swiss_TPH1 ul.menu_vlr .selected ul li:hover>a {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr ul a:hover, .Swiss_TPH1 .menu_vlr ul .adxmhoverA, .Swiss_TPH1 ul.menu_vlr .selected ul a:hover, .Swiss_TPH1 ul.menu_vlr .selected ul .adxmhoverA {		/* li:hover>a selector */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr ul a, .Swiss_TPH1 ul.menu_vlr .selected ul a {
+	width: 100%;
+	height: auto;
+	background-color: #525a63;
+	
+}
+
+.Swiss_TPH1 .menu_vlr ul a:hover, .Swiss_TPH1 .menu_vlr ul li:hover>a, .Swiss_TPH1 ul.menu_vlr .selected ul a:hover, .Swiss_TPH1 ul.menu_vlr .selected ul li:hover>a {
+	background-color: #353c45;
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr ul a:hover, .Swiss_TPH1 .menu_vlr ul .adxmhoverA, .Swiss_TPH1 ul.menu_vlr .selected ul a:hover, .Swiss_TPH1 ul.menu_vlr .selected ul .adxmhoverA {		/* li:hover>a selector */
+	background-color: #353c45;
+	
+}
+
+/* position of items */
+.Swiss_TPH1 .menu_vlr, .Swiss_TPH1 .menu_vlr ul {
+	width: 12.5em;
+}
+
+.Swiss_TPH1 .menu_vlr li {
+	clear: both;
+}
+
+.Swiss_TPH1 .menu_vlr a {
+	width: 12.5em;
+	height: auto;
+	padding: 0;
+	cursor: hand;
+	overflow: hidden;
+}
+
+.Swiss_TPH1 .menu_vlr ul a {
+	width: 12.5em;
+	height: auto;
+	padding: 0;
+	overflow: hidden;
+}
+
+.Swiss_TPH1 .menu_vlr li:hover>ul {	/* inset 2nd+ submenus, to show off overlapping */
+	top: 5px;
+	left: 100%;
+}
+
+.Swiss_TPH1 .menu_vlr .adxmhoverUL {	/* inset 2nd+ submenus, to show off overlapping */
+	top: 5px;
+	left: 100%;
+}
+
+
+/* vrl - Vertical Right to Left */
+
+
+/* vlr_tree - Vertical Left to Right Tree */
+
+/* styles that are used with javascript */
+	.Swiss_TPH1 .menu_vlr_tree .menu_vlr_tree_openedA .text {
+		font-weight: bold;
+	}
+
+	.Swiss_TPH1 .menu_vlr_tree .menu_vlr_tree_openedUL {
+		display: block; 
+		visibility: visible;
+	}
+	
+	.Swiss_TPH1 .menu_vlr_tree .menu_vlr_tree_closedUL {
+		display: none;
+		visibility: hidden;
+	}
+/* begin  hide/show blocks */
+	.Swiss_TPH1 .menu_vlr_tree .right2 {
+		display: none;
+	}
+/* end hide/show blocks */
+
+.Swiss_TPH1 .menu_vlr_tree a {
+	width: 100%;
+	height: auto;
+	background-color: #353c45;
+	
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul a {
+	background-color: #525a63;
+	
+}
+
+.Swiss_TPH1 .menu_vlr_tree a:hover, .Swiss_TPH1 .menu_vlr_tree li:hover>a {
+	background-color: #353c45;
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr_tree a:hover, .Swiss_TPH1 .menu_vlr_tree .adxmhoverA {		/* li:hover>a selector */
+	background-color: #353c45;
+	
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul a:hover, .Swiss_TPH1 .menu_vlr_tree ul li:hover>a {
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr_tree ul a:hover, .Swiss_TPH1 .menu_vlr_tree ul .adxmhoverA {		/* li:hover>a selector */
+	
+}
+
+.Swiss_TPH1 .menu_vlr_tree .menu_vlr_tree_openedA {
+	background-color: #353c45;
+	
+}
+
+.Swiss_TPH1 .menu_vlr_tree .text {
+	position: relative;
+	height: auto;
+	text-align: center;
+	color: #e3e9f2;
+	width: 100%;
+	padding-top: .2em; padding-bottom: .2em;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul .text {
+	width: auto;
+	text-align: left;
+	margin-left: .3em; margin-right: .3em;
+	display: inline; /* The IE Doubled Float-Margin Bug Fix */
+}
+
+.Swiss_TPH1 .menu_vlr_tree a:hover .text, .Swiss_TPH1 .menu_vlr_tree li:hover>a .text {
+	color: #e3e9f2;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr_tree a:hover .text, .Swiss_TPH1 .menu_vlr_tree .adxmhoverA .text {		/* li:hover>a selector */
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_vlr_tree .menu_vlr_tree_openedA .text {
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_vlr_tree a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr_tree a:hover, .Swiss_TPH1 .menu_vlr_tree li:hover>a {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr_tree a:hover, .Swiss_TPH1 .menu_vlr_tree .adxmhoverA {		/* li:hover>a selector */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr_tree .menu_vlr_tree_openedA {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr_tree a:hover, .Swiss_TPH1 .menu_vlr_tree .adxmhoverA {		/* li:hover>a selector */
+	background-color: #353c45;
+	
+}
+
+.Swiss_TPH1 .menu_vlr_tree, .Swiss_TPH1 .menu_vlr_tree ul li {
+	background: transparent;
+}
+
+.Swiss_TPH1 .menu_vlr_tree li {	/* create borders around each item */
+	border: 0;
+}
+
+/* second level */
+
+/* begin  hide/show blocks */
+	.Swiss_TPH1 .menu_vlr_tree ul ul .right2 {
+		display: none;
+	}
+/* end hide/show blocks */
+
+.Swiss_TPH1 .menu_vlr_tree ul ul li {	/* create borders around each item */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul ul .text {
+	position: relative;
+	height: auto;
+	width: auto;
+	text-align: left;
+	color: #e3e9f2;
+	margin-left: .3em; margin-right: .3em;
+	padding-top: .2em; padding-bottom: .2em;
+	display: inline; /* The IE Doubled Float-Margin Bug Fix */
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul ul a:hover .text, .Swiss_TPH1 .menu_vlr_tree ul ul li:hover>a .text {
+	color: #e3e9f2;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr_tree ul ul a:hover .text, .Swiss_TPH1 .menu_vlr_tree ul ul .adxmhoverA .text {		/* li:hover>a selector */
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul ul a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul ul a:hover, .Swiss_TPH1 .menu_vlr_tree ul ul li:hover>a {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr_tree ul ul a:hover, .Swiss_TPH1 .menu_vlr_tree ul ul .adxmhoverA {		/* li:hover>a selector */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul ul a {
+	width: 100%;
+	height: auto;
+	background-color: #525a63;
+	
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul ul a:hover, .Swiss_TPH1 .menu_vlr_tree ul ul li:hover>a {
+	background-color: #353c45;
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vlr_tree ul ul a:hover, .Swiss_TPH1 .menu_vlr_tree ul ul .adxmhoverA {		/* li:hover>a selector */
+	background-color: #353c45;
+	
+}
+
+/* position of items */
+.Swiss_TPH1 .menu_vlr_tree, .Swiss_TPH1 .menu_vlr_tree ul {
+	width: 12.5em;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul {
+	float: left;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul ul {
+	float: none;
+}
+
+.Swiss_TPH1 .menu_vlr_tree a {
+	width: 12.5em;
+	height: auto;
+	padding: 0;
+	float: left;
+	cursor: hand;
+	overflow: hidden;
+}
+
+.Swiss_TPH1 .menu_vlr_tree ul ul a {
+	width: 12.5em;
+	height: auto;
+	padding: 0;
+	float: left;
+	overflow: hidden;
+}
+
+.Swiss_TPH1 .menu_vlr_tree li {
+	float: left;
+}
+
+/* vrl_tree - Vertical Right to Left Tree */
+
+
+/* vrl - Vertical Right to Left */
+
+/* begin  hide/show blocks */
+	.Swiss_TPH1 .menu_vrl .right2 {
+		display: none;
+	}
+/* end hide/show blocks */
+
+.Swiss_TPH1 .menu_vrl a {
+	width: 100%;
+	height: auto;
+	background-color: #525a63;
+	
+}
+
+.Swiss_TPH1 .menu_vrl a:hover, .Swiss_TPH1 .menu_vrl li:hover>a, .Swiss_TPH1 ul.menu_vrl .selected a {
+	background-color: #353c45;
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vrl a:hover, .Swiss_TPH1 .menu_vrl .adxmhoverA, .Swiss_TPH1 ul.menu_vrl .selected a {		/* li:hover>a selector */
+	background-color: #353c45;
+	
+}
+
+.Swiss_TPH1 .menu_vrl .text {
+	position: relative;
+	height: auto;
+	width: 100%;
+	text-align: center;
+	color: #e3e9f2;
+	padding-top: .2em; padding-bottom: .2em;
+}
+
+.Swiss_TPH1 .menu_vrl a:hover .text, .Swiss_TPH1 .menu_vrl li:hover>a .text, .Swiss_TPH1 ul.menu_vrl .selected a .text {
+	color: #e3e9f2;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vrl a:hover .text, .Swiss_TPH1 .menu_vrl .adxmhoverA .text, .Swiss_TPH1 ul.menu_vrl .selected a .text {		/* li:hover>a selector */
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_vrl a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vrl a:hover, .Swiss_TPH1 .menu_vrl li:hover>a, .Swiss_TPH1 ul.menu_vrl .selected a {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vrl a:hover, .Swiss_TPH1 .menu_vrl .adxmhoverA, .Swiss_TPH1 ul.menu_vrl .selected a {		/* li:hover>a selector */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vrl, .Swiss_TPH1 .menu_vrl ul li {
+	background: transparent;
+}
+
+.Swiss_TPH1 .menu_vrl li {	/* create borders around each item */
+	border: 0;
+}
+
+/* second level */
+
+/* begin  hide/show blocks */
+	.Swiss_TPH1 .menu_vrl ul .right2 {
+		display: none;
+	}
+/* end hide/show blocks */
+
+.Swiss_TPH1 .menu_vrl ul li {	/* create borders around each item */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vrl ul .text, .Swiss_TPH1 ul.menu_vrl .selected ul .text {
+	position: relative;
+	height: auto;
+	width: auto;
+	color: #e3e9f2;
+	text-align: left;
+	margin-left: .3em; margin-right: .3em;
+	padding-top: .2em; padding-bottom: .2em;
+	display: inline; /* The IE Doubled Float-Margin Bug Fix */
+}
+
+.Swiss_TPH1 .menu_vrl ul a:hover .text, .Swiss_TPH1 .menu_vrl ul li:hover>a .text, .Swiss_TPH1 ul.menu_vrl .selected ul a:hover .text, .Swiss_TPH1 ul.menu_vrl .selected ul li:hover>a .text {
+	color: #e3e9f2;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vrl ul a:hover .text, .Swiss_TPH1 .menu_vrl ul .adxmhoverA .text, .Swiss_TPH1 ul.menu_vrl .selected ul a:hover .text, .Swiss_TPH1 ul.menu_vrl .selected ul .adxmhoverA .text {		/* li:hover>a selector */
+	color: #e3e9f2;
+}
+
+.Swiss_TPH1 .menu_vrl ul a, .Swiss_TPH1 ul.menu_vrl .selected ul a {
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vrl ul a:hover, .Swiss_TPH1 .menu_vrl ul li:hover>a, .Swiss_TPH1 ul.menu_vrl .selected ul a:hover, .Swiss_TPH1 ul.menu_vrl .selected ul li:hover>a {
+	border: 0;
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vrl ul a:hover, .Swiss_TPH1 .menu_vrl ul .adxmhoverA, .Swiss_TPH1 ul.menu_vrl .selected ul a:hover, .Swiss_TPH1 ul.menu_vrl .selected ul .adxmhoverA {		/* li:hover>a selector */
+	border: 0;
+}
+
+.Swiss_TPH1 .menu_vrl ul a, .Swiss_TPH1 ul.menu_vrl .selected ul a {
+	width: 100%;
+	height: auto;
+	background-color: #525a63;
+	
+}
+
+.Swiss_TPH1 .menu_vrl ul a:hover, .Swiss_TPH1 .menu_vrl ul li:hover>a, .Swiss_TPH1 ul.menu_vrl .selected ul a:hover, .Swiss_TPH1 ul.menu_vrl .selected ul li:hover>a {
+	background-color: #353c45;
+	
+}
+
+/* <= ie6 */
+.Swiss_TPH1 .menu_vrl ul a:hover, .Swiss_TPH1 .menu_vrl ul .adxmhoverA, .Swiss_TPH1 ul.menu_vrl .selected ul a:hover, .Swiss_TPH1 ul.menu_vrl .selected ul .adxmhoverA {		/* li:hover>a selector */
+	background-color: #353c45;
+	
+}
+
+/* position of items */
+.Swiss_TPH1 .menu_vrl, .Swiss_TPH1 .menu_vrl ul {
+	width: 12.5em;
+}
+
+.Swiss_TPH1 .menu_vrl li {
+	clear: both;
+}
+
+.Swiss_TPH1 .menu_vrl a {
+	width: 12.5em;
+	height: auto;
+	padding: 0;
+	cursor: hand;
+	overflow: hidden;
+}
+
+.Swiss_TPH1 .menu_vrl ul a {
+	width: 12.5em;
+	height: auto;
+	padding: 0;
+	overflow: hidden;
+}
+
+.Swiss_TPH1 .menu_vrl li:hover>ul {	/* inset 2nd+ submenus, to show off overlapping */
+	top: 5px;
+	right: 100%;
+}
+
+.Swiss_TPH1 .menu_vrl .adxmhoverUL {	/* inset 2nd+ submenus, to show off overlapping */
+	top: 5px;
+	right: 100%;
+}
+

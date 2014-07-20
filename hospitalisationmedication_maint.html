@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>medication_maint</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+var medicationhospitalisationATCodeID_all = new Array();
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//DEL      // -------------------------
+//DEL    var AvailableLB = document.getElementById("available_medication");
+//DEL   var LinkedLB = document.getElementById("linked_medication");
+//DEL   for (var i=0; i < AvailableLB.length; i++) {
+//DEL     if (AvailableLB.options[i].selected == true) {
+//DEL         LinkedLB.options[LinkedLB.length] = 
+//DEL         new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+//DEL         AvailableLB.options[i] = null;
+//DEL         i=i-1;
+//DEL     }
+//DEL   }
+//DEL      // -------------------------
+
+//DEL      // -------------------------
+//DEL   var AvailableLB = document.getElementById("available_medication");
+//DEL   var LinkedLB = document.getElementById("linked_medication");
+//DEL   for (var i=0; i < LinkedLB.length; i++) {
+//DEL     if (LinkedLB.options[i].selected == true) {
+//DEL        AvailableLB.options[AvailableLB.length] = 
+//DEL            new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+//DEL        LinkedLB.options[i] = null;
+//DEL        i=i-1;
+//DEL     }
+//DEL   }
+//DEL      // -------------------------
+
+//Date Picker Object Definitions @1-B1505C0E
+
+var medicationhospitalisation_DatePicker_DateMedication = new Object(); 
+medicationhospitalisation_DatePicker_DateMedication.format           = "ShortDate";
+medicationhospitalisation_DatePicker_DateMedication.style            = "Styles/{CCS_Style}/Style.css";
+medicationhospitalisation_DatePicker_DateMedication.relativePathPart = "";
+medicationhospitalisation_DatePicker_DateMedication.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//medicationhospitalisationButton_Delete_OnClick @5-0C635612
+function medicationhospitalisationButton_Delete_OnClick()
+{
+    var result = true;
+//End medicationhospitalisationButton_Delete_OnClick
+
+//Confirmation Message @6-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close medicationhospitalisationButton_Delete_OnClick @5-BC33A33A
+    return result;
+}
+//End Close medicationhospitalisationButton_Delete_OnClick
+
+//_OnLoad @1-9C4F01C0
+function _OnLoad()
+{
+    var result = true;
+//End _OnLoad
+
+//Custom Code @110-2A29BDB7
+    // -------------------------
+ CacheValues('medicationhospitalisationATCodeID',medicationhospitalisationATCodeID_all);
+    // -------------------------
+//End Custom Code
+
+//Close _OnLoad @1-BC33A33A
+    return result;
+}
+//End Close _OnLoad
+
+//medicationhospitalisationButton_Cancel_OnClick @7-24FBBBFA
+function medicationhospitalisationButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End medicationhospitalisationButton_Cancel_OnClick
+
+//bind_events @1-1B04BF50
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("medicationhospitalisationButton_Delete", "click", medicationhospitalisationButton_Delete_OnClick);
+    addEventHandler("", "load", _OnLoad);
+    addEventHandler("medicationhospitalisationButton_Cancel", "click", medicationhospitalisationButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+function CacheValues(selectboxID,Backup)
+{
+    var l =  document.getElementById(selectboxID);
+    for (var i=0; i < l.options.length; i++)
+    {
+              Backup[i] = l.options[i];
+    }
+}
+
+function SearchList(selectboxID,searchTextID,Backup)
+{
+        var l =  document.getElementById(selectboxID);
+        var tb = document.getElementById(searchTextID);
+   
+    l.options.length=0;
+ 
+    if(tb.value == "")
+    {
+      for (var i=0; i < Backup.length; i++)
+      {
+        l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+      }
+    }
+    else{
+ 
+      for (var i=0; i <Backup.length; i++)
+      {
+        if (Backup[i].text.toLowerCase().indexOf(tb.value.toLowerCase()) != -1)
+        {
+          l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+        }
+      }
+    }
+}
+  function ClearSelection(lb)
+  {
+    lb.selectedIndex = -1;
+  }
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record pregnancy_header -->
+<form id="pregnancy_header" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{FirstName}&nbsp;{FamiliyName}&nbsp;({BirthDate})</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_headerPatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header --><br>
+<!-- BEGIN Record pregnancy_header1 -->
+<form id="pregnancy_header1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_header1PatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header1 --></p>
+<p>&nbsp; 
+<!-- BEGIN Record medicationhospitalisation -->
+<form id="medicationhospitalisation" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:AddEditAdministeredMedication}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="testTestCodeID"><label for="medicationhospitalisationDateMedication">{res:Date}</label></label></td> 
+            <td><input id="medicationhospitalisationDateMedication" value="{DateMedication}" maxlength="100" size="8" name="{DateMedication_Name}">
+              <!-- BEGIN DatePicker DatePicker_DateMedication --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="medicationhospitalisationDatePicker_DateMedication"><img id="medicationhospitalisationDatePicker_DateMedication_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_DateMedication --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="testTestDate"><label for="medicationhospitalisationATCodeID">{res:Medication}</label></label></td> 
+            <td>
+              <p align="left"><textarea style="WIDTH: 430px; HEIGHT: 48px" id="medicationhospitalisationTextArea1" cols="41" name="{TextArea1_Name}">{TextArea1}</textarea></p>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="testTestResult"><label for="medicationhospitalisationDosage">{res:Dosage}</label></label></td> 
+            <td><input id="medicationhospitalisationDosage" value="{Dosage}" maxlength="50" size="50" name="{Dosage_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">{res:LastUpdated}&nbsp;{lastmodified}&nbsp;({user})<label for="medicationhospitalisationCurrentUser" style="display: none;">CurrentUser&nbsp; </label><input id="medicationhospitalisationHospitalisationID" value="{HospitalisationID}" type="hidden" name="{HospitalisationID_Name}">
+              <!-- BEGIN Button Button_Insert --><input id="medicationhospitalisationButton_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="medicationhospitalisationButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input id="medicationhospitalisationButton_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input id="medicationhospitalisationButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --><input id="medicationhospitalisationCurrentUser" value="{CurrentUser}" type="hidden" name="{CurrentUser_Name}"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record medicationhospitalisation --><br>
+</p>
+</body>
+</html>

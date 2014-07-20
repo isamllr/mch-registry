@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Hospitalisation Test</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-B936AABF
+
+var testhospitalisation_DatePicker_TestDate = new Object(); 
+testhospitalisation_DatePicker_TestDate.format           = "ShortDate";
+testhospitalisation_DatePicker_TestDate.style            = "Styles/{CCS_Style}/Style.css";
+testhospitalisation_DatePicker_TestDate.relativePathPart = "";
+testhospitalisation_DatePicker_TestDate.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//DEL      // -------------------------
+//DEL          ProfessionShowHide()
+//DEL      // -------------------------
+
+//testhospitalisationButton_Delete_OnClick @56-58A8B959
+function testhospitalisationButton_Delete_OnClick()
+{
+    var result = true;
+//End testhospitalisationButton_Delete_OnClick
+
+//Confirmation Message @57-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close testhospitalisationButton_Delete_OnClick @56-BC33A33A
+    return result;
+}
+//End Close testhospitalisationButton_Delete_OnClick
+
+//testhospitalisationButton_Cancel_OnClick @58-7BC9907D
+function testhospitalisationButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End testhospitalisationButton_Cancel_OnClick
+
+//bind_events @1-1B343308
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("testhospitalisationButton_Delete", "click", testhospitalisationButton_Delete_OnClick);
+    addEventHandler("testhospitalisationButton_Cancel", "click", testhospitalisationButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record pregnancy_header -->
+<form id="pregnancy_header" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{FirstName}&nbsp;{FamiliyName}&nbsp;({BirthDate})</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_headerPatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header --></p>
+<p>
+<!-- BEGIN Record pregnancy_header1 -->
+<form id="pregnancy_header1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_header1PatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header1 --></p>
+<p>
+<!-- BEGIN Record testhospitalisation -->
+<form id="testhospitalisation" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:testhospitalisation} {res:CCS_RecordFormSuffix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="testhospitalisationTestDate">{res:TestDate}</label></td> 
+            <td><input id="testhospitalisationTestDate" value="{TestDate}" maxlength="100" size="8" name="{TestDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_TestDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="testhospitalisationDatePicker_TestDate"><img id="testhospitalisationDatePicker_TestDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_TestDate --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="testhospitalisationTestCodeID">{res:test}</label></td> 
+            <td>
+              <select id="testhospitalisationTestCodeID" name="{TestCodeID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {TestCodeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:TestResultNormal}</td> 
+            <td>
+              <!-- BEGIN RadioButton TestResultNormal --><input id="testhospitalisationTestResultNormal_{TestResultNormal:optionNumber}" value="{Value}" type="radio" name="{TestResultNormal_Name}" {Check}><label for="testhospitalisationTestResultNormal_{TestResultNormal:optionNumber}">{Description}</label><!-- END RadioButton TestResultNormal --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="testhospitalisationTestResultDetails">{res:TestResultDetails}</label></td> 
+            <td><input id="testhospitalisationTestResultDetails" value="{TestResultDetails}" maxlength="50" size="50" name="{TestResultDetails_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right"><input id="testhospitalisationHospitalisationID" value="{HospitalisationID}" type="hidden" name="{HospitalisationID_Name}">
+              <!-- BEGIN Button Button_Insert --><input id="testhospitalisationButton_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="testhospitalisationButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input id="testhospitalisationButton_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input id="testhospitalisationButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+</p>
+<!-- END Record testhospitalisation -->
+</body>
+</html>

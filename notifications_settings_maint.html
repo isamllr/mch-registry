@@ -1,0 +1,766 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:notifications}</title>
+
+<link rel="stylesheet" href="pickadate.js-3.5.2/lib/themes/default.css" id="theme_base">
+<link rel="stylesheet" href="pickadate.js-3.5.2/lib/themes/default.date.css" id="theme_date">
+<link rel="stylesheet" href="pickadate.js-3.5.2/lib/themes/default.time.css" id="theme_time">
+
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Include User Scripts @1-B93D65AC
+</script>
+<script language="JavaScript" src="js/pt/prototype.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include User Scripts
+function getQueryVariable(variable){
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return("0");
+	}
+//countries_districts_facil_OnLoad @88-28299435
+function countries_districts_facil_OnLoad(form)
+{
+    var result = true;
+//End countries_districts_facil_OnLoad
+
+//Custom Code @522-2A29BDB7
+    // -------------------------
+        // -------------------------
+    var control1 = document.getElementById("Recommendations");
+	var control2 = document.getElementById("Reminders");
+	var control3 = document.getElementById("PatientDischarged");
+	var control4 = document.getElementById("HighRiskPregnancySummaries");
+	var control5 = document.getElementById("HighRiskReminders");
+	var control6 = document.getElementById("Unsubscribe");
+	var control7 = document.getElementById("Subscribe");
+	var control8 = document.getElementById("ValidInputForNotifications");
+
+    var paramNotificationID = getQueryVariable("FacilityID");
+
+    if (!(paramNotificationID == "0")) {
+		control1.style.display = "";
+		control2.style.display = "";
+		control3.style.display = "";
+		control4.style.display = "";
+		control5.style.display = "";
+		control6.style.display = "";
+		control7.style.display = "";
+		control8.style.display = "";
+    } else {
+		control1.style.display = "none";
+		control2.style.display = "none";
+		control3.style.display = "none";
+		control4.style.display = "none";
+		control5.style.display = "none";
+		control6.style.display = "none";
+		control7.style.display = "none";
+		control8.style.display = "none";
+    }
+    // -------------------------
+//End Custom Code
+
+//Close countries_districts_facil_OnLoad @88-BC33A33A
+    return result;
+}
+//End Close countries_districts_facil_OnLoad
+
+//RecommendationsButton_Delete_OnClick @259-C2267678
+function RecommendationsButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End RecommendationsButton_Delete_OnClick
+
+//RemindersButton_Delete_OnClick @303-6E8FFD32
+function RemindersButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End RemindersButton_Delete_OnClick
+
+//PatientDischargedButton_Delete_OnClick @377-AD050D78
+function PatientDischargedButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End PatientDischargedButton_Delete_OnClick
+
+//HighRiskPregnancySummariesButton_Delete_OnClick @414-AE88FBEA
+function HighRiskPregnancySummariesButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End HighRiskPregnancySummariesButton_Delete_OnClick
+
+//HighRiskRemindersButton_Delete_OnClick @340-80AB9F4C
+function HighRiskRemindersButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End HighRiskRemindersButton_Delete_OnClick
+
+//UnsubscribeButton_Delete_OnClick @452-9AB0E5C8
+function UnsubscribeButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End UnsubscribeButton_Delete_OnClick
+
+//SubscribeButton_Delete_OnClick @488-84E8FFC5
+function SubscribeButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End SubscribeButton_Delete_OnClick
+
+//countries_districts_facils_province_ProvinceIDPTDependentListBox1 Start @153-B3236592
+function countries_districts_facils_province_ProvinceIDPTDependentListBox1_start(sender) {
+    var dependentElement = $("countries_districts_facils_province_ProvinceID" + sender.id.substring(46));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/ProvinceID_from_Countries_PTDependentListBox.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End countries_districts_facils_province_ProvinceIDPTDependentListBox1 Start
+
+//countries_districts_facils_districts_DistrictIDPTDependentListBox2 Start @154-570C8752
+function countries_districts_facils_districts_DistrictIDPTDependentListBox2_start(sender) {
+    var dependentElement = $("countries_districts_facils_districts_DistrictID" + sender.id.substring(46));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/DistrictID_from_Province_PTDependentListBox.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End countries_districts_facils_districts_DistrictIDPTDependentListBox2 Start
+
+//bind_events @1-BFE136E7
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("countries_districts_facils_countries_CountryID", "change", countries_districts_facils_province_ProvinceIDPTDependentListBox1_start);
+    addEventHandler("countries_districts_facils_countries_CountryID", "load", countries_districts_facils_province_ProvinceIDPTDependentListBox1_start);
+    addEventHandler("countries_districts_facils_province_ProvinceID", "change", countries_districts_facils_districts_DistrictIDPTDependentListBox2_start);
+    addEventHandler("countries_districts_facils_province_ProvinceID", "load", countries_districts_facils_districts_DistrictIDPTDependentListBox2_start);
+    addEventHandler("countries_districts_facil", "load", countries_districts_facil_OnLoad);
+    addEventHandler("RecommendationsButton_Delete", "click", RecommendationsButton_Delete_OnClick);
+    addEventHandler("RemindersButton_Delete", "click", RemindersButton_Delete_OnClick);
+    addEventHandler("PatientDischargedButton_Delete", "click", PatientDischargedButton_Delete_OnClick);
+    addEventHandler("HighRiskPregnancySummariesButton_Delete", "click", HighRiskPregnancySummariesButton_Delete_OnClick);
+    addEventHandler("HighRiskRemindersButton_Delete", "click", HighRiskRemindersButton_Delete_OnClick);
+    addEventHandler("UnsubscribeButton_Delete", "click", UnsubscribeButton_Delete_OnClick);
+    addEventHandler("SubscribeButton_Delete", "click", SubscribeButton_Delete_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+</head>
+<body>
+{topmenu}<br>
+<table style="WIDTH: 10%" cellspacing="5" border="0">
+  <tr valign="top">
+    <td valign="top" align="left">
+      <!-- BEGIN Record countries_districts_facil -->
+      <form id="countries_districts_facil" method="post" name="{HTMLFormName}" action="{Action}">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Header" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                  <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp;{res:Search_Facilties} {res:CCS_SearchFormSuffix}</strong></td> 
+                  <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                </tr>
+ 
+              </table>
+ 
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facils_countries_CountryID">{res:countriesCountryID}</label></td> 
+                  <td>
+                    <select id="countries_districts_facils_countries_CountryID" name="{s_countries_CountryID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+ {s_countries_CountryID_Options} 
+                    </select>
+ </td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facils_province_ProvinceID">{res:provinceProvinceID}</label></td> 
+                  <td>
+                    <!-- BEGIN ListBox s_province_ProvinceID -->
+                    <select id="countries_districts_facils_province_ProvinceID" name="{s_province_ProvinceID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+ {s_province_ProvinceID_Options} 
+                    </select>
+ <!-- END ListBox s_province_ProvinceID --></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facils_districts_DistrictID">{res:districtsDistrictID}</label></td> 
+                  <td>
+                    <!-- BEGIN ListBox s_districts_DistrictID -->
+                    <select id="countries_districts_facils_districts_DistrictID" name="{s_districts_DistrictID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+ {s_districts_DistrictID_Options} 
+                    </select>
+ <!-- END ListBox s_districts_DistrictID --></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facils_FacilityName">{res:FacilityName}</label></td> 
+                  <td><input id="countries_districts_facils_FacilityName" maxlength="250" size="50" value="{s_FacilityName}" name="{s_FacilityName_Name}"></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="countries_districts_facilfacilities_countries_provPageSize">{res:CCS_RecPerPage}</label></td> 
+                  <td>
+                    <select id="countries_districts_facilfacilities_countries_provPageSize" name="{facilities_countries_provPageSize_Name}">
+                      {facilities_countries_provPageSize_Options} 
+                    </select>
+ </td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td colspan="2" align="right">
+                    <!-- BEGIN Button Button_DoSearch --><input id="countries_districts_facilButton_DoSearch" class="Button" alt="{res:CCS_Search}" type="submit" value="{res:CCS_Search}" name="{Button_Name}"><!-- END Button Button_DoSearch --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ &nbsp;<!-- END Record countries_districts_facil --></td> 
+    <td>&nbsp;</td> 
+  </tr>
+ 
+  <tr valign="top">
+    <td valign="top" align="left">&nbsp; 
+      <!-- BEGIN Grid countries_districts_facil1 -->
+      <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>{res:CCS_GridFormPrefix} {res:Search_Facilties}{res:CCS_GridFormSuffix} </strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <tr class="Caption">
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_FacilityName --><a href="{Sort_URL}" id="countries_districts_facil1Sorter_FacilityName">{res:FacilityName}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_FacilityName --></th>
+ 
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_DistrictName --><a href="{Sort_URL}" id="countries_districts_facil1Sorter_DistrictName">{res:DistrictName}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_DistrictName --></th>
+ 
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_ProvinceName --><a href="{Sort_URL}" id="countries_districts_facil1Sorter_ProvinceName">{res:ProvinceName}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_ProvinceName --></th>
+ 
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_Country --><a href="{Sort_URL}" id="countries_districts_facil1Sorter_Country">{res:Country}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_Country --></th>
+ 
+              </tr>
+ 
+              <!-- BEGIN Row -->
+              <tr class="Row">
+                <td><a href="{FacilityName_Src}" id="countries_districts_facil1FacilityName_{countries_districts_facil1:rowNumber}">{FacilityName}</a>&nbsp;</td> 
+                <td>{DistrictName}&nbsp;</td> 
+                <td>{ProvinceName}&nbsp;</td> 
+                <td>{Country}&nbsp;</td> 
+              </tr>
+ <!-- END Row -->
+              <!-- BEGIN NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="4">{res:CCS_NoRecords}</td> 
+              </tr>
+ <!-- END NoRecords -->
+              <tr class="Footer">
+                <td colspan="4">&nbsp; 
+                  <!-- BEGIN Navigator Navigator -->
+                  <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+                  <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+                    <option selected value="">-</option>
+ {PageSize_Options} 
+                  </select>
+ 
+                  <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+                  <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+                  <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+                  <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+                  <!-- BEGIN Pages -->
+                  <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a><!-- END Page_On -->
+                  <!-- BEGIN Page_Off -->{Page_Number}<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+                  <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+                  <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+                  <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+                  <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off -->&nbsp;<!-- END Navigator Navigator -->&nbsp;</td> 
+              </tr>
+ 
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ <!-- END Grid countries_districts_facil1 -->
+      <?php echo $days_to_keep_history>
+      <p></p>
+ </td> 
+    <td><label id="ValidInputForNotifications" for="RemindersDaysBeforeOrAfter">{res:ValidInputForNotifications}</label>
+      <br/>
+      <!-- BEGIN Record Recommendations -->
+      <form id="Recommendations" method="post" name="{HTMLFormName}" action="{Action}" style="display:none;">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th">{res:Recommendations}</td> 
+                  <td><input id="RecommendationsEnabled" type="checkbox" value="1" name="{Enabled_Name}" {Enabled}></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="RecommendationsTimeToSend">{res:TimeToSend}</label></td> 
+                  <td><input id="RecommendationsTimeToSend" maxlength="100" size="8" value="{TimeToSend}" name="{TimeToSend_Name}"></td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td colspan="2" align="right">
+                    <!-- BEGIN Button Button_Insert --><input id="RecommendationsButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                    <!-- BEGIN Button Button_Update --><input id="RecommendationsButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                    <!-- BEGIN Button Button_Delete --><input id="RecommendationsButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ <!-- END Record Recommendations --><br>
+      
+<!-- BEGIN Record Reminders -->
+<form id="Reminders" method="post" name="{HTMLFormName}" action="{Action}" style="display:none;">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th">{res:Reminders}</td> 
+            <td><input id="RemindersEnabled" type="checkbox" value="1" name="{Enabled_Name}" {Enabled}></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="RemindersDaysBeforeOrAfter">{res:RemindersDaysInAdv}</label></td> 
+            <td><input id="RemindersDaysBeforeOrAfter" maxlength="10" size="10" value="{DaysBeforeOrAfter}" name="{DaysBeforeOrAfter_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="RemindersTimeToSend">{res:TimeToSend}</label></td> 
+            <td>
+              <!-- BEGIN TextBox TimeToSend --><input id="RemindersTimeToSend" maxlength="100" size="8" value="{TimeToSend}" name="{TimeToSend_Name}"><!-- END TextBox TimeToSend --></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_Insert --><input id="RemindersButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="RemindersButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input id="RemindersButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+ 
+</form>
+ <!-- END Record Reminders --><br>
+      <!-- BEGIN Record HighRiskReminders -->
+      <form id="HighRiskReminders" method="post" name="{HTMLFormName}" action="{Action}" style="display:none;">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th">{res:RemindersHighRisk}</td> 
+                  <td><input id="HighRiskRemindersEnabled" type="checkbox" value="1" name="{Enabled_Name}" {Enabled}></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="HighRiskRemindersDaysBeforeOrAfter">{res:RemindersDaysInAdv}</label></td> 
+                  <td><input id="HighRiskRemindersDaysBeforeOrAfter" maxlength="10" size="10" value="{DaysBeforeOrAfter}" name="{DaysBeforeOrAfter_Name}"></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="HighRiskRemindersTimeToSend">{res:TimeToSend}</label></td> 
+                  <td><input id="HighRiskRemindersTimeToSend" maxlength="100" size="8" value="{TimeToSend}" name="{TimeToSend_Name}"></td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td colspan="2" align="right">
+                    <!-- BEGIN Button Button_Insert --><input id="HighRiskRemindersButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                    <!-- BEGIN Button Button_Update --><input id="HighRiskRemindersButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                    <!-- BEGIN Button Button_Delete --><input id="HighRiskRemindersButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ <!-- END Record HighRiskReminders --><br>
+      <!-- BEGIN Record PatientDischarged -->
+      <form id="PatientDischarged" method="post" name="{HTMLFormName}" action="{Action}" style="display:none;">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th">{res:PatientDischargedReferral}</td> 
+                  <td><input id="PatientDischargedEnabled" type="checkbox" value="1" name="{Enabled_Name}" {Enabled}></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="PatientDischargedDaysBeforeOrAfter">{res:PatientDischargedReferralDaysAfter}</label></td> 
+                  <td><input id="PatientDischargedDaysBeforeOrAfter" maxlength="10" size="10" value="{DaysBeforeOrAfter}" name="{DaysBeforeOrAfter_Name}"></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="PatientDischargedTimeToSend">{res:TimeToSend}</label></td> 
+                  <td><input id="PatientDischargedTimeToSend" maxlength="100" size="8" value="{TimeToSend}" name="{TimeToSend_Name}"></td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td colspan="2" align="right">
+                    <!-- BEGIN Button Button_Insert --><input id="PatientDischargedButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                    <!-- BEGIN Button Button_Update --><input id="PatientDischargedButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                    <!-- BEGIN Button Button_Delete --><input id="PatientDischargedButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ <!-- END Record PatientDischarged --><br>
+      <!-- BEGIN Record HighRiskPregnancySummaries -->
+      <form id="HighRiskPregnancySummaries" method="post" name="{HTMLFormName}" action="{Action}" style="display:none;">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th">{res:HighRiskPregnanciesSummary}</td> 
+                  <td><input id="HighRiskPregnancySummariesEnabled" type="checkbox" value="1" name="{Enabled_Name}" {Enabled}></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="HighRiskPregnancySummariesDaysBeforeOrAfter">{res:HighRiskPregnanciesSummaryDayOfMonth}</label></td> 
+                  <td><input id="HighRiskPregnancySummariesDaysBeforeOrAfter" maxlength="10" size="10" value="{DaysBeforeOrAfter}" name="{DaysBeforeOrAfter_Name}"></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="HighRiskPregnancySummariesTimeToSend">{res:TimeToSend}</label></td> 
+                  <td><input id="HighRiskPregnancySummariesTimeToSend" maxlength="100" size="8" value="{TimeToSend}" name="{TimeToSend_Name}"></td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td colspan="2" align="right">
+                    <!-- BEGIN Button Button_Insert --><input id="HighRiskPregnancySummariesButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                    <!-- BEGIN Button Button_Update --><input id="HighRiskPregnancySummariesButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                    <!-- BEGIN Button Button_Delete --><input id="HighRiskPregnancySummariesButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ <!-- END Record HighRiskPregnancySummaries -->
+      <p></p>
+ 
+      <!-- BEGIN Record Subscribe -->
+      <form id="Subscribe" method="post" name="{HTMLFormName}" action="{Action}" style="display:none;">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th">{res:Subscribe}</td> 
+                  <td><input id="SubscribeEnabled" type="checkbox" value="1" name="{Enabled_Name}" {Enabled}></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="SubscribeDaysBeforeOrAfter">{res:SubscribeDaysAfter}</label></td> 
+                  <td><input id="SubscribeDaysBeforeOrAfter" maxlength="10" size="10" value="{DaysBeforeOrAfter}" name="{DaysBeforeOrAfter_Name}"></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="SubscribeTimeToSend">{res:TimeToSend}</label></td> 
+                  <td><input id="SubscribeTimeToSend" maxlength="100" size="8" value="{TimeToSend}" name="{TimeToSend_Name}"></td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td colspan="2" align="right">
+                    <!-- BEGIN Button Button_Insert --><input id="SubscribeButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                    <!-- BEGIN Button Button_Update --><input id="SubscribeButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                    <!-- BEGIN Button Button_Delete --><input id="SubscribeButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ <!-- END Record Subscribe --><br>
+      <!-- BEGIN Record Unsubscribe -->
+      <form id="Unsubscribe" method="post" name="{HTMLFormName}" action="{Action}" style="display:none;">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th">{res:Unsubscribe}</td> 
+                  <td><input id="UnsubscribeEnabled" type="checkbox" value="1" name="{Enabled_Name}" {Enabled}></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="UnsubscribeDaysBeforeOrAfter">{res:UnsubscribeDaysAfter}</label></td> 
+                  <td><input id="UnsubscribeDaysBeforeOrAfter" maxlength="10" size="10" value="{DaysBeforeOrAfter}" name="{DaysBeforeOrAfter_Name}"></td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="UnsubscribeTimeToSend">{res:TimeToSend}</label></td> 
+                  <td><input id="UnsubscribeTimeToSend" class="timebox" maxlength="100" size="8" value="{TimeToSend}" name="{TimeToSend_Name}"></td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td colspan="2" align="right">
+                    <!-- BEGIN Button Button_Insert --><input id="UnsubscribeButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                    <!-- BEGIN Button Button_Update --><input id="UnsubscribeButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                    <!-- BEGIN Button Button_Delete --><input id="UnsubscribeButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ <!-- END Record Unsubscribe --></td> 
+  </tr>
+</table>
+<br>
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>window.jQuery||document.write('<script src="tests/jquery.2.0.0.js"><\/script>')</script>
+<script src="pickadate.js-3.5.2/lib/picker.js"></script>
+<script src="pickadate.js-3.5.2/lib/picker.date.js"></script>
+<script src="pickadate.js-3.5.2/lib/picker.time.js"></script>
+<script src="pickadate.js-3.5.2/lib/legacy.js"></script>
+<script type="text/javascript">
+     var $j = jQuery.noConflict();
+</script>
+<script>
+$j(function(){
+	$j('#RecommendationsTimeToSend').pickatime({
+	format: 'HH:i',
+	formatSubmit: 'HH:i',
+	min: [6,00],
+	max: [22,00],
+	interval: 30
+	})
+}); 
+
+$j(function(){
+	$j('#RemindersTimeToSend').pickatime({
+	format: 'HH:i',
+	formatSubmit: 'HH:i',
+	min: [6,00],
+	max: [22,00],
+	interval: 30
+	})
+});
+
+$j(function(){
+	$j('#HighRiskRemindersTimeToSend').pickatime({
+	format: 'HH:i',
+	formatSubmit: 'HH:i',
+	min: [6,00],
+	max: [22,00],
+	interval: 30
+	})
+}); 
+
+$j(function(){
+	$j('#SubscribeTimeToSend').pickatime({
+	format: 'HH:i',
+	formatSubmit: 'HH:i',
+	min: [6,00],
+	max: [22,00],
+	interval: 30
+	})
+}); 
+
+$j(function(){
+	$j('#UnsubscribeTimeToSend').pickatime({
+	format: 'HH:i',
+	formatSubmit: 'HH:i',
+	min: [6,00],
+	max: [22,00],
+	interval: 30
+	})
+}); 
+
+$j(function(){
+	$j('#HighRiskPregnancySummariesTimeToSend').pickatime({
+	format: 'HH:i',
+	formatSubmit: 'HH:i',
+	min: [6,00],
+	max: [22,00],
+	interval: 30
+	})
+}); 
+
+$j(function(){
+	$j('#PatientDischargedTimeToSend').pickatime({
+	format: 'HH:i',
+	formatSubmit: 'HH:i',
+	min: [6,00],
+	max: [22,00],
+	interval: 30
+	})
+}); 
+
+</script>
+</body>
+</html>

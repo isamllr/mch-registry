@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:districts}</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Include User Scripts @1-B93D65AC
+</script>
+<script language="JavaScript" src="js/pt/prototype.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include User Scripts
+
+//districtsEditButton_Delete_OnClick @62-81624F8F
+function districtsEditButton_Delete_OnClick()
+{
+    var result = true;
+//End districtsEditButton_Delete_OnClick
+
+//Confirmation Message @63-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close districtsEditButton_Delete_OnClick @62-BC33A33A
+    return result;
+}
+//End Close districtsEditButton_Delete_OnClick
+
+//districtsEditButton_Cancel_OnClick @64-788C3821
+function districtsEditButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End districtsEditButton_Cancel_OnClick
+
+//districtsEditProvinceIDPTDependentListBox1 Start @74-2CF56AA1
+function districtsEditProvinceIDPTDependentListBox1_start(sender) {
+    var dependentElement = $("districtsEditProvinceID" + sender.id.substring(22));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/ProvinceID_from_Countries_PTDependentListBox.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End districtsEditProvinceIDPTDependentListBox1 Start
+
+//bind_events @1-DA1F320F
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("districtsEditCountryID", "change", districtsEditProvinceIDPTDependentListBox1_start);
+    addEventHandler("districtsEditCountryID", "load", districtsEditProvinceIDPTDependentListBox1_start);
+    addEventHandler("districtsEditButton_Delete", "click", districtsEditButton_Delete_OnClick);
+    addEventHandler("districtsEditButton_Cancel", "click", districtsEditButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link href="Styles/{CCS_Style}/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p>{topmenu}</p>
+<br>
+&nbsp; 
+<table style="WIDTH: 10%" cellspacing="5" align="left" border="0">
+  <tr valign="top">
+    <td>
+      <!-- BEGIN Record districtsSearch -->
+      <form id="districtsSearch" name="{HTMLFormName}" action="{Action}" method="post">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Header" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td class="HeaderLeft"><img alt="" src="Styles/{CCS_Style}/Images/Spacer.gif" border="0"></td> 
+                  <td class="th"><strong>{res:CCS_SearchFormPrefix} {res:districts} {res:CCS_SearchFormSuffix}</strong></td> 
+                  <td class="HeaderRight"><img alt="" src="Styles/{CCS_Style}/Images/Spacer.gif" border="0"></td> 
+                </tr>
+ 
+              </table>
+ 
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th"><label for="districtsSearchs_ProvinceID">{res:ProvinceID}</label></td> 
+                  <td>
+                    <select id="districtsSearchs_ProvinceID" name="{s_ProvinceID_Name}">
+                      <option value="" selected>{res:CCS_SelectValue}</option>
+ {s_ProvinceID_Options} 
+                    </select>
+ </td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="districtsSearchs_DistrictName">{res:DistrictName}</label></td> 
+                  <td><input id="districtsSearchs_DistrictName" maxlength="250" value="{s_DistrictName}" name="{s_DistrictName_Name}"></td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td align="right" colspan="2">
+                    <!-- BEGIN Button Button_DoSearch --><input class="Button" id="districtsSearchButton_DoSearch" type="submit" alt="{res:CCS_Search}" value="{res:CCS_Search}" name="{Button_Name}"><!-- END Button Button_DoSearch --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ &nbsp;<!-- END Record districtsSearch -->&nbsp;&nbsp;</td> 
+    <td>&nbsp;</td> 
+  </tr>
+ 
+  <tr valign="top">
+    <td>
+      <!-- BEGIN Grid districts -->
+      <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td class="HeaderLeft"><img alt="" src="Styles/{CCS_Style}/Images/Spacer.gif" border="0"></td> 
+                <td class="th"><strong>{res:CCS_GridFormPrefix} {res:districts} {res:CCS_GridFormSuffix} </strong></td> 
+                <td class="HeaderRight"><img alt="" src="Styles/{CCS_Style}/Images/Spacer.gif" border="0"></td> 
+              </tr>
+ 
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <tr class="Row">
+                <td colspan="2">{res:CCS_TotalRecords}&nbsp;{districts_TotalRecords}</td> 
+              </tr>
+ 
+              <tr class="Caption">
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_DistrictName --><a href="{Sort_URL}" id="districtsSorter_DistrictName">{res:DistrictName}</a> 
+                <!-- BEGIN Asc_On --><img alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif" border="0"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif" border="0"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_DistrictName --></th>
+ 
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_ProvinceID --><a href="{Sort_URL}" id="districtsSorter_ProvinceID">{res:ProvinceID}</a> 
+                <!-- BEGIN Asc_On --><img alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif" border="0"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif" border="0"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_ProvinceID --></th>
+ 
+              </tr>
+ 
+              <!-- BEGIN Row -->
+              <tr class="Row">
+                <td><a href="{DistrictName_Src}" id="districtsDistrictName_{districts:rowNumber}">{DistrictName}</a>&nbsp;</td> 
+                <td style="TEXT-ALIGN: right">{ProvinceID}&nbsp;</td> 
+              </tr>
+ <!-- END Row -->
+              <!-- BEGIN NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="2">{res:CCS_NoRecords}</td> 
+              </tr>
+ <!-- END NoRecords -->
+              <tr class="Footer">
+                <td colspan="2"><a href="{districts_Insert_Src}" id="districtsdistricts_Insert">{res:CCS_InsertLink}</a>&nbsp; 
+                  
+<!-- BEGIN Navigator Navigator -->
+<!-- BEGIN Page_Parameter --><input type="hidden" name="{Name}" value="{Value}"><!-- END Page_Parameter -->Per page:
+<select name="{FormName}PageSize" onchange="CCChangeSize(this, '{FormName}')">
+  <option value="">-</option>
+  {PageSize_Options}
+</select>
+ 
+<!-- BEGIN First_On --><a href="{First_URL}"><img border="0" src="Styles/{CCS_Style}/Images/First.gif" alt="{First_URL}"></a> <!-- END First_On -->
+<!-- BEGIN First_Off --><img border="0" src="Styles/{CCS_Style}/Images/FirstOff.gif" alt="{First_URL}"><!-- END First_Off -->
+<!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" src="Styles/{CCS_Style}/Images/Prev.gif" alt="{Prev_URL}"></a> <!-- END Prev_On -->
+<!-- BEGIN Prev_Off --><img border="0" src="Styles/{CCS_Style}/Images/PrevOff.gif" alt="{Prev_URL}"><!-- END Prev_Off -->&nbsp;
+<!-- BEGIN Pages -->
+<!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+<!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+<!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" src="Styles/{CCS_Style}/Images/Next.gif" alt="{Next_URL}"></a> <!-- END Next_On -->
+<!-- BEGIN Next_Off --><img border="0" src="Styles/{CCS_Style}/Images/NextOff.gif" alt="{Next_URL}"><!-- END Next_Off -->
+<!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" src="Styles/{CCS_Style}/Images/Last.gif" alt="{Last_URL}"></a> <!-- END Last_On -->
+<!-- BEGIN Last_Off --><img border="0" src="Styles/{CCS_Style}/Images/LastOff.gif" alt="{Last_URL}"><!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td> 
+              </tr>
+ 
+            </table>
+ </td> 
+        </tr>
+ 
+      </table>
+ &nbsp;<!-- END Grid districts -->&nbsp;&nbsp;</td> 
+    <td>
+      <!-- BEGIN Record districtsEdit -->
+      <form id="districtsEdit" name="{HTMLFormName}" action="{Action}" method="post">
+        <table cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td valign="top">
+              <table class="Header" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td class="HeaderLeft"><img alt="" src="Styles/{CCS_Style}/Images/Spacer.gif" border="0"></td> 
+                  <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:districts} {res:CCS_RecordFormSuffix}</strong></td> 
+                  <td class="HeaderRight"><img alt="" src="Styles/{CCS_Style}/Images/Spacer.gif" border="0"></td> 
+                </tr>
+ 
+              </table>
+ 
+              <table class="Record" cellspacing="0" cellpadding="0">
+                <!-- BEGIN Error -->
+                <tr class="Error">
+                  <td colspan="2">{Error}</td> 
+                </tr>
+ <!-- END Error -->
+                <tr class="Controls">
+                  <td class="th"><label for="facilitiesProvinceID">{res:CountryID}</label>&nbsp;</td> 
+                  <td>
+                    <select id="districtsEditCountryID" name="{CountryID_Name}">
+                      <option value="" selected>{res:CCS_SelectValue}</option>
+ {CountryID_Options} 
+                    </select>
+ </td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="districtsEditProvinceID">{res:ProvinceID}</label></td> 
+                  <td>
+                    <select id="districtsEditProvinceID" name="{ProvinceID_Name}">
+                      <option value="" selected>{res:CCS_SelectValue}</option>
+ {ProvinceID_Options} 
+                    </select>
+ </td> 
+                </tr>
+ 
+                <tr class="Controls">
+                  <td class="th"><label for="districtsEditDistrictName">{res:DistrictName}</label></td> 
+                  <td><input id="districtsEditDistrictName" maxlength="250" size="50" value="{DistrictName}" name="{DistrictName_Name}"></td> 
+                </tr>
+ 
+                <tr class="Bottom">
+                  <td align="right" colspan="2">
+                    <!-- BEGIN Button Button_Insert --><input class="Button" id="districtsEditButton_Insert" type="submit" alt="{res:CCS_Insert}" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                    <!-- BEGIN Button Button_Update --><input class="Button" id="districtsEditButton_Update" type="submit" alt="{res:CCS_Update}" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                    <!-- BEGIN Button Button_Delete --><input class="Button" id="districtsEditButton_Delete" type="submit" alt="{res:CCS_Delete}" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete -->
+                    <!-- BEGIN Button Button_Cancel --><input class="Button" id="districtsEditButton_Cancel" type="submit" alt="{res:CCS_Cancel}" value="{res:CCS_Cancel}" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+                </tr>
+ 
+              </table>
+ </td> 
+          </tr>
+ 
+        </table>
+ 
+      </form>
+ &nbsp;<!-- END Record districtsEdit -->&nbsp;&nbsp;</td> 
+  </tr>
+</table>
+<br>
+<br>
+</body>
+</html>

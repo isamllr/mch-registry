@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:employees}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+<!--<link href="Styles/{CCS_Style}/Style_doctype.css" type="text/css" rel="stylesheet">-->
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+</head>
+<body>
+<p>{topmenu}</p>
+<p>&nbsp;</p>
+<!-- BEGIN Record employeesSearch -->
+<form id="employeesSearch" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix} {res:employees} {res:CCS_SearchFormSuffix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <font size="2">
+          <!-- BEGIN Error --></font> 
+          <tr class="Error">
+            <td colspan="3"><font size="2">{Error}</font></td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employeesSearchs_FirstName">{res:FirstName}</label></td> 
+            <td><label for="employeesSearchs_LastName">{res:LastName}</label></td> 
+            <td><label for="employeesSearchs_Position">{res:Position}</label>&nbsp;&nbsp;&nbsp; </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><input id="employeesSearchs_FirstName" value="{s_FirstName}" maxlength="100" size="25" name="{s_FirstName_Name}"></td> 
+            <td><input id="employeesSearchs_LastName" value="{s_LastName}" maxlength="100" size="25" name="{s_LastName_Name}"></td> 
+            <td>
+              <select id="employeesSearchs_Position" name="{s_Position_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {s_Position_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeesSearchs_FacilityID">{res:FacilityID}</label> </td> 
+            <td><label for="employeesSearchdepartment_DeptID">{res:DepartmentDesc}</label>&nbsp;&nbsp;</td> 
+            <td></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">
+              <select id="employeesSearchs_FacilityID" name="{s_FacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {s_FacilityID_Options}
+              </select>
+ </td> 
+            <td>
+              <select id="employeesSearchdepartment_DeptID" name="{department_DeptID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {department_DeptID_Options}
+              </select>
+ </td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="3" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="employeesSearchButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+&nbsp;<!-- END Record employeesSearch -->
+<!-- BEGIN Grid employees -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_GridFormPrefix} {res:employees} {res:CCS_GridFormSuffix}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_FirstName --><a href="{Sort_URL}" id="employeesSorter_FirstName">{res:FirstName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_FirstName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_LastName --><a href="{Sort_URL}" id="employeesSorter_LastName">{res:LastName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_LastName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Position --><a href="{Sort_URL}" id="employeesSorter_Position">{res:Position}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_Position --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_LocationID --><a href="{Sort_URL}" id="employeesSorter_LocationID">{res:FacilityID}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_LocationID --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DepartmentDsc --><a href="{Sort_URL}" id="employeesSorter_DepartmentDsc">{res:DepartmentDesc}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DepartmentDsc --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_WorkPhone --><a href="{Sort_URL}" id="employeesSorter_WorkPhone">{res:WorkPhone}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_WorkPhone --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_HandPhone --><a href="{Sort_URL}" id="employeesSorter_HandPhone">{res:HandPhone}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_HandPhone --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Email --><a href="{Sort_URL}" id="employeesSorter_Email">{res:Email}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;<!-- END Sorter Sorter_Email --></th>
+ 
+          <th scope="col">&nbsp;&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td><a href="{FirstName_Src}" id="employeesFirstName_{employees:rowNumber}">{FirstName}</a>&nbsp;</td> 
+          <td>{LastName}&nbsp;</td> 
+          <td>{Position}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">{LocationID}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">{DepartmentID}&nbsp;</td> 
+          <td>{WorkPhone}&nbsp;</td> 
+          <td>{HandPhone}&nbsp;</td> 
+          <td>{Email}&nbsp;</td> 
+          <td><a href="{ImageLink1}" id="employeesImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="9">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="9">
+            <div align="left">
+<a href="{ToExcelLink_Src}" id="employeesToExcelLink">{res:ExportToExcel}</a> 
+            </div>
+            &nbsp;<a href="{employees_Insert_Src}" id="employeesemployees_Insert">{res:CCS_InsertLink}</a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}">|&lt;</a> <!-- END First_On -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">&lt;&lt;</a> <!-- END Prev_On -->&nbsp;{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">&gt;&gt;</a> <!-- END Next_On -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">&gt;|</a> <!-- END Last_On -->&nbsp;<!-- END Navigator Navigator -->&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+&nbsp;<!-- END Grid employees --><br>
+&nbsp; 
+<!-- BEGIN Grid employees_admin -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_GridFormPrefix} {res:employees} {res:CCS_GridFormSuffix}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">&nbsp; 
+          <!-- BEGIN Sorter Sorter_login --><a href="{Sort_URL}" id="employees_adminSorter_login">{res:username}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_login --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_FirstName --><a href="{Sort_URL}" id="employees_adminSorter_FirstName">{res:FirstName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_FirstName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_LastName --><a href="{Sort_URL}" id="employees_adminSorter_LastName">{res:LastName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_LastName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Position --><a href="{Sort_URL}" id="employees_adminSorter_Position">{res:Position}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Position --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_LocationID --><a href="{Sort_URL}" id="employees_adminSorter_LocationID">{res:FacilityID}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_LocationID --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DepartmentDsc --><a href="{Sort_URL}" id="employees_adminSorter_DepartmentDsc">{res:DepartmentDesc}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DepartmentDsc --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_WorkPhone --><a href="{Sort_URL}" id="employees_adminSorter_WorkPhone">{res:WorkPhone}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_WorkPhone --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_HandPhone --><a href="{Sort_URL}" id="employees_adminSorter_HandPhone">{res:HandPhone}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_HandPhone --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Email --><a href="{Sort_URL}" id="employees_adminSorter_Email">{res:Email}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Email --></th>
+ 
+          <th scope="col"></th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td><a href="{login_Src}" id="employees_adminlogin_{employees_admin:rowNumber}">{login}</a></td> 
+          <td><a href="{FirstName_Src}" id="employees_adminFirstName_{employees_admin:rowNumber}">{FirstName}</a></td> 
+          <td>{LastName}&nbsp;</td> 
+          <td>{Position}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">{LocationID}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">{DepartmentID}&nbsp;</td> 
+          <td>{WorkPhone}&nbsp;</td> 
+          <td>{HandPhone}&nbsp;</td> 
+          <td>{Email}&nbsp;</td> 
+          <td><a href="{ImageLink1}" id="employees_adminImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="10">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="10">
+            <div align="left">
+<a href="{ToExcelLink_Src}" id="employees_adminToExcelLink">{res:ExportToExcel}</a> 
+            </div>
+<a href="{employees_Insert_Src}" id="employees_adminemployees_Insert">{res:CCS_InsertLink}</a> 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}">|&lt;</a> <!-- END First_On -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">&lt;&lt;</a> <!-- END Prev_On -->{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">&gt;&gt;</a> <!-- END Next_On -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">&gt;|</a> <!-- END Last_On --><!-- END Navigator Navigator --></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid employees_admin -->
+</body>
+</html>

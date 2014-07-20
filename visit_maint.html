@@ -1,0 +1,906 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:Visit}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.2.00.040">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+
+var available_visit_all = new Array();
+
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Include User Scripts @1-B93D65AC
+</script>
+<script language="JavaScript" src="js/pt/prototype.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include User Scripts
+
+//Date Picker Object Definitions @1-FF3D214C
+
+var visit_DatePicker_VisitDate = new Object(); 
+visit_DatePicker_VisitDate.format           = "ShortDate";
+visit_DatePicker_VisitDate.style            = "Styles/{CCS_Style}/Style.css";
+visit_DatePicker_VisitDate.relativePathPart = "";
+visit_DatePicker_VisitDate.themeVersion = "3.0";
+
+var visit_DatePicker_NextVisit = new Object(); 
+visit_DatePicker_NextVisit.format           = "ShortDate";
+visit_DatePicker_NextVisit.style            = "Styles/{CCS_Style}/Style.css";
+visit_DatePicker_NextVisit.relativePathPart = "";
+visit_DatePicker_NextVisit.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//visitButton_Delete_OnClick @58-149E5E40
+function visitButton_Delete_OnClick()
+{
+    var result = true;
+//End visitButton_Delete_OnClick
+
+//Confirmation Message @59-A493C8C1
+    return confirm('{res:ConfirmDeleteVisit}');
+//End Confirmation Message
+
+//Close visitButton_Delete_OnClick @58-BC33A33A
+    return result;
+}
+//End Close visitButton_Delete_OnClick
+
+//visitLeftButtonVisit_OnClick @125-229523EF
+function visitLeftButtonVisit_OnClick()
+{
+    var result = true;
+//End visitLeftButtonVisit_OnClick
+
+//Custom Code @128-2A29BDB7
+    // -------------------------
+ var AvailableLB = document.getElementById("available_visit");
+ var LinkedLB = document.getElementById("linked_visit");
+ for (var i=0; i < LinkedLB.length; i++) {
+   if (LinkedLB.options[i].selected == true) {
+      AvailableLB.options[AvailableLB.length] = 
+          new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+      LinkedLB.options[i] = null;
+      i=i-1;
+   }
+ }
+  // naming the tooltips of the options in a select HTML element as the displayed text of the option
+        // this is useful for the select lists in which the text of each option is not fully visible
+        addToolTipsSelect('ListofVisitDis[]');
+ 
+    // -------------------------
+//End Custom Code
+
+//Close visitLeftButtonVisit_OnClick @125-BC33A33A
+    return result;
+}
+//End Close visitLeftButtonVisit_OnClick
+
+//visitRightButtonVisit_OnClick @126-0A7BA897
+function visitRightButtonVisit_OnClick()
+{
+    var result = true;
+//End visitRightButtonVisit_OnClick
+
+//Custom Code @127-2A29BDB7
+    // -------------------------
+  var AvailableLB = document.getElementById("available_visit");
+ var LinkedLB = document.getElementById("linked_visit");
+ for (var i=0; i < AvailableLB.length; i++) {
+   if (AvailableLB.options[i].selected == true) {
+       LinkedLB.options[LinkedLB.length] = 
+       new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+       AvailableLB.options[i] = null;
+       i=i-1;
+   }
+ }
+
+    // naming the tooltips of the options in a select HTML element as the displayed text of the option
+        // this is useful for the select lists in which the text of each option is not fully visible
+        addToolTipsSelect('SelectedVisitDis[]');
+    // -------------------------
+//End Custom Code
+
+//Close visitRightButtonVisit_OnClick @126-BC33A33A
+    return result;
+}
+//End Close visitRightButtonVisit_OnClick
+
+
+
+//visitButton_UpdateAddMedication_OnClick @51-36BBAF8D
+function visitButton_UpdateAddMedication_OnClick()
+{
+    var result = true;
+//End visitButton_UpdateAddMedication_OnClick
+
+//Custom Code @541-2A29BDB7
+    // -------------------------
+    result = outcomeVerifier();
+    // -------------------------
+//End Custom Code
+
+//Close visitButton_UpdateAddMedication_OnClick @51-BC33A33A
+    return result;
+}
+//End Close visitButton_UpdateAddMedication_OnClick
+
+//visitButton_UpdateAddHospitalisation_OnClick @419-067CA4E4
+function visitButton_UpdateAddHospitalisation_OnClick()
+{
+    var result = true;
+//End visitButton_UpdateAddHospitalisation_OnClick
+
+//Custom Code @540-2A29BDB7
+    // -------------------------
+    result = outcomeVerifier();
+    // -------------------------
+//End Custom Code
+
+//Close visitButton_UpdateAddHospitalisation_OnClick @419-BC33A33A
+    return result;
+}
+//End Close visitButton_UpdateAddHospitalisation_OnClick
+
+//visitButton_Update_OnClick @57-4C038F56
+function visitButton_Update_OnClick()
+{
+    var result = true;
+//End visitButton_Update_OnClick
+
+//Custom Code @539-2A29BDB7
+    // -------------------------
+    result = outcomeVerifier();
+    // -------------------------
+//End Custom Code
+
+//Close visitButton_Update_OnClick @57-BC33A33A
+    return result;
+}
+//End Close visitButton_Update_OnClick
+
+//visitVisitOutcomeID_OnChange @209-9D33074F
+function visitVisitOutcomeID_OnChange()
+{
+    var result = true;
+//End visitVisitOutcomeID_OnChange
+
+//Custom Code @210-2A29BDB7
+
+        VisitOutcomeClearValues(document.visit.VisitOutcomeID.value);
+        VisitOutcomeChangeView(document.visit.VisitOutcomeID.value);
+
+//End Custom Code
+
+//Close visitVisitOutcomeID_OnChange @209-BC33A33A
+    return result;
+}
+//End Close visitVisitOutcomeID_OnChange
+
+//visitButton_UpdateAddTests_OnClick @547-3289F921
+function visitButton_UpdateAddTests_OnClick()
+{
+    var result = true;
+//End visitButton_UpdateAddTests_OnClick
+
+//Custom Code @550-2A29BDB7
+    // -------------------------
+    result = outcomeVerifier();
+    // -------------------------
+//End Custom Code
+
+//Close visitButton_UpdateAddTests_OnClick @547-BC33A33A
+    return result;
+}
+//End Close visitButton_UpdateAddTests_OnClick
+
+//visitButton_UpdateAddTest_OnClick @569-8B59F364
+function visitButton_UpdateAddTest_OnClick()
+{
+    var result = true;
+//End visitButton_UpdateAddTest_OnClick
+
+//Custom Code @572-2A29BDB7
+    // -------------------------
+    result = outcomeVerifier();
+    // -------------------------
+//End Custom Code
+
+//Close visitButton_UpdateAddTest_OnClick @569-BC33A33A
+    return result;
+}
+//End Close visitButton_UpdateAddTest_OnClick
+
+function outcomeVerifier()
+{
+        var result = true;
+        
+        var refSelectedVisitOutcome = document.getElementById("visitVisitOutcomeID");
+        var selectedVisitOutcome = refSelectedVisitOutcome.options[refSelectedVisitOutcome.selectedIndex].value;
+        var hospitalisationTable = document.getElementById("hosptable");        
+
+        if( hospitalisationTable != null && (selectedVisitOutcome == 1 || selectedVisitOutcome == 3))
+                result = confirm("{res:HospAssociatedWillBeRemovedDoYouWantCont}");
+        
+        return result;
+}
+
+//visit_OnSubmit @55-2FA3C069
+function visit_OnSubmit()
+{
+    var result = true;
+//End visit_OnSubmit
+
+//Custom Code @123-2A29BDB7
+    // -------------------------
+        LinkedLB = document.getElementById("linked_visit"); 
+         document.visit.LinkedID_Visit.value = ""
+         for (i=0; i<LinkedLB.options.length; i++) {
+            if (document.visit.LinkedID_Visit.value != "" ) {
+                document.visit.LinkedID_Visit.value = document.visit.LinkedID_Visit.value + ","
+                }
+                document.visit.LinkedID_Visit.value = document.visit.LinkedID_Visit.value  + "'" + LinkedLB.options[i].value + "'"
+         }
+         document.visit.Reloaded.value = true;
+
+        // -------------------------
+//End Custom Code
+
+//Close visit_OnSubmit @55-BC33A33A
+    return result;
+}
+//End Close visit_OnSubmit
+
+function GetUrlParam(pname)
+{
+  pname = pname.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+pname+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return results[1];
+}
+
+
+//visit_OnLoad @55-6BF2447F
+function visit_OnLoad(form)
+{
+    var result = true;
+//End visit_OnLoad
+
+//Custom Code @213-2A29BDB7
+    // -------------------------
+       
+        VisitOutcomeChangeView(document.visit.VisitOutcomeID.value);
+   // naming the tooltips of the options in a select HTML element as the displayed text of the option
+        // this is useful for the select lists in which the text of each option is not fully visible
+        addToolTipsSelect('ListofVisitDis[]');
+        addToolTipsSelect('SelectedVisitDis[]');
+        
+    // -------------------------
+//End Custom Code
+
+//Close visit_OnLoad @55-BC33A33A
+    return result;
+}
+//End Close visit_OnLoad
+
+//_OnLoad @1-9C4F01C0
+function _OnLoad()
+{
+    var result = true;
+//End _OnLoad
+
+//Custom Code @491-2A29BDB7
+    // -------------------------
+    CacheValues('available_visit',available_visit_all);
+    // -------------------------
+//End Custom Code
+
+//Close _OnLoad @1-BC33A33A
+    return result;
+}
+//End Close _OnLoad
+
+//visitButton_Cancel_OnClick @60-41961250
+function visitButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End visitButton_Cancel_OnClick
+
+//visitEmployeeIDPTDependentListBox1 Start @587-418F17C7
+function visitEmployeeIDPTDependentListBox1_start(sender) {
+    var dependentElement = $("visitEmployeeID" + sender.id.substring(15));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/visit_maint_visit_EmployeeID_PTDependentListBox1.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End visitEmployeeIDPTDependentListBox1 Start
+
+//bind_events @1-35ADA101
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("visitFacilityID", "change", visitEmployeeIDPTDependentListBox1_start);
+    addEventHandler("visitFacilityID", "load", visitEmployeeIDPTDependentListBox1_start);
+    addEventHandler("visitButton_Delete", "click", visitButton_Delete_OnClick);
+    addEventHandler("visitLeftButtonVisit", "click", visitLeftButtonVisit_OnClick);
+    addEventHandler("visitRightButtonVisit", "click", visitRightButtonVisit_OnClick);
+    addEventHandler("visitButton_UpdateAddMedication", "click", visitButton_UpdateAddMedication_OnClick);
+    addEventHandler("visitButton_UpdateAddHospitalisation", "click", visitButton_UpdateAddHospitalisation_OnClick);
+    addEventHandler("visitButton_Update", "click", visitButton_Update_OnClick);
+    addEventHandler("visitVisitOutcomeID", "change", visitVisitOutcomeID_OnChange);
+    addEventHandler("visitButton_UpdateAddTests", "click", visitButton_UpdateAddTests_OnClick);
+    addEventHandler("visitButton_UpdateAddTest", "click", visitButton_UpdateAddTest_OnClick);
+    addEventHandler("visit", "submit", visit_OnSubmit);
+    addEventHandler("visit", "load", visit_OnLoad);
+    addEventHandler("", "load", _OnLoad);
+    addEventHandler("visitButton_Cancel", "click", visitButton_Cancel_OnClick);
+}
+//End bind_events
+
+
+
+function VisitOutcomeChangeView(OutcomeType){
+
+        var visitReferralFacilityID = document.getElementById("visitReferralFacilityID");
+        var visitIndicationID = document.getElementById("visitIndicationID");
+        var visitIndicationID_Label = document.getElementById("visitIndicationID_Label");
+		var visitReferralTypeID = document.getElementById("visitReferralTypeID");
+		var visitReferralTypeID_Label = document.getElementById("visitReferralTypeID_Label");
+        var visitReferralID_Label = document.getElementById("visitReferralID_Label");
+        var visitDeptlID_Label = document.getElementById("visitDeptlID_Label");
+        var visitDeptID = document.getElementById("visitDeptID");
+        var addHospButton = document.getElementById("visitButton_UpdateAddHospitalisation");
+
+        visitReferralFacilityID.style.visibility="hidden";
+        visitIndicationID.style.visibility="hidden";
+        visitIndicationID_Label.style.visibility= "hidden";
+		visitReferralTypeID.style.visibility="hidden";
+		visitReferralTypeID_Label.style.visibility="hidden";
+        visitReferralID_Label.style.visibility= "hidden";
+        visitDeptlID_Label.style.visibility= "hidden";
+        visitDeptID.style.visibility= "hidden";
+                
+        if (addHospButton != null)
+                addHospButton.style.visibility="hidden";
+
+        if(OutcomeType == 3)
+        {
+                visitReferralFacilityID.style.visibility="visible";
+                visitIndicationID.style.visibility="visible";
+                visitIndicationID_Label.style.visibility= "visible";
+				visitReferralTypeID.style.visibility="visible";
+				visitReferralTypeID_Label.style.visibility="visible";
+                visitReferralID_Label.style.visibility= "visible";
+                visitDeptlID_Label.style.visibility= "visible";
+                visitDeptID.style.visibility= "visible";
+ 
+        }
+
+        if(OutcomeType == 2)
+        {
+                visitReferralFacilityID.style.visibility="hidden";
+                visitIndicationID.style.visibility="hidden";
+                visitIndicationID_Label.style.visibility= "hidden";
+				visitReferralTypeID.style.visibility="hidden";
+				visitReferralTypeID_Label.style.visibility="hidden";
+                visitReferralID_Label.style.visibility= "hidden";
+                visitDeptlID_Label.style.visibility= "hidden";
+                visitDeptID.style.visibility= "hidden";
+                if (addHospButton != null)
+                addHospButton.style.visibility="visible";
+        }
+}
+
+function VisitOutcomeClearValues(OutcomeType){
+
+        var visitReferralFacilityID = document.getElementById("visitReferralFacilityID");
+        var visitIndicationID = document.getElementById("visitIndicationID");
+                var visitReferralTypeID = document.getElementById("visitReferralTypeID");
+        var visitDeptID = document.getElementById("visitDeptID");
+        if(OutcomeType == 3)
+        {
+                visitReferralFacilityID.value ="";
+                visitIndicationID.value="";
+				visitReferralTypeID.value="";
+                visitDeptID.value= "1"; 
+        }
+        else
+        {
+         visitReferralFacilityID.value ="2";
+         visitIndicationID.value="1";
+		 visitReferralTypeID.value="1";
+         visitDeptID.value= "1"; 
+        }
+}
+
+
+function CacheValues(selectboxID,Backup)
+{
+    var l =  document.getElementById(selectboxID);
+    for (var i=0; i < l.options.length; i++)
+    {
+              Backup[i] = l.options[i];
+    }
+}
+
+function SearchList(selectboxID,searchTextID,Backup)
+{
+        var l =  document.getElementById(selectboxID);
+        var tb = document.getElementById(searchTextID);
+   
+    l.options.length=0;
+ 
+    if(tb.value == "")
+    {
+      for (var i=0; i < Backup.length; i++)
+      {
+        l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+      }
+    }
+    else{
+ 
+      for (var i=0; i <Backup.length; i++)
+      {
+        if (Backup[i].text.toLowerCase().indexOf(tb.value.toLowerCase()) != -1)
+        {
+          l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+        }
+      }
+    }
+}
+  function ClearSelection(lb)
+  {
+    lb.selectedIndex = -1;
+  }
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<!-- BEGIN Record pregnancy_header -->
+<form id="pregnancy_header" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{FirstName}&nbsp;{FamiliyName}&nbsp;({BirthDate})</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_headerPatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header --><br>
+<!-- BEGIN Record pregnancy_header1 -->
+<form id="pregnancy_header1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_header1PatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header1 --><br>
+<!-- BEGIN Record visit -->
+<form id="visit" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:visit} </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="12">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="visitVisitDate"><label for="visitVisitDate">{res:RiskGroup}</label></label></td> 
+            <td colspan="11"><input id="visitRiskGroup" value="1" type="checkbox" name="{RiskGroup_Name}" {RiskGroup}></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="visitVisitDate">{res:VisitDate}</label></td> 
+            <td colspan="11"><input id="visitVisitDate" value="{VisitDate}" maxlength="100" size="8" name="{VisitDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_VisitDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="visitDatePicker_VisitDate"><img id="visitDatePicker_VisitDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;<!-- END DatePicker DatePicker_VisitDate --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="visitFacilityID">{res:FacilityID}</label></td> 
+            <td colspan="11">
+              <select id="visitFacilityID" name="{FacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {FacilityID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr style="HEIGHT: 5%" class="Controls">
+            <td class="th" valign="middle">{res:Doctor}</td> 
+            <td colspan="11">
+              <!-- BEGIN ListBox EmployeeID -->
+              <select id="visitEmployeeID" name="{EmployeeID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {EmployeeID_Options}
+              </select>
+ <!-- END ListBox EmployeeID --></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td valign="baseline" colspan="2" nowrap>
+              <p align="left">{res:AntenatalProblemsList}</p>
+ 
+              <p align="left"><input style="WIDTH: 246px; HEIGHT: 24px" id="visitFilterofAntenatalProblems" title="{res:search}" onkeyup="javascript:SearchList('available_visit','visitFilterofAntenatalProblems',available_visit_all);addToolTipsSelect('ListofVisitDis[]');" value="{visitFilterofAntenatalProblems}" name="{visitFilterofAntenatalProblems_Name}"><br>
+              <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 100px" id="available_visit" multiple size="8" name="{ListofVisitDis_Name}" align="left">
+                {ListofVisitDis_Options}
+              </select>
+ </p>
+            </td> 
+            <td>
+              <p align="center">{res:CCS_Insert}<br>
+              &nbsp; 
+              <!-- BEGIN Button RightButtonVisit --><input id="visitRightButtonVisit" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButtonVisit --></p>
+ 
+              <p align="center">{res:CCS_Delete}<br>
+              <!-- BEGIN Button LeftButtonVisit --><input id="visitLeftButtonVisit" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButtonVisit --></p>
+            </td> 
+            <td colspan="9">
+              <p align="left">{res:DiagnosedPatientDiseases}</p>
+ 
+              <p align="left">
+              <select style="WIDTH: 250px; HEIGHT: 110px" id="linked_visit" multiple size="8" name="{SelectedVisitDis_Name}">
+                {SelectedVisitDis_Options}
+              </select>
+ </p>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="visitVisitOutcomeID">{res:VisitOutcomeID}</label>&nbsp;</td> 
+            <td colspan="11">
+              <select id="visitVisitOutcomeID" name="{VisitOutcomeID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {VisitOutcomeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="visitIndicationID" id="visitIndicationID_Label">{res:IndicationID}</label>&nbsp;</td> 
+            <td colspan="11">
+              <select id="visitIndicationID" name="{IndicationID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {IndicationID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="visitIndicationID" id="visitIndicationID_Label"><label id="visitIndicationID_Label" for="visitIndicationID"><label id="visitReferralID_Label" for="visitReferralFacilityID">{res:ReferralFacilityID}</label></label>&nbsp;</label></td> 
+            <td colspan="11">
+              <select style="WIDTH: 161px" id="visitReferralFacilityID" name="{ReferralFacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {ReferralFacilityID_Options}
+              </select>
+ &nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="visitReferralDeptID" id="visitDeptlID_Label">{res:ReferralDeptID}&nbsp;</label></td> 
+            <td colspan="11">
+              <select id="visitDeptID" name="{DeptID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {DeptID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+		  	<td class="th"><label for="visitReferralDeptID" id="visitReferralTypeID_Label">{res:ReferralTypeID}&nbsp;</label></td> 
+            
+            <td colspan="11">
+              <select id="visitReferralTypeID" name="{ReferralTypeID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {ReferralTypeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="visitNextVisit">{res:NextVisit}</label></td> 
+            <td colspan="11"><input id="visitNextVisit" value="{NextVisit}" maxlength="100" size="8" name="{NextVisit_Name}">
+              <!-- BEGIN DatePicker DatePicker_NextVisit --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="visitDatePicker_NextVisit"><img id="visitDatePicker_NextVisit_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;<!-- END DatePicker DatePicker_NextVisit --></td>
+          </tr>
+ 
+          <tr id="commandsRow" class="Bottom">
+            <td colspan="12" align="right">{res:LastUpdated}&nbsp;{lastmodified}&nbsp; ({user})<label for="visitCurrentUser" style="display: none;">CurrentUser</label><input id="visitCurrentUser" value="{CurrentUser}" type="hidden" name="{CurrentUser_Name}"><input id="visitReloaded" value="{Reloaded}" type="hidden" name="{Reloaded_Name}"><input id="visitPregnancyID" value="{PregnancyID}" type="hidden" name="{PregnancyID_Name}"><input id="LinkedID_Visit" value="{LinkedID_Visit}" type="hidden" name="{LinkedID_Visit_Name}">&nbsp; 
+              <!-- BEGIN Button Button_Insert --><input id="visitButton_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="visitButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_UpdateAddHospitalisation --><input id="visitButton_UpdateAddHospitalisation" class="Button" value="{res:CCS_Insert} {res:hospitalisation}" alt="Button1" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddHospitalisation -->
+              <!-- BEGIN Button Button_UpdateAddMedication --><input id="visitButton_UpdateAddMedication" class="Button" value="{res:CCS_Insert} {res:medicationm}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddMedication -->
+              <!-- BEGIN Button Button_UpdateAddTests --><input id="visitButton_UpdateAddTests" class="Button" value="{res:CCS_Insert} {res:testsbutton}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddTests -->
+              <!-- BEGIN Button Button_UpdateAddTest --><input id="visitButton_UpdateAddTest" class="Button" value="{res:CCS_Insert} {res:testv}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddTest -->
+              <!-- BEGIN Button Button_Delete --><input id="visitButton_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input id="visitButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record visit --><br>
+<!-- BEGIN Grid test_testcode1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_GridFormPrefix} {res:testtestcode} {res:CCS_GridFormSuffix} </strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TestDate --><a href="{Sort_URL}" id="test_testcode1Sorter_TestDate">{res:TestDate}</a><!-- END Sorter Sorter_TestDate --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TestName --><a href="{Sort_URL}" id="test_testcode1Sorter_TestName">{res:TestName}</a><!-- END Sorter Sorter_TestName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TestResultNormal --><a href="{Sort_URL}" id="test_testcode1Sorter_TestResultNormal">{res:TestResultNormal}</a><!-- END Sorter Sorter_TestResultNormal --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TestResultDetails --><a href="{Sort_URL}" id="test_testcode1Sorter_TestResultDetails">{res:TestResultDetails}</a><!-- END Sorter Sorter_TestResultDetails --></th>
+ 
+          <th scope="col">{res:Edit}&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{TestDate}&nbsp;</td> 
+          <td>{TestName}&nbsp;</td> 
+          <td>{TestResultNormal}&nbsp;</td> 
+          <td>{TestResultDetails}&nbsp;</td> 
+          <td>&nbsp;<a href="{ImageLink1}" id="test_testcode1ImageLink1_{test:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="5">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid test_testcode1 --><br>
+<!-- BEGIN Grid medication -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:Medication_List}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="4">{res:CCS_TotalRecords}&nbsp;{medication_medicationatco_TotalRecords}</td>
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DateMedication --><a href="{Sort_URL}" id="medicationSorter_DateMedication">{res:Date}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DateMedication --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_MedicationName --><a href="{Sort_URL}" id="medicationSorter_MedicationName">{res:Medication}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_MedicationName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Dosage --><a href="{Sort_URL}" id="medicationSorter_Dosage">{res:Dosage}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Dosage --></th>
+ 
+          <th colspan="5" scope="col">{res:Edit}&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{DateMedication}&nbsp;</td> 
+          <td>{MedicationName}&nbsp;</td> 
+          <td>{Dosage}&nbsp;</td> 
+          <td>&nbsp;<a href="{ImageLink1}" id="medicationImageLink1_{medication:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td>{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="5">
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input value="{Value}" type="hidden" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option selected value="">-</option>
+ {PageSize_Options}
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a><!-- END First_On -->
+            <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a><!-- END Prev_On -->
+            <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->&nbsp;{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a><!-- END Next_On -->
+            <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a><!-- END Last_On -->
+            <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid medication --><br>
+<!-- BEGIN Grid department_facilities_hos -->
+<table id="hosptable" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:ListHospitalization}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DepartmentDesc --><a href="{Sort_URL}" id="department_facilities_hosSorter_DepartmentDesc">{res:DepartmentDesc}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DepartmentDesc --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_FacilityName --><a href="{Sort_URL}" id="department_facilities_hosSorter_FacilityName">{res:FacilityName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_FacilityName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_reason --><a href="{Sort_URL}" id="department_facilities_hosSorter_reason">{res:reason}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_reason --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_AdmissionDate --><a href="{Sort_URL}" id="department_facilities_hosSorter_AdmissionDate">{res:AdmissionDate}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_AdmissionDate --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DischargeDate --><a href="{Sort_URL}" id="department_facilities_hosSorter_DischargeDate">{res:DischargeDate}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DischargeDate --></th>
+ 
+          <th scope="col">{res:Edit}&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{DepartmentDesc}&nbsp;</td> 
+          <td>{FacilityName}&nbsp;</td> 
+          <td>{reason}&nbsp;</td> 
+          <td>{AdmissionDate}&nbsp;</td> 
+          <td>{DischargeDate}&nbsp;</td> 
+          <td colspan="2"><a href="{ImageLink1}" id="department_facilities_hosImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="6">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid department_facilities_hos -->
+<p></p>
+<p>&nbsp;</p>
+</body>
+</html>

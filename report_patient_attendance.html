@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>report_patient_attendance</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-F0CE16C5
+
+var patient_pregnancy_visit_DatePicker_s_NextVisit = new Object(); 
+patient_pregnancy_visit_DatePicker_s_NextVisit.format           = "ShortDate";
+patient_pregnancy_visit_DatePicker_s_NextVisit.style            = "Styles/{CCS_Style}/Style.css";
+patient_pregnancy_visit_DatePicker_s_NextVisit.relativePathPart = "";
+patient_pregnancy_visit_DatePicker_s_NextVisit.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record patient_pregnancy_visit -->
+<form id="patient_pregnancy_visit" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix} {res:patient_pregnancy_visit} {res:CCS_SearchFormSuffix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="patient_pregnancy_visits_FamilyName">{res:FamilyName}</label></td> 
+            <td><input id="patient_pregnancy_visits_FamilyName" value="{s_FamilyName}" size="50" name="{s_FamilyName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patient_pregnancy_visits_GivenName">{res:GivenName}</label></td> 
+            <td><input id="patient_pregnancy_visits_GivenName" value="{s_GivenName}" size="50" name="{s_GivenName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patient_pregnancy_visits_NextVisit">{res:NextVisit}</label></td> 
+            <td><input id="patient_pregnancy_visits_NextVisit" value="{s_NextVisit}" maxlength="100" size="8" name="{s_NextVisit_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_NextVisit --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="patient_pregnancy_visitDatePicker_s_NextVisit"><img id="patient_pregnancy_visitDatePicker_s_NextVisit_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_NextVisit --></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="patient_pregnancy_visitButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record patient_pregnancy_visit --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print -->
+<p>
+<!-- BEGIN Report patient_visit_pregnancy -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_ReportFormPrefix} {res:patientvisitpregnancy} {res:CCS_ReportFormSuffix}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">{res:CCS_TotalRecords}&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col"># &nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_NextVisit --><a href="{Sort_URL}">{res:NextVisit}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_NextVisit -->&nbsp;</th>
+ 
+          <th scope="col">{res:FamilyName} &nbsp;</th>
+ 
+          <th scope="col">{res:GivenName} &nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Town --><a href="{Sort_URL}">{res:Town}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Town -->&nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_MobilePhone --><a href="{Sort_URL}">{res:MobilePhone}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_MobilePhone -->&nbsp;</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tr class="Footer">
+          <td>{Report_CurrentDate}</td> 
+          <td colspan="5">
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+        </tr>
+ 
+        <!-- BEGIN Panel PageBreak -->
+      </table>
+    </td>
+  </tr>
+</table>
+<p style="PAGE-BREAK-AFTER: always">&nbsp;</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- END Panel PageBreak --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right">{Report_Row_Number} </td> 
+          <td>{NextVisit} </td> 
+          <td>{FamilyName} </td> 
+          <td>{GivenName} </td> 
+          <td>{Town} </td> 
+          <td>{MobilePhone} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="6">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report patient_visit_pregnancy --><br>
+<br>
+<br>
+<br>
+</p>
+</body>
+</html>

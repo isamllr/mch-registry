@@ -1,0 +1,541 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>report_f21_district</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-B8A2FE64
+
+var pregnancySearch_DatePicker_s_PregRegDate = new Object(); 
+pregnancySearch_DatePicker_s_PregRegDate.format           = "ShortDate";
+pregnancySearch_DatePicker_s_PregRegDate.style            = "Styles/{CCS_Style}/Style.css";
+pregnancySearch_DatePicker_s_PregRegDate.relativePathPart = "";
+pregnancySearch_DatePicker_s_PregRegDate.themeVersion = "3.0";
+
+var pregnancySearch_DatePicker_s_PregRegDateTo = new Object(); 
+pregnancySearch_DatePicker_s_PregRegDateTo.format           = "ShortDate";
+pregnancySearch_DatePicker_s_PregRegDateTo.style            = "Styles/{CCS_Style}/Style.css";
+pregnancySearch_DatePicker_s_PregRegDateTo.relativePathPart = "";
+pregnancySearch_DatePicker_s_PregRegDateTo.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record pregnancySearch -->
+<form id="pregnancySearch" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table style="WIDTH: 500px" class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp; </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="pregnancySearchs_PregRegDate">{res:Date}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from} </label><input id="pregnancySearchs_PregRegDate" value="{s_PregRegDate}" maxlength="100" size="8" name="{s_PregRegDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_PregRegDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDate"><img id="pregnancySearchDatePicker_s_PregRegDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_PregRegDate -->&nbsp;&nbsp;<label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}</label></label> <input id="pregnancySearchs_PregRegDateTo" value="{s_PregRegDateTo}" maxlength="100" size="8" name="{s_PregRegDateTo_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_PregRegDateTo --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDateTo"><img id="pregnancySearchDatePicker_s_PregRegDateTo_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_PregRegDateTo --><label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate"><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_DataDelivery2"></a>&nbsp; <a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDate4"></a><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDate3"></a><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDate2"></a></label></label></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="pregnancySearchButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancySearch --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print -->
+<p></p>
+<p>
+<p style="FONT-SIZE: 16pt"><span style="FONT-FAMILY: 'Times New Roman','serif'; FONT-SIZE: 12pt; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: UK; mso-fareast-language: RU; mso-bidi-language: AR-SA" lang="UK">&nbsp;</span>{res:F21_2211}&nbsp; 
+<!-- BEGIN Report Report1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" align="center">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th style="TEXT-ALIGN: center" scope="col">&nbsp;<span id="result_box" lang="en" class="short_text"><span class="hps">{res:Name_of_disease}</span></span></th>
+ 
+          <th style="TEXT-ALIGN: center" scope="col">&nbsp;{res:LineNumber}</th>
+ 
+          <th style="TEXT-ALIGN: center" scope="col">&nbsp;{res:ICD10Code1}</th>
+ 
+          <th style="TEXT-ALIGN: center" scope="col">{res:Total}</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_1}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline"><br>
+            1</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">&nbsp;<br>
+            O.44.1</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline"><br>
+            {TotalSum_COUNT_disease_1}&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report1 -->
+<!-- BEGIN Report Report2 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_2}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">2</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.45.0, O.67.0, O.46.0</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report2 -->
+<!-- BEGIN Report Report3 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_3}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">3</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.45.8,9</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report3 -->
+<!-- BEGIN Report Report4 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_4}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">4</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.10-O.16</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report4 -->
+<!-- BEGIN Report Report5 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_5}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">5</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.11, O.13, O.14, O.15</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report5 -->
+<!-- BEGIN Report Report6 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_6}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">6</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.14.1, O.15</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report6 -->
+<!-- BEGIN Report Report7 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_7}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">7</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.86.2-3</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report7 -->
+<!-- BEGIN Report Report8 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_8}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">&nbsp;8</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.24</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report8 -->
+<!-- BEGIN Report Report9 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_9}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">&nbsp;9</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.90.5 О.99.2-частина</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report9 -->
+<!-- BEGIN Report Report10 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_10}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">&nbsp;10</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">О.99.2-частина</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report10 -->
+<!-- BEGIN Report Report11 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_11}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">11</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">О.99.0-частина</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report11 -->
+<!-- BEGIN Report Report12 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_12}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">12</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">О.99.4-частина</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report12 -->
+<!-- BEGIN Report Report13 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_13}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">13</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.64-O.66</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report13 -->
+<!-- BEGIN Report Report14 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_14}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">14</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.62-O.63</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report14 -->
+<!-- BEGIN Report Report15 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_15}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">15</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.70.2-3</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report15 -->
+<!-- BEGIN Report Report16 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_16}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">16</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.71.0-1</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report16 -->
+<!-- BEGIN Report Report17 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_18}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">18</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.72.0-1</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report17 -->
+<!-- BEGIN Report Report22 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_19}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">19</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.72.0-1</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report22 -->
+<!-- BEGIN Report Report18 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_20}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">20</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.75.3, O.85</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report18 -->
+<!-- BEGIN Report Report19 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_21}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">21</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.85-частина</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report19 -->
+<!-- BEGIN Report Report23 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_22}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">22</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.85-частина</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report23 -->
+<!-- BEGIN Report Report20 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_23}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">23</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.87</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report20 -->
+<!-- BEGIN Report Report21 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Report_Footer -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 320px; FONT-WEIGHT: normal" valign="baseline">{res:2211_24}</td> 
+          <td style="TEXT-ALIGN: center; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 90px; FONT-WEIGHT: normal" valign="baseline">24</td> 
+          <td style="TEXT-ALIGN: left; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 170px; FONT-WEIGHT: normal" valign="baseline">O.91.1</td> 
+          <td style="TEXT-ALIGN: right; TEXT-TRANSFORM: none; BACKGROUND-COLOR: #ffffff; WIDTH: 50px; FONT-WEIGHT: normal" valign="baseline">{TotalSum_COUNT_disease_1} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report21 --><br>
+&nbsp; </p>
+</body>
+</html>

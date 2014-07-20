@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>report_risks_facilities</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record Report2 -->
+<form id="Report2" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix} </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="Report2s_PregnancyRecNr">{res:PregnancyRecNr}</label></td> 
+            <td><input id="Report2s_PregnancyRecNr" value="{s_PregnancyRecNr}" maxlength="10" size="10" name="{s_PregnancyRecNr_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="Report2s_PatientID">{res:PatientID}</label></td> 
+            <td><input id="Report2s_PatientID" value="{s_PatientID}" maxlength="10" size="10" name="{s_PatientID_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td></td> 
+            <td align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="Report2Button_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record Report2 --></p>
+<p>
+<!-- BEGIN Link Report_Print --><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a><!-- END Link Report_Print -->
+<p></p>
+<p>
+<!-- BEGIN Report Report1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:PregRisksReport}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tr class="Footer">
+          <td>{Report_CurrentDateTime}</td> 
+          <td style="TEXT-ALIGN: right" colspan="6">{res:CCS_ReportPageNumber1} {Report_CurrentPage} {res:CCS_ReportPageNumber2} {Report_TotalPages}&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+            <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->{Page_Number}&nbsp;{res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator --></td>
+        </tr>
+ <!-- END Section Page_Footer -->
+        <!-- BEGIN Section PatientID_Header -->
+        <tr class="GroupCaption">
+          <th colspan="7" scope="col">{res:PatientID}: <a href="{PatientID_Src}" style="COLOR: blue" id="Report1PatientID_HeaderPatientID_{visit_referral_pregnancy:rowNumber}">{PatientID}</a></th>
+        </tr>
+ <!-- END Section PatientID_Header -->
+        <!-- BEGIN Section FamilyName_Header -->
+        <tr class="GroupCaption">
+          <th colspan="7" scope="col">{res:FamilyName}: {FamilyName} </th>
+        </tr>
+ <!-- END Section FamilyName_Header -->
+        <!-- BEGIN Section GivenName_Header -->
+        <tr class="GroupCaption">
+          <th colspan="7" scope="col">{res:GivenName}: {GivenName} </th>
+        </tr>
+ <!-- END Section GivenName_Header -->
+        <!-- BEGIN Section PregnancyRecNr_Header -->
+        <tr class="GroupCaption">
+          <th colspan="7" scope="col">{res:PregnancyRecNr}: <a href="{PregnancyRecNr_Src}" style="COLOR: blue" id="Report1PregnancyRecNr_HeaderPregnancyRecNr_{Report1:rowNumber}">{PregnancyRecNr}</a></th>
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">{res:Medical_Anamnesis}</th>
+ 
+          <th scope="col">{res:BadHabbits}</th>
+ 
+          <th scope="col">{res:Antenatal_Conditions}</th>
+ 
+          <th scope="col">{res:Abnormal_Test_Results}</th>
+ 
+          <th scope="col">{res:HospAdmDiag}</th>
+ 
+          <th scope="col">{res:HospDiscDiag}</th>
+        </tr>
+ <!-- END Section PregnancyRecNr_Header -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td>{Medical_Anamnesis} </td> 
+          <td>{Bad_Habits} </td> 
+          <td>{Antenatal_Problems}</td> 
+          <td>{Abnormal_Test_Results} </td> 
+          <td>{Hospitalisation_Admission}</td> 
+          <td>{Hospitalisation_Discharge}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section PregnancyRecNr_Footer --><!-- END Section PregnancyRecNr_Footer -->
+        <!-- BEGIN Section GivenName_Footer --><!-- END Section GivenName_Footer -->
+        <!-- BEGIN Section FamilyName_Footer --><!-- END Section FamilyName_Footer -->
+        <!-- BEGIN Section PatientID_Footer --><!-- END Section PatientID_Footer -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="7">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report1 --></p>
+</body>
+</html>
