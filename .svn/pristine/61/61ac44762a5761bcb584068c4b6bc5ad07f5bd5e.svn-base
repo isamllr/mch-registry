@@ -1,0 +1,76 @@
+<?php
+//BindEvents Method @1-AE1CC17B
+function BindEvents()
+{
+    global $delivery_deliverymethod_f1;
+    global $delivery_deliverymethod_f;
+    global $Report_Print;
+    $delivery_deliverymethod_f1->Navigator->CCSEvents["BeforeShow"] = "delivery_deliverymethod_f1_Navigator_BeforeShow";
+    $delivery_deliverymethod_f->CCSEvents["BeforeShow"] = "delivery_deliverymethod_f_BeforeShow";
+    $Report_Print->CCSEvents["BeforeShow"] = "Report_Print_BeforeShow";
+}
+//End BindEvents Method
+
+//delivery_deliverymethod_f1_Navigator_BeforeShow @42-FAC7A05B
+function delivery_deliverymethod_f1_Navigator_BeforeShow(& $sender)
+{
+    $delivery_deliverymethod_f1_Navigator_BeforeShow = true;
+    $Component = & $sender;
+    $Container = & CCGetParentContainer($sender);
+    global $delivery_deliverymethod_f1; //Compatibility
+//End delivery_deliverymethod_f1_Navigator_BeforeShow
+
+//Hide-Show Component @43-286333C6
+    $Parameter1 = $Container->TotalPages;
+    $Parameter2 = 2;
+    if (((is_array($Parameter1) || strlen($Parameter1)) && (is_array($Parameter2) || strlen($Parameter2))) && 0 >  CCCompareValues($Parameter1, $Parameter2, ccsInteger))
+        $Component->Visible = false;
+//End Hide-Show Component
+
+//Close delivery_deliverymethod_f1_Navigator_BeforeShow @42-F9C77F84
+    return $delivery_deliverymethod_f1_Navigator_BeforeShow;
+}
+//End Close delivery_deliverymethod_f1_Navigator_BeforeShow
+
+//delivery_deliverymethod_f_BeforeShow @15-FBCEFFD9
+function delivery_deliverymethod_f_BeforeShow(& $sender)
+{
+    $delivery_deliverymethod_f_BeforeShow = true;
+    $Component = & $sender;
+    $Container = & CCGetParentContainer($sender);
+    global $delivery_deliverymethod_f; //Compatibility
+//End delivery_deliverymethod_f_BeforeShow
+
+//Hide-Show Component @23-286F3E6C
+    $Parameter1 = CCGetFromGet("ViewMode", "");
+    $Parameter2 = "Print";
+    if (0 == CCCompareValues($Parameter1, $Parameter2, ccsText))
+        $Component->Visible = false;
+//End Hide-Show Component
+
+//Close delivery_deliverymethod_f_BeforeShow @15-FD3ECD6A
+    return $delivery_deliverymethod_f_BeforeShow;
+}
+//End Close delivery_deliverymethod_f_BeforeShow
+
+//Report_Print_BeforeShow @20-6CD7E3F9
+function Report_Print_BeforeShow(& $sender)
+{
+    $Report_Print_BeforeShow = true;
+    $Component = & $sender;
+    $Container = & CCGetParentContainer($sender);
+    global $Report_Print; //Compatibility
+//End Report_Print_BeforeShow
+
+//Hide-Show Component @22-286F3E6C
+    $Parameter1 = CCGetFromGet("ViewMode", "");
+    $Parameter2 = "Print";
+    if (0 == CCCompareValues($Parameter1, $Parameter2, ccsText))
+        $Component->Visible = false;
+//End Hide-Show Component
+
+//Close Report_Print_BeforeShow @20-0DD1CC60
+    return $Report_Print_BeforeShow;
+}
+//End Close Report_Print_BeforeShow
+?>

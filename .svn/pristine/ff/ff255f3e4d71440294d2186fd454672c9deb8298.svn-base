@@ -1,0 +1,647 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:F21StatisticalReports}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-B8A2FE64
+
+var pregnancySearch_DatePicker_s_PregRegDate = new Object(); 
+pregnancySearch_DatePicker_s_PregRegDate.format           = "ShortDate";
+pregnancySearch_DatePicker_s_PregRegDate.style            = "Styles/{CCS_Style}/Style.css";
+pregnancySearch_DatePicker_s_PregRegDate.relativePathPart = "";
+pregnancySearch_DatePicker_s_PregRegDate.themeVersion = "3.0";
+
+var pregnancySearch_DatePicker_s_PregRegDateTo = new Object(); 
+pregnancySearch_DatePicker_s_PregRegDateTo.format           = "ShortDate";
+pregnancySearch_DatePicker_s_PregRegDateTo.style            = "Styles/{CCS_Style}/Style.css";
+pregnancySearch_DatePicker_s_PregRegDateTo.relativePathPart = "";
+pregnancySearch_DatePicker_s_PregRegDateTo.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+<link rel="stylesheet" type="text/css" href="Styles/Table/Style_Components_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record pregnancySearch -->
+<form id="pregnancySearch" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table style="WIDTH: 500px" class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp; </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="pregnancySearchs_PregRegDate">{res:Date}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from} </label><input id="pregnancySearchs_PregRegDate" value="{s_PregRegDate}" maxlength="100" size="8" name="{s_PregRegDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_PregRegDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDate"><img id="pregnancySearchDatePicker_s_PregRegDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_PregRegDate -->&nbsp;&nbsp;<label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}</label></label> <input id="pregnancySearchs_PregRegDateTo" value="{s_PregRegDateTo}" maxlength="100" size="8" name="{s_PregRegDateTo_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_PregRegDateTo --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDateTo"><img id="pregnancySearchDatePicker_s_PregRegDateTo_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_PregRegDateTo --><label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate"><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_DataDelivery2"></a>&nbsp; <a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDate4"></a><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDate3"></a><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancySearchDatePicker_s_PregRegDate2"></a></label></label></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="right">
+              <p align="left"><label for="facilities_hospitalisatios_FacilityName">{res:FacilityName}</label></p>
+            </td> 
+            <td>
+              <p align="left">
+              <select id="pregnancySearchs_FacilityName" name="{s_FacilityName_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {s_FacilityName_Options}
+              </select>
+              &nbsp;&nbsp;</p>
+            </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="pregnancySearchButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancySearch --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print -->
+<p></p>
+<p><font size="4"><strong>{res:F21StatisticalReports}</strong></font></p>
+<p><font size="4">{res:F21AntenatalClinicactivity}</font>&nbsp; 
+<!-- BEGIN Report Report1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:gestation12weeks}</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TotalPreg --><!-- END Sorter Sorter_TotalPreg -->#</th>
+ 
+          <th scope="col">%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{TotalPreg} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{TotalPreg1}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords --><!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_TotalPreg} </td> 
+          <td style="TEXT-ALIGN: right"></td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report1 -->&nbsp; 
+<!-- BEGIN Report Report3 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:f21PregnanciesObserved}</th>
+ 
+          <th scope="col">#</th>
+ 
+          <th scope="col">%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Admitted} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{Totalpatient} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{Totalpatient1}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalCount_Totalpatient} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline"></td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report3 -->&nbsp; 
+<!-- BEGIN Report Report4 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff" class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:left_the_facilityF21}&nbsp;</th>
+ 
+          <th scope="col">#&nbsp;</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Discharged} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{Totalpatient} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="2">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report4 -->&nbsp; 
+<!-- BEGIN Report pregnancy1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21Total_number_pregnancies}</th>
+ 
+          <th scope="col">#&nbsp;&nbsp;</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail --><!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td>&nbsp;</td> 
+          <td>{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" valign="baseline">{res:F21Total_number_pregnancies}&nbsp;</td> 
+          <td style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" valign="baseline">&nbsp;{TotalCount_PregnancyID}</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report pregnancy1 --></p>
+<p>
+<!-- BEGIN Report Report5 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff; WIDTH: 400px" class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21HIV}</th>
+ 
+          <th scope="col">#</th>
+ 
+          <th scope="col">%&nbsp;</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr style="BACKGROUND-COLOR: #ffffff" class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{F21HIV}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{patient_PatientID} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">&nbsp;{patient_PatientID1}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td style="TEXT-ALIGN: left" valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_patient_PatientID}</td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report5 -->
+<!-- BEGIN Report Report22 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table style="WIDTH: 400px" class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21HIV_tested_twice}</th>
+ 
+          <th scope="col">#</th>
+ 
+          <th scope="col">%&nbsp;</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left">{Age} </td> 
+          <td style="TEXT-ALIGN: right">{COUNT_1} </td> 
+          <td style="TEXT-ALIGN: right">{COUNT_2}&nbsp;</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_COUNT_1} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline"></td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report22 -->
+<!-- BEGIN Report Report2 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table style="WIDTH: 400px" class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21HIV_positive}</th>
+ 
+          <th scope="col">#</th>
+ 
+          <th scope="col">%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{PPP} </td> 
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">&nbsp;{PPP1}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_PPP} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report2 --></p>
+<p>
+<!-- BEGIN Report Report6 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21alfafetoprotein}</th>
+ 
+          <th scope="col">#&nbsp;</th>
+ 
+          <th scope="col">&nbsp;%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{PPP} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{PPP1}&nbsp;</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_PPP} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report6 --></p>
+<p></p>
+<p>
+<!-- BEGIN Report Report7 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21HBsAg}</th>
+ 
+          <th scope="col">#</th>
+ 
+          <th scope="col">&nbsp;%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{PPP} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{PPP1}&nbsp;</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_PPP} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report7 --></p>
+<p></p>
+<p>
+<!-- BEGIN Report Report8 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21Ultrasound22weeks}</th>
+ 
+          <th scope="col">#&nbsp;</th>
+ 
+          <th scope="col">&nbsp;%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{PPP} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">&nbsp;{PPP1}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_PPP} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report8 --></p>
+<p>
+<!-- BEGIN Report Report9 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table style="WIDTH: 650px" class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21RWtested}</th>
+ 
+          <th scope="col">#</th>
+ 
+          <th scope="col">&nbsp;%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{COUNT_1} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">&nbsp;{COUNT_2}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_COUNT_1} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report9 -->
+<!-- BEGIN Report Report23 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table style="WIDTH: 650px" class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21RWpositive}</th>
+ 
+          <th scope="col">#</th>
+ 
+          <th scope="col">%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{PPP} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{PPP1}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_PPP} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline"></td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report23 --></p>
+<p>
+<!-- BEGIN Report Report10 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21abortions}</th>
+ 
+          <th scope="col">#</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{TotalPreg} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="2">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report10 --></p>
+<p></p>
+<p>
+<!-- BEGIN Report Report11 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">{res:F21stillbirths}</th>
+ 
+          <th scope="col">#</th>
+ 
+          <th scope="col">&nbsp;%</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff">{Age} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{TotalPreg} </td> 
+          <td style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff">{TotalPreg1}&nbsp;</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">{res:CCS_ReportTotal} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_TotalPreg} </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report Report11 --></p>
+<p></p>
+</body>
+</html>

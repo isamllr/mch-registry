@@ -1,0 +1,273 @@
+<?php
+header ( 'Content-Type: text/html; charset=utf-8' );
+use Clickatell\Clickatell;
+require 'vendor/autoload.php';
+require_once 'config.php';
+
+class StrategyContext {
+	
+	private $strategy = NULL;
+	
+	public function __construct($strategy_ind_provider, $strategy_ind_protocol) {
+		switch ($strategy_ind_provider) {
+			case "Clickatell" :
+				switch ($strategy_ind_protocol) {
+					case "HTTP" :
+						$this->strategy = new StrategyClickatellHTTP ();
+						break;
+					case "SOAP" :
+						$this->strategy = new StrategyClickatellSOAP ();
+						break;
+					case "XML" :
+						$this->strategy = new StrategyClickatellXML ();
+						break;
+					default :
+						echo date ( "Y-m-d H:i:s" ) . 'Strategy not implemented, trying to use provider Clickatell and SOAP protocol.' . "\n";
+						$this->strategy = new StrategyClickatellSOAP ();
+						break;
+				}
+				break;
+			case "ecall" :
+				switch ($strategy_ind_protocol) {
+					case "HTTP" :
+						$this->strategy = new StrategyEcallHTTP ();
+						break;
+					default :
+						echo date ( "Y-m-d H:i:s" ) . 'Strategy not implemented, trying to use provider Clickatell and SOAP protocol.' . "\n";
+						$this->strategy = new StrategyClickatellSOAP ();
+						break;
+				}
+				break;
+			default :
+				echo date ( "Y-m-d H:i:s" ) . 'Strategy not implemented, trying to use provider Clickatell and SOAP protocol.' . "\n";
+				$this->strategy = new StrategyClickatellSOAP ();
+				break;
+		}
+	}
+	
+	public function sendSMSNotification($SMS) {
+		return $this->strategy->sendSMS ( $SMS );
+	}
+}
+interface StrategyInterface {
+	public function sendSMS($SMS_in);
+}
+
+class StrategyClickatellXML implements StrategyInterface {
+	public function sendSMS($SMS_in) {
+		$clickatell = new Clickatell ( $GLOBALS ['CLICKATELL_USER'], $GLOBALS ['CLICKATELL_PASS'], $GLOBALS ['CLICKATELL_XML_API'], Clickatell::XML_API );
+		$func = $clickatell->sendMessage ( array ($SMS_in->getNumber ()), $SMS_in->getMessage (), $from = "41767658011", $callback = true, $extra = $SMS_in->getExtras () );
+		$funcResult = json_decode ( $func, true );		
+		return array (
+				$funcResult['result']['status'],
+				$funcResult['result']['response']
+		);
+	}
+}
+
+class StrategyClickatellSOAP implements StrategyInterface {
+	public function sendSMS($SMS_in) {
+		$clickatell = new Clickatell ( $GLOBALS ['CLICKATELL_USER'], $GLOBALS ['CLICKATELL_PASS'], $GLOBALS ['CLICKATELL_SOAP_API'], Clickatell::SOAP_API );
+		$func = $clickatell->sendMessage ( array ($SMS_in->getNumber ()), $SMS_in->getMessage (), $from = "41767658011", $callback = true, $extra = $SMS_in->getExtras () );
+		$funcResult = json_decode ( $func, true );		
+		return array (
+				$funcResult['result']['status'],
+				$funcResult['result']['response']
+		);
+	}
+}
+
+class StrategyClickatellHTTP implements StrategyInterface {
+	public function sendSMS($SMS_in) {
+		$clickatell = new Clickatell ( $GLOBALS ['CLICKATELL_USER'], $GLOBALS ['CLICKATELL_PASS'], $GLOBALS ['CLICKATELL_HTTP_API'], Clickatell::HTTP_API );
+		$func = $clickatell->sendMessage ( array ($SMS_in->getNumber ()), $SMS_in->getMessage (), $from = "41767658011", $callback = true, $extra = $SMS_in->getExtras () );
+		
+		$funcResult = json_decode ( $func, true );		
+		return array (
+				$funcResult['result']['status'],
+				$funcResult['result']['response']
+		);
+	}
+}
+
+class StrategyEcallHTTP implements StrategyInterface {
+	public function sendSMS($SMS_in) {
+		// Be aware that ecall can not send messages in Unicode! (Cyrillic letters unavailable)
+		$status = "fail";
+		$url = 'http://www1.ecall.ch/ecallurl/ecallurl.asp?' . 'wci=' . urlencode ( 'Interface' ) . '&Function=SendPage' . '&Address=' . urlencode ( $SMS_in->getNumber () ) . '&Message=' . urlencode ( $SMS_in->getMessage () ) . '&AccountName=' . $GLOBALS ['ECALL_USER'] . '&AccountPassword=' . $GLOBALS ['ECALL_PASS'];
+		$response = @file_get_contents ( $url );
+		
+		// Check from SMS service provider $response
+		if (strcmp ( trim ( $response ), 'ResultPage ResultCode:0 ResultText:' )) {
+			$status = "success";
+		}
+		return array (
+				$status,
+				$response 
+		);
+	}
+}
+
+class SMSNotification {
+	
+	private $number = "";
+	private $message = "";
+	private $extras = array ();
+	
+	function __construct($message_in, $number_in, $extras_in) {
+		$this->number = $number_in;
+		$this->extras = $extras_in;
+		
+		if ($GLOBALS ['USE_UNICODE']) {
+			$this->message = bin2hex(iconv( 'UTF-8', 'UTF-16BE', $message_in )); // UTF-16BE is UCS-2
+		} else {
+			$this->message = $message_in;
+		}
+	}
+	
+	function getNumber() {
+		return $this->number;
+	}
+	
+	function getMessage() {
+		return $this->message;
+	}
+	
+	function getExtras() {
+		return $this->extras;
+	}
+
+}
+
+class SendSMS {
+	
+	function __construct() {
+		try {
+			// Create a PDO database connection to MySQL server
+			$dbConn = new PDO ( "mysql:host=" . $GLOBALS ['DB_HOST'] . ";port=" . $GLOBALS ['DB_PORT'] . ";dbname=" . $GLOBALS ['DB_NAME'] . "", $GLOBALS ['DB_USER'], $GLOBALS ['DB_PASS'], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+			$dbConn->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set error mode to exception
+			
+			// Get Protocol & Provider
+			try {
+				$sql = 'SELECT NotificationProvider, NotificationProtocol FROM notificationsmsservice WHERE NotificationSMSServiceID=1';
+				$resultset = $dbConn->query ( $sql, PDO::FETCH_OBJ );
+				foreach ( $resultset as $row ) {
+					$nProvider = $row->NotificationProvider;				
+					$nProtocol = $row->NotificationProtocol;
+				}
+			} catch ( Exception $e ) {
+				echo date ( "Y-m-d H:i:s" ) . 'Caught exception while loading provider and protocol from database. Defaults (Clickatell, HTTP) will be used. Message: ', $e->getMessage (), '<br\>', "\n";
+				$nProvider = "Clickatell";
+				$nProtocol = "HTTP";
+			}
+			
+			// Find all messages that need to be sent now
+			$lastFullHalfHour = $this->getlastFullHalfHour();
+			
+			$sql = "SELECT NotificationQueueID,
+					MobilePhone,
+					NotificationText, 
+					DateTimeToSend,
+					LatestBy
+					FROM notificationqueue
+					WHERE 
+					Date(LatestBY) >= curdate()
+					AND ((DateTimeToSend >= '" . $lastFullHalfHour . "' AND  DateTimeToSend <=  ADDTIME('" . $lastFullHalfHour . "', '00:30:00'))
+					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 1 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 1 DAY))
+					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 2 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 2 DAY))
+					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 3 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 3 DAY))
+					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 4 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 4 DAY))
+					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 5 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 5 DAY))
+					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 6 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 6 DAY))
+					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 7 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 7 DAY)))
+					ORDER BY DateTimeToSend ASC;";
+			
+			$resultset = $dbConn->query ( $sql, PDO::FETCH_OBJ );
+			foreach ( $resultset as $row ) {
+				try {
+					// Prepare notification
+					$SMS = new SMSNotification ( $row->NotificationText, $row->MobilePhone, $extras = array (
+							'unicode' => $GLOBALS ['USE_UNICODE'],
+							'concatenation' => $GLOBALS ['DEFAULT_CONCAT_SMS'] 
+					) );
+					// Use selected Provider & Protocol
+					$myStrategyContext = new StrategyContext ( $nProvider, $nProtocol );
+					// Send SMS & check result
+					$response = $myStrategyContext->sendSMSNotification ( $SMS );
+				} catch ( Exception $e ) {
+					echo date ( "Y-m-d H:i:s" ) . 'Caught exception while sending message: ', $e->getMessage (),  '<br>' , "\n";
+				}
+				
+				if (! strcmp ( $response [0], "success" )) {
+					echo date ( "Y-m-d H:i:s" ) . ' NotificationQueueID ' . $row->NotificationQueueID . ' sent to ' . $row->MobilePhone . '<br>' . " \n";
+					
+					try {
+						// Move notification to history
+						$rowCount = $dbConn->exec ( 'REPLACE INTO notificationqueuehistory
+											SELECT 	NotificationQueueID,
+													MobilePhone,
+													NotificationText, 
+													DateTimeToSend,
+													1 as SucessfullySent,
+													NOW() as DateTimeSent
+											FROM notificationqueue
+											WHERE NotificationQueueID = ' . $row->NotificationQueueID . ';' );
+						// echo date("Y-m-d H:i:s") . ' Records added to history: ', $rowCount;
+						
+						$rowCount = $dbConn->exec ( 'DELETE FROM notificationqueue
+												WHERE NotificationQueueID =' . $row->NotificationQueueID . ';' );
+						// echo date("Y-m-d H:i:s") . ' Records removed from queue: ', $rowCount;
+					} catch ( Exception $e ) {
+						echo date ( "Y-m-d H:i:s" ) . 'Caught exception while moving a successfully sent notification to Notification Queue History. Message: ', $e->getMessage() . '<br>' .  "\n";
+					}
+				} else {
+					try {
+						// Failed to send message: Update notification to be sent the next day if applicable
+						$rowCount = $dbConn->exec ( "
+									UPDATE notificationqueue
+									SET 
+									DateTimeToSend = ADDDATE('" . $row->DateTimeToSend . "', INTERVAL 1 DAY)
+									WHERE NotificationQueueID = " . $row->NotificationQueueID . ";" );
+						
+						echo date ( "Y-m-d H:i:s" ) . ' Error sending NotificationQueueID ' . $row->NotificationQueueID . ' to ' . $row->MobilePhone . '. Will try to send the message the next day at the same time up to and including ' . $row->LatestBy . ' Response: ' . $response [1] . '<br/>' . "\n";
+					} catch ( Exception $e ) {
+						echo date ( "Y-m-d H:i:s" ) . 'Failed to increment date to send of an unsuccessfully sent notification in the Notification Queue. Message: ', $e->getMessage () . '<br>' .  "\n";
+					}
+				}
+			}
+			
+			// Close the database connection
+			$dbConn = NULL;
+		} catch ( PDOException $e ) {
+			$fileName = basename ( $e->getFile (), ".php" );
+			$lineNumber = $e->getLine ();
+			die ( date ( "Y-m-d H:i:s" ) . " [$fileName][$lineNumber] Database error: " . $e->getMessage () );
+		}
+	}
+	
+	private static function getlastFullHalfHour() {
+		
+		// Assume $timestamp has the original timestamp, i.e. 2012-03-09 16:23:41
+		$timestamp = time();
+		
+		$day = date ( 'Y-m-d', $timestamp ); // $day is now "2014-03-09"
+		$hour = ( int ) date ( 'H', $timestamp ); // $hour is now (int)16
+		$minute = ( int ) date ( 'i', $timestamp ); // $minute is now (int)23
+		
+		if ($minute < 30) {
+			$lastFullHalfHour = strtotime ( "$day $hour:00:00" );
+		} else {
+			$lastFullHalfHour = strtotime ( "$day $hour:30:00" );
+			if (++ $hour > 23) {
+				// past midnight set the hour to 00
+				$day = date ( 'Y-m-d', $timestamp + (24 * 60 * 60) );
+				$hour = '00';
+			}
+		}
+		
+		return date ( 'Y-m-d H:i:s', $lastFullHalfHour );
+	}
+}
+
+$mySendSMS = new SendSMS ();
+?>

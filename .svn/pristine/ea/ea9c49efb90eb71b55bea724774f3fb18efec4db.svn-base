@@ -1,0 +1,1474 @@
+<?php
+//Include Common Files @1-0FC3C0F6
+define("RelativePath", ".");
+define("PathToCurrentPage", "/");
+define("FileName", "notifications_settings_maint.php");
+include_once(RelativePath . "/Common.php");
+include_once(RelativePath . "/Template.php");
+include_once(RelativePath . "/Sorter.php");
+include_once(RelativePath . "/Navigator.php");
+//End Include Common Files
+
+//Include Page implementation @11-203FAEA1
+include_once(RelativePath . "/topmenu.php");
+//End Include Page implementation
+
+class clsGridcountries_districts_facil1 { //countries_districts_facil1 class @80-4DE50C27
+
+//Variables @80-012D3538
+
+    // Public variables
+    public $ComponentType = "Grid";
+    public $ComponentName;
+    public $Visible;
+    public $Errors;
+    public $ErrorBlock;
+    public $ds;
+    public $DataSource;
+    public $PageSize;
+    public $IsEmpty;
+    public $ForceIteration = false;
+    public $HasRecord = false;
+    public $SorterName = "";
+    public $SorterDirection = "";
+    public $PageNumber;
+    public $RowNumber;
+    public $ControlsVisible = array();
+
+    public $CCSEvents = "";
+    public $CCSEventResult;
+
+    public $RelativePath = "";
+    public $Attributes;
+
+    // Grid Controls
+    public $StaticControls;
+    public $RowControls;
+    public $Sorter_FacilityName;
+    public $Sorter_ProvinceName;
+    public $Sorter_DistrictName;
+    public $Sorter_Country;
+//End Variables
+
+//Class_Initialize Event @80-EDFFE685
+    function clsGridcountries_districts_facil1($RelativePath, & $Parent)
+    {
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->ComponentName = "countries_districts_facil1";
+        $this->Visible = True;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Grid countries_districts_facil1";
+        $this->Attributes = new clsAttributes($this->ComponentName . ":");
+        $this->DataSource = new clscountries_districts_facil1DataSource($this);
+        $this->ds = & $this->DataSource;
+        $this->PageSize = CCGetParam($this->ComponentName . "PageSize", "");
+        if(!is_numeric($this->PageSize) || !strlen($this->PageSize))
+            $this->PageSize = 20;
+        else
+            $this->PageSize = intval($this->PageSize);
+        if ($this->PageSize > 100)
+            $this->PageSize = 100;
+        if($this->PageSize == 0)
+            $this->Errors->addError("<p>Form: Grid " . $this->ComponentName . "<br>Error: (CCS06) Invalid page size.</p>");
+        $this->PageNumber = intval(CCGetParam($this->ComponentName . "Page", 1));
+        if ($this->PageNumber <= 0) $this->PageNumber = 1;
+        $this->SorterName = CCGetParam("countries_districts_facil1Order", "");
+        $this->SorterDirection = CCGetParam("countries_districts_facil1Dir", "");
+
+        $this->FacilityName = new clsControl(ccsLink, "FacilityName", "FacilityName", ccsText, "", CCGetRequestParam("FacilityName", ccsGet, NULL), $this);
+        $this->FacilityName->Page = "notifications_settings_maint.php";
+        $this->ProvinceName = new clsControl(ccsLabel, "ProvinceName", "ProvinceName", ccsText, "", CCGetRequestParam("ProvinceName", ccsGet, NULL), $this);
+        $this->DistrictName = new clsControl(ccsLabel, "DistrictName", "DistrictName", ccsText, "", CCGetRequestParam("DistrictName", ccsGet, NULL), $this);
+        $this->Country = new clsControl(ccsLabel, "Country", "Country", ccsText, "", CCGetRequestParam("Country", ccsGet, NULL), $this);
+        $this->Sorter_FacilityName = new clsSorter($this->ComponentName, "Sorter_FacilityName", $FileName, $this);
+        $this->Sorter_ProvinceName = new clsSorter($this->ComponentName, "Sorter_ProvinceName", $FileName, $this);
+        $this->Sorter_DistrictName = new clsSorter($this->ComponentName, "Sorter_DistrictName", $FileName, $this);
+        $this->Sorter_Country = new clsSorter($this->ComponentName, "Sorter_Country", $FileName, $this);
+        $this->Navigator = new clsNavigator($this->ComponentName, "Navigator", $FileName, 10, tpCentered, $this);
+        $this->Navigator->PageSizes = array("1", "5", "10", "25", "50");
+    }
+//End Class_Initialize Event
+
+//Initialize Method @80-90E704C5
+    function Initialize()
+    {
+        if(!$this->Visible) return;
+
+        $this->DataSource->PageSize = & $this->PageSize;
+        $this->DataSource->AbsolutePage = & $this->PageNumber;
+        $this->DataSource->SetOrder($this->SorterName, $this->SorterDirection);
+    }
+//End Initialize Method
+
+//Show Method @80-C5E5CA31
+    function Show()
+    {
+        global $Tpl;
+        global $CCSLocales;
+        if(!$this->Visible) return;
+
+        $this->RowNumber = 0;
+
+        $this->DataSource->Parameters["urls_countries_CountryID"] = CCGetFromGet("s_countries_CountryID", NULL);
+        $this->DataSource->Parameters["urls_province_ProvinceID"] = CCGetFromGet("s_province_ProvinceID", NULL);
+        $this->DataSource->Parameters["urls_districts_DistrictID"] = CCGetFromGet("s_districts_DistrictID", NULL);
+        $this->DataSource->Parameters["urls_FacilityName"] = CCGetFromGet("s_FacilityName", NULL);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $this->DataSource->Prepare();
+        $this->DataSource->Open();
+        $this->HasRecord = $this->DataSource->has_next_record();
+        $this->IsEmpty = ! $this->HasRecord;
+        $this->Attributes->Show();
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        if(!$this->Visible) return;
+
+        $GridBlock = "Grid " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $GridBlock;
+
+
+        if (!$this->IsEmpty) {
+            $this->ControlsVisible["FacilityName"] = $this->FacilityName->Visible;
+            $this->ControlsVisible["ProvinceName"] = $this->ProvinceName->Visible;
+            $this->ControlsVisible["DistrictName"] = $this->DistrictName->Visible;
+            $this->ControlsVisible["Country"] = $this->Country->Visible;
+            while ($this->ForceIteration || (($this->RowNumber < $this->PageSize) &&  ($this->HasRecord = $this->DataSource->has_next_record()))) {
+                $this->RowNumber++;
+                if ($this->HasRecord) {
+                    $this->DataSource->next_record();
+                    $this->DataSource->SetValues();
+                }
+                $Tpl->block_path = $ParentPath . "/" . $GridBlock . "/Row";
+                $this->FacilityName->SetValue($this->DataSource->FacilityName->GetValue());
+                $this->FacilityName->Parameters = CCGetQueryString("QueryString", array("ccsForm"));
+                $this->FacilityName->Parameters = CCAddParam($this->FacilityName->Parameters, "FacilityID", $this->DataSource->f("FacilityID"));
+                $this->ProvinceName->SetValue($this->DataSource->ProvinceName->GetValue());
+                $this->DistrictName->SetValue($this->DataSource->DistrictName->GetValue());
+                $this->Country->SetValue($this->DataSource->Country->GetValue());
+                $this->Attributes->SetValue("rowNumber", $this->RowNumber);
+                $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShowRow", $this);
+                $this->Attributes->Show();
+                $this->FacilityName->Show();
+                $this->ProvinceName->Show();
+                $this->DistrictName->Show();
+                $this->Country->Show();
+                $Tpl->block_path = $ParentPath . "/" . $GridBlock;
+                $Tpl->parse("Row", true);
+            }
+        }
+        else { // Show NoRecords block if no records are found
+            $this->Attributes->Show();
+            $Tpl->parse("NoRecords", false);
+        }
+
+        $errors = $this->GetErrors();
+        if(strlen($errors))
+        {
+            $Tpl->replaceblock("", $errors);
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+        $this->Navigator->PageNumber = $this->DataSource->AbsolutePage;
+        $this->Navigator->PageSize = $this->PageSize;
+        if ($this->DataSource->RecordsCount == "CCS not counted")
+            $this->Navigator->TotalPages = $this->DataSource->AbsolutePage + ($this->DataSource->next_record() ? 1 : 0);
+        else
+            $this->Navigator->TotalPages = $this->DataSource->PageCount();
+        if ($this->Navigator->TotalPages <= 1) {
+            $this->Navigator->Visible = false;
+        }
+        $this->Sorter_FacilityName->Show();
+        $this->Sorter_ProvinceName->Show();
+        $this->Sorter_DistrictName->Show();
+        $this->Sorter_Country->Show();
+        $this->Navigator->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+        $this->DataSource->close();
+    }
+//End Show Method
+
+//GetErrors Method @80-94B0D790
+    function GetErrors()
+    {
+        $errors = "";
+        $errors = ComposeStrings($errors, $this->FacilityName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->ProvinceName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DistrictName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Country->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DataSource->Errors->ToString());
+        return $errors;
+    }
+//End GetErrors Method
+
+} //End countries_districts_facil1 Class @80-FCB6E20C
+
+class clscountries_districts_facil1DataSource extends clsDBregistry_db {  //countries_districts_facil1DataSource Class @80-8F8ECF96
+
+//DataSource Variables @80-9680092C
+    public $Parent = "";
+    public $CCSEvents = "";
+    public $CCSEventResult;
+    public $ErrorBlock;
+    public $CmdExecution;
+
+    public $CountSQL;
+    public $wp;
+
+
+    // Datasource fields
+    public $FacilityName;
+    public $ProvinceName;
+    public $DistrictName;
+    public $Country;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @80-15050FD7
+    function clscountries_districts_facil1DataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Grid countries_districts_facil1";
+        $this->Initialize();
+        $this->FacilityName = new clsField("FacilityName", ccsText, "");
+        
+        $this->ProvinceName = new clsField("ProvinceName", ccsText, "");
+        
+        $this->DistrictName = new clsField("DistrictName", ccsText, "");
+        
+        $this->Country = new clsField("Country", ccsText, "");
+        
+
+    }
+//End DataSourceClass_Initialize Event
+
+//SetOrder Method @80-F7E49927
+    function SetOrder($SorterName, $SorterDirection)
+    {
+        $this->Order = "";
+        $this->Order = CCGetOrder($this->Order, $SorterName, $SorterDirection, 
+            array("Sorter_FacilityName" => array("FacilityName", ""), 
+            "Sorter_ProvinceName" => array("ProvinceName", ""), 
+            "Sorter_DistrictName" => array("DistrictName", ""), 
+            "Sorter_Country" => array("Country", "")));
+    }
+//End SetOrder Method
+
+//Prepare Method @80-3390EDA3
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urls_countries_CountryID", ccsInteger, "", "", $this->Parameters["urls_countries_CountryID"], "", false);
+        $this->wp->AddParameter("2", "urls_province_ProvinceID", ccsInteger, "", "", $this->Parameters["urls_province_ProvinceID"], "", false);
+        $this->wp->AddParameter("3", "urls_districts_DistrictID", ccsInteger, "", "", $this->Parameters["urls_districts_DistrictID"], "", false);
+        $this->wp->AddParameter("4", "urls_FacilityName", ccsText, "", "", $this->Parameters["urls_FacilityName"], "", false);
+        $this->wp->Criterion[1] = $this->wp->Operation(opEqual, "countries.CountryID", $this->wp->GetDBValue("1"), $this->ToSQL($this->wp->GetDBValue("1"), ccsInteger),false);
+        $this->wp->Criterion[2] = $this->wp->Operation(opEqual, "province.ProvinceID", $this->wp->GetDBValue("2"), $this->ToSQL($this->wp->GetDBValue("2"), ccsInteger),false);
+        $this->wp->Criterion[3] = $this->wp->Operation(opEqual, "districts.DistrictID", $this->wp->GetDBValue("3"), $this->ToSQL($this->wp->GetDBValue("3"), ccsInteger),false);
+        $this->wp->Criterion[4] = $this->wp->Operation(opContains, "facilities.FacilityName", $this->wp->GetDBValue("4"), $this->ToSQL($this->wp->GetDBValue("4"), ccsText),false);
+        $this->Where = $this->wp->opAND(
+             false, $this->wp->opAND(
+             false, $this->wp->opAND(
+             false, 
+             $this->wp->Criterion[1], 
+             $this->wp->Criterion[2]), 
+             $this->wp->Criterion[3]), 
+             $this->wp->Criterion[4]);
+    }
+//End Prepare Method
+
+//Open Method @80-DA4BE272
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->CountSQL = "SELECT COUNT(*)\n\n" .
+        "FROM ((districts INNER JOIN province ON\n\n" .
+        "districts.ProvinceID = province.ProvinceID) INNER JOIN facilities ON\n\n" .
+        "facilities.DistrictID = districts.DistrictID) INNER JOIN countries ON\n\n" .
+        "province.CountryID = countries.CountryID";
+        $this->SQL = "SELECT FacilityID, FacilityName, ProvinceName, DistrictName, Country \n\n" .
+        "FROM ((districts INNER JOIN province ON\n\n" .
+        "districts.ProvinceID = province.ProvinceID) INNER JOIN facilities ON\n\n" .
+        "facilities.DistrictID = districts.DistrictID) INNER JOIN countries ON\n\n" .
+        "province.CountryID = countries.CountryID {SQL_Where} {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        if ($this->CountSQL) 
+            $this->RecordsCount = CCGetDBValue(CCBuildSQL($this->CountSQL, $this->Where, ""), $this);
+        else
+            $this->RecordsCount = "CCS not counted";
+        $this->query($this->OptimizeSQL(CCBuildSQL($this->SQL, $this->Where, $this->Order)));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @80-8EEE0BFD
+    function SetValues()
+    {
+        $this->FacilityName->SetDBValue($this->f("FacilityName"));
+        $this->ProvinceName->SetDBValue($this->f("ProvinceName"));
+        $this->DistrictName->SetDBValue($this->f("DistrictName"));
+        $this->Country->SetDBValue($this->f("Country"));
+    }
+//End SetValues Method
+
+} //End countries_districts_facil1DataSource Class @80-FCB6E20C
+
+
+
+class clsRecordcountries_districts_facil { //countries_districts_facil Class @88-27BBB6AC
+
+//Variables @88-9E315808
+
+    // Public variables
+    public $ComponentType = "Record";
+    public $ComponentName;
+    public $Parent;
+    public $HTMLFormAction;
+    public $PressedButton;
+    public $Errors;
+    public $ErrorBlock;
+    public $FormSubmitted;
+    public $FormEnctype;
+    public $Visible;
+    public $IsEmpty;
+
+    public $CCSEvents = "";
+    public $CCSEventResult;
+
+    public $RelativePath = "";
+
+    public $InsertAllowed = false;
+    public $UpdateAllowed = false;
+    public $DeleteAllowed = false;
+    public $ReadAllowed   = false;
+    public $EditMode      = false;
+    public $ds;
+    public $DataSource;
+    public $ValidatingControls;
+    public $Controls;
+    public $Attributes;
+
+    // Class variables
+//End Variables
+
+//Class_Initialize Event @88-EEE3C5EF
+    function clsRecordcountries_districts_facil($RelativePath, & $Parent)
+    {
+
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->Visible = true;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Record countries_districts_facil/Error";
+        $this->ReadAllowed = true;
+        if($this->Visible)
+        {
+            $this->ComponentName = "countries_districts_facil";
+            $this->Attributes = new clsAttributes($this->ComponentName . ":");
+            $CCSForm = explode(":", CCGetFromGet("ccsForm", ""), 2);
+            if(sizeof($CCSForm) == 1)
+                $CCSForm[1] = "";
+            list($FormName, $FormMethod) = $CCSForm;
+            $this->FormEnctype = "application/x-www-form-urlencoded";
+            $this->FormSubmitted = ($FormName == $this->ComponentName);
+            $Method = $this->FormSubmitted ? ccsPost : ccsGet;
+            $this->Button_DoSearch = new clsButton("Button_DoSearch", $Method, $this);
+            $this->s_countries_CountryID = new clsControl(ccsListBox, "s_countries_CountryID", "s_countries_CountryID", ccsInteger, "", CCGetRequestParam("s_countries_CountryID", $Method, NULL), $this);
+            $this->s_countries_CountryID->DSType = dsTable;
+            $this->s_countries_CountryID->DataSource = new clsDBregistry_db();
+            $this->s_countries_CountryID->ds = & $this->s_countries_CountryID->DataSource;
+            $this->s_countries_CountryID->DataSource->SQL = "SELECT * \n" .
+"FROM countries {SQL_Where} {SQL_OrderBy}";
+            list($this->s_countries_CountryID->BoundColumn, $this->s_countries_CountryID->TextColumn, $this->s_countries_CountryID->DBFormat) = array("CountryID", "Country", "");
+            $this->s_province_ProvinceID = new clsControl(ccsListBox, "s_province_ProvinceID", "s_province_ProvinceID", ccsInteger, "", CCGetRequestParam("s_province_ProvinceID", $Method, NULL), $this);
+            $this->s_province_ProvinceID->DSType = dsTable;
+            $this->s_province_ProvinceID->DataSource = new clsDBregistry_db();
+            $this->s_province_ProvinceID->ds = & $this->s_province_ProvinceID->DataSource;
+            $this->s_province_ProvinceID->DataSource->SQL = "SELECT * \n" .
+"FROM province {SQL_Where} {SQL_OrderBy}";
+            list($this->s_province_ProvinceID->BoundColumn, $this->s_province_ProvinceID->TextColumn, $this->s_province_ProvinceID->DBFormat) = array("ProvinceID", "ProvinceName", "");
+            $this->s_districts_DistrictID = new clsControl(ccsListBox, "s_districts_DistrictID", "s_districts_DistrictID", ccsInteger, "", CCGetRequestParam("s_districts_DistrictID", $Method, NULL), $this);
+            $this->s_districts_DistrictID->DSType = dsTable;
+            $this->s_districts_DistrictID->DataSource = new clsDBregistry_db();
+            $this->s_districts_DistrictID->ds = & $this->s_districts_DistrictID->DataSource;
+            $this->s_districts_DistrictID->DataSource->SQL = "SELECT * \n" .
+"FROM districts {SQL_Where} {SQL_OrderBy}";
+            list($this->s_districts_DistrictID->BoundColumn, $this->s_districts_DistrictID->TextColumn, $this->s_districts_DistrictID->DBFormat) = array("DistrictID", "DistrictName", "");
+            $this->s_FacilityName = new clsControl(ccsTextBox, "s_FacilityName", "s_FacilityName", ccsText, "", CCGetRequestParam("s_FacilityName", $Method, NULL), $this);
+            $this->facilities_countries_provPageSize = new clsControl(ccsListBox, "facilities_countries_provPageSize", "facilities_countries_provPageSize", ccsText, "", CCGetRequestParam("facilities_countries_provPageSize", $Method, NULL), $this);
+            $this->facilities_countries_provPageSize->DSType = dsListOfValues;
+            $this->facilities_countries_provPageSize->Values = array(array("", $CCSLocales->GetText("CCS_SelectValue")), array("5", "5"), array("10", "10"), array("25", "25"), array("100", "100"));
+        }
+    }
+//End Class_Initialize Event
+
+//Validate Method @88-162C19B1
+    function Validate()
+    {
+        global $CCSLocales;
+        $Validation = true;
+        $Where = "";
+        $Validation = ($this->s_countries_CountryID->Validate() && $Validation);
+        $Validation = ($this->s_province_ProvinceID->Validate() && $Validation);
+        $Validation = ($this->s_districts_DistrictID->Validate() && $Validation);
+        $Validation = ($this->s_FacilityName->Validate() && $Validation);
+        $Validation = ($this->facilities_countries_provPageSize->Validate() && $Validation);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "OnValidate", $this);
+        $Validation =  $Validation && ($this->s_countries_CountryID->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_province_ProvinceID->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_districts_DistrictID->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_FacilityName->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->facilities_countries_provPageSize->Errors->Count() == 0);
+        return (($this->Errors->Count() == 0) && $Validation);
+    }
+//End Validate Method
+
+//CheckErrors Method @88-5CDBC762
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->s_countries_CountryID->Errors->Count());
+        $errors = ($errors || $this->s_province_ProvinceID->Errors->Count());
+        $errors = ($errors || $this->s_districts_DistrictID->Errors->Count());
+        $errors = ($errors || $this->s_FacilityName->Errors->Count());
+        $errors = ($errors || $this->facilities_countries_provPageSize->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//MasterDetail @88-ED598703
+function SetPrimaryKeys($keyArray)
+{
+    $this->PrimaryKeys = $keyArray;
+}
+function GetPrimaryKeys()
+{
+    return $this->PrimaryKeys;
+}
+function GetPrimaryKey($keyName)
+{
+    return $this->PrimaryKeys[$keyName];
+}
+//End MasterDetail
+
+//Operation Method @88-F58FE3FF
+    function Operation()
+    {
+        if(!$this->Visible)
+            return;
+
+        global $Redirect;
+        global $FileName;
+
+        if(!$this->FormSubmitted) {
+            return;
+        }
+
+        if($this->FormSubmitted) {
+            $this->PressedButton = "Button_DoSearch";
+            if($this->Button_DoSearch->Pressed) {
+                $this->PressedButton = "Button_DoSearch";
+            }
+        }
+        $Redirect = "notifications_settings_maint.php";
+        if($this->Validate()) {
+            if($this->PressedButton == "Button_DoSearch") {
+                $Redirect = "notifications_settings_maint.php" . "?" . CCMergeQueryStrings(CCGetQueryString("Form", array("Button_DoSearch", "Button_DoSearch_x", "Button_DoSearch_y")));
+                if(!CCGetEvent($this->Button_DoSearch->CCSEvents, "OnClick", $this->Button_DoSearch)) {
+                    $Redirect = "";
+                }
+            }
+        } else {
+            $Redirect = "";
+        }
+    }
+//End Operation Method
+
+//Show Method @88-6FB7D973
+    function Show()
+    {
+        global $CCSUseAmp;
+        global $Tpl;
+        global $FileName;
+        global $CCSLocales;
+        $Error = "";
+
+        if(!$this->Visible)
+            return;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+        $this->s_countries_CountryID->Prepare();
+        $this->s_province_ProvinceID->Prepare();
+        $this->s_districts_DistrictID->Prepare();
+        $this->facilities_countries_provPageSize->Prepare();
+
+        $RecordBlock = "Record " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $RecordBlock;
+        $this->EditMode = $this->EditMode && $this->ReadAllowed;
+        if (!$this->FormSubmitted) {
+        }
+
+        if($this->FormSubmitted || $this->CheckErrors()) {
+            $Error = "";
+            $Error = ComposeStrings($Error, $this->s_countries_CountryID->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_province_ProvinceID->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_districts_DistrictID->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_FacilityName->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->facilities_countries_provPageSize->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Errors->ToString());
+            $Tpl->SetVar("Error", $Error);
+            $Tpl->Parse("Error", false);
+        }
+        $CCSForm = $this->EditMode ? $this->ComponentName . ":" . "Edit" : $this->ComponentName;
+        $this->HTMLFormAction = $FileName . "?" . CCAddParam(CCGetQueryString("QueryString", ""), "ccsForm", $CCSForm);
+        $Tpl->SetVar("Action", !$CCSUseAmp ? $this->HTMLFormAction : str_replace("&", "&amp;", $this->HTMLFormAction));
+        $Tpl->SetVar("HTMLFormName", $this->ComponentName);
+        $Tpl->SetVar("HTMLFormEnctype", $this->FormEnctype);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        $this->Attributes->Show();
+        if(!$this->Visible) {
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+
+        $this->Button_DoSearch->Show();
+        $this->s_countries_CountryID->Show();
+        $this->s_province_ProvinceID->Show();
+        $this->s_districts_DistrictID->Show();
+        $this->s_FacilityName->Show();
+        $this->facilities_countries_provPageSize->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+    }
+//End Show Method
+
+} //End countries_districts_facil Class @88-FCB6E20C
+
+class clsRecordnotificationsettings { //notificationsettings Class @157-9DE2246F
+
+//Variables @157-9E315808
+
+    // Public variables
+    public $ComponentType = "Record";
+    public $ComponentName;
+    public $Parent;
+    public $HTMLFormAction;
+    public $PressedButton;
+    public $Errors;
+    public $ErrorBlock;
+    public $FormSubmitted;
+    public $FormEnctype;
+    public $Visible;
+    public $IsEmpty;
+
+    public $CCSEvents = "";
+    public $CCSEventResult;
+
+    public $RelativePath = "";
+
+    public $InsertAllowed = false;
+    public $UpdateAllowed = false;
+    public $DeleteAllowed = false;
+    public $ReadAllowed   = false;
+    public $EditMode      = false;
+    public $ds;
+    public $DataSource;
+    public $ValidatingControls;
+    public $Controls;
+    public $Attributes;
+
+    // Class variables
+//End Variables
+
+//Class_Initialize Event @157-0F4A9D13
+    function clsRecordnotificationsettings($RelativePath, & $Parent)
+    {
+
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->Visible = true;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Record notificationsettings/Error";
+        $this->DataSource = new clsnotificationsettingsDataSource($this);
+        $this->ds = & $this->DataSource;
+        $this->ReadAllowed = true;
+        $this->Visible = (CCSecurityAccessCheck("1") == "success");
+        if($this->Visible)
+        {
+            $this->ReadAllowed = $this->ReadAllowed && CCUserInGroups(CCGetGroupID(), "1");
+            $this->InsertAllowed = CCUserInGroups(CCGetGroupID(), "1");
+            $this->UpdateAllowed = CCUserInGroups(CCGetGroupID(), "1");
+            $this->ComponentName = "notificationsettings";
+            $this->Attributes = new clsAttributes($this->ComponentName . ":");
+            $CCSForm = explode(":", CCGetFromGet("ccsForm", ""), 2);
+            if(sizeof($CCSForm) == 1)
+                $CCSForm[1] = "";
+            list($FormName, $FormMethod) = $CCSForm;
+            $this->EditMode = ($FormMethod == "Edit");
+            $this->FormEnctype = "application/x-www-form-urlencoded";
+            $this->FormSubmitted = ($FormName == $this->ComponentName);
+            $Method = $this->FormSubmitted ? ccsPost : ccsGet;
+            $this->Button_Insert = new clsButton("Button_Insert", $Method, $this);
+            $this->Button_Update = new clsButton("Button_Update", $Method, $this);
+            $this->Button_Delete = new clsButton("Button_Delete", $Method, $this);
+            $this->Recommendations = new clsControl(ccsCheckBox, "Recommendations", $CCSLocales->GetText("Recommendations"), ccsInteger, "", CCGetRequestParam("Recommendations", $Method, NULL), $this);
+            $this->Recommendations->CheckedValue = $this->Recommendations->GetParsedValue(1);
+            $this->Recommendations->UncheckedValue = $this->Recommendations->GetParsedValue(0);
+            $this->Reminders = new clsControl(ccsCheckBox, "Reminders", $CCSLocales->GetText("Reminders"), ccsInteger, "", CCGetRequestParam("Reminders", $Method, NULL), $this);
+            $this->Reminders->CheckedValue = $this->Reminders->GetParsedValue(1);
+            $this->Reminders->UncheckedValue = $this->Reminders->GetParsedValue(0);
+            $this->RemindersTimeToSend = new clsControl(ccsTextBox, "RemindersTimeToSend", $CCSLocales->GetText("RemindersTimeToSend"), ccsDate, array("H", ":", "nn", ":", "ss"), CCGetRequestParam("RemindersTimeToSend", $Method, NULL), $this);
+            $this->RemindersTimeToSend->Required = true;
+            $this->RemindersHighRisk = new clsControl(ccsCheckBox, "RemindersHighRisk", $CCSLocales->GetText("RemindersHighRisk"), ccsInteger, "", CCGetRequestParam("RemindersHighRisk", $Method, NULL), $this);
+            $this->RemindersHighRisk->CheckedValue = $this->RemindersHighRisk->GetParsedValue(1);
+            $this->RemindersHighRisk->UncheckedValue = $this->RemindersHighRisk->GetParsedValue(0);
+            $this->RemindersHighRiskTimeToSend = new clsControl(ccsTextBox, "RemindersHighRiskTimeToSend", $CCSLocales->GetText("RemindersHighRiskTimeToSend"), ccsDate, array("H", ":", "nn", ":", "ss"), CCGetRequestParam("RemindersHighRiskTimeToSend", $Method, NULL), $this);
+            $this->RemindersHighRiskTimeToSend->Required = true;
+            $this->PatientDischargedReferralDaysAfter = new clsControl(ccsTextBox, "PatientDischargedReferralDaysAfter", $CCSLocales->GetText("PatientDischargedReferralDaysAfter"), ccsInteger, "", CCGetRequestParam("PatientDischargedReferralDaysAfter", $Method, NULL), $this);
+            $this->PatientDischargedReferralDaysAfter->Required = true;
+            $this->HighRiskPregnanciesSummary = new clsControl(ccsCheckBox, "HighRiskPregnanciesSummary", $CCSLocales->GetText("HighRiskPregnanciesSummary"), ccsInteger, "", CCGetRequestParam("HighRiskPregnanciesSummary", $Method, NULL), $this);
+            $this->HighRiskPregnanciesSummary->CheckedValue = $this->HighRiskPregnanciesSummary->GetParsedValue(1);
+            $this->HighRiskPregnanciesSummary->UncheckedValue = $this->HighRiskPregnanciesSummary->GetParsedValue(0);
+            $this->HighRiskPregnanciesSummaryDayOfMonth = new clsControl(ccsTextBox, "HighRiskPregnanciesSummaryDayOfMonth", $CCSLocales->GetText("HighRiskPregnanciesSummaryDayOfMonth"), ccsInteger, "", CCGetRequestParam("HighRiskPregnanciesSummaryDayOfMonth", $Method, NULL), $this);
+            $this->HighRiskPregnanciesSummaryDayOfMonth->Required = true;
+            $this->HighRiskPregnanciesSummaryTimeToSend = new clsControl(ccsTextBox, "HighRiskPregnanciesSummaryTimeToSend", $CCSLocales->GetText("HighRiskPregnanciesSummaryTimeToSend"), ccsDate, array("H", ":", "nn", ":", "ss"), CCGetRequestParam("HighRiskPregnanciesSummaryTimeToSend", $Method, NULL), $this);
+            $this->HighRiskPregnanciesSummaryTimeToSend->Required = true;
+            $this->RecommendationsTimeToSend = new clsControl(ccsTextBox, "RecommendationsTimeToSend", $CCSLocales->GetText("RecommendationsTimeToSend"), ccsDate, array("H", ":", "nn", ":", "ss"), CCGetRequestParam("RecommendationsTimeToSend", $Method, NULL), $this);
+            $this->RecommendationsTimeToSend->Required = true;
+            $this->RemindersHighRiskDaysInAdv = new clsControl(ccsTextBox, "RemindersHighRiskDaysInAdv", $CCSLocales->GetText("RemindersHighRiskDaysInAdv"), ccsInteger, "", CCGetRequestParam("RemindersHighRiskDaysInAdv", $Method, NULL), $this);
+            $this->RemindersHighRiskDaysInAdv->Required = true;
+            $this->RemindersDaysInAdv = new clsControl(ccsTextBox, "RemindersDaysInAdv", $CCSLocales->GetText("RemindersDaysInAdv"), ccsInteger, "", CCGetRequestParam("RemindersDaysInAdv", $Method, NULL), $this);
+            $this->RemindersDaysInAdv->Required = true;
+            $this->PatientDischargedReferral = new clsControl(ccsCheckBox, "PatientDischargedReferral", $CCSLocales->GetText("PatientDischargedReferral"), ccsInteger, "", CCGetRequestParam("PatientDischargedReferral", $Method, NULL), $this);
+            $this->PatientDischargedReferral->CheckedValue = $this->PatientDischargedReferral->GetParsedValue(1);
+            $this->PatientDischargedReferral->UncheckedValue = $this->PatientDischargedReferral->GetParsedValue(0);
+            $this->PatientDischargedReferralTimeToSend = new clsControl(ccsTextBox, "PatientDischargedReferralTimeToSend", $CCSLocales->GetText("PatientDischargedReferralTimeToSend"), ccsDate, array("H", ":", "nn", ":", "ss"), CCGetRequestParam("PatientDischargedReferralTimeToSend", $Method, NULL), $this);
+            $this->PatientDischargedReferralTimeToSend->Required = true;
+            $this->FacilityNameLabel = new clsControl(ccsLabel, "FacilityNameLabel", "FacilityNameLabel", ccsText, "", CCGetRequestParam("FacilityNameLabel", $Method, NULL), $this);
+            if(!$this->FormSubmitted) {
+                if(!is_array($this->Recommendations->Value) && !strlen($this->Recommendations->Value) && $this->Recommendations->Value !== false)
+                    $this->Recommendations->SetValue(true);
+                if(!is_array($this->Reminders->Value) && !strlen($this->Reminders->Value) && $this->Reminders->Value !== false)
+                    $this->Reminders->SetValue(true);
+                if(!is_array($this->RemindersTimeToSend->Value) && !strlen($this->RemindersTimeToSend->Value) && $this->RemindersTimeToSend->Value !== false)
+                    $this->RemindersTimeToSend->SetText($CCSLocales->GetText("DefaultTime"));
+                if(!is_array($this->RemindersHighRisk->Value) && !strlen($this->RemindersHighRisk->Value) && $this->RemindersHighRisk->Value !== false)
+                    $this->RemindersHighRisk->SetValue(true);
+                if(!is_array($this->RemindersHighRiskTimeToSend->Value) && !strlen($this->RemindersHighRiskTimeToSend->Value) && $this->RemindersHighRiskTimeToSend->Value !== false)
+                    $this->RemindersHighRiskTimeToSend->SetText($CCSLocales->GetText("DefaultTime"));
+                if(!is_array($this->PatientDischargedReferralDaysAfter->Value) && !strlen($this->PatientDischargedReferralDaysAfter->Value) && $this->PatientDischargedReferralDaysAfter->Value !== false)
+                    $this->PatientDischargedReferralDaysAfter->SetText(1);
+                if(!is_array($this->HighRiskPregnanciesSummary->Value) && !strlen($this->HighRiskPregnanciesSummary->Value) && $this->HighRiskPregnanciesSummary->Value !== false)
+                    $this->HighRiskPregnanciesSummary->SetValue(true);
+                if(!is_array($this->HighRiskPregnanciesSummaryDayOfMonth->Value) && !strlen($this->HighRiskPregnanciesSummaryDayOfMonth->Value) && $this->HighRiskPregnanciesSummaryDayOfMonth->Value !== false)
+                    $this->HighRiskPregnanciesSummaryDayOfMonth->SetText(28);
+                if(!is_array($this->HighRiskPregnanciesSummaryTimeToSend->Value) && !strlen($this->HighRiskPregnanciesSummaryTimeToSend->Value) && $this->HighRiskPregnanciesSummaryTimeToSend->Value !== false)
+                    $this->HighRiskPregnanciesSummaryTimeToSend->SetText($CCSLocales->GetText("DefaultTime"));
+                if(!is_array($this->RecommendationsTimeToSend->Value) && !strlen($this->RecommendationsTimeToSend->Value) && $this->RecommendationsTimeToSend->Value !== false)
+                    $this->RecommendationsTimeToSend->SetText($CCSLocales->GetText("DefaultTime"));
+                if(!is_array($this->RemindersHighRiskDaysInAdv->Value) && !strlen($this->RemindersHighRiskDaysInAdv->Value) && $this->RemindersHighRiskDaysInAdv->Value !== false)
+                    $this->RemindersHighRiskDaysInAdv->SetText(1);
+                if(!is_array($this->RemindersDaysInAdv->Value) && !strlen($this->RemindersDaysInAdv->Value) && $this->RemindersDaysInAdv->Value !== false)
+                    $this->RemindersDaysInAdv->SetText(2);
+                if(!is_array($this->PatientDischargedReferral->Value) && !strlen($this->PatientDischargedReferral->Value) && $this->PatientDischargedReferral->Value !== false)
+                    $this->PatientDischargedReferral->SetValue(true);
+                if(!is_array($this->PatientDischargedReferralTimeToSend->Value) && !strlen($this->PatientDischargedReferralTimeToSend->Value) && $this->PatientDischargedReferralTimeToSend->Value !== false)
+                    $this->PatientDischargedReferralTimeToSend->SetText($CCSLocales->GetText("DefaultTime"));
+            }
+        }
+    }
+//End Class_Initialize Event
+
+//Initialize Method @157-80BA7BA3
+    function Initialize()
+    {
+
+        if(!$this->Visible)
+            return;
+
+        $this->DataSource->Parameters["urlFacilityID"] = CCGetFromGet("FacilityID", NULL);
+    }
+//End Initialize Method
+
+//Validate Method @157-E0B36F41
+    function Validate()
+    {
+        global $CCSLocales;
+        $Validation = true;
+        $Where = "";
+        if(!(($this->RemindersTimeToSend->getvalue().substr(0,2) >= 0 && $this->RemindersTimeToSend->getvalue().substr(0,2) <= 23) &&
+            ($this->RemindersTimeToSend->getvalue().substr(3,2) >= 0 && $this->RemindersTimeToSend->getvalue().substr(3,2) <= 59) &&
+            ($this->RemindersTimeToSend->getvalue().substr(6,2) >= 0 && $this->RemindersTimeToSend->getvalue().substr(6,2) <= 59))) {
+            $this->RemindersTimeToSend->Errors->addError($CCSLocales->GetText("NotificationInvalidTimeFormat"));
+        }
+
+		if(!(($this->RemindersHighRiskTimeToSend->getvalue().substr(0,2) >= 0 && $this->RemindersHighRiskTimeToSend->getvalue().substr(0,2) <= 23) &&
+            ($this->RemindersHighRiskTimeToSend->getvalue().substr(3,2) >= 0 && $this->RemindersHighRiskTimeToSend->getvalue().substr(3,2) <= 59) &&
+            ($this->RemindersHighRiskTimeToSend->getvalue().substr(6,2) >= 0 && $this->RemindersHighRiskTimeToSend->getvalue().substr(6,2) <= 59))) {
+            $this->RemindersHighRiskTimeToSend->Errors->addError($CCSLocales->GetText("NotificationInvalidTimeFormat"));
+        }
+
+		if(!(($this->RecommendationsTimeToSend->getvalue().substr(0,2) >= 0 && $this->RecommendationsTimeToSend->getvalue().substr(0,2) <= 23) &&
+            ($this->RecommendationsTimeToSend->getvalue().substr(3,2) >= 0 && $this->RecommendationsTimeToSend->getvalue().substr(3,2) <= 59) &&
+            ($this->RecommendationsTimeToSend->getvalue().substr(6,2) >= 0 && $this->RecommendationsTimeToSend->getvalue().substr(6,2) <= 59))) {
+            $this->RecommendationsTimeToSend->Errors->addError($CCSLocales->GetText("NotificationInvalidTimeFormat"));
+        }
+
+        if(! (($this->PatientDischargedReferralDaysAfter->getvalue() > 0) && (($this->PatientDischargedReferralDaysAfter->getvalue() < 16)))) {
+            $this->PatientDischargedReferralDaysAfter->Errors->addError($CCSLocales->GetText("NotificationsDaysAfter"));
+        }
+        if(! (($this->HighRiskPregnanciesSummaryDayOfMonth->getvalue() > 0) && ($this->HighRiskPregnanciesSummaryDayOfMonth->getvalue() < 29))) {
+            $this->HighRiskPregnanciesSummaryDayOfMonth->Errors->addError($CCSLocales->GetText("NotificationsDayOfMonth"));
+        }
+        if(! (($this->RemindersHighRiskDaysInAdv->getvalue() > 0) && (($this->RemindersHighRiskDaysInAdv->getvalue() < 16)))) {
+            $this->RemindersHighRiskDaysInAdv->Errors->addError($CCSLocales->GetText("NotificationsDaysinAdvHighRiskReminders"));
+        }
+        if(! (($this->RemindersDaysInAdv->getvalue() > 0) && (($this->RemindersDaysInAdv->getvalue() < 16)))) {
+            $this->RemindersDaysInAdv->Errors->addError($CCSLocales->GetText("NotificationsReminderDaysinAdvance"));
+        }
+        $Validation = ($this->Recommendations->Validate() && $Validation);
+        $Validation = ($this->Reminders->Validate() && $Validation);
+        $Validation = ($this->RemindersTimeToSend->Validate() && $Validation);
+        $Validation = ($this->RemindersHighRisk->Validate() && $Validation);
+        $Validation = ($this->RemindersHighRiskTimeToSend->Validate() && $Validation);
+        $Validation = ($this->PatientDischargedReferralDaysAfter->Validate() && $Validation);
+        $Validation = ($this->HighRiskPregnanciesSummary->Validate() && $Validation);
+        $Validation = ($this->HighRiskPregnanciesSummaryDayOfMonth->Validate() && $Validation);
+        $Validation = ($this->HighRiskPregnanciesSummaryTimeToSend->Validate() && $Validation);
+        $Validation = ($this->RecommendationsTimeToSend->Validate() && $Validation);
+        $Validation = ($this->RemindersHighRiskDaysInAdv->Validate() && $Validation);
+        $Validation = ($this->RemindersDaysInAdv->Validate() && $Validation);
+        $Validation = ($this->PatientDischargedReferral->Validate() && $Validation);
+        $Validation = ($this->PatientDischargedReferralTimeToSend->Validate() && $Validation);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "OnValidate", $this);
+        $Validation =  $Validation && ($this->Recommendations->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->Reminders->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->RemindersTimeToSend->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->RemindersHighRisk->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->RemindersHighRiskTimeToSend->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->PatientDischargedReferralDaysAfter->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->HighRiskPregnanciesSummary->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->HighRiskPregnanciesSummaryDayOfMonth->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->HighRiskPregnanciesSummaryTimeToSend->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->RecommendationsTimeToSend->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->RemindersHighRiskDaysInAdv->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->RemindersDaysInAdv->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->PatientDischargedReferral->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->PatientDischargedReferralTimeToSend->Errors->Count() == 0);
+        return (($this->Errors->Count() == 0) && $Validation);
+    }
+//End Validate Method
+
+//CheckErrors Method @157-11CA71E7
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->Recommendations->Errors->Count());
+        $errors = ($errors || $this->Reminders->Errors->Count());
+        $errors = ($errors || $this->RemindersTimeToSend->Errors->Count());
+        $errors = ($errors || $this->RemindersHighRisk->Errors->Count());
+        $errors = ($errors || $this->RemindersHighRiskTimeToSend->Errors->Count());
+        $errors = ($errors || $this->PatientDischargedReferralDaysAfter->Errors->Count());
+        $errors = ($errors || $this->HighRiskPregnanciesSummary->Errors->Count());
+        $errors = ($errors || $this->HighRiskPregnanciesSummaryDayOfMonth->Errors->Count());
+        $errors = ($errors || $this->HighRiskPregnanciesSummaryTimeToSend->Errors->Count());
+        $errors = ($errors || $this->RecommendationsTimeToSend->Errors->Count());
+        $errors = ($errors || $this->RemindersHighRiskDaysInAdv->Errors->Count());
+        $errors = ($errors || $this->RemindersDaysInAdv->Errors->Count());
+        $errors = ($errors || $this->PatientDischargedReferral->Errors->Count());
+        $errors = ($errors || $this->PatientDischargedReferralTimeToSend->Errors->Count());
+        $errors = ($errors || $this->FacilityNameLabel->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        $errors = ($errors || $this->DataSource->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//MasterDetail @157-ED598703
+function SetPrimaryKeys($keyArray)
+{
+    $this->PrimaryKeys = $keyArray;
+}
+function GetPrimaryKeys()
+{
+    return $this->PrimaryKeys;
+}
+function GetPrimaryKey($keyName)
+{
+    return $this->PrimaryKeys[$keyName];
+}
+//End MasterDetail
+
+//Operation Method @157-31B62782
+    function Operation()
+    {
+        if(!$this->Visible)
+            return;
+
+        global $Redirect;
+        global $FileName;
+
+        $this->DataSource->Prepare();
+        if(!$this->FormSubmitted) {
+            $this->EditMode = $this->DataSource->AllParametersSet;
+            return;
+        }
+
+        if($this->FormSubmitted) {
+            $this->PressedButton = $this->EditMode ? "Button_Update" : "Button_Insert";
+            if($this->Button_Insert->Pressed) {
+                $this->PressedButton = "Button_Insert";
+            } else if($this->Button_Update->Pressed) {
+                $this->PressedButton = "Button_Update";
+            } else if($this->Button_Delete->Pressed) {
+                $this->PressedButton = "Button_Delete";
+            }
+        }
+        $Redirect = "notifications_settings_maint.php" . "?" . CCGetQueryString("QueryString", array("ccsForm"));
+        if($this->PressedButton == "Button_Delete") {
+            if(!CCGetEvent($this->Button_Delete->CCSEvents, "OnClick", $this->Button_Delete)) {
+                $Redirect = "";
+            }
+        } else if($this->Validate()) {
+            if($this->PressedButton == "Button_Insert" && $this->InsertAllowed) {
+                if(!CCGetEvent($this->Button_Insert->CCSEvents, "OnClick", $this->Button_Insert) || !$this->InsertRow()) {
+                    $Redirect = "";
+                }
+            } else if($this->PressedButton == "Button_Update" && $this->UpdateAllowed) {
+                if(!CCGetEvent($this->Button_Update->CCSEvents, "OnClick", $this->Button_Update) || !$this->UpdateRow()) {
+                    $Redirect = "";
+                }
+            }
+        } else {
+            $Redirect = "";
+        }
+        if ($Redirect)
+            $this->DataSource->close();
+    }
+//End Operation Method
+
+//InsertRow Method @157-2A137FD6
+    function InsertRow()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeInsert", $this);
+        if(!$this->InsertAllowed) return false;
+        $this->DataSource->Recommendations->SetValue($this->Recommendations->GetValue(true));
+        $this->DataSource->Reminders->SetValue($this->Reminders->GetValue(true));
+        $this->DataSource->RemindersTimeToSend->SetValue($this->RemindersTimeToSend->GetValue(true));
+        $this->DataSource->RemindersHighRisk->SetValue($this->RemindersHighRisk->GetValue(true));
+        $this->DataSource->RemindersHighRiskTimeToSend->SetValue($this->RemindersHighRiskTimeToSend->GetValue(true));
+        $this->DataSource->PatientDischargedReferral->SetValue($this->PatientDischargedReferral->GetValue(true));
+        $this->DataSource->PatientDischargedReferralTimeToSend->SetValue($this->PatientDischargedReferralTimeToSend->GetValue(true));
+        $this->DataSource->PatientDischargedReferralDaysAfter->SetValue($this->PatientDischargedReferralDaysAfter->GetValue(true));
+        $this->DataSource->HighRiskPregnanciesSummary->SetValue($this->HighRiskPregnanciesSummary->GetValue(true));
+        $this->DataSource->HighRiskPregnanciesSummaryDayOfMonth->SetValue($this->HighRiskPregnanciesSummaryDayOfMonth->GetValue(true));
+        $this->DataSource->HighRiskPregnanciesSummaryTimeToSend->SetValue($this->HighRiskPregnanciesSummaryTimeToSend->GetValue(true));
+        $this->DataSource->RecommendationsTimeToSend->SetValue($this->RecommendationsTimeToSend->GetValue(true));
+        $this->DataSource->RemindersHighRiskDaysInAdv->SetValue($this->RemindersHighRiskDaysInAdv->GetValue(true));
+        $this->DataSource->RemindersDaysInAdv->SetValue($this->RemindersDaysInAdv->GetValue(true));
+        $this->DataSource->Insert();
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterInsert", $this);
+        return (!$this->CheckErrors());
+    }
+//End InsertRow Method
+
+//UpdateRow Method @157-5AB3EF04
+    function UpdateRow()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeUpdate", $this);
+        if(!$this->UpdateAllowed) return false;
+        $this->DataSource->Recommendations->SetValue($this->Recommendations->GetValue(true));
+        $this->DataSource->Reminders->SetValue($this->Reminders->GetValue(true));
+        $this->DataSource->RemindersTimeToSend->SetValue($this->RemindersTimeToSend->GetValue(true));
+        $this->DataSource->RemindersHighRisk->SetValue($this->RemindersHighRisk->GetValue(true));
+        $this->DataSource->RemindersHighRiskTimeToSend->SetValue($this->RemindersHighRiskTimeToSend->GetValue(true));
+        $this->DataSource->PatientDischargedReferral->SetValue($this->PatientDischargedReferral->GetValue(true));
+        $this->DataSource->PatientDischargedReferralTimeToSend->SetValue($this->PatientDischargedReferralTimeToSend->GetValue(true));
+        $this->DataSource->PatientDischargedReferralDaysAfter->SetValue($this->PatientDischargedReferralDaysAfter->GetValue(true));
+        $this->DataSource->HighRiskPregnanciesSummary->SetValue($this->HighRiskPregnanciesSummary->GetValue(true));
+        $this->DataSource->HighRiskPregnanciesSummaryDayOfMonth->SetValue($this->HighRiskPregnanciesSummaryDayOfMonth->GetValue(true));
+        $this->DataSource->HighRiskPregnanciesSummaryTimeToSend->SetValue($this->HighRiskPregnanciesSummaryTimeToSend->GetValue(true));
+        $this->DataSource->RecommendationsTimeToSend->SetValue($this->RecommendationsTimeToSend->GetValue(true));
+        $this->DataSource->RemindersHighRiskDaysInAdv->SetValue($this->RemindersHighRiskDaysInAdv->GetValue(true));
+        $this->DataSource->RemindersDaysInAdv->SetValue($this->RemindersDaysInAdv->GetValue(true));
+        $this->DataSource->Update();
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterUpdate", $this);
+        return (!$this->CheckErrors());
+    }
+//End UpdateRow Method
+
+//Show Method @157-31908487
+    function Show()
+    {
+        global $CCSUseAmp;
+        global $Tpl;
+        global $FileName;
+        global $CCSLocales;
+        $Error = "";
+
+        if(!$this->Visible)
+            return;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $RecordBlock = "Record " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $RecordBlock;
+        $this->EditMode = $this->EditMode && $this->ReadAllowed;
+        if($this->EditMode) {
+            if($this->DataSource->Errors->Count()){
+                $this->Errors->AddErrors($this->DataSource->Errors);
+                $this->DataSource->Errors->clear();
+            }
+            $this->DataSource->Open();
+            if($this->DataSource->Errors->Count() == 0 && $this->DataSource->next_record()) {
+                $this->DataSource->SetValues();
+                $this->FacilityNameLabel->SetValue($this->DataSource->FacilityNameLabel->GetValue());
+                if(!$this->FormSubmitted){
+                    $this->Recommendations->SetValue($this->DataSource->Recommendations->GetValue());
+                    $this->Reminders->SetValue($this->DataSource->Reminders->GetValue());
+                    $this->RemindersTimeToSend->SetValue($this->DataSource->RemindersTimeToSend->GetValue());
+                    $this->RemindersHighRisk->SetValue($this->DataSource->RemindersHighRisk->GetValue());
+                    $this->RemindersHighRiskTimeToSend->SetValue($this->DataSource->RemindersHighRiskTimeToSend->GetValue());
+                    $this->PatientDischargedReferralDaysAfter->SetValue($this->DataSource->PatientDischargedReferralDaysAfter->GetValue());
+                    $this->HighRiskPregnanciesSummary->SetValue($this->DataSource->HighRiskPregnanciesSummary->GetValue());
+                    $this->HighRiskPregnanciesSummaryDayOfMonth->SetValue($this->DataSource->HighRiskPregnanciesSummaryDayOfMonth->GetValue());
+                    $this->HighRiskPregnanciesSummaryTimeToSend->SetValue($this->DataSource->HighRiskPregnanciesSummaryTimeToSend->GetValue());
+                    $this->RecommendationsTimeToSend->SetValue($this->DataSource->RecommendationsTimeToSend->GetValue());
+                    $this->RemindersHighRiskDaysInAdv->SetValue($this->DataSource->RemindersHighRiskDaysInAdv->GetValue());
+                    $this->RemindersDaysInAdv->SetValue($this->DataSource->RemindersDaysInAdv->GetValue());
+                    $this->PatientDischargedReferral->SetValue($this->DataSource->PatientDischargedReferral->GetValue());
+                    $this->PatientDischargedReferralTimeToSend->SetValue($this->DataSource->PatientDischargedReferralTimeToSend->GetValue());
+                }
+            } else {
+                $this->EditMode = false;
+            }
+        }
+
+        if($this->FormSubmitted || $this->CheckErrors()) {
+            $Error = "";
+            $Error = ComposeStrings($Error, $this->Recommendations->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Reminders->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->RemindersTimeToSend->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->RemindersHighRisk->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->RemindersHighRiskTimeToSend->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->PatientDischargedReferralDaysAfter->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->HighRiskPregnanciesSummary->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->HighRiskPregnanciesSummaryDayOfMonth->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->HighRiskPregnanciesSummaryTimeToSend->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->RecommendationsTimeToSend->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->RemindersHighRiskDaysInAdv->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->RemindersDaysInAdv->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->PatientDischargedReferral->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->PatientDischargedReferralTimeToSend->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->FacilityNameLabel->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DataSource->Errors->ToString());
+            $Tpl->SetVar("Error", $Error);
+            $Tpl->Parse("Error", false);
+        }
+        $CCSForm = $this->EditMode ? $this->ComponentName . ":" . "Edit" : $this->ComponentName;
+        $this->HTMLFormAction = $FileName . "?" . CCAddParam(CCGetQueryString("QueryString", ""), "ccsForm", $CCSForm);
+        $Tpl->SetVar("Action", !$CCSUseAmp ? $this->HTMLFormAction : str_replace("&", "&amp;", $this->HTMLFormAction));
+        $Tpl->SetVar("HTMLFormName", $this->ComponentName);
+        $Tpl->SetVar("HTMLFormEnctype", $this->FormEnctype);
+        $this->Button_Insert->Visible = !$this->EditMode && $this->InsertAllowed;
+        $this->Button_Update->Visible = $this->EditMode && $this->UpdateAllowed;
+        $this->Button_Delete->Visible = $this->EditMode && $this->DeleteAllowed;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        $this->Attributes->Show();
+        if(!$this->Visible) {
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+
+        $this->Button_Insert->Show();
+        $this->Button_Update->Show();
+        $this->Button_Delete->Show();
+        $this->Recommendations->Show();
+        $this->Reminders->Show();
+        $this->RemindersTimeToSend->Show();
+        $this->RemindersHighRisk->Show();
+        $this->RemindersHighRiskTimeToSend->Show();
+        $this->PatientDischargedReferralDaysAfter->Show();
+        $this->HighRiskPregnanciesSummary->Show();
+        $this->HighRiskPregnanciesSummaryDayOfMonth->Show();
+        $this->HighRiskPregnanciesSummaryTimeToSend->Show();
+        $this->RecommendationsTimeToSend->Show();
+        $this->RemindersHighRiskDaysInAdv->Show();
+        $this->RemindersDaysInAdv->Show();
+        $this->PatientDischargedReferral->Show();
+        $this->PatientDischargedReferralTimeToSend->Show();
+        $this->FacilityNameLabel->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+        $this->DataSource->close();
+    }
+//End Show Method
+
+} //End notificationsettings Class @157-FCB6E20C
+
+class clsnotificationsettingsDataSource extends clsDBregistry_db {  //notificationsettingsDataSource Class @157-630B50FB
+
+//DataSource Variables @157-4753DDD2
+    public $Parent = "";
+    public $CCSEvents = "";
+    public $CCSEventResult;
+    public $ErrorBlock;
+    public $CmdExecution;
+
+    public $InsertParameters;
+    public $UpdateParameters;
+    public $wp;
+    public $AllParametersSet;
+
+    public $InsertFields = array();
+    public $UpdateFields = array();
+
+    // Datasource fields
+    public $Recommendations;
+    public $Reminders;
+    public $RemindersTimeToSend;
+    public $RemindersHighRisk;
+    public $RemindersHighRiskTimeToSend;
+    public $PatientDischargedReferralDaysAfter;
+    public $HighRiskPregnanciesSummary;
+    public $HighRiskPregnanciesSummaryDayOfMonth;
+    public $HighRiskPregnanciesSummaryTimeToSend;
+    public $RecommendationsTimeToSend;
+    public $RemindersHighRiskDaysInAdv;
+    public $RemindersDaysInAdv;
+    public $PatientDischargedReferral;
+    public $PatientDischargedReferralTimeToSend;
+    public $FacilityNameLabel;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @157-878A5660
+    function clsnotificationsettingsDataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Record notificationsettings/Error";
+        $this->Initialize();
+        $this->Recommendations = new clsField("Recommendations", ccsInteger, "");
+        
+        $this->Reminders = new clsField("Reminders", ccsInteger, "");
+        
+        $this->RemindersTimeToSend = new clsField("RemindersTimeToSend", ccsDate, array("H", ":", "nn", ":", "ss"));
+        
+        $this->RemindersHighRisk = new clsField("RemindersHighRisk", ccsInteger, "");
+        
+        $this->RemindersHighRiskTimeToSend = new clsField("RemindersHighRiskTimeToSend", ccsDate, array("H", ":", "nn", ":", "ss"));
+        
+        $this->PatientDischargedReferralDaysAfter = new clsField("PatientDischargedReferralDaysAfter", ccsInteger, "");
+        
+        $this->HighRiskPregnanciesSummary = new clsField("HighRiskPregnanciesSummary", ccsInteger, "");
+        
+        $this->HighRiskPregnanciesSummaryDayOfMonth = new clsField("HighRiskPregnanciesSummaryDayOfMonth", ccsInteger, "");
+        
+        $this->HighRiskPregnanciesSummaryTimeToSend = new clsField("HighRiskPregnanciesSummaryTimeToSend", ccsDate, array("H", ":", "nn", ":", "ss"));
+        
+        $this->RecommendationsTimeToSend = new clsField("RecommendationsTimeToSend", ccsDate, array("H", ":", "nn", ":", "ss"));
+        
+        $this->RemindersHighRiskDaysInAdv = new clsField("RemindersHighRiskDaysInAdv", ccsInteger, "");
+        
+        $this->RemindersDaysInAdv = new clsField("RemindersDaysInAdv", ccsInteger, "");
+        
+        $this->PatientDischargedReferral = new clsField("PatientDischargedReferral", ccsInteger, "");
+        
+        $this->PatientDischargedReferralTimeToSend = new clsField("PatientDischargedReferralTimeToSend", ccsDate, array("H", ":", "nn", ":", "ss"));
+        
+        $this->FacilityNameLabel = new clsField("FacilityNameLabel", ccsText, "");
+        
+
+        $this->InsertFields["Recommendations"] = array("Name" => "Recommendations", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["Reminders"] = array("Name" => "Reminders", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["RemindersTimeToSend"] = array("Name" => "RemindersTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->InsertFields["RemindersHighRisk"] = array("Name" => "RemindersHighRisk", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["RemindersHighRiskTimeToSend"] = array("Name" => "RemindersHighRiskTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->InsertFields["PatientDischargedReferral"] = array("Name" => "PatientDischargedReferral", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["PatientDischargedReferralTimeToSend"] = array("Name" => "PatientDischargedReferralTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->InsertFields["PatientDischargedReferralDaysAfter"] = array("Name" => "PatientDischargedReferralDaysAfter", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["HighRiskPregnanciesSummary"] = array("Name" => "HighRiskPregnanciesSummary", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["HighRiskPregnanciesSummaryDayOfMonth"] = array("Name" => "HighRiskPregnanciesSummaryDayOfMonth", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["HighRiskPregnanciesSummaryTimeToSend"] = array("Name" => "HighRiskPregnanciesSummaryTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->InsertFields["RecommendationsTimeToSend"] = array("Name" => "RecommendationsTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->InsertFields["RemindersHighRiskDaysInAdv"] = array("Name" => "RemindersHighRiskDaysInAdv", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["RemindersDaysInAdv"] = array("Name" => "RemindersDaysInAdv", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["FacilityID"] = array("Name" => "FacilityID", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["Recommendations"] = array("Name" => "Recommendations", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["Reminders"] = array("Name" => "Reminders", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["RemindersTimeToSend"] = array("Name" => "RemindersTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->UpdateFields["RemindersHighRisk"] = array("Name" => "RemindersHighRisk", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["RemindersHighRiskTimeToSend"] = array("Name" => "RemindersHighRiskTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->UpdateFields["PatientDischargedReferral"] = array("Name" => "PatientDischargedReferral", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["PatientDischargedReferralTimeToSend"] = array("Name" => "PatientDischargedReferralTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->UpdateFields["PatientDischargedReferralDaysAfter"] = array("Name" => "PatientDischargedReferralDaysAfter", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["HighRiskPregnanciesSummary"] = array("Name" => "HighRiskPregnanciesSummary", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["HighRiskPregnanciesSummaryDayOfMonth"] = array("Name" => "HighRiskPregnanciesSummaryDayOfMonth", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["HighRiskPregnanciesSummaryTimeToSend"] = array("Name" => "HighRiskPregnanciesSummaryTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->UpdateFields["RecommendationsTimeToSend"] = array("Name" => "RecommendationsTimeToSend", "Value" => "", "DataType" => ccsDate, "OmitIfEmpty" => 1);
+        $this->UpdateFields["RemindersHighRiskDaysInAdv"] = array("Name" => "RemindersHighRiskDaysInAdv", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["RemindersDaysInAdv"] = array("Name" => "RemindersDaysInAdv", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+    }
+//End DataSourceClass_Initialize Event
+
+//Prepare Method @157-69AC1AE9
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urlFacilityID", ccsInteger, "", "", $this->Parameters["urlFacilityID"], 0, false);
+        $this->AllParametersSet = $this->wp->AllParamsSet();
+    }
+//End Prepare Method
+
+//Open Method @157-6849C377
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->SQL = "SELECT * \n" .
+        "FROM notificationsettings\n" .
+        "RIGHT JOIN facilities on facilities.FacilityID = notificationsettings.FacilityID\n" .
+        "WHERE  notificationsettings.FacilityID = " . $this->SQLValue($this->wp->GetDBValue("1"), ccsInteger) . " ";
+        $this->Order = "";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        $this->PageSize = 1;
+        $this->query($this->OptimizeSQL(CCBuildSQL($this->SQL, $this->Where, $this->Order)));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @157-97E09077
+    function SetValues()
+    {
+        $this->Recommendations->SetDBValue(trim($this->f("Recommendations")));
+        $this->Reminders->SetDBValue(trim($this->f("Reminders")));
+        $this->RemindersTimeToSend->SetDBValue(trim($this->f("RemindersTimeToSend")));
+        $this->RemindersHighRisk->SetDBValue(trim($this->f("RemindersHighRisk")));
+        $this->RemindersHighRiskTimeToSend->SetDBValue(trim($this->f("RemindersHighRiskTimeToSend")));
+        $this->PatientDischargedReferralDaysAfter->SetDBValue(trim($this->f("PatientDischargedReferralDaysAfter")));
+        $this->HighRiskPregnanciesSummary->SetDBValue(trim($this->f("HighRiskPregnanciesSummary")));
+        $this->HighRiskPregnanciesSummaryDayOfMonth->SetDBValue(trim($this->f("HighRiskPregnanciesSummaryDayOfMonth")));
+        $this->HighRiskPregnanciesSummaryTimeToSend->SetDBValue(trim($this->f("HighRiskPregnanciesSummaryTimeToSend")));
+        $this->RecommendationsTimeToSend->SetDBValue(trim($this->f("RecommendationsTimeToSend")));
+        $this->RemindersHighRiskDaysInAdv->SetDBValue(trim($this->f("RemindersHighRiskDaysInAdv")));
+        $this->RemindersDaysInAdv->SetDBValue(trim($this->f("RemindersDaysInAdv")));
+        $this->PatientDischargedReferral->SetDBValue(trim($this->f("PatientDischargedReferral")));
+        $this->PatientDischargedReferralTimeToSend->SetDBValue(trim($this->f("PatientDischargedReferralTimeToSend")));
+        $this->FacilityNameLabel->SetDBValue($this->f("FacilityName"));
+    }
+//End SetValues Method
+
+//Insert Method @157-8ABAB8CA
+    function Insert()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->CmdExecution = true;
+        $this->cp["Recommendations"] = new clsSQLParameter("ctrlRecommendations", ccsInteger, "", "", $this->Recommendations->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["Reminders"] = new clsSQLParameter("ctrlReminders", ccsInteger, "", "", $this->Reminders->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersTimeToSend"] = new clsSQLParameter("ctrlRemindersTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->RemindersTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersHighRisk"] = new clsSQLParameter("ctrlRemindersHighRisk", ccsInteger, "", "", $this->RemindersHighRisk->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersHighRiskTimeToSend"] = new clsSQLParameter("ctrlRemindersHighRiskTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->RemindersHighRiskTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["PatientDischargedReferral"] = new clsSQLParameter("ctrlPatientDischargedReferral", ccsInteger, "", "", $this->PatientDischargedReferral->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["PatientDischargedReferralTimeToSend"] = new clsSQLParameter("ctrlPatientDischargedReferralTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->PatientDischargedReferralTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["PatientDischargedReferralDaysAfter"] = new clsSQLParameter("ctrlPatientDischargedReferralDaysAfter", ccsInteger, "", "", $this->PatientDischargedReferralDaysAfter->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["HighRiskPregnanciesSummary"] = new clsSQLParameter("ctrlHighRiskPregnanciesSummary", ccsInteger, "", "", $this->HighRiskPregnanciesSummary->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["HighRiskPregnanciesSummaryDayOfMonth"] = new clsSQLParameter("ctrlHighRiskPregnanciesSummaryDayOfMonth", ccsInteger, "", "", $this->HighRiskPregnanciesSummaryDayOfMonth->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["HighRiskPregnanciesSummaryTimeToSend"] = new clsSQLParameter("ctrlHighRiskPregnanciesSummaryTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->HighRiskPregnanciesSummaryTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RecommendationsTimeToSend"] = new clsSQLParameter("ctrlRecommendationsTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->RecommendationsTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersHighRiskDaysInAdv"] = new clsSQLParameter("ctrlRemindersHighRiskDaysInAdv", ccsInteger, "", "", $this->RemindersHighRiskDaysInAdv->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersDaysInAdv"] = new clsSQLParameter("ctrlRemindersDaysInAdv", ccsInteger, "", "", $this->RemindersDaysInAdv->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["FacilityID"] = new clsSQLParameter("urlFacilityID", ccsInteger, "", "", CCGetFromGet("FacilityID", NULL), NULL, false, $this->ErrorBlock);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildInsert", $this->Parent);
+        if (!is_null($this->cp["Recommendations"]->GetValue()) and !strlen($this->cp["Recommendations"]->GetText()) and !is_bool($this->cp["Recommendations"]->GetValue())) 
+            $this->cp["Recommendations"]->SetValue($this->Recommendations->GetValue(true));
+        if (!is_null($this->cp["Reminders"]->GetValue()) and !strlen($this->cp["Reminders"]->GetText()) and !is_bool($this->cp["Reminders"]->GetValue())) 
+            $this->cp["Reminders"]->SetValue($this->Reminders->GetValue(true));
+        if (!is_null($this->cp["RemindersTimeToSend"]->GetValue()) and !strlen($this->cp["RemindersTimeToSend"]->GetText()) and !is_bool($this->cp["RemindersTimeToSend"]->GetValue())) 
+            $this->cp["RemindersTimeToSend"]->SetValue($this->RemindersTimeToSend->GetValue(true));
+        if (!is_null($this->cp["RemindersHighRisk"]->GetValue()) and !strlen($this->cp["RemindersHighRisk"]->GetText()) and !is_bool($this->cp["RemindersHighRisk"]->GetValue())) 
+            $this->cp["RemindersHighRisk"]->SetValue($this->RemindersHighRisk->GetValue(true));
+        if (!is_null($this->cp["RemindersHighRiskTimeToSend"]->GetValue()) and !strlen($this->cp["RemindersHighRiskTimeToSend"]->GetText()) and !is_bool($this->cp["RemindersHighRiskTimeToSend"]->GetValue())) 
+            $this->cp["RemindersHighRiskTimeToSend"]->SetValue($this->RemindersHighRiskTimeToSend->GetValue(true));
+        if (!is_null($this->cp["PatientDischargedReferral"]->GetValue()) and !strlen($this->cp["PatientDischargedReferral"]->GetText()) and !is_bool($this->cp["PatientDischargedReferral"]->GetValue())) 
+            $this->cp["PatientDischargedReferral"]->SetValue($this->PatientDischargedReferral->GetValue(true));
+        if (!is_null($this->cp["PatientDischargedReferralTimeToSend"]->GetValue()) and !strlen($this->cp["PatientDischargedReferralTimeToSend"]->GetText()) and !is_bool($this->cp["PatientDischargedReferralTimeToSend"]->GetValue())) 
+            $this->cp["PatientDischargedReferralTimeToSend"]->SetValue($this->PatientDischargedReferralTimeToSend->GetValue(true));
+        if (!is_null($this->cp["PatientDischargedReferralDaysAfter"]->GetValue()) and !strlen($this->cp["PatientDischargedReferralDaysAfter"]->GetText()) and !is_bool($this->cp["PatientDischargedReferralDaysAfter"]->GetValue())) 
+            $this->cp["PatientDischargedReferralDaysAfter"]->SetValue($this->PatientDischargedReferralDaysAfter->GetValue(true));
+        if (!is_null($this->cp["HighRiskPregnanciesSummary"]->GetValue()) and !strlen($this->cp["HighRiskPregnanciesSummary"]->GetText()) and !is_bool($this->cp["HighRiskPregnanciesSummary"]->GetValue())) 
+            $this->cp["HighRiskPregnanciesSummary"]->SetValue($this->HighRiskPregnanciesSummary->GetValue(true));
+        if (!is_null($this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->GetValue()) and !strlen($this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->GetText()) and !is_bool($this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->GetValue())) 
+            $this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->SetValue($this->HighRiskPregnanciesSummaryDayOfMonth->GetValue(true));
+        if (!is_null($this->cp["HighRiskPregnanciesSummaryTimeToSend"]->GetValue()) and !strlen($this->cp["HighRiskPregnanciesSummaryTimeToSend"]->GetText()) and !is_bool($this->cp["HighRiskPregnanciesSummaryTimeToSend"]->GetValue())) 
+            $this->cp["HighRiskPregnanciesSummaryTimeToSend"]->SetValue($this->HighRiskPregnanciesSummaryTimeToSend->GetValue(true));
+        if (!is_null($this->cp["RecommendationsTimeToSend"]->GetValue()) and !strlen($this->cp["RecommendationsTimeToSend"]->GetText()) and !is_bool($this->cp["RecommendationsTimeToSend"]->GetValue())) 
+            $this->cp["RecommendationsTimeToSend"]->SetValue($this->RecommendationsTimeToSend->GetValue(true));
+        if (!is_null($this->cp["RemindersHighRiskDaysInAdv"]->GetValue()) and !strlen($this->cp["RemindersHighRiskDaysInAdv"]->GetText()) and !is_bool($this->cp["RemindersHighRiskDaysInAdv"]->GetValue())) 
+            $this->cp["RemindersHighRiskDaysInAdv"]->SetValue($this->RemindersHighRiskDaysInAdv->GetValue(true));
+        if (!is_null($this->cp["RemindersDaysInAdv"]->GetValue()) and !strlen($this->cp["RemindersDaysInAdv"]->GetText()) and !is_bool($this->cp["RemindersDaysInAdv"]->GetValue())) 
+            $this->cp["RemindersDaysInAdv"]->SetValue($this->RemindersDaysInAdv->GetValue(true));
+        if (!is_null($this->cp["FacilityID"]->GetValue()) and !strlen($this->cp["FacilityID"]->GetText()) and !is_bool($this->cp["FacilityID"]->GetValue())) 
+            $this->cp["FacilityID"]->SetText(CCGetFromGet("FacilityID", NULL));
+        $this->InsertFields["Recommendations"]["Value"] = $this->cp["Recommendations"]->GetDBValue(true);
+        $this->InsertFields["Reminders"]["Value"] = $this->cp["Reminders"]->GetDBValue(true);
+        $this->InsertFields["RemindersTimeToSend"]["Value"] = $this->cp["RemindersTimeToSend"]->GetDBValue(true);
+        $this->InsertFields["RemindersHighRisk"]["Value"] = $this->cp["RemindersHighRisk"]->GetDBValue(true);
+        $this->InsertFields["RemindersHighRiskTimeToSend"]["Value"] = $this->cp["RemindersHighRiskTimeToSend"]->GetDBValue(true);
+        $this->InsertFields["PatientDischargedReferral"]["Value"] = $this->cp["PatientDischargedReferral"]->GetDBValue(true);
+        $this->InsertFields["PatientDischargedReferralTimeToSend"]["Value"] = $this->cp["PatientDischargedReferralTimeToSend"]->GetDBValue(true);
+        $this->InsertFields["PatientDischargedReferralDaysAfter"]["Value"] = $this->cp["PatientDischargedReferralDaysAfter"]->GetDBValue(true);
+        $this->InsertFields["HighRiskPregnanciesSummary"]["Value"] = $this->cp["HighRiskPregnanciesSummary"]->GetDBValue(true);
+        $this->InsertFields["HighRiskPregnanciesSummaryDayOfMonth"]["Value"] = $this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->GetDBValue(true);
+        $this->InsertFields["HighRiskPregnanciesSummaryTimeToSend"]["Value"] = $this->cp["HighRiskPregnanciesSummaryTimeToSend"]->GetDBValue(true);
+        $this->InsertFields["RecommendationsTimeToSend"]["Value"] = $this->cp["RecommendationsTimeToSend"]->GetDBValue(true);
+        $this->InsertFields["RemindersHighRiskDaysInAdv"]["Value"] = $this->cp["RemindersHighRiskDaysInAdv"]->GetDBValue(true);
+        $this->InsertFields["RemindersDaysInAdv"]["Value"] = $this->cp["RemindersDaysInAdv"]->GetDBValue(true);
+        $this->InsertFields["FacilityID"]["Value"] = $this->cp["FacilityID"]->GetDBValue(true);
+        $this->SQL = CCBuildInsert("notificationsettings", $this->InsertFields, $this);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteInsert", $this->Parent);
+        if($this->Errors->Count() == 0 && $this->CmdExecution) {
+            $this->query($this->SQL);
+            $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteInsert", $this->Parent);
+        }
+    }
+//End Insert Method
+
+//Update Method @157-E9F1AADB
+    function Update()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->CmdExecution = true;
+        $this->cp["Recommendations"] = new clsSQLParameter("ctrlRecommendations", ccsInteger, "", "", $this->Recommendations->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["Reminders"] = new clsSQLParameter("ctrlReminders", ccsInteger, "", "", $this->Reminders->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersTimeToSend"] = new clsSQLParameter("ctrlRemindersTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->RemindersTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersHighRisk"] = new clsSQLParameter("ctrlRemindersHighRisk", ccsInteger, "", "", $this->RemindersHighRisk->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersHighRiskTimeToSend"] = new clsSQLParameter("ctrlRemindersHighRiskTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->RemindersHighRiskTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["PatientDischargedReferral"] = new clsSQLParameter("ctrlPatientDischargedReferral", ccsInteger, "", "", $this->PatientDischargedReferral->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["PatientDischargedReferralTimeToSend"] = new clsSQLParameter("ctrlPatientDischargedReferralTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->PatientDischargedReferralTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["PatientDischargedReferralDaysAfter"] = new clsSQLParameter("ctrlPatientDischargedReferralDaysAfter", ccsInteger, "", "", $this->PatientDischargedReferralDaysAfter->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["HighRiskPregnanciesSummary"] = new clsSQLParameter("ctrlHighRiskPregnanciesSummary", ccsInteger, "", "", $this->HighRiskPregnanciesSummary->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["HighRiskPregnanciesSummaryDayOfMonth"] = new clsSQLParameter("ctrlHighRiskPregnanciesSummaryDayOfMonth", ccsInteger, "", "", $this->HighRiskPregnanciesSummaryDayOfMonth->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["HighRiskPregnanciesSummaryTimeToSend"] = new clsSQLParameter("ctrlHighRiskPregnanciesSummaryTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->HighRiskPregnanciesSummaryTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RecommendationsTimeToSend"] = new clsSQLParameter("ctrlRecommendationsTimeToSend", ccsDate, $DefaultDateFormat, $this->DateFormat, $this->RecommendationsTimeToSend->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersHighRiskDaysInAdv"] = new clsSQLParameter("ctrlRemindersHighRiskDaysInAdv", ccsInteger, "", "", $this->RemindersHighRiskDaysInAdv->GetValue(true), NULL, false, $this->ErrorBlock);
+        $this->cp["RemindersDaysInAdv"] = new clsSQLParameter("ctrlRemindersDaysInAdv", ccsInteger, "", "", $this->RemindersDaysInAdv->GetValue(true), NULL, false, $this->ErrorBlock);
+        $wp = new clsSQLParameters($this->ErrorBlock);
+        $wp->AddParameter("1", "urlFacilityID", ccsInteger, "", "", CCGetFromGet("FacilityID", NULL), "", true);
+        if(!$wp->AllParamsSet()) {
+            $this->Errors->addError($CCSLocales->GetText("CCS_CustomOperationError_MissingParameters"));
+        }
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildUpdate", $this->Parent);
+        if (!is_null($this->cp["Recommendations"]->GetValue()) and !strlen($this->cp["Recommendations"]->GetText()) and !is_bool($this->cp["Recommendations"]->GetValue())) 
+            $this->cp["Recommendations"]->SetValue($this->Recommendations->GetValue(true));
+        if (!is_null($this->cp["Reminders"]->GetValue()) and !strlen($this->cp["Reminders"]->GetText()) and !is_bool($this->cp["Reminders"]->GetValue())) 
+            $this->cp["Reminders"]->SetValue($this->Reminders->GetValue(true));
+        if (!is_null($this->cp["RemindersTimeToSend"]->GetValue()) and !strlen($this->cp["RemindersTimeToSend"]->GetText()) and !is_bool($this->cp["RemindersTimeToSend"]->GetValue())) 
+            $this->cp["RemindersTimeToSend"]->SetValue($this->RemindersTimeToSend->GetValue(true));
+        if (!is_null($this->cp["RemindersHighRisk"]->GetValue()) and !strlen($this->cp["RemindersHighRisk"]->GetText()) and !is_bool($this->cp["RemindersHighRisk"]->GetValue())) 
+            $this->cp["RemindersHighRisk"]->SetValue($this->RemindersHighRisk->GetValue(true));
+        if (!is_null($this->cp["RemindersHighRiskTimeToSend"]->GetValue()) and !strlen($this->cp["RemindersHighRiskTimeToSend"]->GetText()) and !is_bool($this->cp["RemindersHighRiskTimeToSend"]->GetValue())) 
+            $this->cp["RemindersHighRiskTimeToSend"]->SetValue($this->RemindersHighRiskTimeToSend->GetValue(true));
+        if (!is_null($this->cp["PatientDischargedReferral"]->GetValue()) and !strlen($this->cp["PatientDischargedReferral"]->GetText()) and !is_bool($this->cp["PatientDischargedReferral"]->GetValue())) 
+            $this->cp["PatientDischargedReferral"]->SetValue($this->PatientDischargedReferral->GetValue(true));
+        if (!is_null($this->cp["PatientDischargedReferralTimeToSend"]->GetValue()) and !strlen($this->cp["PatientDischargedReferralTimeToSend"]->GetText()) and !is_bool($this->cp["PatientDischargedReferralTimeToSend"]->GetValue())) 
+            $this->cp["PatientDischargedReferralTimeToSend"]->SetValue($this->PatientDischargedReferralTimeToSend->GetValue(true));
+        if (!is_null($this->cp["PatientDischargedReferralDaysAfter"]->GetValue()) and !strlen($this->cp["PatientDischargedReferralDaysAfter"]->GetText()) and !is_bool($this->cp["PatientDischargedReferralDaysAfter"]->GetValue())) 
+            $this->cp["PatientDischargedReferralDaysAfter"]->SetValue($this->PatientDischargedReferralDaysAfter->GetValue(true));
+        if (!is_null($this->cp["HighRiskPregnanciesSummary"]->GetValue()) and !strlen($this->cp["HighRiskPregnanciesSummary"]->GetText()) and !is_bool($this->cp["HighRiskPregnanciesSummary"]->GetValue())) 
+            $this->cp["HighRiskPregnanciesSummary"]->SetValue($this->HighRiskPregnanciesSummary->GetValue(true));
+        if (!is_null($this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->GetValue()) and !strlen($this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->GetText()) and !is_bool($this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->GetValue())) 
+            $this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->SetValue($this->HighRiskPregnanciesSummaryDayOfMonth->GetValue(true));
+        if (!is_null($this->cp["HighRiskPregnanciesSummaryTimeToSend"]->GetValue()) and !strlen($this->cp["HighRiskPregnanciesSummaryTimeToSend"]->GetText()) and !is_bool($this->cp["HighRiskPregnanciesSummaryTimeToSend"]->GetValue())) 
+            $this->cp["HighRiskPregnanciesSummaryTimeToSend"]->SetValue($this->HighRiskPregnanciesSummaryTimeToSend->GetValue(true));
+        if (!is_null($this->cp["RecommendationsTimeToSend"]->GetValue()) and !strlen($this->cp["RecommendationsTimeToSend"]->GetText()) and !is_bool($this->cp["RecommendationsTimeToSend"]->GetValue())) 
+            $this->cp["RecommendationsTimeToSend"]->SetValue($this->RecommendationsTimeToSend->GetValue(true));
+        if (!is_null($this->cp["RemindersHighRiskDaysInAdv"]->GetValue()) and !strlen($this->cp["RemindersHighRiskDaysInAdv"]->GetText()) and !is_bool($this->cp["RemindersHighRiskDaysInAdv"]->GetValue())) 
+            $this->cp["RemindersHighRiskDaysInAdv"]->SetValue($this->RemindersHighRiskDaysInAdv->GetValue(true));
+        if (!is_null($this->cp["RemindersDaysInAdv"]->GetValue()) and !strlen($this->cp["RemindersDaysInAdv"]->GetText()) and !is_bool($this->cp["RemindersDaysInAdv"]->GetValue())) 
+            $this->cp["RemindersDaysInAdv"]->SetValue($this->RemindersDaysInAdv->GetValue(true));
+        $wp->Criterion[1] = $wp->Operation(opEqual, "notificationsettings.FacilityID", $wp->GetDBValue("1"), $this->ToSQL($wp->GetDBValue("1"), ccsInteger),true);
+        $Where = 
+             $wp->Criterion[1];
+        $this->UpdateFields["Recommendations"]["Value"] = $this->cp["Recommendations"]->GetDBValue(true);
+        $this->UpdateFields["Reminders"]["Value"] = $this->cp["Reminders"]->GetDBValue(true);
+        $this->UpdateFields["RemindersTimeToSend"]["Value"] = $this->cp["RemindersTimeToSend"]->GetDBValue(true);
+        $this->UpdateFields["RemindersHighRisk"]["Value"] = $this->cp["RemindersHighRisk"]->GetDBValue(true);
+        $this->UpdateFields["RemindersHighRiskTimeToSend"]["Value"] = $this->cp["RemindersHighRiskTimeToSend"]->GetDBValue(true);
+        $this->UpdateFields["PatientDischargedReferral"]["Value"] = $this->cp["PatientDischargedReferral"]->GetDBValue(true);
+        $this->UpdateFields["PatientDischargedReferralTimeToSend"]["Value"] = $this->cp["PatientDischargedReferralTimeToSend"]->GetDBValue(true);
+        $this->UpdateFields["PatientDischargedReferralDaysAfter"]["Value"] = $this->cp["PatientDischargedReferralDaysAfter"]->GetDBValue(true);
+        $this->UpdateFields["HighRiskPregnanciesSummary"]["Value"] = $this->cp["HighRiskPregnanciesSummary"]->GetDBValue(true);
+        $this->UpdateFields["HighRiskPregnanciesSummaryDayOfMonth"]["Value"] = $this->cp["HighRiskPregnanciesSummaryDayOfMonth"]->GetDBValue(true);
+        $this->UpdateFields["HighRiskPregnanciesSummaryTimeToSend"]["Value"] = $this->cp["HighRiskPregnanciesSummaryTimeToSend"]->GetDBValue(true);
+        $this->UpdateFields["RecommendationsTimeToSend"]["Value"] = $this->cp["RecommendationsTimeToSend"]->GetDBValue(true);
+        $this->UpdateFields["RemindersHighRiskDaysInAdv"]["Value"] = $this->cp["RemindersHighRiskDaysInAdv"]->GetDBValue(true);
+        $this->UpdateFields["RemindersDaysInAdv"]["Value"] = $this->cp["RemindersDaysInAdv"]->GetDBValue(true);
+        $this->SQL = CCBuildUpdate("notificationsettings", $this->UpdateFields, $this);
+        $this->SQL .= strlen($Where) ? " WHERE " . $Where : $Where;
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteUpdate", $this->Parent);
+        if($this->Errors->Count() == 0 && $this->CmdExecution) {
+            $this->query($this->SQL);
+            $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteUpdate", $this->Parent);
+        }
+    }
+//End Update Method
+
+} //End notificationsettingsDataSource Class @157-FCB6E20C
+
+
+
+
+
+//Initialize Page @1-0E5451CB
+// Variables
+$FileName = "";
+$Redirect = "";
+$Tpl = "";
+$TemplateFileName = "";
+$BlockToParse = "";
+$ComponentName = "";
+$Attributes = "";
+
+// Events;
+$CCSEvents = "";
+$CCSEventResult = "";
+
+$FileName = FileName;
+$Redirect = "";
+$TemplateFileName = "notifications_settings_maint.html";
+$BlockToParse = "main";
+$TemplateEncoding = "UTF-8";
+$ContentType = "text/html";
+$PathToRoot = "./";
+$Charset = $Charset ? $Charset : "utf-8";
+//End Initialize Page
+
+//Check SSL @1-E30DD771
+CCCheckSSL();
+//End Check SSL
+
+//Include events file @1-5C6C3614
+include_once("./notifications_settings_maint_events.php");
+//End Include events file
+
+//BeforeInitialize Binding @1-17AC9191
+$CCSEvents["BeforeInitialize"] = "Page_BeforeInitialize";
+//End BeforeInitialize Binding
+
+//Before Initialize @1-E870CEBC
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeInitialize", $MainPage);
+//End Before Initialize
+
+//Initialize Objects @1-029415F2
+$DBregistry_db = new clsDBregistry_db();
+$MainPage->Connections["registry_db"] = & $DBregistry_db;
+$Attributes = new clsAttributes("page:");
+$MainPage->Attributes = & $Attributes;
+
+// Controls
+$topmenu = new clstopmenu("", "topmenu", $MainPage);
+$topmenu->Initialize();
+$countries_districts_facil1 = new clsGridcountries_districts_facil1("", $MainPage);
+$countries_districts_facil = new clsRecordcountries_districts_facil("", $MainPage);
+$notificationsettings = new clsRecordnotificationsettings("", $MainPage);
+$MainPage->topmenu = & $topmenu;
+$MainPage->countries_districts_facil1 = & $countries_districts_facil1;
+$MainPage->countries_districts_facil = & $countries_districts_facil;
+$MainPage->notificationsettings = & $notificationsettings;
+$countries_districts_facil1->Initialize();
+$notificationsettings->Initialize();
+
+BindEvents();
+
+$CCSEventResult = CCGetEvent($CCSEvents, "AfterInitialize", $MainPage);
+
+if ($Charset) {
+    header("Content-Type: " . $ContentType . "; charset=" . $Charset);
+} else {
+    header("Content-Type: " . $ContentType);
+}
+//End Initialize Objects
+
+//Initialize HTML Template @1-A06E9207
+$CCSEventResult = CCGetEvent($CCSEvents, "OnInitializeView", $MainPage);
+$Tpl = new clsTemplate($FileEncoding, $TemplateEncoding);
+$Tpl->LoadTemplate(PathToCurrentPage . $TemplateFileName, $BlockToParse, "UTF-8", "replace");
+$Tpl->block_path = "/$BlockToParse";
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeShow", $MainPage);
+$Attributes->SetValue("pathToRoot", "");
+$Attributes->Show();
+//End Initialize HTML Template
+
+//Execute Components @1-D0F12E83
+$topmenu->Operations();
+$countries_districts_facil->Operation();
+$notificationsettings->Operation();
+//End Execute Components
+
+//Go to destination page @1-58C391B0
+if($Redirect)
+{
+    $CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+    $DBregistry_db->close();
+    header("Location: " . $Redirect);
+    $topmenu->Class_Terminate();
+    unset($topmenu);
+    unset($countries_districts_facil1);
+    unset($countries_districts_facil);
+    unset($notificationsettings);
+    unset($Tpl);
+    exit;
+}
+//End Go to destination page
+
+//Show Page @1-14730658
+$topmenu->Show();
+$countries_districts_facil1->Show();
+$countries_districts_facil->Show();
+$notificationsettings->Show();
+$Tpl->block_path = "";
+$Tpl->Parse($BlockToParse, false);
+if (!isset($main_block)) $main_block = $Tpl->GetVar($BlockToParse);
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeOutput", $MainPage);
+if ($CCSEventResult) echo $main_block;
+//End Show Page
+
+//Unload Page @1-074331F0
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+$DBregistry_db->close();
+$topmenu->Class_Terminate();
+unset($topmenu);
+unset($countries_districts_facil1);
+unset($countries_districts_facil);
+unset($notificationsettings);
+unset($Tpl);
+//End Unload Page
+
+
+?>

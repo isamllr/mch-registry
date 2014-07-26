@@ -1,0 +1,83 @@
+<!doctype html>
+
+<meta charset="utf-8">
+
+<meta name="author" content="Amsul - http://amsul.ca">
+
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+<title>pickadate.js / time</title>
+
+<link rel="shortcut icon" href="demo/images/favicon.ico">
+<link rel="stylesheet" href="demo/styles/css/main.css">
+<link rel="stylesheet" href="lib/themes/default.css" id="theme_base">
+<link rel="stylesheet" href="lib/themes/default.date.css" id="theme_date">
+<link rel="stylesheet" href="lib/themes/default.time.css" id="theme_time">
+
+<!--[if lt IE 9]>
+    <script>document.createElement('section')</script>
+<![endif]-->
+
+
+<body>
+
+
+
+        </div> <!-- .section__block -->
+
+        
+
+    </header> <!-- .section -->
+
+
+    
+
+
+
+
+<section class="section">
+
+        <!--<fieldset class="fieldset fieldset--demo js__fieldset"><div class="fieldset__wrapper">-->
+		
+			<input id="" class="fieldset__input js__timepicker" type=text placeholder="Try me&hellip;">
+			
+		<!--</div></fieldset>-->
+
+
+
+<section class="section">
+
+    <div class="section__block section__block--scoped">
+
+        <h2 class="heading heading--divide"><span class="heading__text">Editable input<a class="heading__anchor" name="editable" href="#editable">&sect;</a></span></h2>
+        <p>By default, typing into the input is disabled by giving it a <code class="attribute">readOnly</code> attribute. Doing so ensures that virtual keyboards don’t pop open on touch devices. It is also a confirmation that values passed to the server will be of a consistent format.</p>
+        <p>However, this behavior can be changed using the <code>editable</code> option:</p>
+
+        <pre class="pre--demo"><code data-language="javascript">$('.timepicker').pickatime({
+    editable: true
+})</code></pre>
+
+        <fieldset class="fieldset fieldset--demo js__fieldset"><div class="fieldset__wrapper"><input id="time_demo__editable" class="fieldset__input " type=text placeholder="Try me&hellip;"></div></fieldset>
+
+        <div class="section__block section__block--notification">
+            <p>An important thing to note here is that this disables keyboard bindings on the input element, such as arrow keys opening the picker. You will have to add your own bindings as you see fit.</p>
+        </div>
+
+        <h3 class="heading heading--divide"><span class="heading__text">Using HTML5 attributes<a class="heading__anchor--bigger" name="html5-attributes" href="#html5-attributes">&sect;</a></span></h3>
+        <p>Because each <code class="tag-name">input</code> is <a href="#editable"><code class="attribute">readOnly</code> by default</a>, HTML5 attributes, such as <code class="attribute">required</code> and <code class="attribute">pattern</code>, do not get enforced.</p>
+        <p>To enable default browser behavior on these attributes, set the <a href="#editable"><code>editable</code> property to <code class="constant">true</code></a>.</p>
+
+    </div> <!-- .section__block -->
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>window.jQuery||document.write('<script src="tests/jquery.2.0.0.js"><\/script>')</script>
+    <script src="lib/picker.js"></script>
+    <script src="lib/picker.date.js"></script>
+    <script src="lib/picker.time.js"></script>
+    <script src="lib/legacy.js"></script>
+    <script src="demo/scripts/demo.js"></script>
+
+</body>

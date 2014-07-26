@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:login}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record login -->
+<form id="login" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table style="WIDTH: 500px" class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:login} </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td style="WIDTH: 150px" class="th"><label for="username">{res:username}</label></td> 
+            <td id="username">{username}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="logincurrentPwd">{res:currentPassword}</label></td> 
+            <td><input id="logincurrentPwd" value="{currentPwd}" maxlength="20" type="password" name="{currentPwd_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="loginpassword">{res:newPassword}</label></td> 
+            <td><input id="loginpassword" value="{password}" maxlength="20" type="password" name="{password_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="loginrepeatPassword">{res:confirmNewPassword}</label></td> 
+            <td><input id="loginrepeatPassword" value="{repeatPassword}" type="password" name="{repeatPassword_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="loginlocale">{res:locale}</label></td> 
+            <td>
+              <select id="loginlocale" name="{locale_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {locale_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr id="commandsRow" class="Bottom">
+            <td colspan="2" align="right">&nbsp; 
+              <!-- BEGIN Button Button_Update --><input id="loginButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!--<input id="loginLoginID" value="{LoginID}" name="{LoginID_Name}">-->
+              <input id="loginpassword_Shadow" value="{password_Shadow}" type="hidden" name="{password_Shadow_Name}"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record login --></p>
+<br>
+</body>
+</html>

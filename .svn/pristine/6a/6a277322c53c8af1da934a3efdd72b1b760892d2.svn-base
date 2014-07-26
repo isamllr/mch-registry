@@ -1,0 +1,1019 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:HHospitalisation}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+
+var hosppossibdiag_all = new Array();
+var ReasonHospitalisation_all = new Array();
+
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-50B4A12C
+
+var hospitalisation_DatePicker_AdmissionDate = new Object(); 
+hospitalisation_DatePicker_AdmissionDate.format           = "ShortDate";
+hospitalisation_DatePicker_AdmissionDate.style            = "Styles/{CCS_Style}/Style.css";
+hospitalisation_DatePicker_AdmissionDate.relativePathPart = "";
+hospitalisation_DatePicker_AdmissionDate.themeVersion = "3.0";
+
+var hospitalisation_DatePicker_DischargeDate = new Object(); 
+hospitalisation_DatePicker_DischargeDate.format           = "ShortDate";
+hospitalisation_DatePicker_DischargeDate.style            = "Styles/{CCS_Style}/Style.css";
+hospitalisation_DatePicker_DischargeDate.relativePathPart = "";
+hospitalisation_DatePicker_DischargeDate.themeVersion = "3.0";
+
+var hospitalisation_DatePicker_RecomObstetricExaminationDate = new Object(); 
+hospitalisation_DatePicker_RecomObstetricExaminationDate.format           = "ShortDate";
+hospitalisation_DatePicker_RecomObstetricExaminationDate.style            = "Styles/{CCS_Style}/Style.css";
+hospitalisation_DatePicker_RecomObstetricExaminationDate.relativePathPart = "";
+hospitalisation_DatePicker_RecomObstetricExaminationDate.themeVersion = "3.0";
+
+var hospitalisation_DatePicker_RecomRepeatedHospitalisationDate = new Object(); 
+hospitalisation_DatePicker_RecomRepeatedHospitalisationDate.format           = "ShortDate";
+hospitalisation_DatePicker_RecomRepeatedHospitalisationDate.style            = "Styles/{CCS_Style}/Style.css";
+hospitalisation_DatePicker_RecomRepeatedHospitalisationDate.relativePathPart = "";
+hospitalisation_DatePicker_RecomRepeatedHospitalisationDate.themeVersion = "3.0";
+
+var hospitalisation_DatePicker_RecomDelivery3rdLevelDate = new Object(); 
+hospitalisation_DatePicker_RecomDelivery3rdLevelDate.format           = "ShortDate";
+hospitalisation_DatePicker_RecomDelivery3rdLevelDate.style            = "Styles/{CCS_Style}/Style.css";
+hospitalisation_DatePicker_RecomDelivery3rdLevelDate.relativePathPart = "";
+hospitalisation_DatePicker_RecomDelivery3rdLevelDate.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//hospitalisationButton_Delete_OnClick @6-74A01317
+function hospitalisationButton_Delete_OnClick()
+{
+    var result = true;
+//End hospitalisationButton_Delete_OnClick
+
+//Confirmation Message @7-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close hospitalisationButton_Delete_OnClick @6-BC33A33A
+    return result;
+}
+//End Close hospitalisationButton_Delete_OnClick
+
+//hospitalisationRecomObstetricExamination_OnClick @21-4EB5D887
+function hospitalisationRecomObstetricExamination_OnClick()
+{
+    var result = true;
+//End hospitalisationRecomObstetricExamination_OnClick
+
+//Custom Code @252-2A29BDB7
+    // -------------------------
+    ObsExamShowHide(true);
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisationRecomObstetricExamination_OnClick @21-BC33A33A
+    return result;
+}
+//End Close hospitalisationRecomObstetricExamination_OnClick
+
+//hospitalisationRecomDelivery3rdLevel_OnClick @27-FF139C01
+function hospitalisationRecomDelivery3rdLevel_OnClick()
+{
+    var result = true;
+//End hospitalisationRecomDelivery3rdLevel_OnClick
+
+//Custom Code @254-2A29BDB7
+    // -------------------------
+    ThirdLevelDelivShowHide(true);
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisationRecomDelivery3rdLevel_OnClick @27-BC33A33A
+    return result;
+}
+//End Close hospitalisationRecomDelivery3rdLevel_OnClick
+
+//hospitalisationLeftButtonHospDiag_OnClick @216-77ED9C66
+function hospitalisationLeftButtonHospDiag_OnClick()
+{
+    var result = true;
+//End hospitalisationLeftButtonHospDiag_OnClick
+
+//Custom Code @217-2A29BDB7
+    // -------------------------
+
+
+ var AvailableLB = document.getElementById("hosppossibdiag");
+ var LinkedLB = document.getElementById("hospselectdiag");
+ for (var i=0; i < LinkedLB.length; i++) {
+   if (LinkedLB.options[i].selected == true) {
+      AvailableLB.options[AvailableLB.length] = 
+          new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+      LinkedLB.options[i] = null;
+      i=i-1;
+   }
+ }      
+    // naming the tooltips of the options in a select HTML element as the displayed text of the option
+        // this is useful for the select lists in which the text of each option is not fully visible
+        addToolTipsSelect('hosppossibdiag[]');
+
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisationLeftButtonHospDiag_OnClick @216-BC33A33A
+    return result;
+}
+//End Close hospitalisationLeftButtonHospDiag_OnClick
+
+//hospitalisationRightButtonHospDiag_OnClick @220-F344FB5A
+function hospitalisationRightButtonHospDiag_OnClick()
+{
+    var result = true;
+//End hospitalisationRightButtonHospDiag_OnClick
+
+//Custom Code @221-2A29BDB7
+    // -------------------------
+ var AvailableLB = document.getElementById("hosppossibdiag");
+ var LinkedLB = document.getElementById("hospselectdiag");
+ for (var i=0; i < AvailableLB.length; i++) {
+   if (AvailableLB.options[i].selected == true) {
+       LinkedLB.options[LinkedLB.length] = 
+       new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+       AvailableLB.options[i] = null;
+       i=i-1;
+   }
+ }
+     // naming the tooltips of the options in a select HTML element as the displayed text of the option
+        // this is useful for the select lists in which the text of each option is not fully visible
+        addToolTipsSelect('hospselectdiag[]');
+
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisationRightButtonHospDiag_OnClick @220-BC33A33A
+    return result;
+}
+//End Close hospitalisationRightButtonHospDiag_OnClick
+
+//hospitalisationRecomRepeatedHospitalisation_OnClick @24-2C857363
+function hospitalisationRecomRepeatedHospitalisation_OnClick()
+{
+    var result = true;
+//End hospitalisationRecomRepeatedHospitalisation_OnClick
+
+//Custom Code @253-2A29BDB7
+    // -------------------------
+    RepHospShowHide(true);
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisationRecomRepeatedHospitalisation_OnClick @24-BC33A33A
+    return result;
+}
+//End Close hospitalisationRecomRepeatedHospitalisation_OnClick
+
+//hospitalisationRightButtonReasonHospitalisation_OnClick @357-C32D8A38
+function hospitalisationRightButtonReasonHospitalisation_OnClick()
+{
+    var result = true;
+//End hospitalisationRightButtonReasonHospitalisation_OnClick
+
+//Custom Code @270-2A29BDB7
+    // -------------------------
+ var AvailableLB = document.getElementById("ReasonHospitalisation");
+ var LinkedLB = document.getElementById("SelectedReasonHospitalisation");
+ for (var i=0; i < AvailableLB.length; i++) {
+   if (AvailableLB.options[i].selected == true) {
+       LinkedLB.options[LinkedLB.length] = 
+       new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+       AvailableLB.options[i] = null;
+       i=i-1;
+   }
+ }
+     // naming the tooltips of the options in a select HTML element as the displayed text of the option
+        // this is useful for the select lists in which the text of each option is not fully visible
+        addToolTipsSelect('SelectedReasonHospitalisation[]');
+
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisationRightButtonReasonHospitalisation_OnClick @357-BC33A33A
+    return result;
+}
+//End Close hospitalisationRightButtonReasonHospitalisation_OnClick
+
+//hospitalisationLeftButtonReasonHospitalisation_OnClick @360-67FA76DD
+function hospitalisationLeftButtonReasonHospitalisation_OnClick()
+{
+    var result = true;
+//End hospitalisationLeftButtonReasonHospitalisation_OnClick
+
+//Custom Code @361-2A29BDB7
+    // -------------------------
+var AvailableLB = document.getElementById("ReasonHospitalisation");
+ var LinkedLB = document.getElementById("SelectedReasonHospitalisation");
+ for (var i=0; i < LinkedLB.length; i++) {
+   if (LinkedLB.options[i].selected == true) {
+      AvailableLB.options[AvailableLB.length] = 
+          new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+      LinkedLB.options[i] = null;
+      i=i-1;
+   }
+ }      
+    // naming the tooltips of the options in a select HTML element as the displayed text of the option
+        // this is useful for the select lists in which the text of each option is not fully visible
+        addToolTipsSelect('ReasonHospitalisation[]');
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisationLeftButtonReasonHospitalisation_OnClick @360-BC33A33A
+    return result;
+}
+//End Close hospitalisationLeftButtonReasonHospitalisation_OnClick
+
+//hospitalisation_OnSubmit @3-25566C5B
+function hospitalisation_OnSubmit()
+{
+    var result = true;
+//End hospitalisation_OnSubmit
+
+//Custom Code @244-2A29BDB7
+    // -------------------------
+         LinkedDD = document.getElementById("hospselectdiag"); 
+         document.hospitalisation.LinkedDD_Hospitalisation.value = "";
+         for (i=0; i<LinkedDD.options.length; i++) {
+            if (document.hospitalisation.LinkedDD_Hospitalisation.value != "" ) {
+                document.hospitalisation.LinkedDD_Hospitalisation.value = document.hospitalisation.LinkedDD_Hospitalisation.value + ",";
+                }
+                document.hospitalisation.LinkedDD_Hospitalisation.value = document.hospitalisation.LinkedDD_Hospitalisation.value + "'" + LinkedDD.options[i].value + "'";
+         }
+         document.hospitalisation.Reloaded.value = true;
+
+         LinkedDD = document.getElementById("SelectedReasonHospitalisation"); 
+         document.hospitalisation.LinkedDD_ReasonHospitalisation.value = "";
+         for (i=0; i<LinkedDD.options.length; i++) {
+            if (document.hospitalisation.LinkedDD_ReasonHospitalisation.value != "" ) {
+                document.hospitalisation.LinkedDD_ReasonHospitalisation.value = document.hospitalisation.LinkedDD_ReasonHospitalisation.value + ",";
+                }
+                document.hospitalisation.LinkedDD_ReasonHospitalisation.value = document.hospitalisation.LinkedDD_ReasonHospitalisation.value + "'" + LinkedDD.options[i].value + "'";
+         }
+         document.hospitalisation.Reloaded.value = true;
+                 result = true;
+
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisation_OnSubmit @3-BC33A33A
+    return result;
+}
+//End Close hospitalisation_OnSubmit
+
+//hospitalisation_OnLoad @3-59E2F538
+function hospitalisation_OnLoad(form)
+{
+    var result = true;
+//End hospitalisation_OnLoad
+
+//Custom Code @249-2A29BDB7
+    // -------------------------
+
+    CacheValues('hosppossibdiag',hosppossibdiag_all);
+    ObsExamShowHide(false);
+    RepHospShowHide(false);
+    ThirdLevelDelivShowHide(false);
+
+    addToolTipsSelect('hospselectdiag[]');
+    addToolTipsSelect('hosppossibdiag[]');
+
+    CacheValues('ReasonHospitalisation',ReasonHospitalisation_all);
+    ObsExamShowHide(false);
+    RepHospShowHide(false);
+    ThirdLevelDelivShowHide(false);
+
+    addToolTipsSelect('SelectedReasonHospitalisation[]');
+        addToolTipsSelect('ReasonHospitalisation[]');
+
+    // -------------------------
+//End Custom Code
+
+//Close hospitalisation_OnLoad @3-BC33A33A
+    return result;
+}
+//End Close hospitalisation_OnLoad
+
+
+
+function GetObstetricExaminationRadioValue()
+{
+for (var i=0; i < document.hospitalisation.RecomObstetricExamination.length; i++)
+   {
+   if (document.hospitalisation.RecomObstetricExamination[i].checked)
+      {
+      var rad_val = document.hospitalisation.RecomObstetricExamination[i].value;
+      }
+   }
+   return rad_val;
+}
+
+function ObsExamShowHide(clear)
+{
+        var obsExam = document.getElementById("hospitalisationRecomObstetricExaminationDate");
+    var obsExamLabel = document.getElementById("hospitalisationRecomObstetricExaminationDateLabel");
+    var obsExamDatePicker = document.getElementById("hospitalisationDatePicker_RecomObstetricExaminationDate");
+    var obsExamDatePickerImage = document.getElementById("hospitalisationDatePicker_RecomObstetricExaminationDate_Image");
+
+    if(GetObstetricExaminationRadioValue() == 1)
+    {
+                obsExam.style.visibility="visible";
+        obsExamLabel.style.visibility="visible";
+        obsExamDatePicker.style.visibility="visible";
+        obsExamDatePickerImage.style.visibility="visible";
+                if(clear == true)
+                        {
+                                obsExam.value = "";
+                        }
+        }
+    
+        if(GetObstetricExaminationRadioValue() == 0)
+    {
+        obsExam.style.visibility="hidden";
+        obsExamLabel.style.visibility="hidden";
+        obsExamDatePicker.style.visibility="hidden";
+        obsExamDatePickerImage.style.visibility="hidden";
+        //obsExam.value = '00.00.0000';
+        }
+}
+
+function GetRepHospRadioValue()
+{
+for (var i=0; i < document.hospitalisation.RecomRepeatedHospitalisation.length; i++)
+   {
+   if (document.hospitalisation.RecomRepeatedHospitalisation[i].checked)
+      {
+      var rad_val = document.hospitalisation.RecomRepeatedHospitalisation[i].value;
+      }
+   }
+   return rad_val;
+}
+
+function RepHospShowHide(clear)
+{
+        var repHosp = document.getElementById("hospitalisationRecomRepeatedHospitalisationDate");
+    var repHospLabel = document.getElementById("hospitalisationRecomRepeatedHospitalisationDateLabel");
+    var repHospDatePicker = document.getElementById("hospitalisationDatePicker_RecomRepeatedHospitalisationDate");
+    var repHospDatePickerImage = document.getElementById("hospitalisationDatePicker_RecomRepeatedHospitalisationDate_Image");
+
+    if(GetRepHospRadioValue() == 1)
+    {
+                repHosp.style.visibility="visible";
+        repHospLabel.style.visibility="visible";
+        repHospDatePicker.style.visibility="visible";
+        repHospDatePickerImage.style.visibility="visible";
+                if(clear == true)
+                        {
+                                repHosp.value = "";
+                        }
+        }
+    
+        if(GetRepHospRadioValue() == 0)
+    {
+        repHosp.style.visibility="hidden";
+        repHospLabel.style.visibility="hidden";
+        repHospDatePicker.style.visibility="hidden";
+        repHospDatePickerImage.style.visibility="hidden";
+        //repHosp.value = '00.00.0000';
+        }
+}
+
+function GetThirdLevelDelivRadioValue()
+{
+for (var i=0; i < document.hospitalisation.RecomDelivery3rdLevel.length; i++)
+   {
+   if (document.hospitalisation.RecomDelivery3rdLevel[i].checked)
+      {
+      var rad_val = document.hospitalisation.RecomDelivery3rdLevel[i].value;
+      }
+   }
+   return rad_val;
+}
+
+function ThirdLevelDelivShowHide(clear)
+{
+    var thirdLevelDelivDate = document.getElementById("hospitalisationRecomDelivery3rdLevelDate");
+    var thirdLevelDelivLabel = document.getElementById("hospitalisationRecomDelivery3rdLevelDateLabel");
+    var thirdLevelDelivDatePicker = document.getElementById("hospitalisationDatePicker_RecomDelivery3rdLevelDate");
+    var thirdLevelDelivDatePickerImage = document.getElementById("hospitalisationDatePicker_RecomDelivery3rdLevelDate_Image");
+    var hospitalisationIndicationID = document.getElementById("hospitalisationIndicationID");
+    var hospitalisationReferralFacilityID = document.getElementById("hospitalisationReferralFacilityID");
+    var hospitalisationDeptID = document.getElementById("hospitalisationDeptID");
+    var hospitalisationReferralID_Label = document.getElementById("hospitalisationReferralID_Label");
+    var hospitalisationDeptlID_Label = document.getElementById("hospitalisationDeptlID_Label");
+    var hospitalisationRecommendedDeliveryDate_Label = document.getElementById("hospitalisationRecommendedDeliveryDate_Label");
+
+    if(GetThirdLevelDelivRadioValue() == 1)
+    {
+        thirdLevelDelivDate.style.visibility="visible";
+        thirdLevelDelivLabel.style.visibility="visible";
+        thirdLevelDelivDatePicker.style.visibility="visible";
+        thirdLevelDelivDatePickerImage.style.visibility="visible";
+        hospitalisationIndicationID.style.visibility="visible";
+        hospitalisationReferralFacilityID.style.visibility="visible";
+        hospitalisationDeptID.style.visibility="visible";
+        hospitalisationReferralID_Label.style.visibility="visible";
+        hospitalisationDeptlID_Label.style.visibility="visible";
+        hospitalisationRecommendedDeliveryDate_Label.style.visibility="visible";
+        
+                if(clear == true)
+        {
+            thirdLevelDelivDate.value = "";
+            hospitalisationIndicationID.value = "";
+                        hospitalisationReferralFacilityID.value = "";
+            hospitalisationDeptID.value = "";
+                }
+    }
+    
+    if(GetThirdLevelDelivRadioValue() == 0)
+    {
+        thirdLevelDelivDate.style.visibility="hidden";
+        thirdLevelDelivLabel.style.visibility="hidden";
+        thirdLevelDelivDatePicker.style.visibility="hidden";
+        thirdLevelDelivDatePickerImage.style.visibility="hidden";
+        hospitalisationIndicationID.style.visibility="hidden";
+        hospitalisationReferralFacilityID.style.visibility="hidden";
+        hospitalisationDeptID.style.visibility="hidden";
+        hospitalisationReferralID_Label.style.visibility="hidden";
+        hospitalisationDeptlID_Label.style.visibility="hidden";
+        hospitalisationRecommendedDeliveryDate_Label.style.visibility="hidden";
+
+        if(clear == true)
+        {
+            thirdLevelDelivDate.value = "";
+            hospitalisationIndicationID.selectedIndex = "1";
+            hospitalisationReferralFacilityID.selectedIndex = "1";
+                        hospitalisationDeptID.selectedIndex = "1";
+        }
+        }
+}
+
+//hospitalisationButton_Cancel_OnClick @8-15953886
+function hospitalisationButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End hospitalisationButton_Cancel_OnClick
+
+//bind_events @1-0934E16F
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("hospitalisationButton_Delete", "click", hospitalisationButton_Delete_OnClick);
+    addEventHandler("hospitalisationRecomObstetricExamination", "click", hospitalisationRecomObstetricExamination_OnClick);
+    addEventHandler("hospitalisationRecomDelivery3rdLevel", "click", hospitalisationRecomDelivery3rdLevel_OnClick);
+    addEventHandler("hospitalisationLeftButtonHospDiag", "click", hospitalisationLeftButtonHospDiag_OnClick);
+    addEventHandler("hospitalisationRightButtonHospDiag", "click", hospitalisationRightButtonHospDiag_OnClick);
+    addEventHandler("hospitalisationRecomRepeatedHospitalisation", "click", hospitalisationRecomRepeatedHospitalisation_OnClick);
+    addEventHandler("hospitalisationRightButtonReasonHospitalisation", "click", hospitalisationRightButtonReasonHospitalisation_OnClick);
+    addEventHandler("hospitalisationLeftButtonReasonHospitalisation", "click", hospitalisationLeftButtonReasonHospitalisation_OnClick);
+    addEventHandler("hospitalisation", "submit", hospitalisation_OnSubmit);
+    addEventHandler("hospitalisation", "load", hospitalisation_OnLoad);
+    addEventHandler("hospitalisationButton_Cancel", "click", hospitalisationButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+function CacheValues(selectboxID,Backup)
+{
+    var l =  document.getElementById(selectboxID);
+    for (var i=0; i < l.options.length; i++)
+    {
+              Backup[i] = l.options[i];
+    }
+}
+
+function SearchList(selectboxID,searchTextID,Backup)
+{
+        var l =  document.getElementById(selectboxID);
+        var tb = document.getElementById(searchTextID);
+   
+    l.options.length=0;
+ 
+    if(tb.value == "")
+    {
+      for (var i=0; i < Backup.length; i++)
+      {
+        l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+      }
+    }
+    else{
+ 
+      for (var i=0; i <Backup.length; i++)
+      {
+        if (Backup[i].text.toLowerCase().indexOf(tb.value.toLowerCase()) != -1)
+        {
+          l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+        }
+      }
+    }
+}
+  function ClearSelection(lb)
+  {
+    lb.selectedIndex = -1;
+  }
+
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record pregnancy_header -->
+<form id="pregnancy_header" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{FirstName}&nbsp;{FamiliyName}&nbsp;({BirthDate})</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_headerPatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header --></p>
+<p>
+<!-- BEGIN Record pregnancy_header1 -->
+<form id="pregnancy_header1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_header1PatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header1 --></p>
+<p>
+<!-- BEGIN Record hospitalisation -->
+<form id="hospitalisation" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:hospitalisation}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="4">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th" colspan="4"><strong>{res:HospitalisationInformation}</strong></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="hospitalisationAdmissionDate">{res:AdmissionDate}</label></td> 
+            <td colspan="3"><input id="hospitalisationAdmissionDate" value="{AdmissionDate}" maxlength="100" size="8" name="{AdmissionDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_AdmissionDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="hospitalisationDatePicker_AdmissionDate"><img id="hospitalisationDatePicker_AdmissionDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;&nbsp;<!-- END DatePicker DatePicker_AdmissionDate --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="hospitalisationFacilityID">{res:FacilityID}</label></td> 
+            <td colspan="3">
+              <select id="hospitalisationFacilityID" name="{FacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {FacilityID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="hospitalisationDepartmentID">{res:DepartmentID}</label></td> 
+            <td colspan="3">
+              <select id="hospitalisationDepartmentID" name="{DepartmentID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {DepartmentID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td class="th" colspan="4">
+              <p align="left">{res:ClinicalInformation}</p>
+            </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="left">
+              <p align="left">{res:ReasonHospitalisationICD10ID}</p>
+ 
+              <p align="left"><input style="WIDTH: 249px; HEIGHT: 22px" id="hospitalisationFilterofReasonHospitalisation" onkeyup="javascript:SearchList('ReasonHospitalisation','hospitalisationFilterofReasonHospitalisation',ReasonHospitalisation_all);javascript:addToolTipsSelect('ReasonHospitalisation[]');" value="{FilterofReasonHospitalisation}" size="31" name="{FilterofReasonHospitalisation_Name}"><br>
+              <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 116px" id="ReasonHospitalisation" multiple size="8" name="{ReasonHospitalisation_Name}">
+                {ReasonHospitalisation_Options}
+              </select>
+ </p>
+            </td> 
+            <td>
+              <p align="center">{res:CCS_Insert}<br>
+              <!-- BEGIN Button RightButtonReasonHospitalisation --><input id="hospitalisationRightButtonReasonHospitalisation" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButtonReasonHospitalisation --></p>
+ 
+              <p align="center">{res:CCS_Delete}<br>
+              <!-- BEGIN Button LeftButtonReasonHospitalisation --><input id="hospitalisationLeftButtonReasonHospitalisation" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButtonReasonHospitalisation --></p>
+              &nbsp;</td> 
+            <td colspan="2">
+              <p align="left"><label for="hospitalisationReasonHospitalisationICD10ID">{res:PatientsHospitalizationDiagnosis}</label></p>
+ 
+              <p align="left">
+              <select style="WIDTH: 250px; HEIGHT: 138px" id="SelectedReasonHospitalisation" multiple size="8" name="{SelectedReasonHospitalisation_Name}">
+                {SelectedReasonHospitalisation_Options}
+              </select>
+ &nbsp;&nbsp;</p>
+            </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="left">
+              <p align="left">{res:PossibleDischargeDiagnosis}&nbsp;<label for="hospitalisationFilterofhosppossibdiag" style="display: none;">&nbsp;</label></p>
+              <label for="hospitalisationFilterofhosppossibdiag" style="display: none;">&nbsp;</label> 
+              <p align="left"><input style="WIDTH: 249px; HEIGHT: 22px" id="hospitalisationFilterofhosppossibdiag" title="{res:search}" onkeyup="javascript:SearchList('hosppossibdiag','hospitalisationFilterofhosppossibdiag',hosppossibdiag_all);javascript:addToolTipsSelect('hosppossibdiag[]');" value="{hospitalisationFilterofhosppossibdiag}" name="{hospitalisationFilterofhosppossibdiag_Name}"><br>
+              <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 116px" id="hosppossibdiag" multiple size="8" name="{hosppossibdiag_Name}">
+                {hosppossibdiag_Options}
+              </select>
+ </p>
+            </td> 
+            <td>
+              <p align="center">{res:CCS_Insert}<br>
+              <!-- BEGIN Button RightButtonHospDiag --><input id="hospitalisationRightButtonHospDiag" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButtonHospDiag --></p>
+ 
+              <p align="center">{res:CCS_Delete}<br>
+              <!-- BEGIN Button LeftButtonHospDiag --><input id="hospitalisationLeftButtonHospDiag" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButtonHospDiag --></p>
+            </td> 
+            <td colspan="2">
+              <p align="left">{res:DischargeDiagnosis}</p>
+ 
+              <p align="left">
+              <select style="WIDTH: 250px; HEIGHT: 138px" id="hospselectdiag" multiple size="8" name="{hospselectdiag_Name}">
+                {hospselectdiag_Options}
+              </select>
+ </p>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="4"><strong>{res:ClinicalRecommendations}</strong></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:RecomObstetricExamination}</td> 
+            <td>
+              <!-- BEGIN RadioButton RecomObstetricExamination --><input id="hospitalisationRecomObstetricExamination_{RecomObstetricExamination:optionNumber}" value="{Value}" type="radio" name="{RecomObstetricExamination_Name}" {Check}><label for="hospitalisationRecomObstetricExamination_{RecomObstetricExamination:optionNumber}">{Description}</label>&nbsp;&nbsp;<!-- END RadioButton RecomObstetricExamination --></td> 
+            <td class="th"><label for="hospitalisationRecomObstetricExaminationDate" id="hospitalisationRecomObstetricExaminationDateLabel">{res:RecomObstetricExaminationDate}</label></td> 
+            <td><input id="hospitalisationRecomObstetricExaminationDate" value="{RecomObstetricExaminationDate}" maxlength="100" size="8" name="{RecomObstetricExaminationDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_RecomObstetricExaminationDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="hospitalisationDatePicker_RecomObstetricExaminationDate"><img id="hospitalisationDatePicker_RecomObstetricExaminationDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;&nbsp;<!-- END DatePicker DatePicker_RecomObstetricExaminationDate --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:RecomRepeatedHospitalisation}</td> 
+            <td>
+              <!-- BEGIN RadioButton RecomRepeatedHospitalisation --><input id="hospitalisationRecomRepeatedHospitalisation_{RecomRepeatedHospitalisation:optionNumber}" value="{Value}" type="radio" name="{RecomRepeatedHospitalisation_Name}" {Check}><label for="hospitalisationRecomRepeatedHospitalisation_{RecomRepeatedHospitalisation:optionNumber}">{Description}</label>&nbsp;&nbsp;<!-- END RadioButton RecomRepeatedHospitalisation --></td> 
+            <td class="th"><label for="hospitalisationRecomRepeatedHospitalisationDate" id="hospitalisationRecomRepeatedHospitalisationDateLabel">{res:RecomRepeatedHospitalisationDate}</label></td> 
+            <td><input id="hospitalisationRecomRepeatedHospitalisationDate" value="{RecomRepeatedHospitalisationDate}" maxlength="100" size="8" name="{RecomRepeatedHospitalisationDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_RecomRepeatedHospitalisationDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="hospitalisationDatePicker_RecomRepeatedHospitalisationDate"><img id="hospitalisationDatePicker_RecomRepeatedHospitalisationDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;&nbsp;<!-- END DatePicker DatePicker_RecomRepeatedHospitalisationDate --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:RecomDelivery3rdLevel}</td> 
+            <td>
+              <!-- BEGIN RadioButton RecomDelivery3rdLevel --><input id="hospitalisationRecomDelivery3rdLevel_{RecomDelivery3rdLevel:optionNumber}" value="{Value}" type="radio" name="{RecomDelivery3rdLevel_Name}" {Check}><label for="hospitalisationRecomDelivery3rdLevel_{RecomDelivery3rdLevel:optionNumber}">{Description}</label>&nbsp;&nbsp;<!-- END RadioButton RecomDelivery3rdLevel --></td> 
+            <td class="th" colspan="2">
+              <p><label for="hospitalisationRecomDelivery3rdLevelDate" id="hospitalisationRecomDelivery3rdLevelDateLabel"><label id="visitIndicationID_Label" for="visitIndicationID">{res:IndicationID}</label></label><br>
+              <select id="hospitalisationIndicationID" name="{IndicationID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {IndicationID_Options}
+              </select>
+ </p>
+ 
+              <p><label for="hospitalisationIndicationID" id="hospitalisationIndicationID_Label"><label id="hospitalisationndicationID_Label" for="hospitalisationIndicationID"><label id="hospitalisationReferralID_Label" for="hospitalisationReferralFacilityID">{res:ReferralFacilityID}</label></label></label><br>
+              <select style="WIDTH: 161px" id="hospitalisationReferralFacilityID" name="{ReferralFacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {ReferralFacilityID_Options}
+              </select>
+ </p>
+ 
+              <p><label for="hospitalisationReferralDeptID" id="hospitalisationDeptlID_Label">{res:ReferralDeptID}</label><br>
+              <select id="hospitalisationDeptID" name="{DeptID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {DeptID_Options}
+              </select>
+ </p>
+ 
+              <p><label for="hospitalisationRecommendedDeliveryDate" id="hospitalisationRecommendedDeliveryDate_Label">{res:RecommendedDeliveryDate}</label><br>
+              <input id="hospitalisationRecomDelivery3rdLevelDate" value="{RecomDelivery3rdLevelDate}" maxlength="100" size="8" name="{RecomDelivery3rdLevelDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_RecomDelivery3rdLevelDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="hospitalisationDatePicker_RecomDelivery3rdLevelDate"><img id="hospitalisationDatePicker_RecomDelivery3rdLevelDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_RecomDelivery3rdLevelDate --></p>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><strong><label for="hospitalisationDischargeDate">{res:DischargeDate}</label></strong></td> 
+            <td colspan="4"><input id="hospitalisationDischargeDate" value="{DischargeDate}" maxlength="100" size="8" name="{DischargeDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_DischargeDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="hospitalisationDatePicker_DischargeDate"><img id="hospitalisationDatePicker_DischargeDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;&nbsp;<!-- END DatePicker DatePicker_DischargeDate --></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="4" align="right"><input id="hospitalisationpregnancyDateTemp" value="{pregnancyDateTemp}" type="hidden" name="{pregnancyDateTemp_Name}"><label for="hospitalisationpregnancyDateTemp1" style="display: none;">&nbsp;</label>&nbsp;{res:LastUpdated}&nbsp;{lastmodified}&nbsp; ({user})<label for="hospitalisationCurrentUser" style="display: none;">CurrentUser</label><input id="hospitalisationCurrentUser" value="{CurrentUser}" type="hidden" name="{CurrentUser_Name}"><input id="hospitalisationReloaded" value="{Reloaded}" type="hidden" name="{Reloaded_Name}"><input id="hospitalisationPregnancyID" value="{PregnancyID}" type="hidden" name="{PregnancyID_Name}"><input id="LinkedDD_Hospitalisation" value="{LinkedDD_Hospitalisation}" type="hidden" name="{LinkedDD_Hospitalisation_Name}"><input id="LinkedDD_ReasonHospitalisation" value="{LinkedDD_ReasonHospitalisation}" type="hidden" name="{LinkedDD_ReasonHospitalisation_Name}">
+              <!-- BEGIN Button Button_Insert --><input id="hospitalisationButton_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="hospitalisationButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_UpdateAddDelivery --><input id="hospitalisationButton_UpdateAddDelivery" class="Button" value="{res:CCS_Insert} {res:Delivery}" alt="{res:CCS_Insert} {res:Delivery}" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddDelivery -->&nbsp; 
+              <!-- BEGIN Button Button_UpdateAddTests --><input id="hospitalisationButton_UpdateAddTests" class="Button" value="{res:CCS_Insert} {res:testsbutton}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddTests -->
+              <!-- BEGIN Button Button_UpdateAddTest --><input id="hospitalisationButton_UpdateAddTest" class="Button" value="{res:CCS_Insert} {res:Test}" alt="{res:CCS_Insert} {res:Test}" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddTest -->
+              <!-- BEGIN Button Button_UpdateAddAdministeredMedication --><input id="hospitalisationButton_UpdateAddAdministeredMedication" class="Button" value="{res:CCS_Insert} {res:AdminMedication}" alt="{res:CCS_Insert} {res:AdministeredMedication}" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddAdministeredMedication -->
+              <!-- BEGIN Button Button_UpdateAddRecommendedFollowUpMedication --><input id="hospitalisationButton_UpdateAddRecommendedFollowUpMedication" class="Button" value="{res:CCS_Insert} {res:RecomFollowUpMedication}" alt="{res:CCS_Insert} {res:RecommendedFollowUpMedication}" type="submit" name="{Button_Name}"><!-- END Button Button_UpdateAddRecommendedFollowUpMedication -->
+              <!-- BEGIN Button Button_Delete --><input id="hospitalisationButton_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input id="hospitalisationButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+&nbsp;&nbsp;<!-- END Record hospitalisation --></p>
+<p>
+<!-- BEGIN Grid Delivery -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:DeliveryDuringHospitalisation}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_PregnancyRecNr --><a href="{Sort_URL}" id="DeliverySorter_PregnancyRecNr">{res:PregnancyRecNr}</a><!-- END Sorter Sorter_PregnancyRecNr --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DataDelivery --><a href="{Sort_URL}" id="DeliverySorter_DataDelivery">{res:DataDelivery}</a><!-- END Sorter Sorter_DataDelivery --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_FacilityName --><a href="{Sort_URL}" id="DeliverySorter_FacilityName">{res:FacilityName}</a><!-- END Sorter Sorter_FacilityName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DeliveryMethodName --><a href="{Sort_URL}" id="DeliverySorter_DeliveryMethodName">{res:DeliveryMethodName}</a><!-- END Sorter Sorter_DeliveryMethodName --></th>
+ 
+          <th scope="col">{res:Edit}&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{PregnancyRecNr}&nbsp;</td> 
+          <td>{DataDelivery}&nbsp;</td> 
+          <td>{FacilityName}&nbsp;</td> 
+          <td>{DeliveryMethodName}&nbsp;</td> 
+          <td><a href="{ImageLink2}" id="DeliveryImageLink2_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink2}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="5">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+      </table>
+    </td>
+  </tr>
+</table>
+&nbsp;<!-- END Grid Delivery --></p>
+<p>
+<!-- BEGIN Grid test_testcode -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_GridFormPrefix} {res:testtestcode} {res:CCS_GridFormSuffix} </strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="5">{res:CCS_TotalRecords}&nbsp;{test_testcode_TotalRecords}</td>
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TestDate --><a href="{Sort_URL}" id="test_testcodeSorter_TestDate">{res:TestDate}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_TestDate --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TestName --><a href="{Sort_URL}" id="test_testcodeSorter_TestName">{res:TestName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_TestName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TestResultNormal --><a href="{Sort_URL}" id="test_testcodeSorter_TestResultNormal">{res:TestResultNormal}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_TestResultNormal --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TestResultDetails --><a href="{Sort_URL}" id="test_testcodeSorter_TestResultDetails">{res:TestResultDetails}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_TestResultDetails --></th>
+ 
+          <th scope="col">{res:Edit}&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{TestDate}&nbsp;</td> 
+          <td>{TestName}&nbsp;</td> 
+          <td>{TestResultNormal}&nbsp;</td> 
+          <td>{TestResultDetails}&nbsp;</td> 
+          <td><a href="{ImageLink2}" id="test_testcodeImageLink2_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink2}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="5">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+      </table>
+    </td>
+  </tr>
+</table>
+&nbsp;</p>
+<!-- END Grid test_testcode -->
+<p>
+<!-- BEGIN Grid medicationhospitalisation -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:ListofAdminMedications}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="5">{res:CCS_TotalRecords}&nbsp;{medication_medicationatco_TotalRecords}</td>
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DateMedication --><a href="{Sort_URL}" id="medicationhospitalisationSorter_DateMedication">{res:Date}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DateMedication --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_MedicationName --><a href="{Sort_URL}" id="medicationhospitalisationSorter_MedicationName">{res:Medication}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_MedicationName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Dosage --><a href="{Sort_URL}" id="medicationhospitalisationSorter_Dosage">{res:Dosage}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Dosage --></th>
+ 
+          <th colspan="2" scope="col">{res:Edit}&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{DateMedication}</td> 
+          <td>{MedicationName}&nbsp;</td> 
+          <td colspan="2">{Dosage}&nbsp;</td> 
+          <td><a href="{ImageLink1}" id="medicationhospitalisationImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="5">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid medicationhospitalisation --></p>
+<p>&nbsp; 
+<!-- BEGIN Grid recommendedmedicationhospitalisation -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:ListRecomFollowUpMedication}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="5">{res:CCS_TotalRecords}&nbsp;{medication_medicationatco_TotalRecords}</td>
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DateMedication --><a href="{Sort_URL}" id="recommendedmedicationhospitalisationSorter_DateMedication">{res:Date}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DateMedication --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_MedicationName --><a href="{Sort_URL}" id="recommendedmedicationhospitalisationSorter_MedicationName">{res:Medication}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_MedicationName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Dosage --><a href="{Sort_URL}" id="recommendedmedicationhospitalisationSorter_Dosage">{res:Dosage}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Dosage --></th>
+ 
+          <th colspan="2" scope="col">{res:Edit}&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{DateMedication}</td> 
+          <td>{MedicationName}&nbsp;</td> 
+          <td colspan="2">{Dosage}&nbsp;</td> 
+          <td><a href="{ImageLink1}" id="recommendedmedicationhospitalisationImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="5">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid recommendedmedicationhospitalisation --></p>
+</body>
+</html>

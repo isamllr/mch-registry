@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?> <!--FlashChart Header @86-EFBEC7D5-->
+
+<!--FlashChart Template @86-DFD0B425-->
+<root>
+	<schema name="Autumn">
+		<mask name="0"/>
+		<colors><color value="BF7C35"/><color value="A44056"/><color value="658770"/><color value="959806"/><color value="7C643B"/><color value="CFC21B"/><color value="64801F"/><color value="7A4576"/><color value="C5B25D"/><color value="AF421C"/><color value="6897A1"/><color value="64A674"/><color value="B47E94"/><color value="7CAC46"/><color value="895737"/><color value="909685"/><color value="B54850"/><color value="872638"/><color value="B2C216"/><color value="AE583A"/><color value="476850"/><color value="C18A51"/><color value="924245"/><color value="89A1A5"/><color value="6C7738"/><color value="A37746"/><color value="BEBB58"/><color value="686F48"/><color value="DABC44"/><color value="BF794D"/><color value="917C49"/><color value="B26773"/><color value="4B8244"/><color value="BC634F"/><color value="8C8441"/><color value="9DAA24"/><color value="61553D"/><color value="9B5982"/><color value="8F4C28"/><color value="69576B"/></colors>
+	</schema>
+	<separator decimal="," group=""/>
+	<background border="yes" beginColor="FFFFFF" endColor="FFFFFF" color="FFFFFF" gradient="no"/>
+	<chartarea border="yes" gradient="yes" bgcolor="c9c8ac" beginColor="c9c8ac" endColor="f6f6d6" alpha="100">
+		<grid line_style="medium" alpha="100" color="8e8d65" visible="yes"/>
+		<vertical_axis visible="yes"><font face="Tahoma" size="14" bold="yes" italic="no" uline="no" color="605f43"/></vertical_axis>
+		<horizontal_axis visible="yes" rotation="degrees" autoRotate="yes"><font face="Tahoma" size="14" bold="yes" italic="no" uline="no" color="605f43"/></horizontal_axis>
+		<chart line_thick="2" enabled="yes" border="yes" alpha="100" isBorderBright="yes" border_color="000000" type="3d_pie" series="rows">
+			<inscriptions color="605f43" visible="yes"><font face="Verdana" size="11" bold="no" italic="no" uline="no"/></inscriptions>
+			<animation type="none" time="2000"/>
+			<markers size="8" type="0"/>
+			<hints border="yes" enabled="yes" color="FFFF99"><font face="Verdana" size="11" bold="no" italic="no" uline="no" color="605f43"/></hints>
+		</chart>
+		<legend sqr_size="12" sqr_borders="yes" border_thick="0" alpha="100" position="top-left" layout="horizontal" visible="yes"><font face="Verdana" size="11" bold="no" italic="no" uline="no" color="605f43"/></legend>
+		<title position="top" align="center" border="no" alpha="100" visible="yes" text="{res:Partner_deliveries_inall_facilities}"><font face="TimesNewRoman" size="24" bold="yes" uline="yes" italic="no" color="000000"/></title>
+	</chartarea>
+	<objects>
+	</objects>
+	<data>
+		<columns>
+			<column field="DelivCount" name="DelivCount"/></columns>
+		<rows><!-- BEGIN Row --><row col1="{DelivCount}" name="{PartnerDelivery}"/><!-- END Row --></rows></data>
+</root>
+
+<!--End FlashChart Template-->
+

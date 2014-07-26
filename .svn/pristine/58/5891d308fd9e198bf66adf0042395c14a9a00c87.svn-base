@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>dashboard</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//_OnLoad @1-9C4F01C0
+function _OnLoad()
+{
+    var result = true;
+//End _OnLoad
+
+//Custom Code @557-2A29BDB7
+    // -------------------------
+    if(document.getElementById("referralsIn") == null)
+                document.getElementById("referralsOut").style.visibility="hidden";
+    // -------------------------
+//End Custom Code
+
+//Close _OnLoad @1-BC33A33A
+    return result;
+}
+//End Close _OnLoad
+
+//bind_events @1-C1B07B83
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    if (functionExists("news_bind_events")) news_bind_events();
+    addEventHandler("", "load", _OnLoad);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>&nbsp;</p>
+<table>
+  <tr>
+    <td>
+      <table style="BORDER-BOTTOM-COLOR: #d8d8d8; BORDER-TOP-COLOR: #d8d8d8; WIDTH: 524px; HEIGHT: 49.66%; BORDER-RIGHT-COLOR: #d8d8d8; BORDER-LEFT-COLOR: #d8d8d8" border="1" cellspacing="0" cellpadding="10">
+        <tr valign="top">
+          <td style="WIDTH: 500px" valign="top">
+            <p>{news}</p>
+ 
+            <table style="WIDTH: 450px" border="0">
+              <tr>
+                <td><strong>{res:menuoverview}</strong></td> 
+                <td></td>
+              </tr>
+ 
+              <tr>
+                <td>&nbsp;</td> 
+                <td>&nbsp;</td>
+              </tr>
+ 
+              <tr>
+                <td>{res:Today}:</td> 
+                <td>{s_TodayDate}</td>
+              </tr>
+ 
+              <tr>
+                <td>{res:CurrentUser}:</td> 
+                <td>{s_CurrentUser}</td>
+              </tr>
+ 
+              <tr>
+                <td>{res:ActiveDBName}:</td> 
+                <td>{s_ActiveDatabase}</td>
+              </tr>
+ 
+              <tr>
+                <td>{res:DatabaseVersion}:</td> 
+                <td>{DatabaseVersion}</td>
+              </tr>
+ 
+              <tr>
+                <td>{res:facilities}:</td> 
+                <td>{s_Facilities}</td>
+              </tr>
+ 
+              <tr>
+                <td>{res:SWVersion}:</td> 
+                <td>2</td>
+              </tr>
+            </table>
+            <br>
+            <!-- BEGIN Report patient_facilities -->
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td valign="top">
+                  <table class="Header" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                      <td class="th"><strong>{res:CCS_ReportFormPrefix} {res:patientsintheregistry} </strong></td> 
+                      <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+                    </tr>
+                  </table>
+ 
+                  <table class="Grid" cellspacing="0" cellpadding="0">
+                    <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+                    <!-- BEGIN Section Page_Header -->
+                    <tr class="Caption">
+                      <th scope="col">{res:Facility}</th>
+ 
+                      <th scope="col">{res:NumberPatients}</th>
+                    </tr>
+ <!-- END Section Page_Header -->
+                    <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+                    <!-- BEGIN Section Detail -->
+                    <tr class="Row">
+                      <td>{FacilityName} </td> 
+                      <td style="TEXT-ALIGN: right">{NumberPatients} </td>
+                    </tr>
+ 
+                    <!-- BEGIN Panel Separator -->
+                    <tr class="Separator">
+                      <td colspan="2"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+                    </tr>
+ <!-- END Panel Separator --><!-- END Section Detail -->
+                    <!-- BEGIN Section Report_Footer -->
+                    <!-- BEGIN Panel NoRecords -->
+                    <tr class="NoRecords">
+                      <td colspan="2">{res:CCS_NoRecords}</td>
+                    </tr>
+ <!-- END Panel NoRecords -->
+                    <tr class="Total">
+                      <td valign="baseline">{res:CCS_ReportTotal} </td> 
+                      <td style="TEXT-ALIGN: right" valign="baseline">{TotalSum_NumberPatients} </td>
+                    </tr>
+ <!-- END Section Report_Footer -->
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <!-- END Report patient_facilities --><br>
+          </td>
+        </tr>
+      </table>
+    </td> 
+    <td valign="top">
+      <table style="BORDER-BOTTOM-COLOR: #d8d8d8; BORDER-TOP-COLOR: #d8d8d8; WIDTH: 524px; HEIGHT: 49.66%; BORDER-RIGHT-COLOR: #d8d8d8; BORDER-LEFT-COLOR: #d8d8d8" id="referralsOut" border="1" cellspacing="0" cellpadding="10">
+        <tr valign="top">
+          <td style="WIDTH: 500px" valign="top">
+            <!-- BEGIN Report refLast30Days -->
+            <table id="referralsIn" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td valign="top">
+                  <table class="Header" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                      <td class="th"><strong>{res:refLast30Days} </strong></td> 
+                      <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+                    </tr>
+                  </table>
+ 
+                  <table class="Grid" cellspacing="0" cellpadding="0">
+                    <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+                    <!-- BEGIN Section Page_Header -->
+                    <tr class="Caption">
+                      <th scope="col">
+                      <!-- BEGIN Sorter Sorter_patient_PatientID --><a href="{Sort_URL}">{res:PatientID}</a><!-- END Sorter Sorter_patient_PatientID -->&nbsp;</th>
+ 
+                      <th scope="col">{res:GivenName} &nbsp;</th>
+ 
+                      <th scope="col">{res:FamilyName} &nbsp;</th>
+ 
+                      <th scope="col">
+                      <!-- BEGIN Sorter Sorter_ReferralDate --><a href="{Sort_URL}">{res:ReferralDate}</a><!-- END Sorter Sorter_ReferralDate -->&nbsp;</th>
+ 
+                      <th scope="col">
+                      <!-- BEGIN Sorter Sorter_RefIndicationName --><a href="{Sort_URL}">{res:IndicationID}</a><!-- END Sorter Sorter_RefIndicationName -->&nbsp;</th>
+ 
+                      <th scope="col">{res:ReferralTypeID}</th>
+ 
+                      <th scope="col">
+                      <!-- BEGIN Sorter Sorter_DepartmentDesc --><a href="{Sort_URL}">{res:DepartmentDesc}</a><!-- END Sorter Sorter_DepartmentDesc -->&nbsp;</th>
+                    </tr>
+ <!-- END Section Page_Header -->
+                    <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+                    <!-- BEGIN Section Detail -->
+                    <tr class="Row">
+                      <td style="TEXT-ALIGN: right"><a href="{PatientID_Src}" id="refLast30DaysDetailPatientID_{refLast30Days:rowNumber}">{PatientID}</a> </td> 
+                      <td>{GivenName} </td> 
+                      <td>{FamilyName} </td> 
+                      <td>{ReferralDate} </td> 
+                      <td>{RefIndicationName} </td> 
+                      <td>{TypeName}&nbsp;</td> 
+                      <td>{DepartmentDesc} </td>
+                    </tr>
+ <!-- END Section Detail -->
+                    <!-- BEGIN Section Report_Footer -->
+                    <!-- BEGIN Panel NoRecords -->
+                    <tr class="NoRecords">
+                      <td colspan="7">{res:CCS_NoRecords}</td>
+                    </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <!-- END Report refLast30Days --><br>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</strong>
+</body>
+</html>

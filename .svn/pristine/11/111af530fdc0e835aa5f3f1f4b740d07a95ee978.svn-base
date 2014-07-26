@@ -1,0 +1,470 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:Statistical_reports_for_facility_level}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-3192D87D
+
+var delivery_deliverytype_fac_DatePicker_s_DataDelivery = new Object(); 
+delivery_deliverytype_fac_DatePicker_s_DataDelivery.format           = "ShortDate";
+delivery_deliverytype_fac_DatePicker_s_DataDelivery.style            = "Styles/{CCS_Style}/Style.css";
+delivery_deliverytype_fac_DatePicker_s_DataDelivery.relativePathPart = "";
+delivery_deliverytype_fac_DatePicker_s_DataDelivery.themeVersion = "3.0";
+
+var delivery_deliverytype_fac_DatePicker_s_DataDelivery1 = new Object(); 
+delivery_deliverytype_fac_DatePicker_s_DataDelivery1.format           = "ShortDate";
+delivery_deliverytype_fac_DatePicker_s_DataDelivery1.style            = "Styles/{CCS_Style}/Style.css";
+delivery_deliverytype_fac_DatePicker_s_DataDelivery1.relativePathPart = "";
+delivery_deliverytype_fac_DatePicker_s_DataDelivery1.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record delivery_deliverytype_fac -->
+<form id="delivery_deliverytype_fac" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp; </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="delivery_deliverytype_facs_DataDelivery">{res:DataDelivery}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from} </label><input id="delivery_deliverytype_facs_DataDelivery" name="{s_DataDelivery_Name}" maxlength="100" value="{s_DataDelivery}" size="8">
+              <!-- BEGIN DatePicker DatePicker_s_DataDelivery --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="delivery_deliverytype_facDatePicker_s_DataDelivery"><img id="delivery_deliverytype_facDatePicker_s_DataDelivery_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_DataDelivery -->&nbsp; <label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}</label>&nbsp;</label><input id="delivery_deliverytype_facs_DataDelivery1" name="{s_DataDelivery1_Name}" maxlength="100" value="{s_DataDelivery1}" size="8">
+              <!-- BEGIN DatePicker DatePicker_s_DataDelivery1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="delivery_deliverytype_facDatePicker_s_DataDelivery1"><img id="delivery_deliverytype_facDatePicker_s_DataDelivery1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_DataDelivery1 --></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="delivery_deliverytype_facButton_DoSearch" class="Button" name="{Button_Name}" alt="{res:CCS_Search}" value="{res:CCS_Search}" type="submit"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record delivery_deliverytype_fac --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print -->
+<table>
+  <tr valign="top">
+    <td>
+      <p>
+      <!-- BEGIN Report delivery_facilities_deliv -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td style="WIDTH: 260px" class="th"><strong>{res:DeliveryTypeName}</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+              </tr>
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header -->
+              <thead style="DISPLAY: table-header-group">
+                <tr class="Caption">
+                  <th scope="col">&nbsp;&nbsp;</th>
+ 
+                  <th style="TEXT-ALIGN: center" scope="col">&nbsp;#</th>
+ 
+                  <th style="TEXT-ALIGN: center" scope="col">%</th>
+                </tr>
+ 
+              </thead>
+ <!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer -->
+              <tfoot style="DISPLAY: table-footer-group">
+              </tfoot>
+ <!-- END Section Page_Footer -->
+              <!-- BEGIN Section DeliveryTypeName_Header -->
+              <tr class="GroupCaption">
+                <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{DeliveryTypeName} </th>
+ 
+                <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_deliverytype_DeliveryTypeID2}</th>
+ 
+                <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_deliverytype_DeliveryTypeID1}</th>
+              </tr>
+ <!-- END Section DeliveryTypeName_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section DeliveryTypeName_Footer --><!-- END Section DeliveryTypeName_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="3">{res:CCS_NoRecords}</td>
+              </tr>
+ <!-- END Panel NoRecords -->
+              <tr class="Total">
+                <td>{res:CCS_ReportTotal}&nbsp; </td> 
+                <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;{TotalCount_deliverytype_DeliveryTypeID}</td> 
+                <td valign="baseline">&nbsp;</td>
+              </tr>
+ <!-- END Section Report_Footer -->
+            </table>
+          </td>
+        </tr>
+      </table>
+      <!-- END Report delivery_facilities_deliv --><br>
+      <p></p>
+    </td> 
+    <td>&nbsp;</td> 
+    <td>
+      <p>
+      <!-- BEGIN Report delivery_deliverymethod_f1 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td style="WIDTH: 275px" class="th"><strong>{res:delivery_deliverymethod_facility}</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+              </tr>
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header -->
+              <thead style="DISPLAY: table-header-group">
+                <tr class="Caption">
+                  <th scope="col"></th>
+ 
+                  <th style="TEXT-ALIGN: center" scope="col">#</th>
+ 
+                  <th style="TEXT-ALIGN: center" scope="col">%</th>
+                </tr>
+ 
+              </thead>
+ <!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer -->
+              <tfoot style="DISPLAY: table-footer-group">
+              </tfoot>
+ <!-- END Section Page_Footer -->
+              <!-- BEGIN Section FacilityName_Header --><!-- END Section FacilityName_Header -->
+              <!-- BEGIN Section DeliveryMethodName_Header -->
+              <tr class="GroupCaption">
+                <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{DeliveryMethodName} </th>
+ 
+                <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID1}</th>
+ 
+                <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID2} </th>
+              </tr>
+ <!-- END Section DeliveryMethodName_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section DeliveryMethodName_Footer --><!-- END Section DeliveryMethodName_Footer -->
+              <!-- BEGIN Section FacilityName_Footer --><!-- END Section FacilityName_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="3">{res:CCS_NoRecords}</td>
+              </tr>
+ <!-- END Panel NoRecords -->
+              <tr class="Total">
+                <td>{res:CCS_ReportTotal}</td> 
+                <td style="TEXT-ALIGN: right">{TotalCount_DeliveryID}</td> 
+                <td valign="baseline"></td>
+              </tr>
+ <!-- END Section Report_Footer -->
+            </table>
+          </td>
+        </tr>
+      </table>
+      <!-- END Report delivery_deliverymethod_f1 --><br>
+      </p>
+    </td> 
+    <td>&nbsp;</td> 
+    <td>
+      <p>
+      <!-- BEGIN Report delivery_facilities1 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td style="WIDTH: 250px" class="th"><strong>{res:PartnerDeliveryFacility}</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+              </tr>
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header -->
+              <thead style="DISPLAY: table-header-group">
+                <tr class="Caption">
+                  <th scope="col"></th>
+ 
+                  <th style="TEXT-ALIGN: center" scope="col">#</th>
+ 
+                  <th style="TEXT-ALIGN: center" scope="col">%</th>
+                </tr>
+ 
+              </thead>
+ <!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer -->
+              <tfoot style="DISPLAY: table-footer-group">
+              </tfoot>
+ <!-- END Section Page_Footer -->
+              <!-- BEGIN Section FacilityName_Header --><!-- END Section FacilityName_Header -->
+              <!-- BEGIN Section PartnerDelivery_Header -->
+              <tr class="GroupCaption">
+                <th style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{PartnerDelivery} </th>
+ 
+                <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID1}</th>
+ 
+                <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID2}</th>
+              </tr>
+ <!-- END Section PartnerDelivery_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section PartnerDelivery_Footer --><!-- END Section PartnerDelivery_Footer -->
+              <!-- BEGIN Section FacilityName_Footer --><!-- END Section FacilityName_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="3">{res:CCS_NoRecords}</td>
+              </tr>
+ <!-- END Panel NoRecords -->
+              <tr class="Total">
+                <td style="TEXT-ALIGN: right">{res:CCS_ReportTotal}</td> 
+                <td style="TEXT-ALIGN: right">{TotalCount_DeliveryID}</td> 
+                <td valign="baseline"></td>
+              </tr>
+ <!-- END Section Report_Footer -->
+            </table>
+          </td>
+        </tr>
+      </table>
+      <!-- END Report delivery_facilities1 --><br>
+      </p>
+ 
+      <tr valign="top">
+        <td>
+          <p>
+          <!-- BEGIN Report delivery_facilities2 -->
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="top">
+                <table class="Header" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                    <td style="WIDTH: 260px" class="th"><strong>{res:PartogramFacility}</strong></td> 
+                    <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+                  </tr>
+                </table>
+ 
+                <table class="Grid" cellspacing="0" cellpadding="0">
+                  <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+                  <!-- BEGIN Section Page_Header -->
+                  <tr class="Caption">
+                    <th scope="col"></th>
+ 
+                    <th style="TEXT-ALIGN: center" scope="col">#</th>
+ 
+                    <th style="TEXT-ALIGN: center" scope="col">%</th>
+                  </tr>
+ <!-- END Section Page_Header -->
+                  <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+                  <!-- BEGIN Section FacilityName_Header --><!-- END Section FacilityName_Header -->
+                  <!-- BEGIN Section Partogram_Header -->
+                  <tr class="GroupCaption">
+                    <th style="TEXT-ALIGN: left; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col" align="left">{Partogram} </th>
+ 
+                    <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID2}</th>
+ 
+                    <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID3}</th>
+                  </tr>
+ <!-- END Section Partogram_Header -->
+                  <!-- BEGIN Section Detail -->
+                  <tr class="Row">
+                    <td style="TEXT-ALIGN: right"></td> 
+                    <td style="TEXT-ALIGN: right">{Report_Row_Number} </td> 
+                    <td style="TEXT-ALIGN: right">{DeliveryID} </td>
+                  </tr>
+ <!-- END Section Detail -->
+                  <!-- BEGIN Section Partogram_Footer --><!-- END Section Partogram_Footer -->
+                  <!-- BEGIN Section FacilityName_Footer --><!-- END Section FacilityName_Footer -->
+                  <!-- BEGIN Section Report_Footer -->
+                  <!-- BEGIN Panel NoRecords -->
+                  <tr class="NoRecords">
+                    <td colspan="3">{res:CCS_NoRecords}</td>
+                  </tr>
+ <!-- END Panel NoRecords -->
+                  <tr class="Total">
+                    <td style="TEXT-ALIGN: right">{res:CCS_ReportTotal}</td> 
+                    <td style="TEXT-ALIGN: right">{TotalCount_DeliveryID}</td> 
+                    <td style="TEXT-ALIGN: right" valign="baseline"></td>
+                  </tr>
+ <!-- END Section Report_Footer -->
+                </table>
+              </td>
+            </tr>
+          </table>
+          <!-- END Report delivery_facilities2 --></p>
+ 
+          <p></p>
+        </td> 
+        <td>&nbsp;</td> 
+        <td>
+          <p>
+          <!-- BEGIN Report Report3 -->
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="TEXT-ALIGN: right" valign="top" align="right">
+                <table class="Header" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                    <td style="WIDTH: 275px" class="th"><strong>{res:PhysiologicalDelivery}</strong></td> 
+                    <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+                  </tr>
+                </table>
+ 
+                <table class="Grid" cellspacing="0" cellpadding="0">
+                  <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+                  <!-- BEGIN Section Page_Header -->
+                  <tr class="Caption">
+                    <th scope="col"></th>
+ 
+                    <th scope="col"># &nbsp; </th>
+ 
+                    <th style="TEXT-ALIGN: center" scope="col">
+                    <!-- BEGIN Sorter Sorter_DeliveryID --><a href="{Sort_URL}">{res:DeliveryID}</a> 
+                    <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                    <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DeliveryID -->%&nbsp;</th>
+                  </tr>
+ <!-- END Section Page_Header -->
+                  <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+                  <!-- BEGIN Section Physiological_Header -->
+                  <tr class="GroupCaption">
+                    <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Physiological} </th>
+ 
+                    <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID}</th>
+ 
+                    <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID1} </th>
+                  </tr>
+ <!-- END Section Physiological_Header -->
+                  <!-- BEGIN Section Detail --><!-- END Section Detail -->
+                  <!-- BEGIN Section Physiological_Footer --><!-- END Section Physiological_Footer -->
+                  <!-- BEGIN Section Report_Footer -->
+                  <!-- BEGIN Panel NoRecords -->
+                  <tr class="NoRecords">
+                    <td colspan="3">{res:CCS_NoRecords}</td>
+                  </tr>
+ <!-- END Panel NoRecords -->
+                  <tr class="Total">
+                    <td valign="baseline">{res:CCS_ReportTotal} </td> 
+                    <td style="TEXT-ALIGN: right">{TotalCount_DeliveryID} </td> 
+                    <td style="TEXT-ALIGN: right" valign="baseline"></td>
+                  </tr>
+ <!-- END Section Report_Footer -->
+                </table>
+              </td>
+            </tr>
+          </table>
+          <!-- END Report Report3 --><br>
+          </p>
+        </td> 
+        <td>&nbsp;</td> 
+        <td>
+          <p>
+          <!-- BEGIN Report Report2 -->
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td valign="top">
+                <table class="Header" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                    <td style="WIDTH: 250px" class="th"><strong>{res:pregnancy_outcome} </strong></td> 
+                    <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+                  </tr>
+                </table>
+ 
+                <table class="Grid" cellspacing="0" cellpadding="0">
+                  <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+                  <!-- BEGIN Section Page_Header -->
+                  <tr class="Caption">
+                    <th scope="col">&nbsp;&nbsp;</th>
+ 
+                    <th style="TEXT-ALIGN: center" scope="col">#</th>
+ 
+                    <th style="TEXT-ALIGN: center" scope="col">
+                    <!-- BEGIN Sorter Sorter_DeliveryID --><a href="{Sort_URL}">{res:DeliveryID}</a> 
+                    <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                    <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DeliveryID -->%</th>
+                  </tr>
+ <!-- END Section Page_Header -->
+                  <!-- BEGIN Section Page_Footer --><!-- END Section Page_Footer -->
+                  <!-- BEGIN Section pregnancy_outcome_Header -->
+                  <tr class="GroupCaption">
+                    <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{pregnancy_outcome} </th>
+ 
+                    <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID}</th>
+ 
+                    <th style="TEXT-ALIGN: right; BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID1}</th>
+                  </tr>
+ <!-- END Section pregnancy_outcome_Header -->
+                  <!-- BEGIN Section Detail --><!-- END Section Detail -->
+                  <!-- BEGIN Section pregnancy_outcome_Footer --><!-- END Section pregnancy_outcome_Footer -->
+                  <!-- BEGIN Section Report_Footer -->
+                  <!-- BEGIN Panel NoRecords -->
+                  <tr class="NoRecords">
+                    <td colspan="3">{res:CCS_NoRecords}</td>
+                  </tr>
+ <!-- END Panel NoRecords -->
+                  <tr class="Total">
+                    <td valign="baseline">{res:CCS_ReportTotal} </td> 
+                    <td style="TEXT-ALIGN: right">{TotalCount_DeliveryID}</td> 
+                    <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+                  </tr>
+ <!-- END Section Report_Footer -->
+                </table>
+              </td>
+            </tr>
+          </table>
+          <!-- END Report Report2 --><br>
+          {res:DeliveryOutcomeNote}</p>
+        </td>
+      </tr>
+    </table>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    </body>
+    </html>

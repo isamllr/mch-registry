@@ -36,7 +36,9 @@ class FillNotificationQueue {
 			$sth->closeCursor();
 			
 			$currentFillDate = array();
+			$currentFillEndDate = array();
 			$currentFillDate = $fillDate;
+			$currentFillEndDate = $fillDate;
 			$loc = 0;
 			
 			//Calculate new fill date based on last fill date from database
@@ -45,77 +47,96 @@ class FillNotificationQueue {
 				$isDate = DateTime::createFromFormat('Y-m-d', $value); //converts to false if format is not matching
 				if(empty($value) || !isset($value) || !$isDate){	//various checks for null for compatibility reasons
 					//Queue has never been filled before, fill now
-					$currentFillDate[$loc] =  new datetime(date('Y-m-d'));			
+					$currentFillDate[$loc] =  new datetime(date('Y-m-d'));	
+					$currentFillEndDate[$loc] = new datetime(date('Y-m-d'));
+					$oneDayInterval = new DateInterval( "P1D" ); // 1-day, though can be more sophisticated rule
+					$currentFillEndDate[$loc]->add($oneDayInterval);
 				}
 				else{
 					$valueDate = new datetime($value);
-					$todayDate = new datetime(date('Y-m-d'));
-					$intDiffDays = $valueDate->diff($todayDate)->format('%R%a');
+					$intDiffDays = $this->getNrOfDaysUntilToday($valueDate);
 					
 					if($intDiffDays > 7){
+						//Retrospective filling applicable
 						//Last filling too far in the past, generating notifications from last 7 days
 						//First fill day is 6 days back
 						$todayDate = new datetime(date('Y-m-d'));
-						$currentFillDate[$loc] =  $todayDate->sub(new DateInterval( "P6D" ));
+						$sixDaysInterval = new DateInterval( "P6D" );
+						$currentFillDate[$loc] =  $todayDate->sub($sixDaysInterval);
+						$currentFillEndDate[$loc] = new datetime(date('Y-m-d'));
+						$oneDayInterval = new DateInterval( "P1D" ); // 1-day, though can be more sophisticated rule
+						$currentFillEndDate[$loc]->add($oneDayInterval);
 					}
 					else if($intDiffDays <= 7 && $intDiffDays > 0){
 						//Retrospective filling applicable
 						//First fill day is 1 day after that date
 						$valueDate = new datetime($value);
-						$currentFillDate[$loc] = $valueDate->add(new DateInterval( "P1D" ));
+						$oneDayInterval = new DateInterval( "P1D" );
+						$currentFillDate[$loc] = $valueDate->add($oneDayInterval);
+						$currentFillEndDate[$loc] = new datetime(date('Y-m-d'));
+						$oneDayInterval = new DateInterval( "P1D" ); // 1-day, though can be more sophisticated rule
+						$currentFillEndDate[$loc]->add($oneDayInterval);
 					}
 					else if($intDiffDays == 0){
 						//Filling already completed today, do not fill, set fill date to max date
 						$currentFillDate[$loc] =  new datetime(date('2038-01-19'));
+						$currentFillEndDate[$loc] = new datetime(date('2038-01-19'));
 					}
 					else{
 						//Not applicable, do not fill, set fill date to max date
 						$currentFillDate[$loc] =  new datetime(date('2038-01-19'));
+						$currentFillEndDate[$loc] = new datetime(date('2038-01-19'));
 					}
-				}						
+				}			
 			}				
 			
 			gc_enable(); // Enable Garbage Collector
-			$tempDate = new datetime(date('Y-m-d'));
-			$todayDate = $tempDate->format('Y-m-d');
 			
-			//Fill queue for each type
-			for ($i = 1; $i <= 7; $i++) {	
-				$catchedError = false;	
-				try{
-					for($currentDate = $currentFillDate[$i]; $this->getNrOfDaysUntilToday($currentDate) <= 0; $currentDate = $currentDate->add(new DateInterval( "P1D" ))){
-						
-						$rowCount = 0; $rowCountVisit = 0;					
-						$sth = $dbConn->prepare($this->getStatement($i, $currentDate->format('Y-m-d')));
-						$sth->execute();
-						$sth->closeCursor();						
-						
-						//Get number of created notifications
-						$nrOfNotifications = $dbConn->query("select @nrOfNotifications")->fetch(PDO::FETCH_ASSOC);					
-						$rowCount = $nrOfNotifications["@nrOfNotifications"];
-						
-						if($i==2){//Second visit type notification						
-							$sth = $dbConn->prepare($this->getStatement(0, $currentDate->format('Y-m-d')));
+			//Fill queue for each type	
+			for ($i = 1; $i <= 7; $i++) {			
+				$startDate = $currentFillDate[$i];
+				$endDate = $currentFillEndDate[$i];				
+				$periodInterval = new DateInterval( "P1D" );
+				$period = new DatePeriod($startDate, $periodInterval, $endDate );			
+				
+				$catchedError = false;
+				
+				foreach($period as $currentDate){	
+					try{
+							$rowCount = 0; $rowCountVisit = 0;					
+							$sth = $dbConn->prepare($this->getStatement($i, $currentDate->format('Y-m-d')));
 							$sth->execute();
 							$sth->closeCursor();						
 							
 							//Get number of created notifications
-							$nrOfNotificationsVisit = $dbConn->query("select @nrOfNotifications")->fetch(PDO::FETCH_ASSOC);					
-							$rowCountVisit = $nrOfNotificationsVisit["@nrOfNotifications"];
-							$rowCount = $rowCount + $rowCountVisit;						
-						}
-						
-						//Prepare log message
-						$retro = "";
-						if($currentDate<(new datetime(date('Y-m-d')))){$retro = ' Retrospective filling for ' .$currentDate->format('Y-m-d').'. ';}
-						echo date("Y-m-d H:i:s").' Notification Queue filled with ' .$rowCount. ' '.$notificationTypeName[$i].' notification(s). ' . $retro . '<br \>'."\n";
+							$nrOfNotifications = $dbConn->query("select @nrOfNotifications")->fetch(PDO::FETCH_ASSOC);					
+							$rowCount = $nrOfNotifications["@nrOfNotifications"];
+							
+							if($i==2){//Second visit type notification						
+								$sth = $dbConn->prepare($this->getStatement(0, $currentDate->format('Y-m-d')));
+								$sth->execute();
+								$sth->closeCursor();						
+								
+								//Get number of created notifications
+								$nrOfNotificationsVisit = $dbConn->query("select @nrOfNotifications")->fetch(PDO::FETCH_ASSOC);					
+								$rowCountVisit = $nrOfNotificationsVisit["@nrOfNotifications"];
+								$rowCount = $rowCount + $rowCountVisit;						
+							}
+							
+							//Prepare log message
+							$retro = "";
+							if($currentDate<(new datetime(date('Y-m-d')))){$retro = ' Retrospective filling for ' .$currentDate->format('Y-m-d').'. ';}
+							echo date("Y-m-d H:i:s").' Notification Queue filled with ' .$rowCount. ' '.$notificationTypeName[$i].' notification(s). ' . $retro . '<br \>'."\n";
+					}catch(Exception $e){
+						$catchedError = true;
+						echo date("Y-m-d H:i:s") . ' Caught exception while filling '.$notificationTypeName[$i].' notification into queue. Message: ',  $e->getMessage(), '<br \>'."\n";
 					}
-				}catch(Exception $e){
-					$catchedError = true;
-					echo date("Y-m-d H:i:s") . ' Caught exception while filling '.$notificationTypeName[$i].' notification into queue. Message: ',  $e->getMessage(), '<br \>'."\n";
+				}
+				if(!$catchedError){
+					$dbConn->exec("UPDATE notificationqueuelastfill SET lastFillDate = CURDATE() WHERE NotificationTypeID=".$i.";");
 				}				
-				if(!$catchedError){$dbConn->exec("UPDATE notificationqueuelastfill SET lastFillDate = '" . $todayDate . "' WHERE NotificationTypeID=".$i.";");}				
-			}		
+			}
+//}			
 			
 			//Move expired messages to the Notification Queue History
 			$rowCount = $dbConn->exec("
@@ -125,22 +146,24 @@ class FillNotificationQueue {
 					NotificationText,
 					DateTimeToSend,
 					0 as SucessfullySent,
-					NULL as DateTimeSent
+					NULL as DateTimeSent,
+					NotificationQueueID,
+					MobileApp
 				FROM notificationqueue
-				WHERE DATE(LatestBy) < '" . $todayDate . "';
+				WHERE DATE(LatestBy) < curdate();
 		   ");
 			echo date("Y-m-d H:i:s") , ' Moved ', $rowCount, ' expired message(s) to the  Notification Queue History.<br \>'."\n";
 			
 			//Delete expired messages from Notification Queue after moving
 			$rowCount = $dbConn->exec("
-				DELETE FROM notificationqueue WHERE DATE(LatestBy) < '" . $todayDate . "';
+				DELETE FROM notificationqueue WHERE DATE(LatestBy) < curdate();
 		   ");
 			//echo date("Y-m-d H:i:s") , ' Deleted ', $rowCount, ' expired message(s) from the Notification Queue after moving them to the  Notification Queue History.<br \>'."\n";
 		
 			//Clean Notification Queue History
 			$rowCount = $dbConn->exec("
 				DELETE FROM notificationqueuehistory
-				WHERE DATEDIFF(DateTimeToSend, '" . $todayDate . "') >". $GLOBALS['DAYS_TO_KEEP_HISTORY'] .";
+				WHERE DATEDIFF(DateTimeToSend, curdate()) >". $GLOBALS['DAYS_TO_KEEP_HISTORY'] .";
 		   ");
 			echo date("Y-m-d H:i:s") , ' Removed ', $rowCount, ' message(s) older than '. $GLOBALS['DAYS_TO_KEEP_HISTORY'] .' days from the Notification Queue History.<br \>'."\n";
 		
@@ -158,25 +181,24 @@ class FillNotificationQueue {
 		
 	}
 	
-	
 	private function getStatement($notificationTypeID, $currentDate){
 		switch ($notificationTypeID) {
 			case 1:
-				return "CALL fillRecommendationNotificationForPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate . "', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', '". $GLOBALS['DEFAULT_RECOMMENDATIONS_TIME'] ."', " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", '" . quotemeta(quotemeta($GLOBALS['FOLDER_PATH'] . "Recommendations" . $currentDate . ".csv")) . "', @nrOfNotifications);";
+				return "CALL fillRecommendationNotificationForPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', '". $GLOBALS['DEFAULT_RECOMMENDATIONS_TIME'] ."', " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
 			case 2:
-				return "CALL fillVisitReminderNotificationForPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_REMINDERS_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", '" . quotemeta(quotemeta($GLOBALS['FOLDER_PATH'] . "Reminders" . $currentDate . ".csv")) . "', @nrOfNotifications);";
+				return "CALL fillVisitReminderNotificationForPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_REMINDERS_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
 			case 3:
-				return "CALL fillHighRiskVisitReminderNotificationForDoctors('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_ON'] . ", @nrOfNotifications);";
+				return "CALL fillHighRiskVisitReminderNotificationForDoctors('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_HIGH_RISK_REMINDERS_ON'] . ", @nrOfNotifications);";
 			case 4:
-				return "CALL fillHighRiskPregnancySummaryNotificationForOblastUsers('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_DAY_OF_MONTH'] .", '" . $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_TIME'] .  "', ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_ON'] .", ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_ON_EMPLOYEE_LEVEL'] .", @nrOfNotifications);";
+				return "CALL fillHighRiskPregnancySummaryNotificationForOblastUsers('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_DAY_OF_MONTH'] .", '" . $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_TIME'] .  "', ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_ON'] .", ". $GLOBALS['DEFAULT_HIGH_RISK_PREGNANCY_SUMMARY_ON_EMPLOYEE_LEVEL'] .", @nrOfNotifications);";
 			case 5:
-				return "CALL fillPatientDischargedFromHospitalisationNotificationToDoctors('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_TIME'] ."', " . $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_ON'] .", @nrOfNotifications);";
+				return "CALL fillPatientDischargedFromHospitalisationNotificationToDoctors('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_TIME'] ."', " . $GLOBALS['DEFAULT_PATIENT_DISCHARGED_REFERRAL_ON'] .", @nrOfNotifications);";
 			case 6:
-				return "CALL fillSubscribeToPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_SUBSCRIBE_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_SUBSCRIBE_TIME'] ."', " . $GLOBALS['DEFAULT_SUBSCRIBE_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
+				return "CALL fillSubscribeToPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_SUBSCRIBE_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_SUBSCRIBE_TIME'] ."', " . $GLOBALS['DEFAULT_SUBSCRIBE_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
 			case 7:
-				return "CALL fillUnsubscribeToPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_UNSUBSCRIBE_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_UNSUBSCRIBE_TIME'] ."', " . $GLOBALS['DEFAULT_UNSUBSCRIBE_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
+				return "CALL fillUnsubscribeToPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_UNSUBSCRIBE_DAYS_AFTER'] .", '". $GLOBALS['DEFAULT_UNSUBSCRIBE_TIME'] ."', " . $GLOBALS['DEFAULT_UNSUBSCRIBE_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", " . $GLOBALS['DEFAULT_RECOMMENDATIONS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
 			case 0:
-				return "CALL fillVisitReminderHospitalisationNotificationForPatients('". $GLOBALS ['USE_MYSQL_TIMEZONE'] ."', '" . $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_REMINDERS_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", '" . quotemeta(quotemeta($GLOBALS['FOLDER_PATH'] . "RemindersHosp" . $currentDate . ".csv")) . "', @nrOfNotifications);";
+				return "CALL fillVisitReminderHospitalisationNotificationForPatients('". $currentDate."', '". $GLOBALS['DEFAULT_LANGUAGE_FOR_NOTIFICATIONS'] ."', ". $GLOBALS['DEFAULT_REMINDERS_DAYS_IN_ADVANCE'] .", '". $GLOBALS['DEFAULT_REMINDERS_TIME'] ."', " . $GLOBALS['DEFAULT_REMINDERS_ON'] . ", " . $GLOBALS['DEFAULT_REMINDERS_ON_PREGNANCY_LEVEL'] . ", @nrOfNotifications);";
 			default:
 				throw (new Exception('Notification Type ' . $notificationTypeID . ' unknown. <br>' ."\n"));
 				break;
@@ -184,9 +206,9 @@ class FillNotificationQueue {
 	}
 	
 	private function getNrOfDaysUntilToday($fillDate){
-		$todayDate = new datetime(date('Y-m-d'));
-		$days = $todayDate->diff($fillDate);
-		return (int)$days->format('%R%a');
+		$nowdate = new datetime(date('Y-m-d'));
+		$interval = $fillDate->diff($nowdate);
+		return $interval->d;
 	}				
 }
 

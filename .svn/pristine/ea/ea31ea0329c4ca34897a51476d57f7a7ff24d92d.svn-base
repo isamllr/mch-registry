@@ -1,0 +1,727 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:pregnancy}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.1.00.027">
+<script type="text/javascript" src="date.js"></script>
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Include User Scripts @1-B93D65AC
+</script>
+<script language="JavaScript" src="js/pt/prototype.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include User Scripts
+
+//Date Picker Object Definitions @1-28C245BE
+
+var pregnancy_DatePicker_PregnancyRecNr1 = new Object(); 
+pregnancy_DatePicker_PregnancyRecNr1.format           = "ShortDate";
+pregnancy_DatePicker_PregnancyRecNr1.style            = "Styles/{CCS_Style}/Style.css";
+pregnancy_DatePicker_PregnancyRecNr1.relativePathPart = "";
+pregnancy_DatePicker_PregnancyRecNr1.themeVersion = "3.0";
+
+var pregnancy_DatePicker_LastMensesDate1 = new Object(); 
+pregnancy_DatePicker_LastMensesDate1.format           = "ShortDate";
+pregnancy_DatePicker_LastMensesDate1.style            = "Styles/{CCS_Style}/Style.css";
+pregnancy_DatePicker_LastMensesDate1.relativePathPart = "";
+pregnancy_DatePicker_LastMensesDate1.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//pregnancyButton_Delete_OnClick @6-2D8336E6
+function pregnancyButton_Delete_OnClick()
+{
+    var result = true;
+//End pregnancyButton_Delete_OnClick
+
+//Confirmation Message @7-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close pregnancyButton_Delete_OnClick @6-BC33A33A
+    return result;
+}
+//End Close pregnancyButton_Delete_OnClick
+
+//pregnancyUpdateDelDate_OnClick @54-9A5EF9D3
+function pregnancyUpdateDelDate_OnClick()
+{
+    var result = true;
+//End pregnancyUpdateDelDate_OnClick
+
+//Custom Code @55-2A29BDB7
+    // -------------------------
+        var CalcDelDate;
+        var DateString = getLocaleInfo("shortDate");
+        DateString = DateString.replace("mm","MM");
+        DateString = DateString.replace("m","M");
+        CalcDelDate     = Date.parseExact(document.getElementById("pregnancyLastMensesDate").value, DateString);
+        CalcDelDate.setDate(CalcDelDate.getDate()+280);
+        document.getElementById("pregnancyCalc_DeliveryDate").value = formatDate(CalcDelDate, parseDateFormat(getLocaleInfo("shortDate")));
+    // -------------------------
+//End Custom Code
+
+//Close pregnancyUpdateDelDate_OnClick @54-BC33A33A
+    return result;
+}
+//End Close pregnancyUpdateDelDate_OnClick
+
+//pregnancyButton_Insert_OnClick @4-E22C57A8
+function pregnancyButton_Insert_OnClick()
+{
+    var result = true;
+//End pregnancyButton_Insert_OnClick
+
+//Confirmation Message @202-545E0FCB
+    return confirm('{res: AutomAddVisitIfAddPreg}');
+//End Confirmation Message
+
+//Close pregnancyButton_Insert_OnClick @4-BC33A33A
+    return result;
+}
+//End Close pregnancyButton_Insert_OnClick
+
+//pregnancy_OnLoad @3-CF282630
+function pregnancy_OnLoad(form)
+{
+    var result = true;
+//End pregnancy_OnLoad
+
+//Custom Code @412-2A29BDB7
+    // -------------------------
+    var reminderControl = document.getElementsByName("ReminderRow")[0];
+    var recommendationControl = document.getElementsByName("RecommendationRow")[0];
+
+    var reminderEnabled = document.getElementById("ReminderEnabled");
+    var recommendationEnabled = document.getElementById("RecommendationEnabled");
+
+    if (reminderEnabled.innerText == "1") {
+                reminderControl.style.display = "";
+    } else {
+                reminderControl.style.display = "none";
+    }
+
+    if (recommendationEnabled.innerText == "1") {
+                recommendationControl.style.display = "";
+    } else {
+                recommendationControl.style.display = "none";
+    }
+    // -------------------------
+//End Custom Code
+
+//Close pregnancy_OnLoad @3-BC33A33A
+    return result;
+}
+//End Close pregnancy_OnLoad
+
+//pregnancyButton_Cancel_OnClick @8-F05AF953
+function pregnancyButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End pregnancyButton_Cancel_OnClick
+
+//pregnancyEmployeeIDPTDependentListBox1 Start @356-D4DCA6C4
+function pregnancyEmployeeIDPTDependentListBox1_start(sender) {
+    var dependentElement = $("pregnancyEmployeeID" + sender.id.substring(17));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/pregnancy_maint_pregnancy_EmployeeID_PTDependentListBox1.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End pregnancyEmployeeIDPTDependentListBox1 Start
+
+//bind_events @1-4F36EEAC
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("pregnancyFacility", "change", pregnancyEmployeeIDPTDependentListBox1_start);
+    addEventHandler("pregnancyFacility", "load", pregnancyEmployeeIDPTDependentListBox1_start);
+    addEventHandler("pregnancyButton_Delete", "click", pregnancyButton_Delete_OnClick);
+    addEventHandler("pregnancyUpdateDelDate", "click", pregnancyUpdateDelDate_OnClick);
+    addEventHandler("pregnancyButton_Insert", "click", pregnancyButton_Insert_OnClick);
+    addEventHandler("pregnancy", "load", pregnancy_OnLoad);
+    addEventHandler("pregnancyButton_Cancel", "click", pregnancyButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+function CopyDate(){
+        CalcDelDate = new Date(document.getElementById("pregnancyLastMensesDate_hidden").value);
+       document.getElementById("pregnancyCalc_DeliveryDate").value = formatDate(CalcDelDate, parseDateFormat(getLocaleInfo("shortDate")));
+}
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_Components_doctype.css">
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record patient_header -->
+<form id="patient_header" method="post" name="{HTMLFormName}" action="{Action}">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:patient}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{FirstName}&nbsp;{FamiliyName}&nbsp;({BirthDate})</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="patient_headerPatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record patient_header --></p>
+<!-- BEGIN Record patient_header1 -->
+<form id="patient_header1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:patient}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="patient_header1PatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record patient_header1 --><br>
+<!-- BEGIN Record pregnancy -->
+<form id="pregnancy" method="post" name="{HTMLFormName}" action="{Action}">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:AddEditPregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="pregnancyPregnancyRecNr">{res:PregnancyRecNr}</label></td> 
+            <td><input id="pregnancyPregnancyRecNr" maxlength="10" size="10" value="{PregnancyRecNr}" name="{PregnancyRecNr_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="pregnancyFacility">{res:FacilityID} </label></td> 
+            <td>
+              <select id="pregnancyFacility" name="{Facility_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {Facility_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="pregnancyPregRegDate">{res:PregRegDate} </label></td> 
+            <td><input id="pregnancyPregRegDate" maxlength="100" size="8" value="{PregRegDate}" name="{PregRegDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_PregnancyRecNr1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancyDatePicker_PregnancyRecNr1"><img id="pregnancyDatePicker_PregnancyRecNr1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a> <!-- END DatePicker DatePicker_PregnancyRecNr1 --></td> 
+            <tr class="Controls">
+              <td class="th"><label for="pregnancyGestationAge">{res:GestationAge}</label></td> 
+              <td><input id="pregnancyGestationAge" maxlength="100" size="8" value="{GestationAge}" name="{GestationAge_Name}"></td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th">{res:MethodFertilization}</td> 
+              <td><label for="pregnancyMethodFertilization" style="display: none;">&nbsp;</label> 
+                <select id="pregnancyMethodFertilization" name="{MethodFertilization_Name}">
+                  <option selected value="">{res:CCS_SelectValue}</option>
+                  {MethodFertilization_Options}
+                </select>
+ </td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th"><label for="pregnancyGestationAge">{res:Ultrasound20weeks}</label></td> 
+              <td>
+                <!-- BEGIN RadioButton Ultrasound20weeks --><input id="pregnancyUltrasound20weeks_{Ultrasound20weeks:optionNumber}" type="radio" value="{Value}" name="{Ultrasound20weeks_Name}" {Check}><label for="pregnancyUltrasound20weeks_{Ultrasound20weeks:optionNumber}">{Description}</label><!-- END RadioButton Ultrasound20weeks --></td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th">{res:LastMensesDate}</td> 
+              <td><input id="pregnancyLastMensesDate" maxlength="100" size="8" value="{LastMensesDate}" name="{LastMensesDate_Name}">
+                <!-- BEGIN DatePicker DatePicker_LastMensesDate1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="pregnancyDatePicker_LastMensesDate1"><img id="pregnancyDatePicker_LastMensesDate1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a> <!-- END DatePicker DatePicker_LastMensesDate1 --></td> 
+              <tr class="Controls">
+                <td class="th"><label for="pregnancyCalc_DeliveryDate">{res:Calc_DeliveryDate} *</label></td> 
+                <td><input id="pregnancyCalc_DeliveryDate" maxlength="100" size="8" value="{Calc_DeliveryDate}" name="{Calc_DeliveryDate_Name}">&nbsp; 
+                  <!-- BEGIN Button UpdateDelDate --><input id="pregnancyUpdateDelDate" title="Підрахувати" class="Button" alt="Button1" type="button" value=" {res:Calculate}" name="{Calculate}"><!-- END Button UpdateDelDate --></td>
+              </tr>
+ 
+              <tr class="Controls">
+                <td class="th"><label for="pregnancyPregnancyTypeID">{res:PregnancyTypeName}</label></td> 
+                <td>
+                  <select id="pregnancyPregnancyTypeID" name="{PregnancyTypeID_Name}">
+                    <option selected value="">{res:CCS_SelectValue}</option>
+                    {PregnancyTypeID_Options}
+                  </select>
+ </td>
+              </tr>
+ 
+              <tr class="Controls">
+                <td class="th">{res:RespDoctor}</td> 
+                <td>
+                  <!-- BEGIN ListBox EmployeeID -->
+                  <select id="pregnancyEmployeeID" name="{EmployeeID_Name}">
+                    <option selected value="">{res:CCS_SelectValue}</option>
+                    {EmployeeID_Options}
+                  </select>
+ <!-- END ListBox EmployeeID --></td>
+              </tr>
+ 
+              <tr class="Controls" style="DISPLAY: none" name="ReminderRow">
+                <td class="th"><label for="pregnancyPregnancyTypeID">{res:ReminderNot}</label> <label for="NotificationNote" style="DISPLAY: none">{res:NotificationNote} </label></td> 
+                <td>
+                  <!-- BEGIN RadioButton RecommendationNotifications --><input id="pregnancyRecommendationNotifications_{RecommendationNotifications:optionNumber}" type="radio" value="{Value}" name="{RecommendationNotifications_Name}" {Check}><label for="pregnancyRecommendationNotifications_{RecommendationNotifications:optionNumber}">{Description}</label><!-- END RadioButton RecommendationNotifications --></td>
+              </tr>
+ 
+              <tr class="Controls" style="DISPLAY: none" name="RecommendationRow">
+                <td class="th"><label for="pregnancyPregnancyTypeID">{res:RecommendationNot}</label> <label for="NotificationNote" style="DISPLAY: none">{res:NotificationNote} </label></td> 
+                <td>
+                  <!-- BEGIN RadioButton ReminderNotifications --><input id="pregnancyReminderNotifications_{ReminderNotifications:optionNumber}" type="radio" value="{Value}" name="{ReminderNotifications_Name}" {Check}><label for="pregnancyReminderNotifications_{ReminderNotifications:optionNumber}">{Description}</label><!-- END RadioButton ReminderNotifications --></td>
+              </tr>
+ 
+              <tr class="Bottom">
+                <td colspan="2" align="right"><input id="pregnancyPatientID" type="hidden" value="{PatientID}" name="{PatientID_Name}"><input id="pregnancyCurrentUser" type="hidden" value="{CurrentUser}" name="{CurrentUser_Name}">{res:LastUpdated}&nbsp;{lastmodified}&nbsp; ({user})&nbsp;&nbsp;</td>
+              </tr>
+ 
+              <tr class="Bottom">
+                <td colspan="2" align="right">
+                  <!-- BEGIN Button Button_Insert --><input id="pregnancyButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+                  <!-- BEGIN Button Button_Update --><input id="pregnancyButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+                  <!-- BEGIN Button Button_UpdateAddHospitalisation --><input id="pregnancyButton_UpdateAddHospitalisation" class="Button" alt="Button1" type="submit" value="{res:CCS_Insert} {res:Hospitalisation}" name="{Button_Name}"><!-- END Button Button_UpdateAddHospitalisation -->
+                  <!-- BEGIN Button Button_UpdateAddDelivery --><input id="pregnancyButton_UpdateAddDelivery" class="Button" alt="Button1" type="submit" value="{res:CCS_Insert} {res:Deliverym}" name="{Button_Name}"><!-- END Button Button_UpdateAddDelivery -->
+                  <!-- BEGIN Button Button_UpdateAddVisit --><input id="pregnancyButton_UpdateAddVisit" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert} {res:Visit}" name="{Button_Name}"><!-- END Button Button_UpdateAddVisit -->
+                  <!-- BEGIN Button Button_Delete --><input id="pregnancyButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete -->
+                  <!-- BEGIN Button Button_Cancel --><input id="pregnancyButton_Cancel" class="Button" alt="{res:CCS_Cancel}" type="submit" value="{res:CCS_Cancel}" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <!-- END Record pregnancy -->
+    <p></p>
+    <p>{res:FormulaDueDate}</p>
+    <!-- BEGIN Grid Visits -->
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              <td class="th"><strong>{res:ListOfVisits}&nbsp; </strong></td> 
+              <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+            </tr>
+          </table>
+ 
+          <table class="Grid" cellspacing="0" cellpadding="0">
+            <tr class="Row">
+              <td colspan="6">{res:CCS_TotalRecords}&nbsp;{facilities_visit_visitout_TotalRecords}</td>
+            </tr>
+ 
+            <tr class="Caption">
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_VisitDate --><a href="{Sort_URL}" id="VisitsSorter_VisitDate">{res:VisitDate}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_VisitDate --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_FacilityName --><a href="{Sort_URL}" id="VisitsSorter_FacilityName">{res:FacilityName}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_FacilityName --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_VisitOutcomeName --><a href="{Sort_URL}" id="VisitsSorter_VisitOutcomeName">{res:VisitOutcomeName}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_VisitOutcomeName --></th>
+ 
+              <th colspan="2" scope="col">
+              <!-- BEGIN Sorter Sorter_NextVisit --><a href="{Sort_URL}" id="VisitsSorter_NextVisit">{res:NextVisit}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_NextVisit --></th>
+ 
+              <th>{res:Edit}&nbsp;</th>
+            </tr>
+ 
+            <!-- BEGIN Row -->
+            <tr {Visits:rowStyle}>
+              <td>{VisitDate}&nbsp;</td> 
+              <td>{FacilityName}&nbsp;</td> 
+              <td>{VisitOutcomeName}&nbsp;</td> 
+              <td>{NextVisit}&nbsp;</td> 
+              <td colspan="2">&nbsp; <a href="{ImageLink1}" id="VisitsImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a> </td>
+            </tr>
+ <!-- END Row -->
+            <!-- BEGIN NoRecords -->
+            <tr class="NoRecords">
+              <td colspan="6">{res:CCS_NoRecords}</td>
+            </tr>
+            <!-- END NoRecords -->
+            <tr class="Footer">
+              <td colspan="6">
+                <!-- BEGIN Navigator Navigator -->
+                <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->
+                <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+                <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+                <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+                <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->&nbsp;{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+                <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+                <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+                <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+                <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- END Grid Visits -->
+    <p>&nbsp;</p>
+    <!-- BEGIN Grid department_facilities_hos -->
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              <td class="th"><strong>{res:CCS_GridFormPrefix} {res:Hospitalisations} {res:CCS_GridFormSuffix} </strong></td> 
+              <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+            </tr>
+          </table>
+ 
+          <table class="Grid" cellspacing="0" cellpadding="0">
+            <tr class="Row">
+              <td colspan="6">{res:CCS_TotalRecords}&nbsp;{department_facilities_hos_TotalRecords}</td>
+            </tr>
+ 
+            <tr class="Caption">
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_DepartmentDesc --><a href="{Sort_URL}" id="department_facilities_hosSorter_DepartmentDesc">{res:DepartmentDesc}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DepartmentDesc --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_FacilityName --><a href="{Sort_URL}" id="department_facilities_hosSorter_FacilityName">{res:FacilityName}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_FacilityName --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_AdmissionDate --><a href="{Sort_URL}" id="department_facilities_hosSorter_AdmissionDate">{res:AdmissionDate}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_AdmissionDate --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_DischargeDate --><a href="{Sort_URL}" id="department_facilities_hosSorter_DischargeDate">{res:DischargeDate}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DischargeDate --></th>
+ 
+              <th colspan="2" scope="col">{res:Edit}</th>
+            </tr>
+ 
+            <!-- BEGIN Row -->
+            <tr class="Row">
+              <td>{DepartmentDesc}&nbsp;</td> 
+              <td>{FacilityName}&nbsp;</td> 
+              <td>{AdmissionDate}&nbsp;</td> 
+              <td>{DischargeDate}&nbsp;</td> 
+              <td colspan="2">&nbsp; <a href="{ImageLink1}" id="department_facilities_hosImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a> </td>
+            </tr>
+ <!-- END Row -->
+            <!-- BEGIN NoRecords -->
+            <tr class="NoRecords">
+              <td colspan="6">{res:CCS_NoRecords}</td>
+            </tr>
+            <!-- END NoRecords -->
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- END Grid department_facilities_hos -->
+    <p>&nbsp;</p>
+    <!-- BEGIN Grid delivery -->
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              <td class="th"><strong>{res:ListofDelivery}</strong></td> 
+              <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+            </tr>
+          </table>
+ 
+          <table class="Grid" cellspacing="0" cellpadding="0">
+            <tr class="Caption">
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_PregnancyRecNr --><a href="{Sort_URL}" id="deliverySorter_PregnancyRecNr">{res:PregnancyRecNr}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_PregnancyRecNr --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_DataDelivery --><a href="{Sort_URL}" id="deliverySorter_DataDelivery">{res:DataDelivery}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DataDelivery --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_FacilityName --><a href="{Sort_URL}" id="deliverySorter_FacilityName">{res:FacilityName}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_FacilityName --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_DeliveryMethodName --><a href="{Sort_URL}" id="deliverySorter_DeliveryMethodName">{res:DeliveryMethodI D}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DeliveryMethodName --></th>
+ 
+              <th colspan="2" scope="col">{res:Edit}</th>
+            </tr>
+ 
+            <!-- BEGIN Row -->
+            <tr class="Row">
+              <td>{PregnancyRecNr}&nbsp;</td> 
+              <td>{DataDelivery}&nbsp;</td> 
+              <td>{FacilityName}&nbsp;</td> 
+              <td>{DeliveryMethodName}&nbsp;</td> 
+              <td><a href="{ImageLink1}" id="deliveryImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a> </td>
+            </tr>
+ <!-- END Row -->
+            <!-- BEGIN NoRecords -->
+            <tr class="NoRecords">
+              <td colspan="6">{res:CCS_NoRecords}</td>
+            </tr>
+            <!-- END NoRecords -->
+            <tr class="Footer">
+              <td colspan="6">
+                <!-- BEGIN Navigator Navigator -->
+                <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+                <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+                  <option selected value="">-</option>
+ {PageSize_Options}
+                </select>
+ 
+                <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+                <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+                <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+                <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+                <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+                <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+                <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+                <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator --></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- END Grid delivery -->
+    <p>&nbsp; 
+    <!-- BEGIN Grid newborn -->
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              <td class="th"><strong>{res:CCS_GridFormPrefix} {res:newborn1} {res:CCS_GridFormSuffix} </strong></td> 
+              <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+            </tr>
+          </table>
+ 
+          <table class="Grid" cellspacing="0" cellpadding="0">
+            <tr class="Row">
+              <td colspan="5">{res:CCS_TotalRecords}&nbsp;{newborn_TotalRecords}</td>
+            </tr>
+ 
+            <tr class="Caption">
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_NewBornN --><a href="{Sort_URL}" id="newbornSorter_NewBornN">{res:NewBornN}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_NewBornN --></th>
+ 
+              <th scope="col">
+              <!-- BEGIN Sorter Sorter_Sex --><a href="{Sort_URL}" id="newbornSorter_Sex">{res:Sex}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Sex --></th>
+ 
+              <th colspan="2" scope="col">
+              <!-- BEGIN Sorter Sorter_BirthDateTime --><a href="{Sort_URL}" id="newbornSorter_BirthDateTime">{res:BirthDateTime}</a> 
+              <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+              <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_BirthDateTime --></th>
+ 
+              <td>{res:Edit}</td>
+            </tr>
+ 
+            <!-- BEGIN Row -->
+            <tr class="Row">
+              <td>{NewBornN}&nbsp;</td> 
+              <td style="TEXT-ALIGN: right">{Sex}</td> 
+              <td>{BirthDateTime}&nbsp;&nbsp; {BirthDateTime1}</td> 
+              <td colspan="2"><a href="{ImageLink1}" id="newbornImageLink1_{newborn:rowNumber}"><img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a> </td>
+            </tr>
+ <!-- END Row -->
+            <!-- BEGIN NoRecords -->
+            <tr class="NoRecords">
+              <td colspan="5">{res:CCS_NoRecords}</td>
+            </tr>
+            <!-- END NoRecords -->
+            <tr class="Footer">
+              <td colspan="5">
+                <!-- BEGIN Navigator Navigator -->
+                <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+                <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+                  <option selected value="">-</option>
+ {PageSize_Options}
+                </select>
+ 
+                <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+                <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+                <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+                <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+                <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+                <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+                <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+                <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator --></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- END Grid newborn --></p>
+    <!-- BEGIN Record HiddenSettings -->
+    <form id="HiddenSettings" style="DISPLAY: none" method="post" name="{HTMLFormName}" action="{Action}">
+      <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>{res:CCS_RecordFormPrefix2} {res:pregnancy} {res:CCS_RecordFormSuffix}</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+              </tr>
+            </table>
+ 
+            <table class="Record" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Error -->
+              <tr class="Error">
+                <td colspan="2">{Error}</td>
+              </tr>
+              <!-- END Error -->
+              <tr class="Controls">
+                <td class="th">{res:ReminderNotifications}</td> 
+                <td id="ReminderEnabled">{ReminderNotifications}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </table>
+  <!-- END Record HiddenSettings -->
+  <p>
+  <!-- BEGIN Record HiddenSettings2 -->
+  <form id="HiddenSettings2" style="DISPLAY: none" method="post" name="{HTMLFormName}" action="{Action}">
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+              <td class="th"><strong>{res:CCS_RecordFormPrefix2} {res:pregnancy} {res:CCS_RecordFormSuffix}</strong></td> 
+              <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+            </tr>
+          </table>
+ 
+          <table class="Record" cellspacing="0" cellpadding="0">
+            <!-- BEGIN Error -->
+            <tr class="Error">
+              <td colspan="2">{Error}</td>
+            </tr>
+            <!-- END Error -->
+            <tr class="Controls">
+              <td class="th">{res:RecommendationNotifications}</td> 
+              <td id="RecommendationEnabled">{RecommendationNotifications}</td>
+            </tr>
+ 
+            <tr class="Bottom">
+              <td colspan="2" align="right"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <!-- END Record HiddenSettings2 --><br>
+  <br>
+  &nbsp;</p>
+  </body>
+  </html>

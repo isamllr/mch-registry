@@ -1,0 +1,6 @@
+<!-- BEGIN Grid employees_position_facili -->[<!-- BEGIN Row -->
+[
+"{EmployeeID}",
+"{Doctor}"
+]
+<!-- END Row --><!-- BEGIN Separator -->,<!-- END Separator -->]<!-- END Grid employees_position_facili -->

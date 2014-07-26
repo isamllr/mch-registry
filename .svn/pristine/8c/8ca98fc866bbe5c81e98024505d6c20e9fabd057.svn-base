@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:patient}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.2.00.040">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+
+var available_allerg_all = new Array();
+
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+
+function DistrictDischargedShowHide()
+{
+        var patientPatient_ddl2 = document.getElementById("patientDischargeDate2Label2");
+    var patientPatient_prd2 = document.getElementById("patient1Patient1_RegDate2");
+    var patientPatient_disc = document.getElementById("patient1Discharged");
+
+        if(document.patient1.Discharged.checked == true)
+        {           
+        patientPatient_ddl2.style.visibility="visible";
+        patientPatient_prd2.style.visibility="visible";
+    }
+    else
+    { 
+        patientPatient_prd2.style.visibility="hidden";
+        patientPatient_ddl2.style.visibility="hidden";
+        }
+}
+
+//patient1Button_Delete_OnClick @554-621C2E7B
+function patient1Button_Delete_OnClick()
+{
+    var result = true;
+//End patient1Button_Delete_OnClick
+
+//Confirmation Message @555-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close patient1Button_Delete_OnClick @554-BC33A33A
+    return result;
+}
+//End Close patient1Button_Delete_OnClick
+
+//patient1_OnSubmit @551-831D533C
+function patient1_OnSubmit()
+{
+    var result = true;
+//End patient1_OnSubmit
+
+//Custom Code @640-2A29BDB7
+    // -------------------------
+
+ var LinkedLB = document.getElementById("linked_BadHabbits");
+ document.patient.LinkedID_BadHabbits.value = ""
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.patient.LinkedID_BadHabbits.value != "" ) {
+        document.patient.LinkedID_BadHabbits.value = document.patient.LinkedID_BadHabbits.value + ","
+        }
+        document.patient.LinkedID_BadHabbits.value = document.patient.LinkedID_BadHabbits.value + LinkedLB.options[i].value
+ }
+
+LinkedLB = document.getElementById("linked_allerg"); 
+ document.patient.LinkedID_Allerg.value = ""
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.patient.LinkedID_Allerg.value != "" ) {
+        document.patient.LinkedID_Allerg.value = document.patient.LinkedID_Allerg.value + ","
+        }
+        document.patient.LinkedID_Allerg.value = document.patient.LinkedID_Allerg.value + "'" + LinkedLB.options[i].value + "'"
+ }
+
+        document.patient.Reloaded.value = true; //Set the reloaded flag
+
+ result = true;
+
+    // -------------------------
+//End Custom Code
+
+//Close patient1_OnSubmit @551-BC33A33A
+    return result;
+}
+//End Close patient1_OnSubmit
+
+//_OnLoad @1-9C4F01C0
+function _OnLoad()
+{
+    var result = true;
+//End _OnLoad
+
+//Custom Code @395-2A29BDB7
+    // -------------------------
+    DistrictDischargedShowHide();
+    // -------------------------
+//End Custom Code
+
+//Close _OnLoad @1-BC33A33A
+    return result;
+}
+//End Close _OnLoad
+
+//patient1Button_Cancel_OnClick @556-8350C8C8
+function patient1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End patient1Button_Cancel_OnClick
+
+//bind_events @1-DC29BD75
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("patient1Button_Delete", "click", patient1Button_Delete_OnClick);
+    addEventHandler("patient1", "submit", patient1_OnSubmit);
+    addEventHandler("", "load", _OnLoad);
+    addEventHandler("patient1Button_Cancel", "click", patient1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<!-- BEGIN Record patientID -->
+<form id="patientID" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <tr class="Controls">
+            <td>{res:PatientID}: {PatientID}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record patientID -->&nbsp; 
+<!-- BEGIN Record patient1 -->
+<form id="patient1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:AddEditPatient}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="14">{Error}&nbsp;</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th" colspan="14">
+              <h2>{res:Patient_Information}</h2>
+            </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:Admitted}</td> 
+            <td colspan="13"><input id="patient1Admitted" value="1" type="checkbox" name="{Admitted_Name}" {Admitted}></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:Discharged}</td> 
+            <td colspan="13"><input id="patient1Discharged" value="1" type="checkbox" name="{Discharged_Name}" {Discharged}></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patient1Patient1_RegDate2" id="patientDischargeDate2Label2">{res:DischargeDate2}</label></td> 
+            <td colspan="13"><input id="patient1Patient1_RegDate2" value="{Patient1_RegDate2}" maxlength="100" size="8" name="{Patient1_RegDate2_Name}"></td> 
+            <tr class="Controls">
+              <td class="th" colspan="14">
+                <h2>{res:Clinical_Information}</h2>
+              </td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th"><label for="patient1BloodGroupID">{res:BloodGroupID}</label></td> 
+              <td colspan="3">
+                <select id="patient1BloodGroupID" name="{BloodGroupID_Name}">
+                  <option selected value="">{res:CCS_SelectValue}</option>
+                  {BloodGroupID_Options}
+                </select>
+ </td> 
+              <td colspan="3"><label for="patient1Rhesus">{res:Rhesus} <label for="patient1Rhesus">{res:Factor}</label></label></td> 
+              <td colspan="7">
+                <!-- BEGIN RadioButton Rhesus --><input id="patient1Rhesus_{Rhesus:optionNumber}" value="{Value}" type="radio" name="{Rhesus_Name}" {Check}><label for="patient1Rhesus_{Rhesus:optionNumber}">{Description}</label><!-- END RadioButton Rhesus --></td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th"><label for="patient1StreetName">{res:PreviousPregnancies}</label></td> 
+              <td colspan="3"><input id="patient1NrPregnancies" value="{NrPregnancies}" maxlength="10" size="10" name="{NrPregnancies_Name}"></td> 
+              <td colspan="3"><label for="patient1NrDeliveries">{res:PreviousDeliveries}</label></td> 
+              <td colspan="7"><input id="patient1NrDeliveries" value="{NrDeliveries}" maxlength="10" size="10" name="{NrDeliveries_Name}"></td>
+            </tr>
+ 
+            <tr class="Controls" valign="middle">
+              <td class="th">&nbsp;</td> 
+              <td colspan="3">
+                <p>{res:patients_diseases}</p>
+ 
+                <p>
+                <select style="WIDTH: 250px; HEIGHT: 150px" id="linked_allerg" multiple size="8" name="{SelectedDiseases_Name}">
+                  {SelectedDiseases_Options}
+                </select>
+ </p>
+              </td> 
+              <td colspan="3">&nbsp;</td> 
+              <td colspan="7">
+                <p>{res:PatientBadHabbits}</p>
+ 
+                <p>
+                <select style="WIDTH: 250px; HEIGHT: 150px" id="linked_BadHabbits" multiple size="8" name="{SelectedBadHabbits_Name}">
+                  {SelectedBadHabbits_Options}
+                </select>
+ </p>
+              </td>
+            </tr>
+ 
+            <tr class="Bottom">
+              <td colspan="14" align="right">
+                <p><input id="patient1CurrentUser" value="{CurrentUser}" type="hidden" name="{CurrentUser_Name}">{res:LastUpdated}&nbsp;{lastmodified}&nbsp; ({user})&nbsp;</p>
+                <input id="patient1Reloaded" value="{Reloaded}" type="hidden" name="{Reloaded_Name}"><input id="LinkedID_Allerg" value="{LinkedID_Allerg}" type="hidden" name="{LinkedID_Allerg_Name}"><input id="patient1LinkedID_BadHabbits" value="{LinkedID_BadHabbits}" type="hidden" name="{LinkedID_BadHabbits_Name}">
+                <!-- BEGIN Button Button_Insert --><input id="patient1Button_Insert" class="Button" value="{res:CCS_Insert} {res:Patientm}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+                <!-- BEGIN Button Button_Update --><input id="patient1Button_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+                <!-- BEGIN Button Button_AddPreg --><input id="patient1Button_AddPreg" class="Button" value="{res:CCS_Insert} {res:Pregnancym}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_AddPreg -->
+                <!-- BEGIN Button Button_Delete --><input id="patient1Button_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+                <!-- BEGIN Button Button_Cancel --><input id="patient1Button_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <!-- END Record patient1 --><br>
+  <!-- BEGIN Grid pregnancy -->
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:PregnancyList}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Grid" cellspacing="0" cellpadding="0">
+          <tr class="Caption">
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_PregnancyRecNr --><a href="{Sort_URL}" id="pregnancySorter_PregnancyRecNr">{res:PregnancyRecNr}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_PregnancyRecNr --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_PregRegDate --><a href="{Sort_URL}" id="pregnancySorter_PregRegDate">{res:PregRegDate}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_PregRegDate --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_LastMensesDate --><a href="{Sort_URL}" id="pregnancySorter_LastMensesDate">{res:LastMensesDate}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_LastMensesDate --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_GestationAge --><a href="{Sort_URL}" id="pregnancySorter_GestationAge">{res:GestationAge}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_GestationAge --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_Calc_DeliveryDate --><a href="{Sort_URL}" id="pregnancySorter_Calc_DeliveryDate">{res:Calc_DeliveryDate}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Calc_DeliveryDate --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_PregnancyTypeName --><a href="{Sort_URL}" id="pregnancySorter_PregnancyTypeName">{res:PregnancyTypeName}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_PregnancyTypeName --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_Doctor --><a href="{Sort_URL}" id="pregnancySorter_Doctor">{res:RespDoctor}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Doctor --></th>
+ 
+            <th scope="col">&nbsp;{res:Edit}</th>
+          </tr>
+ 
+          <!-- BEGIN Row -->
+          <tr class="Row">
+            <td>{PregnancyRecNr}&nbsp; </td> 
+            <td>{PregRegDate}&nbsp;</td> 
+            <td>{LastMensesDate}&nbsp;</td> 
+            <td>{GestationAge}&nbsp;</td> 
+            <td>{Calc_DeliveryDate}&nbsp;</td> 
+            <td>{PregnancyType}&nbsp;</td> 
+            <td>{RespDoctor}</td> 
+            <td>&nbsp;<a href="{ImageLink1}" id="pregnancyImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+          </tr>
+ <!-- END Row -->
+          <!-- BEGIN NoRecords -->
+          <tr class="NoRecords">
+            <td colspan="8">{res:CCS_NoRecords}</td>
+          </tr>
+          <!-- END NoRecords -->
+          <tr class="Footer">
+            <td colspan="8">
+              <!-- BEGIN Navigator Navigator -->
+              <!-- BEGIN Page_Parameter --><input value="{Value}" type="hidden" name="{Name}"><!-- END Page_Parameter -->Per page: 
+              <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+                <option selected value="">-</option>
+ {PageSize_Options}
+              </select>
+ 
+              <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+              <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+              <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+              <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+              <!-- BEGIN Pages -->
+              <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+              <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+              <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+              <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+              <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+              <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- END Grid pregnancy --><br>
+  <!-- BEGIN Grid delivery -->
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_GridFormPrefix}&nbsp;{res:deliverys}&nbsp;{res:CCS_GridFormSuffix} </strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Grid" cellspacing="0" cellpadding="0">
+          <tr class="Row">
+            <td colspan="5">{res:CCS_TotalRecords}&nbsp;{complications_delivery_de_TotalRecords}</td>
+          </tr>
+ 
+          <tr class="Caption">
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_PregnancyRecNr --><a href="{Sort_URL}" id="deliverySorter_PregnancyRecNr">{res:PregnancyRecNr}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_PregnancyRecNr --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_DataDelivery --><a href="{Sort_URL}" id="deliverySorter_DataDelivery">{res:DataDelivery}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DataDelivery --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_FacilityName --><a href="{Sort_URL}" id="deliverySorter_FacilityName">{res:FacilityName}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_FacilityName --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_DeliveryMethodName --><a href="{Sort_URL}" id="deliverySorter_DeliveryMethodName">{res:DeliveryMethodName}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DeliveryMethodName --></th>
+ 
+            <th colspan="2" scope="col">{res:Edit}</th>
+          </tr>
+ 
+          <!-- BEGIN Row -->
+          <tr class="Row">
+            <td>{PregnancyRecNr}&nbsp;</td> 
+            <td>{DataDelivery}&nbsp;</td> 
+            <td>{FacilityName}&nbsp;</td> 
+            <td>{DeliveryMethodName}&nbsp;</td> 
+            <td><a href="{ImageLink1}" id="deliveryImageLink1_{districts_patient1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a>&nbsp;</td>
+          </tr>
+ <!-- END Row -->
+          <!-- BEGIN NoRecords -->
+          <tr class="NoRecords">
+            <td colspan="5">{res:CCS_NoRecords}</td>
+          </tr>
+          <!-- END NoRecords -->
+          <tr class="Footer">
+            <td colspan="5">
+              <!-- BEGIN Navigator Navigator -->
+              <!-- BEGIN Page_Parameter --><input value="{Value}" type="hidden" name="{Name}"><!-- END Page_Parameter -->Per page: 
+              <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+                <option selected value="">-</option>
+ {PageSize_Options}
+              </select>
+ 
+              <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+              <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+              <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+              <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->&nbsp;{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+              <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+              <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+              <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+              <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- END Grid delivery --><br>
+  </body>
+  </html>

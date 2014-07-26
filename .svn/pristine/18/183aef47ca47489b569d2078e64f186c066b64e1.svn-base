@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:Tests}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.2.00.040">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-5D728B56
+
+var tests_DatePicker_TestDate = new Object(); 
+tests_DatePicker_TestDate.format           = "ShortDate";
+tests_DatePicker_TestDate.style            = "Styles/{CCS_Style}/Style.css";
+tests_DatePicker_TestDate.relativePathPart = "";
+tests_DatePicker_TestDate.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//testsButton_Cancel_OnClick @38-0F6EB513
+function testsButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End testsButton_Cancel_OnClick
+
+//bind_events @1-9627F0C9
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("testsButton_Cancel", "click", testsButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css" />
+</head>
+<body>
+<p>{topmenu}</p>
+<!-- BEGIN Record pregnancy_header -->
+<form id="pregnancy_header" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{FirstName}&nbsp;{FamiliyName}&nbsp;({BirthDate})</td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_headerPatientID">{PatientID}</a></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{visit}:&nbsp;{VisitDate}</td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record pregnancy_header --><br>
+<!-- BEGIN Record pregnancy_header1 -->
+<form id="pregnancy_header1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_header1PatientID">{PatientID}</a></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{visit}: {VisitDate}</td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record pregnancy_header1 --><br>
+<!-- BEGIN EditableGrid tests -->
+<form id="tests" method="post" name="{HTMLFormName}" action="{Action}">
+  <input value="{FormState}" type="hidden" name="FormState">{FormScript} 
+  <table style="WIDTH: 500px" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_GridFormPrefix} {res:testtestcode} {res:CCS_GridFormSuffix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table style="WIDTH: 815px" class="Grid" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="4">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Caption">
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_TestDate --><a href="{Sort_URL}" id="testsSorter_TestDate">{res:TestDate}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_TestDate --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_TestName --><a href="{Sort_URL}" id="testsSorter_TestName">{res:TestName}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_TestName --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_TestResultNormal --><a href="{Sort_URL}" id="testsSorter_TestResultNormal">{res:TestResultNormal}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_TestResultNormal --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_TestResultDetails --><a href="{Sort_URL}" id="testsSorter_TestResultDetails">{res:TestResultDetails}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_TestResultDetails --></th>
+ 
+          </tr>
+ 
+          <!-- BEGIN Row -->
+          <!-- BEGIN RowError -->
+          <tr class="Error">
+            <td colspan="4">{Error}</td> 
+          </tr>
+ <!-- END RowError -->
+          <tr class="Row">
+            <td><label style="display: none;" for="testsTestDate_{tests:rowNumber}">{res:TestDate}</label><input id="testsTestDate_{tests:rowNumber}" value="{TestDate}" maxlength="100" size="8" name="{TestDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_TestDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="testsDatePicker_TestDate_{tests:rowNumber}"><img id="testsDatePicker_TestDate_Image_{tests:rowNumber}" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_TestDate --></td> 
+            <td><label style="display: none;" for="testsTestName_{tests:rowNumber}">{res:TestName}</label> 
+              <select style="WIDTH: 155px" id="testsTestName_{tests:rowNumber}" name="{TestName_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+ {TestName_Options} 
+              </select>
+ </td> 
+            <td nowrap>
+              <!-- BEGIN RadioButton TestResultNormal --><input id="testsTestResultNormal_{tests:rowNumber}_{TestResultNormal:optionNumber}" value="{Value}" type="radio" name="{TestResultNormal_Name}" {Check}><label for="testsTestResultNormal_{tests:rowNumber}_{TestResultNormal:optionNumber}">{Description}</label> <!-- END RadioButton TestResultNormal --></td> 
+            <td><label style="display: none;" for="testsTestResultDetails_{tests:rowNumber}">{res:TestResultDetails}</label><input id="testsTestResultDetails_{tests:rowNumber}" value="{TestResultDetails}" maxlength="50" name="{TestResultDetails_Name}"></td> 
+          </tr>
+ <!-- END Row -->
+          <!-- BEGIN Separator -->
+          <tr class="Separator">
+            <td colspan="4"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          </tr>
+ <!-- END Separator -->
+          <!-- BEGIN NoRecords -->
+          <tr class="NoRecords">
+            <td colspan="4">{res:CCS_NoRecords}</td> 
+          </tr>
+ <!-- END NoRecords -->
+          <tr id="commandsRowTests" class="Footer">
+            <td style="TEXT-ALIGN: right" colspan="4">
+              <!-- BEGIN Button Button_Update --><input id="testsButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Update}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Cancel --><input id="testsButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END EditableGrid tests -->
+</body>
+</html>

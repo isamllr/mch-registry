@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:patient}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.2.00.040">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-DA4E117D
+
+var patientSearch_DatePicker_s_BirthDate = new Object(); 
+patientSearch_DatePicker_s_BirthDate.format           = "ShortDate";
+patientSearch_DatePicker_s_BirthDate.style            = "Styles/{CCS_Style}/Style.css";
+patientSearch_DatePicker_s_BirthDate.relativePathPart = "";
+patientSearch_DatePicker_s_BirthDate.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<!-- BEGIN Record patientSearch -->
+<form id="patientSearch" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:SearchPatient}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="patientSearchs_PatientID">{res:PatientID}</label></td> 
+            <td><input id="patientSearchs_PatientID" value="{s_PatientID}" name="{s_PatientID_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patientSearchs_GivenName">{res:PregnancyRecNr}</label></td> 
+            <td><input id="patientSearchs_PregnancyRecNr" value="{s_PregnancyRecNr}" size="50" name="{s_PregnancyRecNr_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patientSearchs_GivenName">{res:GivenName}</label></td> 
+            <td><input id="patientSearchs_GivenName" value="{s_GivenName}" size="50" name="{s_GivenName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patientSearchs_FamilyName">{res:FamilyName}</label></td> 
+            <td><input id="patientSearchs_FamilyName" value="{s_FamilyName}" size="50" name="{s_FamilyName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patientSearchs_BirthDate">{res:BirthDate}</label></td> 
+            <td><input id="patientSearchs_BirthDate" value="{s_BirthDate}" maxlength="100" size="8" name="{s_BirthDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_BirthDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="patientSearchDatePicker_s_BirthDate"><img id="patientSearchDatePicker_s_BirthDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_BirthDate --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patientSearchs_Town">{res:Town}</label></td> 
+            <td><input id="patientSearchs_Town" value="{s_Town}" maxlength="50" size="50" name="{s_Town_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">&nbsp; 
+              <!-- BEGIN Button Button_DoSearch --><input id="patientSearchButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record patientSearch -->
+<!-- BEGIN Record patientSearch1 -->
+<form id="patientSearch1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:SearchPatient}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"<label for="patientSearch1PatientID">{res:PatientID}</label></td> 
+            <td><input id="patientSearch1PatientID" value="{PatientID}" name="{PatientID_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patientSearch1PregnancyRecNr">{res:PregnancyRecNr}</label></td> 
+            <td><input id="patientSearch1PregnancyRecNr" value="{PregnancyRecNr}" size="50" name="{PregnancyRecNr_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patientSearch1s_Facility">{res:Facility}</label></td> 
+            <td>
+              <select id="patientSearch1FacilityID" name="{FacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {FacilityID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="patientSearch1Button_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record patientSearch1 -->
+<br />
+<!-- BEGIN Grid patients -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:PatientList} </strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter PatientID1 --><a href="{Sort_URL}" id="patientsPatientID1">{res:PatientID}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;&nbsp;&nbsp;<!-- END Sorter PatientID1 --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter FamilyName1 --><a href="{Sort_URL}" id="patientsFamilyName1">{res:FamilyName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;&nbsp;&nbsp;<!-- END Sorter FamilyName1 --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter GivenName1 --><a href="{Sort_URL}" id="patientsGivenName1">{res:GivenName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;&nbsp;&nbsp;<!-- END Sorter GivenName1 --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_BirthDate --><a href="{Sort_URL}" id="patientsSorter_BirthDate">{res:BirthDate}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- END Sorter Sorter_BirthDate --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Town --><a href="{Sort_URL}" id="patientsSorter_Town">{res:Town}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- END Sorter Sorter_Town --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DistrictName --><a href="{Sort_URL}" id="patientsSorter_DistrictName">{res:DistrictName}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- END Sorter Sorter_DistrictName --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Patient_RegDate --><a href="{Sort_URL}" id="patientsSorter_Patient_RegDate">{res:Patient_RegDate}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- END Sorter Sorter_Patient_RegDate --></th>
+ 
+          <th scope="col">&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td><a href="{PatientID_Src}" id="patientsPatientID_{patients:rowNumber}">{PatientID}</a>&nbsp;</td> 
+          <td><a href="{FamilyName_Src}" id="patientsFamilyName_{patients:rowNumber}">{FamilyName}</a>&nbsp;</td> 
+          <td>{GivenName}&nbsp;</td> 
+          <td>{BirthDate}&nbsp;</td> 
+          <td>{Town}&nbsp;</td> 
+          <td>{DistrictName}&nbsp;</td> 
+          <td>{Patient_RegDate}&nbsp;</td> 
+          <td><a href="{ImageLink1}" id="patientsImageLink1_{patients:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a>&nbsp;</td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="8">{res:CCS_NoRecords}&nbsp;</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="8"><a href="{ToExcelLink_Src}" id="patientsToExcelLink"></a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+            <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->&nbsp;{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- END Navigator Navigator -->&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid patients -->
+
+<!-- BEGIN Grid patients1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:PatientList}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter PatientID1 --><a href="{Sort_URL}" id="patients1PatientID1">{res:PatientID}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter PatientID1 --></th>
+ 
+          <th scope="col">&nbsp;</th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{PatientID}</td> 
+          <td><a href="{ImageLink1}" id="patients1ImageLink1_{patients1:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a></td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="2">{res:CCS_NoRecords}&nbsp;</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="2"><a href="{ToExcelLink_Src}" id="patientsToExcelLink"></a>
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+            <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator --></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid patients1 -->
+</body>
+</html>

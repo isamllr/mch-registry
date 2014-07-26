@@ -1,0 +1,20 @@
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+<table style="WIDTH: 450px" border="0">
+  <tr>
+    <td><strong>{res:latestnews}</strong></td> 
+  </tr>
+ 
+  <tr>
+    <td>&nbsp;</td> 
+  </tr>
+ 
+  <tr>
+    <td>{res:news24092012}</td> 
+  </tr>
+ 
+  <tr>
+    <td>&nbsp;</td> 
+  </tr>
+</table>

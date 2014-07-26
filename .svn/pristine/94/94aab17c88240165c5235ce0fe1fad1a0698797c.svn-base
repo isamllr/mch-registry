@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:phyisiological_delivery}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-0F9507AB
+
+var Report2_DatePicker_s_DataDelivery = new Object(); 
+Report2_DatePicker_s_DataDelivery.format           = "ShortDate";
+Report2_DatePicker_s_DataDelivery.style            = "Styles/{CCS_Style}/Style.css";
+Report2_DatePicker_s_DataDelivery.relativePathPart = "";
+Report2_DatePicker_s_DataDelivery.themeVersion = "3.0";
+
+var Report2_DatePicker_s_DataDelivery1 = new Object(); 
+Report2_DatePicker_s_DataDelivery1.format           = "ShortDate";
+Report2_DatePicker_s_DataDelivery1.style            = "Styles/{CCS_Style}/Style.css";
+Report2_DatePicker_s_DataDelivery1.relativePathPart = "";
+Report2_DatePicker_s_DataDelivery1.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record Report2 -->
+<form id="Report2" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="Report2s_DataDelivery">{res:DataDelivery}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from} </label><input id="Report2s_DataDelivery" name="{s_DataDelivery_Name}" maxlength="100" value="{s_DataDelivery}" size="8">
+              <!-- BEGIN DatePicker DatePicker_s_DataDelivery --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="Report2DatePicker_s_DataDelivery"><img id="Report2DatePicker_s_DataDelivery_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_DataDelivery -->&nbsp; <label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}</label></label> <input id="Report2s_DataDelivery1" name="{s_DataDelivery1_Name}" maxlength="100" value="{s_DataDelivery1}" size="8">
+              <!-- BEGIN DatePicker DatePicker_s_DataDelivery1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="Report2DatePicker_s_DataDelivery1"><img id="Report2DatePicker_s_DataDelivery1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_DataDelivery1 --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">{res:FacilityName}</td> 
+            <td>
+              <select id="Report2s_FacilityID" name="{s_FacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {s_FacilityID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="Report2Button_DoSearch" class="Button" name="{Button_Name}" alt="{res:CCS_Search}" value="{res:CCS_Search}" type="submit"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record Report2 --><br>
+</p>
+<p>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print -->
+<table>
+  <tr valign="top">
+    <td>
+      <p>
+      <!-- BEGIN Report Report1 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>{res:PhysiologicalDeliveryPerFacility}</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+              </tr>
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header -->
+              <thead style="DISPLAY: table-header-group">
+                <tr class="Caption">
+                  <th scope="col">{res:FacilityName} &nbsp;</th>
+ 
+                  <th scope="col">{res:DeliveryType}&nbsp;</th>
+ 
+                  <th scope="col"># &nbsp;</th>
+ 
+                  <th scope="col">
+                  <!-- BEGIN Sorter Sorter_DeliveryID --><a href="{Sort_URL}">{res:DeliveryID}</a> 
+                  <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                  <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DeliveryID -->%&nbsp;</th>
+                </tr>
+ 
+              </thead>
+ <!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer -->
+              <tfoot style="DISPLAY: table-footer-group">
+                <tr class="Footer">
+                  <td>{Report_CurrentDate}</td> 
+                  <td colspan="3">
+                    <!-- BEGIN Navigator Navigator -->
+                    <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+                    <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+                    <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+                    <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+                    <!-- BEGIN Pages -->
+                    <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+                    <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+                    <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+                    <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+                    <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+                    <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+                </tr>
+              </tfoot>
+ <!-- END Section Page_Footer -->
+              <!-- BEGIN Section FacilityName_Header -->
+              <tr class="GroupCaption">
+                <th scope="col">{FacilityName} </th>
+ 
+                <th scope="col">&nbsp; </th>
+ 
+                <th scope="col">&nbsp; </th>
+ 
+                <th scope="col">&nbsp; </th>
+              </tr>
+ <!-- END Section FacilityName_Header -->
+              <!-- BEGIN Section Physiological_Header -->
+              <tr class="GroupCaption">
+                <th style="BACKGROUND-COLOR: #ffffff" scope="col">&nbsp; </th>
+ 
+                <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Physiological} </th>
+ 
+                <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID1}</th>
+ 
+                <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID2}</th>
+              </tr>
+ <!-- END Section Physiological_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Physiological_Footer --><!-- END Section Physiological_Footer -->
+              <!-- BEGIN Section FacilityName_Footer -->
+              <tr class="SubTotal">
+                <td>{res:CCS_ReportSubTotal} &nbsp; </td> 
+                <td>&nbsp; </td> 
+                <td style="TEXT-ALIGN: right">{Count_DeliveryID}</td> 
+                <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+              </tr>
+ <!-- END Section FacilityName_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="4">{res:CCS_NoRecords}</td>
+              </tr>
+ <!-- END Panel NoRecords -->
+              <tr class="Total">
+                <td valign="baseline">{res:CCS_ReportTotal} </td> 
+                <td>&nbsp; </td> 
+                <td style="TEXT-ALIGN: right">{TotalCount_DeliveryID} </td> 
+                <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+              </tr>
+ <!-- END Section Report_Footer -->
+            </table>
+          </td>
+        </tr>
+      </table>
+      <!-- END Report Report1 --><br>
+      </p>
+    </td> 
+    <td>&nbsp;</td> 
+    <td>
+      <p>
+      <!-- BEGIN Report Report3 -->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+                <td class="th"><strong>{res:PhysiologicalDeliveryInAllFacilities}</strong></td> 
+                <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+              </tr>
+            </table>
+ 
+            <table class="Grid" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+              <!-- BEGIN Section Page_Header -->
+              <tr class="Caption">
+                <th scope="col">{res:DeliveryType}&nbsp;</th>
+ 
+                <th scope="col"># &nbsp;</th>
+ 
+                <th scope="col">
+                <!-- BEGIN Sorter Sorter_DeliveryID --><a href="{Sort_URL}">{res:DeliveryID}</a> 
+                <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+                <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_DeliveryID -->%&nbsp;</th>
+              </tr>
+ <!-- END Section Page_Header -->
+              <!-- BEGIN Section Page_Footer -->
+              <tr class="Footer">
+                <td>{Report_CurrentDate}</td> 
+                <td colspan="2">
+                  <!-- BEGIN Navigator Navigator -->
+                  <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+                  <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+                  <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+                  <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->&nbsp;{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+                  <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+                  <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+                  <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+                  <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator --></td>
+              </tr>
+ <!-- END Section Page_Footer -->
+              <!-- BEGIN Section Physiological_Header -->
+              <tr class="GroupCaption">
+                <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Physiological} </th>
+ 
+                <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID}&nbsp; </th>
+ 
+                <th style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{Count_DeliveryID1}</th>
+              </tr>
+ <!-- END Section Physiological_Header -->
+              <!-- BEGIN Section Detail --><!-- END Section Detail -->
+              <!-- BEGIN Section Physiological_Footer --><!-- END Section Physiological_Footer -->
+              <!-- BEGIN Section Report_Footer -->
+              <!-- BEGIN Panel NoRecords -->
+              <tr class="NoRecords">
+                <td colspan="3">{res:CCS_NoRecords}</td>
+              </tr>
+ <!-- END Panel NoRecords -->
+              <tr class="Total">
+                <td valign="baseline">{res:CCS_ReportTotal} </td> 
+                <td style="TEXT-ALIGN: right">&nbsp;{TotalCount_DeliveryID} </td> 
+                <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+              </tr>
+ <!-- END Section Report_Footer -->
+            </table>
+          </td>
+        </tr>
+      </table>
+      <!-- END Report Report3 -->
+      <!-- BEGIN FlashChart FlashChart1 -->
+      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="{Width}" height="{Height}" accesskey="q" tabindex="1" title="{Title}">
+        <param name="movie" value="{Src}" />
+        <param name="quality" value="high" />
+        <param name="wmode" value="transparent" />
+        <param name="scale" value="exactfit" />
+        <embed src="{Src}" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="{Width}" height="{Height}" scale="exactfit" wmode="transparent"></embed>
+ 
+      </object>
+      <!-- END FlashChart FlashChart1 --><br>
+      </p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

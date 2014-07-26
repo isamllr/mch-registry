@@ -1,0 +1,65 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "00174732423b4a6074b9c9225e1351cb",
+    "packages": [
+        {
+            "name": "arcturial/clickatell",
+            "version": "dev-master",
+            "target-dir": "Clickatell/",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arcturial/clickatell.git",
+                "reference": "247a4ec80bda3f44c28ca77016fc97797d73f5b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arcturial/clickatell/zipball/247a4ec80bda3f44c28ca77016fc97797d73f5b9",
+                "reference": "247a4ec80bda3f44c28ca77016fc97797d73f5b9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Clickatell\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU General Public License"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Brand",
+                    "email": "webmaster@cainsvault.com",
+                    "homepage": "http://www.cainsvault.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Standalone PHP library to integrate with the Clickatell SMS gateway",
+            "homepage": "http://www.cainsvault.com",
+            "time": "2014-05-25 21:10:16"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "arcturial/clickatell": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

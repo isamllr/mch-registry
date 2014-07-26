@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:notification}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//notificationtexteditButton_Delete_OnClick @96-4CAC5100
+function notificationtexteditButton_Delete_OnClick()
+{
+    disableValidation = true;
+}
+//End notificationtexteditButton_Delete_OnClick
+
+//bind_events @1-B1B9F6FD
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("notificationtexteditButton_Delete", "click", notificationtexteditButton_Delete_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<p>
+<!-- BEGIN Grid notificationgrid -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:Recommendations}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_NotificationID --><a href="{Sort_URL}" id="notificationgridSorter_NotificationID">{res:NotificationID}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_NotificationID --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Day --><a href="{Sort_URL}" id="notificationgridSorter_Day">{res:Day}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Day --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Text --><a href="{Sort_URL}" id="notificationgridSorter_Text">{res:Text}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Text --></th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr {notificationgrid:rowStyle}>
+          <td style="TEXT-ALIGN: right"><a href="{NotificationID_Src}" id="notificationgridNotificationID_{notificationgrid:rowNumber}">{NotificationID}</a>&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">{Day}&nbsp;</td> 
+          <td>{Text}&nbsp;</td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="3">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="3"><a href="{Grid1_Insert_Src}" id="notificationgridGrid1_Insert">{res:CCS_InsertLink}</a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option selected value="">-</option>
+ {PageSize_Options}
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+            <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->&nbsp;{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid notificationgrid --><br>
+<!-- BEGIN Record notificationtextedit -->
+<form id="notificationtextedit" method="post" name="{HTMLFormName}" action="{Action}">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:notificationtext} {res:CCS_RecordFormSuffix}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th">ID</td> 
+            <td>{IDLabel}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="notificationtexteditDay">{res:Day}</label> </td> 
+            <td><label for="notificationtexteditDay" style="display: none;">TextBox1</label><input id="notificationtexteditDay" value="{Day}" name="{Day_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"></td> 
+            <td><label for="notificationtexteditText" style="display: none;">notificationtext</label> <textarea id="notificationtexteditText" style="HEIGHT: 162px; WIDTH: 400px" rows="3" cols="5" name="{Text_Name}">{Text}</textarea></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right"><span id="remaining">&nbsp;</span> <span id="messages">&nbsp;</span><br>
+              <span id="unicodeRemaining">&nbsp;</span><span id="unicodeMessages">&nbsp;</span></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_Insert --><input id="notificationtexteditButton_Insert" class="Button" alt="{res:CCS_Insert}" type="submit" value="{res:CCS_Insert}" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input id="notificationtexteditButton_Update" class="Button" alt="{res:CCS_Update}" type="submit" value="{res:CCS_Update}" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input id="notificationtexteditButton_Delete" class="Button" alt="{res:CCS_Delete}" type="submit" value="{res:CCS_Delete}" name="{Button_Name}"><!-- END Button Button_Delete --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record notificationtextedit --><br>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript">
+     var $j = jQuery.noConflict();
+</script>
+<script>
+$j(function () {
+    var $remaining = $j('#remaining'),
+        $messages = $remaining.next(),
+        $unicodeRemaining = $j('#unicodeRemaining'),
+        $unicodeMessages = $unicodeRemaining.next();
+
+    $j('#notificationtexteditText').keyup(function() {
+        var chars = this.value.length;
+                var messages, unicodeMessages, remaining, unicodeRemaining;
+
+                if (chars > 70){
+                        unicodeMessages = Math.ceil(chars / 63);
+                        unicodeRemaining = unicodeMessages * 63 - (chars % (unicodeMessages * 63) || unicodeMessages * 63);
+                }else{
+                        unicodeMessages = 1;
+                        unicodeRemaining = unicodeMessages * 70 - (chars % (unicodeMessages * 70) || unicodeMessages * 70);
+                }
+                
+                if (chars > 160){
+                        messages = Math.ceil(chars / 153);
+                        remaining = messages * 153 - (chars % (messages * 153) || messages * 153);
+                } else{
+                        messages = 1;
+                        remaining = messages * 160 - (chars % (messages * 160) || messages * 160);
+                }
+
+        $remaining.text(remaining + ' remaining, ');
+        $messages.text(messages + ' GSM SMS');
+
+        $unicodeRemaining.text(unicodeRemaining + ' remaining, ');
+        $unicodeMessages.text(unicodeMessages + ' Unicode SMS');
+    });
+
+}); 
+</script>
+</body>
+</html>

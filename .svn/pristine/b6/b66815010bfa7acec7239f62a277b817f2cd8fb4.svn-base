@@ -1,0 +1,1919 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:delivery}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+
+var available_comp_all = new Array();
+var available_pcomp_all = new Array();
+
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Include User Scripts @1-B93D65AC
+</script>
+<script language="JavaScript" src="js/pt/prototype.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include User Scripts
+
+//Date Picker Object Definitions @1-196628AB
+
+var delivery_DatePicker_HospitalAdmData = new Object(); 
+delivery_DatePicker_HospitalAdmData.format           = "ShortDate";
+delivery_DatePicker_HospitalAdmData.style            = "Styles/{CCS_Style}/Style.css";
+delivery_DatePicker_HospitalAdmData.relativePathPart = "";
+delivery_DatePicker_HospitalAdmData.themeVersion = "3.0";
+
+var delivery_DatePicker_DataDelivery1 = new Object(); 
+delivery_DatePicker_DataDelivery1.format           = "ShortDate";
+delivery_DatePicker_DataDelivery1.style            = "Styles/{CCS_Style}/Style.css";
+delivery_DatePicker_DataDelivery1.relativePathPart = "";
+delivery_DatePicker_DataDelivery1.themeVersion = "3.0";
+
+var delivery_DatePicker_HospitalDischDate = new Object(); 
+delivery_DatePicker_HospitalDischDate.format           = "ShortDate";
+delivery_DatePicker_HospitalDischDate.style            = "Styles/{CCS_Style}/Style.css";
+delivery_DatePicker_HospitalDischDate.relativePathPart = "";
+delivery_DatePicker_HospitalDischDate.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+
+window.onload = bind_events;
+
+
+//deliveryButton_Delete_OnClick @238-6CB30320
+function deliveryButton_Delete_OnClick()
+{
+    var result = true;
+//End deliveryButton_Delete_OnClick
+
+//Confirmation Message @239-1840CE41
+    return confirm('{res:CCS_DeleteConfirmation}');
+//End Confirmation Message
+
+//Close deliveryButton_Delete_OnClick @238-BC33A33A
+    return result;
+}
+//End Close deliveryButton_Delete_OnClick
+
+//deliveryRightButton_procedure_OnClick @64-CCD1849F
+function deliveryRightButton_procedure_OnClick()
+{
+    var result = true;
+//End deliveryRightButton_procedure_OnClick
+
+//Custom Code @65-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_procedures");
+   var LinkedLB = document.getElementById("linked_procedures");
+   for (var i=0; i < AvailableLB.length; i++) {
+     if (AvailableLB.options[i].selected == true) {
+         LinkedLB.options[LinkedLB.length] = 
+         new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+         AvailableLB.options[i] = null;
+         i=i-1;
+     }
+   }
+   addToolTipsSelect('SelectedProcedures[]');
+    // -------------------------
+//End Custom Code
+
+//Close deliveryRightButton_procedure_OnClick @64-BC33A33A
+    return result;
+}
+//End Close deliveryRightButton_procedure_OnClick
+
+//deliveryLeftButton_procedure_OnClick @66-8D0FEC8B
+function deliveryLeftButton_procedure_OnClick()
+{
+    var result = true;
+//End deliveryLeftButton_procedure_OnClick
+
+//Custom Code @67-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_procedures");
+   var LinkedLB = document.getElementById("linked_procedures");
+   for (var i=0; i < LinkedLB.length; i++) {
+     if (LinkedLB.options[i].selected == true) {
+        AvailableLB.options[AvailableLB.length] = 
+            new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+        LinkedLB.options[i] = null;
+        i=i-1;
+     }
+   }
+   addToolTipsSelect('ListofProcedures[]');
+    // -------------------------
+//End Custom Code
+
+//Close deliveryLeftButton_procedure_OnClick @66-BC33A33A
+    return result;
+}
+//End Close deliveryLeftButton_procedure_OnClick
+
+//deliveryRightButtonAnesthesia_OnClick @269-56A04700
+function deliveryRightButtonAnesthesia_OnClick()
+{
+    var result = true;
+//End deliveryRightButtonAnesthesia_OnClick
+
+//Custom Code @270-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_anesthesia");
+   var LinkedLB = document.getElementById("linked_anesthesia");
+   for (var i=0; i < AvailableLB.length; i++) {
+     if (AvailableLB.options[i].selected == true) {
+         LinkedLB.options[LinkedLB.length] = 
+         new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+         AvailableLB.options[i] = null;
+         i=i-1;
+     }
+   }
+   addToolTipsSelect('SelectedAnesthesia[]');
+    // -------------------------
+//End Custom Code
+
+//Close deliveryRightButtonAnesthesia_OnClick @269-BC33A33A
+    return result;
+}
+//End Close deliveryRightButtonAnesthesia_OnClick
+
+//deliveryLeftButtonAnesthesia_OnClick @273-177E2F14
+function deliveryLeftButtonAnesthesia_OnClick()
+{
+    var result = true;
+//End deliveryLeftButtonAnesthesia_OnClick
+
+//Custom Code @274-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_anesthesia");
+   var LinkedLB = document.getElementById("linked_anesthesia");
+   for (var i=0; i < LinkedLB.length; i++) {
+     if (LinkedLB.options[i].selected == true) {
+        AvailableLB.options[AvailableLB.length] = 
+            new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+        LinkedLB.options[i] = null;
+        i=i-1;
+     }
+   }
+   addToolTipsSelect('ListofAnesthesia[]');
+    // -------------------------
+//End Custom Code
+
+//Close deliveryLeftButtonAnesthesia_OnClick @273-BC33A33A
+    return result;
+}
+//End Close deliveryLeftButtonAnesthesia_OnClick
+
+//deliverySteroidsYesNo_OnClick @328-DB7496D6
+function deliverySteroidsYesNo_OnClick()
+{
+    var result = true;
+//End deliverySteroidsYesNo_OnClick
+
+//Custom Code @331-2A29BDB7
+    // -------------------------
+ SteroidsShowHide()
+    // -------------------------
+//End Custom Code
+
+//Close deliverySteroidsYesNo_OnClick @328-BC33A33A
+    return result;
+}
+//End Close deliverySteroidsYesNo_OnClick
+
+//deliveryRightButton_comp_OnClick @48-29E5DFAC
+function deliveryRightButton_comp_OnClick()
+{
+    var result = true;
+//End deliveryRightButton_comp_OnClick
+
+//Custom Code @49-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_comp");
+   var LinkedLB = document.getElementById("linked_comp");
+   for (var i=0; i < AvailableLB.length; i++) {
+     if (AvailableLB.options[i].selected == true) {
+         LinkedLB.options[LinkedLB.length] = 
+         new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+         AvailableLB.options[i] = null;
+         i=i-1;
+     }
+   }
+   addToolTipsSelect('SelectedComplications[]');
+    // -------------------------
+//End Custom Code
+
+//Close deliveryRightButton_comp_OnClick @48-BC33A33A
+    return result;
+}
+//End Close deliveryRightButton_comp_OnClick
+
+//deliveryLeftButton_comp_OnClick @50-7331DE23
+function deliveryLeftButton_comp_OnClick()
+{
+    var result = true;
+//End deliveryLeftButton_comp_OnClick
+
+//Custom Code @51-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_comp");
+   var LinkedLB = document.getElementById("linked_comp");
+   for (var i=0; i < LinkedLB.length; i++) {
+     if (LinkedLB.options[i].selected == true) {
+        AvailableLB.options[AvailableLB.length] = 
+            new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+        LinkedLB.options[i] = null;
+        i=i-1;
+     }
+   }
+   addToolTipsSelect('ListofComplications[]');
+    // -------------------------
+//End Custom Code
+
+//Close deliveryLeftButton_comp_OnClick @50-BC33A33A
+    return result;
+}
+//End Close deliveryLeftButton_comp_OnClick
+
+//deliveryRightButton_pcomp_OnClick @341-F73E8617
+function deliveryRightButton_pcomp_OnClick()
+{
+    var result = true;
+//End deliveryRightButton_pcomp_OnClick
+
+//Custom Code @342-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_pcomp");
+   var LinkedLB = document.getElementById("linked_pcomp");
+   for (var i=0; i < AvailableLB.length; i++) {
+     if (AvailableLB.options[i].selected == true) {
+         LinkedLB.options[LinkedLB.length] = 
+         new Option(AvailableLB.options[i].text, AvailableLB.options[i].value);
+         AvailableLB.options[i] = null;
+         i=i-1;
+     }
+   }
+   addToolTipsSelect('SelectedPComplications[]');
+    // -------------------------
+//End Custom Code
+
+//Close deliveryRightButton_pcomp_OnClick @341-BC33A33A
+    return result;
+}
+//End Close deliveryRightButton_pcomp_OnClick
+
+//deliveryLeftButton_pcomp_OnClick @343-8A63CCA7
+function deliveryLeftButton_pcomp_OnClick()
+{
+    var result = true;
+//End deliveryLeftButton_pcomp_OnClick
+
+//Custom Code @344-2A29BDB7
+    // -------------------------
+   var AvailableLB = document.getElementById("available_pcomp");
+   var LinkedLB = document.getElementById("linked_pcomp");
+   for (var i=0; i < LinkedLB.length; i++) {
+     if (LinkedLB.options[i].selected == true) {
+        AvailableLB.options[AvailableLB.length] = 
+            new Option(LinkedLB.options[i].text, LinkedLB.options[i].value);
+        LinkedLB.options[i] = null;
+        i=i-1;
+     }
+   }
+   addToolTipsSelect('ListofPComplications[]');
+    // -------------------------
+//End Custom Code
+
+//Close deliveryLeftButton_pcomp_OnClick @343-BC33A33A
+    return result;
+}
+//End Close deliveryLeftButton_pcomp_OnClick
+
+//deliveryPregnancyOutcome1ID_OnChange @436-4E3132A6
+function deliveryPregnancyOutcome1ID_OnChange()
+{
+    var result = true;
+//End deliveryPregnancyOutcome1ID_OnChange
+
+//Custom Code @472-2A29BDB7
+    // -------------------------
+DeliveryPregnancyOutcome1(document.delivery.PregnancyOutcome1ID.value);
+    // -------------------------
+//End Custom Code
+
+//Close deliveryPregnancyOutcome1ID_OnChange @436-BC33A33A
+    return result;
+}
+//End Close deliveryPregnancyOutcome1ID_OnChange
+
+//deliveryDeliveryMethodID_OnLoad @26-94860F37
+function deliveryDeliveryMethodID_OnLoad()
+{
+    var result = true;
+//End deliveryDeliveryMethodID_OnLoad
+
+//Custom Code @453-2A29BDB7
+    // -------------------------
+    DeliveryMethodChangeView(document.delivery.DeliveryMethodID.value);
+    // -------------------------
+//End Custom Code
+
+//Close deliveryDeliveryMethodID_OnLoad @26-BC33A33A
+    return result;
+}
+//End Close deliveryDeliveryMethodID_OnLoad
+
+//deliveryDeliveryMethodID_OnChange @26-F80B7793
+function deliveryDeliveryMethodID_OnChange()
+{
+    var result = true;
+//End deliveryDeliveryMethodID_OnChange
+
+//Custom Code @454-2A29BDB7
+    // -------------------------
+    DeliveryMethodChangeView(document.delivery.DeliveryMethodID.value);
+    // -------------------------
+//End Custom Code
+
+//Close deliveryDeliveryMethodID_OnChange @26-BC33A33A
+    return result;
+}
+//End Close deliveryDeliveryMethodID_OnChange
+
+function DeliveryPregnancyOutcome1(PregnancyOutcome1)
+{
+	out1 = document.getElementById("PregnancyOutcome1IDlabel"); 
+    out1s = document.getElementById("deliveryPregnancyOutcome1ID");
+    out2 = document.getElementById("PregnancyOutcome2IDboth"); 
+    out2s = document.getElementById("deliveryPregnancyOutcome2ID"); 
+    out3 = document.getElementById("PregnancyOutcome3IDboth"); 
+    out3s = document.getElementById("deliveryPregnancyOutcome3ID"); 
+    out4 = document.getElementById("PregnancyOutcome4IDboth"); 
+    out4s = document.getElementById("deliveryPregnancyOutcome4ID");         
+    SecondChild = document.getElementById("SecondChild_Label");
+	ThirdChild = document.getElementById("ThirdChild_Label"); 
+	FurtherChildren = document.getElementById("FurtherChildren_Label");
+	AmnioticAbort = document.getElementById("deliveryAmnioticBursting_4");
+    methoddeliv = document.getElementById("deliveryDeliveryMethodID");
+    delivtype = document.getElementById("deliveryDeliveryTypeID");
+	deliveryPartnerDelivery_Label = document.getElementById("deliveryPartnerDelivery_Label");
+	PartogramFacility_Label = document.getElementById("PartogramFacility_Label");
+	AmnioticBursting_Label = document.getElementById("AmnioticBursting_Label");
+	DeliveryMethodID_Label = document.getElementById("DeliveryMethodID_Label");
+	DeliveryTypeID_Label = document.getElementById("DeliveryTypeID_Label");
+	deliveryDeliveryMethodID = document.getElementById("deliveryDeliveryMethodID");
+	deliveryDeliveryTypeID = document.getElementById("deliveryDeliveryTypeID");
+	PartnDelAll = document.getElementById("PartnDelAll");
+	PartogrDelAll = document.getElementById("PartogrDelAll");
+	Partner1 = document.getElementById("deliveryPartnerDelivery_1");
+	PartnerLabel1 = document.getElementById("labelDeliveryPartnerDelivery_1");
+	Partner2 = document.getElementById("deliveryPartnerDelivery_2");
+	PartnerLabel2 = document.getElementById("labelDeliveryPartnerDelivery_2");
+	Partner3 = document.getElementById("deliveryPartnerDelivery_3");
+	PartnerLabel3 = document.getElementById("labelDeliveryPartnerDelivery_3");
+	Partogram1 = document.getElementById("deliveryPartogram_1");
+	PartogramLabel1 = document.getElementById("LabelPartogramDelivery_1");
+	Partogram2 = document.getElementById("deliveryPartogram_2");
+	PartogramLabel2 = document.getElementById("LabelPartogramDelivery_2");
+	Partogram3 = document.getElementById("deliveryPartogram_3");
+	PartogramLabel3 = document.getElementById("LabelPartogramDelivery_3");
+	AmnioticBursting1 = document.getElementById("deliveryAmnioticBursting_1");
+	AmnioticBurstingLabel1 = document.getElementById("LabelAmnioticBursting_1");
+	AmnioticBursting2 = document.getElementById("deliveryAmnioticBursting_2");
+	AmnioticBurstingLabel2 = document.getElementById("LabelAmnioticBursting_2");
+	AmnioticBursting3 = document.getElementById("deliveryAmnioticBursting_3");
+	AmnioticBurstingLabel3 = document.getElementById("LabelAmnioticBursting_3");
+	AmnioticBursting4 = document.getElementById("deliveryAmnioticBursting_4");
+	AmnioticBurstingLabel4 = document.getElementById("LabelAmnioticBursting_4");
+	AmnioticBurstingAll = document.getElementById("AmnioticBurstingAll");
+                
+		if(out1s.value == 4)
+			{
+				methoddeliv.value="99";
+				delivtype.value="99";
+				Partner3.click();
+				Partogram3.click();
+				AmnioticAbort.click();
+                                                
+				out2.style.visibility= "hidden";
+				out3.style.visibility= "hidden";
+				out4.style.visibility= "hidden";
+				out2s.style.visibility= "hidden";
+				out2s.value = "-1";
+				out3s.style.visibility= "hidden";
+				out3s.value = "-1";
+				out4s.style.visibility= "hidden";
+				out4s.value = "-";
+				SecondChild.style.visibility= "hidden";
+				ThirdChild.style.visibility= "hidden";
+				Partner1.style.visibility= "hidden";
+				PartnerLabel1.style.visibility= "hidden";
+				Partner3.click();
+				Partner2.style.visibility= "hidden";;
+				PartnerLabel2.style.visibility= "hidden";
+				Partner3.style.visibility= "hidden";
+				PartnerLabel3.style.visibility= "hidden";
+				Partogram1.style.visibility= "hidden";
+				PartogramLabel1.style.visibility= "hidden";
+				Partogram3.click();
+				Partogram2.style.visibility= "hidden";
+				PartogramLabel2.style.visibility= "hidden";
+				Partogram3.style.visibility= "hidden";
+				PartogramLabel3.style.visibility= "hidden";
+				AmnioticBursting1.style.visibility= "hidden";
+				AmnioticBurstingLabel1.style.visibility= "hidden";
+				AmnioticBursting4.click();
+				AmnioticBursting2.style.visibility= "hidden";
+				AmnioticBurstingLabel2.style.visibility= "hidden";
+				AmnioticBursting3.style.visibility= "hidden";
+				AmnioticBurstingLabel3.style.visibility= "hidden";
+				AmnioticBursting4.style.visibility= "hidden";
+				AmnioticBurstingLabel4.style.visibility= "hidden";
+
+				deliveryPartnerDelivery_Label.style.visibility= "hidden";
+				PartogramFacility_Label.style.visibility= "hidden";
+                AmnioticBursting_Label.style.visibility= "hidden";
+                DeliveryMethodID_Label.style.visibility= "hidden";
+                DeliveryTypeID_Label.style.visibility= "hidden";
+                deliveryDeliveryMethodID.style.visibility= "hidden";
+                deliveryDeliveryTypeID.style.visibility= "hidden";
+               
+			}
+		else if(out1s.value == 3)
+			{
+				methoddeliv.value="99";
+                delivtype.value="99";
+                Partner3.click();
+                Partogram3.click();
+                AmnioticAbort.click();
+                                                        
+				out2.style.visibility= "hidden";
+                out3.style.visibility= "hidden";
+                out4.style.visibility= "hidden";
+                out2s.style.visibility= "hidden";
+                out3s.style.visibility= "hidden";
+                out4s.style.visibility= "hidden";
+                out4s.value = "-";
+				out2s.value = "-1";
+				out3s.value = "-1";
+                SecondChild.style.visibility= "hidden";
+                ThirdChild.style.visibility= "hidden";
+				Partner1.style.visibility= "hidden";
+				PartnerLabel1.style.visibility= "hidden";
+				Partner3.click();
+				Partner2.style.visibility= "hidden";;
+				PartnerLabel2.style.visibility= "hidden";
+				Partner3.style.visibility= "hidden";
+				PartnerLabel3.style.visibility= "hidden";
+				Partogram1.style.visibility= "hidden";
+				PartogramLabel1.style.visibility= "hidden";
+				Partogram3.click();
+				Partogram2.style.visibility= "hidden";
+				PartogramLabel2.style.visibility= "hidden";
+				Partogram3.style.visibility= "hidden";
+				PartogramLabel3.style.visibility= "hidden";
+				AmnioticBursting1.style.visibility= "hidden";
+				AmnioticBurstingLabel1.style.visibility= "hidden";
+				AmnioticBursting4.click();
+				AmnioticBursting2.style.visibility= "hidden";
+				AmnioticBurstingLabel2.style.visibility= "hidden";
+				AmnioticBursting3.style.visibility= "hidden";
+				AmnioticBurstingLabel3.style.visibility= "hidden";
+				AmnioticBursting4.style.visibility= "hidden";
+				AmnioticBurstingLabel4.style.visibility= "hidden";
+
+				deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                PartogramFacility_Label.style.visibility= "hidden";
+                AmnioticBursting_Label.style.visibility= "hidden";
+                DeliveryMethodID_Label.style.visibility= "hidden";
+                DeliveryTypeID_Label.style.visibility= "hidden";
+                deliveryDeliveryMethodID.style.visibility= "hidden";
+                deliveryDeliveryTypeID.style.visibility= "hidden";
+			}
+		else if(out1s.value < 3)
+			{
+				out1.style.visibility= "visible";
+                out1s.style.visibility= "visible";
+                	if(document.delivery.NrChildren.value == 4)
+						{
+							out2s.style.visibility= "visible";
+							out3s.style.visibility= "visible";
+                            out4s.style.visibility= "visible";
+                            out4.style.visibility= "visible";
+						}
+					else if(document.delivery.NrChildren.value == 3)
+                    	{
+                        	out2s.style.visibility= "visible";
+                            out3s.style.visibility= "visible";
+                            out4s.style.visibility= "hidden";
+                            out4s.value = "-";
+                            out4.style.visibility= "hidden";
+						}
+					else if(document.delivery.NrChildren.value == 2)
+						{
+							out2s.style.visibility= "visible";
+                            out3s.style.visibility= "hidden";
+                            out3s.value = "-1";
+                            out4s.style.visibility= "hidden";
+                            out4s.value = "-";
+                            out4.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+                            deliveryPartnerDelivery_3.style.visibility= "visible";
+						}
+					else if(document.delivery.NrChildren.value == 1)
+                    	{
+                        	out2s.style.visibility= "hidden";
+                            out2s.value = "-1";
+                            out3s.style.visibility= "hidden";
+                            out3s.value = "-1";
+                            out4s.style.visibility= "hidden";
+                            out4s.value = "-";
+                            out4.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+						}                                               
+				Partner1.style.visibility= "visible";
+				PartnerLabel1.style.visibility= "visible";
+				Partner1.click();
+				Partner2.style.visibility= "visible";
+				PartnerLabel2.style.visibility= "visible";
+				Partner3.style.visibility= "hidden";
+				PartnerLabel3.style.visibility= "hidden";
+				Partogram1.style.visibility= "visible";
+				PartogramLabel1.style.visibility= "visible";
+				Partogram1.click();
+				Partogram2.style.visibility= "visible";
+				PartogramLabel2.style.visibility= "visible";
+				Partogram3.style.visibility= "hidden";
+				PartogramLabel3.style.visibility= "hidden";
+				AmnioticBursting1.style.visibility= "visible";
+				AmnioticBurstingLabel1.style.visibility= "visible";
+				AmnioticBursting1.click();
+				AmnioticBursting2.style.visibility= "visible";
+				AmnioticBurstingLabel2.style.visibility= "visible";
+				AmnioticBursting3.style.visibility= "visible";
+				AmnioticBurstingLabel3.style.visibility= "visible";
+				AmnioticBursting4.style.visibility= "hidden";
+				AmnioticBurstingLabel4.style.visibility= "hidden";
+				deliveryPartnerDelivery_Label.style.visibility= "visible";
+                PartogramFacility_Label.style.visibility= "visible";
+                AmnioticBursting_Label.style.visibility= "visible";
+                DeliveryMethodID_Label.style.visibility= "visible";
+                DeliveryTypeID_Label.style.visibility= "visible";
+                deliveryDeliveryMethodID.style.visibility= "visible";
+                deliveryDeliveryTypeID.style.visibility= "visible";
+                AmnioticBurstingAll.style.visibility= "visible";
+			}
+}
+
+function DeliveryMethodChangeView(DeliveryMethod){
+
+        var deliveryTextArea1 = document.getElementById("deliveryTextArea1");
+        var deliveryIndications_Label = document.getElementById("deliveryIndications_Label");
+        deliveryTextArea1.style.visibility="hidden";
+        deliveryIndications_Label.style.visibility="hidden";
+        if(DeliveryMethod == 3 || DeliveryMethod == 4)
+        {
+                deliveryTextArea1.style.visibility="visible";
+                deliveryIndications_Label.style.visibility="visible";
+        }
+}
+
+function get_SteroidsYesNo_radio_value()
+{
+for (var i=0; i < document.delivery.SteroidsYesNo.length; i++)
+   {
+   if (document.delivery.SteroidsYesNo[i].checked)
+      {
+      var rad_val = document.delivery.SteroidsYesNo[i].value;
+      }
+   }
+   return rad_val;
+}
+
+function SteroidsShowHide()
+{
+            var deliverySteroids = document.getElementById("deliverySteroids");
+                        var deliveryMg_Label = document.getElementById("deliveryMg_Label");
+                        if(get_SteroidsYesNo_radio_value() == 1)
+        {
+                deliverySteroids.style.visibility="visible";
+                                deliveryMg_Label.style.visibility="visible";
+        }
+        if(get_SteroidsYesNo_radio_value() == 0)
+        {
+                deliverySteroids.style.visibility="hidden";
+                                deliveryMg_Label.style.visibility="hidden";
+        }
+}
+
+//delivery_OnSubmit @234-136A722D
+function delivery_OnSubmit()
+{
+    var result = true;
+//End delivery_OnSubmit
+
+//Custom Code @253-2A29BDB7
+    // -------------------------
+ var LinkedLB = document.getElementById("linked_comp");
+ document.delivery.LinkedID_Comp.value = "";
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.delivery.LinkedID_Comp.value != "" ) {
+        document.delivery.LinkedID_Comp.value = document.delivery.LinkedID_Comp.value + ","
+        }
+        document.delivery.LinkedID_Comp.value = document.delivery.LinkedID_Comp.value + "'"  + LinkedLB.options[i].value + "'" 
+ }
+
+ var LinkedLB = document.getElementById("linked_pcomp");
+ document.delivery.LinkedID_PComp.value = "";
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.delivery.LinkedID_PComp.value != "" ) {
+        document.delivery.LinkedID_PComp.value = document.delivery.LinkedID_PComp.value + ","
+        }
+        document.delivery.LinkedID_PComp.value = document.delivery.LinkedID_PComp.value + "'"  + LinkedLB.options[i].value + "'" 
+ }
+
+LinkedLB = document.getElementById("linked_procedures"); 
+document.delivery.LinkedID_Procedures.value = "";
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.delivery.LinkedID_Procedures.value != "" ) {
+        document.delivery.LinkedID_Procedures.value = document.delivery.LinkedID_Procedures.value + ","
+        }
+        document.delivery.LinkedID_Procedures.value = document.delivery.LinkedID_Procedures.value + "'" + LinkedLB.options[i].value + "'" 
+ }
+
+ LinkedLB = document.getElementById("linked_anesthesia"); 
+document.delivery.LinkedID_Anesthesia.value = "";
+ for (i=0; i<LinkedLB.options.length; i++) {
+    if (document.delivery.LinkedID_Anesthesia.value != "" ) {
+        document.delivery.LinkedID_Anesthesia.value = document.delivery.LinkedID_Anesthesia.value + ","
+        }
+        document.delivery.LinkedID_Anesthesia.value = document.delivery.LinkedID_Anesthesia.value + LinkedLB.options[i].value
+ }
+
+document.delivery.Reloaded.value = true;
+
+result = true;
+    // -------------------------
+//End Custom Code
+
+//Close delivery_OnSubmit @234-BC33A33A
+    return result;
+}
+//End Close delivery_OnSubmit
+
+function OutcomesShowHide()
+{
+	out1 = document.getElementById("PregnancyOutcome1IDlabel"); 
+	out1s = document.getElementById("deliveryPregnancyOutcome1ID");
+    out2 = document.getElementById("PregnancyOutcome2IDboth"); 
+    out2s = document.getElementById("deliveryPregnancyOutcome2ID"); 
+    out3 = document.getElementById("PregnancyOutcome3IDboth"); 
+    out3s = document.getElementById("deliveryPregnancyOutcome3ID"); 
+    out4 = document.getElementById("PregnancyOutcome4IDboth"); 
+    out4s = document.getElementById("deliveryPregnancyOutcome4ID"); 
+	SecondChild = document.getElementById("SecondChild_Label");
+
+	Partner1 = document.getElementById("deliveryPartnerDelivery_1");
+	PartnerLabel1 = document.getElementById("labelDeliveryPartnerDelivery_1");
+	Partner2 = document.getElementById("deliveryPartnerDelivery_2");
+	PartnerLabel2 = document.getElementById("labelDeliveryPartnerDelivery_2");
+	Partner3 = document.getElementById("deliveryPartnerDelivery_3");
+	PartnerLabel3 = document.getElementById("labelDeliveryPartnerDelivery_3");
+
+    ThirdChild = document.getElementById("ThirdChild_Label"); 
+    FurtherChildren = document.getElementById("FurtherChildren_Label");
+    Partogram1 = document.getElementById("deliveryPartogram_1");
+	PartogramLabel1 = document.getElementById("LabelPartogramDelivery_1");
+	Partogram2 = document.getElementById("deliveryPartogram_2");
+	PartogramLabel2 = document.getElementById("LabelPartogramDelivery_2");
+	Partogram3 = document.getElementById("deliveryPartogram_3");
+	PartogramLabel3 = document.getElementById("LabelPartogramDelivery_3");
+    AmnioticBursting1 = document.getElementById("deliveryAmnioticBursting_1");
+	AmnioticBurstingLabel1 = document.getElementById("LabelAmnioticBursting_1");
+	AmnioticBursting2 = document.getElementById("deliveryAmnioticBursting_2");
+	AmnioticBurstingLabel2 = document.getElementById("LabelAmnioticBursting_2");
+	AmnioticBursting3 = document.getElementById("deliveryAmnioticBursting_3");
+	AmnioticBurstingLabel3 = document.getElementById("LabelAmnioticBursting_3");
+	AmnioticBursting4 = document.getElementById("deliveryAmnioticBursting_4");
+	AmnioticBurstingLabel4 = document.getElementById("LabelAmnioticBursting_4");
+    methoddeliv = document.getElementById("deliveryDeliveryMethodID");
+    delivtype = document.getElementById("deliveryDeliveryTypeID");
+    deliveryAmnioticBursting_4 = document.getElementById("deliveryAmnioticBursting_4");
+    deliveryAmnioticBursting_3 = document.getElementById("deliveryAmnioticBursting_3");
+    deliveryAmnioticBursting_2 = document.getElementById("deliveryAmnioticBursting_2");
+    deliveryAmnioticBursting_1 = document.getElementById("deliveryAmnioticBursting_1");
+    deliveryPartnerDelivery_Label = document.getElementById("deliveryPartnerDelivery_Label");
+    PartogramFacility_Label = document.getElementById("PartogramFacility_Label");
+    AmnioticBursting_Label = document.getElementById("AmnioticBursting_Label");
+    DeliveryMethodID_Label = document.getElementById("DeliveryMethodID_Label");
+    DeliveryTypeID_Label = document.getElementById("DeliveryTypeID_Label");
+    deliveryDeliveryMethodID = document.getElementById("deliveryDeliveryMethodID");
+    deliveryDeliveryTypeID = document.getElementById("deliveryDeliveryTypeID");
+    PartnDelAll = document.getElementById("PartnDelAll");
+    PartogrDelAll = document.getElementById("PartogrDelAll");
+    AmnioticBurstingAll = document.getElementById("AmnioticBurstingAll");
+
+      if(document.delivery.NrChildren.value > 0)
+		{
+            if(document.delivery.NrChildren.value == 4)
+				{
+					if(out1s.value == 4)
+                        {
+                            out2.style.visibility= "hidden";
+							out3.style.visibility= "hidden";
+							out4.style.visibility= "hidden";
+							out2s.style.visibility= "hidden";
+							out3s.style.visibility= "hidden";
+							out4s.style.visibility= "hidden";
+                                
+                            SecondChild.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+                            Partner1.style.visibility= "hidden";
+							PartnerLabel1.style.visibility= "hidden";
+							Partner3.click();
+							Partogram3.click();
+							AmnioticBursting4.click();
+							Partner2.style.visibility= "hidden";;
+							PartnerLabel2.style.visibility= "hidden";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+                            Partogram1.style.visibility= "hidden";
+							PartogramLabel1.style.visibility= "hidden";
+                            Partogram2.style.visibility= "hidden";
+							PartogramLabel2.style.visibility= "hidden";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+							AmnioticBursting1.style.visibility= "hidden";
+							AmnioticBurstingLabel1.style.visibility= "hidden";
+							AmnioticBursting2.style.visibility= "hidden";
+							AmnioticBurstingLabel2.style.visibility= "hidden";
+							AmnioticBursting3.style.visibility= "hidden";
+							AmnioticBurstingLabel3.style.visibility= "hidden";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+                            deliveryAmnioticBursting_4.style.visibility= "hidden";
+                            deliveryAmnioticBursting_3.style.visibility= "hidden";
+                            deliveryAmnioticBursting_2.style.visibility= "hidden";
+                            deliveryAmnioticBursting_1.style.visibility= "hidden";
+                            deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                            PartogramFacility_Label.style.visibility= "hidden";
+                            AmnioticBursting_Label.style.visibility= "hidden";
+                            DeliveryMethodID_Label.style.visibility= "hidden";
+                            DeliveryTypeID_Label.style.visibility= "hidden";
+                            deliveryDeliveryMethodID.style.visibility= "hidden";
+                            deliveryDeliveryTypeID.style.visibility= "hidden";
+                            PartnDelAll.style.visibility= "hidden";
+                            PartogrDelAll.style.visibility= "hidden";
+                            AmnioticBurstingAll.style.visibility= "hidden";
+						}
+					else if(out1s.value == 3)
+						{
+							out2.style.visibility= "hidden";
+                            out3.style.visibility= "hidden";
+                            out4.style.visibility= "hidden";
+                            out2s.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out4s.style.visibility= "hidden";
+                            SecondChild.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+                            Partner1.style.visibility= "hidden";
+							PartnerLabel1.style.visibility= "hidden";
+							Partner3.click();
+							Partogram3.click();
+							AmnioticBursting4.click();
+							Partner2.style.visibility= "hidden";;
+							PartnerLabel2.style.visibility= "hidden";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+                            Partogram1.style.visibility= "hidden";
+							PartogramLabel1.style.visibility= "hidden";
+                            Partogram2.style.visibility= "hidden";
+							PartogramLabel2.style.visibility= "hidden";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "hidden";
+							AmnioticBurstingLabel1.style.visibility= "hidden";
+							AmnioticBursting2.style.visibility= "hidden";
+							AmnioticBurstingLabel2.style.visibility= "hidden";
+							AmnioticBursting3.style.visibility= "hidden";
+							AmnioticBurstingLabel3.style.visibility= "hidden";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+                            deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                            PartogramFacility_Label.style.visibility= "hidden";
+                            AmnioticBursting_Label.style.visibility= "hidden";
+                            DeliveryMethodID_Label.style.visibility= "hidden";
+                            DeliveryTypeID_Label.style.visibility= "hidden";
+                            deliveryDeliveryMethodID.style.visibility= "hidden";
+                            deliveryDeliveryTypeID.style.visibility= "hidden";
+                            PartnDelAll.style.visibility= "hidden";
+                            PartogrDelAll.style.visibility= "hidden";
+                            AmnioticBurstingAll.style.visibility= "hidden";
+						}
+					else if(out1s.value < 3)
+						{
+							out1.style.visibility= "visible";
+                            out1s.style.visibility= "visible";
+                            out2s.style.visibility= "visible";
+                            out3s.style.visibility= "visible";
+                            out4s.style.visibility= "visible";
+                            out4.style.visibility= "visible";
+                            SecondChild.style.visibility= "visible";
+                            ThirdChild.style.visibility= "visible";
+                            Partner1.style.visibility= "visible";
+							PartnerLabel1.style.visibility= "visible";
+							Partner2.style.visibility= "visible";
+							PartnerLabel2.style.visibility= "visible";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+
+                            Partogram1.style.visibility= "visible";
+							PartogramLabel1.style.visibility= "visible";
+                            Partogram2.style.visibility= "visible";
+							PartogramLabel2.style.visibility= "visible";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "visible";
+							AmnioticBurstingLabel1.style.visibility= "visible";
+							AmnioticBursting2.style.visibility= "visible";
+							AmnioticBurstingLabel2.style.visibility= "visible";
+							AmnioticBursting3.style.visibility= "visible";
+							AmnioticBurstingLabel3.style.visibility= "visible";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+                            deliveryPartnerDelivery_Label.style.visibility= "visible";
+                            PartogramFacility_Label.style.visibility= "visible";
+                            AmnioticBursting_Label.style.visibility= "visible";
+                            DeliveryMethodID_Label.style.visibility= "visible";
+                            DeliveryTypeID_Label.style.visibility= "visible";
+                            deliveryDeliveryMethodID.style.visibility= "visible";
+                            deliveryDeliveryTypeID.style.visibility= "visible";
+                            PartogrDelAll.style.visibility= "visible";
+                            AmnioticBurstingAll.style.visibility= "visible";
+						}
+				}
+		// якщо трійня
+			if(document.delivery.NrChildren.value == 3)
+				{
+					if(out1s.value == 4)
+						{
+							out2.style.visibility= "hidden";
+                            out3.style.visibility= "hidden";
+                            out4.style.visibility= "hidden";
+                            out2s.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out4s.style.visibility= "hidden";
+                            out4s.value = "-";
+                            SecondChild.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+
+                    		Partner1.style.visibility= "hidden";
+							PartnerLabel1.style.visibility= "hidden";
+							Partner2.style.visibility= "hidden";
+							PartnerLabel2.style.visibility= "hidden";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+
+                            Partogram1.style.visibility= "hidden";
+							PartogramLabel1.style.visibility= "hidden";
+                            Partogram2.style.visibility= "hidden";
+							PartogramLabel2.style.visibility= "hidden";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "hidden";
+							AmnioticBurstingLabel1.style.visibility= "hidden";
+							AmnioticBursting2.style.visibility= "hidden";
+							AmnioticBurstingLabel2.style.visibility= "hidden";
+							AmnioticBursting3.style.visibility= "hidden";
+							AmnioticBurstingLabel3.style.visibility= "hidden";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                            PartogramFacility_Label.style.visibility= "hidden";
+                            AmnioticBursting_Label.style.visibility= "hidden";
+                            DeliveryMethodID_Label.style.visibility= "hidden";
+                            DeliveryTypeID_Label.style.visibility= "hidden";
+                            deliveryDeliveryMethodID.style.visibility= "hidden";
+                            deliveryDeliveryTypeID.style.visibility= "hidden";
+                            PartnDelAll.style.visibility= "hidden";
+                            AmnioticBurstingAll.style.visibility= "hidden";
+						}
+					if(out1s.value == 3)
+						{
+							out2.style.visibility= "hidden";
+                            out3.style.visibility= "hidden";
+                            out4.style.visibility= "hidden";
+                            out2s.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out4s.style.visibility= "hidden";
+                            out4s.value = "-";
+                            SecondChild.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+              				
+							Partner1.style.visibility= "hidden";
+							PartnerLabel1.style.visibility= "hidden";
+							Partner2.style.visibility= "hidden";
+							PartnerLabel2.style.visibility= "hidden";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+
+                            Partogram1.style.visibility= "hidden";
+							PartogramLabel1.style.visibility= "hidden";
+                            Partogram2.style.visibility= "hidden";
+							PartogramLabel2.style.visibility= "hidden";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "hidden";
+							AmnioticBurstingLabel1.style.visibility= "hidden";
+							AmnioticBursting2.style.visibility= "hidden";
+							AmnioticBurstingLabel2.style.visibility= "hidden";
+							AmnioticBursting3.style.visibility= "hidden";
+							AmnioticBurstingLabel3.style.visibility= "hidden";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                            PartogramFacility_Label.style.visibility= "hidden";
+                            AmnioticBursting_Label.style.visibility= "hidden";
+                            DeliveryMethodID_Label.style.visibility= "hidden";
+                            DeliveryTypeID_Label.style.visibility= "hidden";
+                            deliveryDeliveryMethodID.style.visibility= "hidden";
+                            deliveryDeliveryTypeID.style.visibility= "hidden";
+                            PartogrDelAll.style.visibility= "hidden";
+                            AmnioticBurstingAll.style.visibility= "hidden";
+                        }
+					if(out1s.value < 3)
+						{
+							out1.style.visibility= "visible";
+                            out1s.style.visibility= "visible";
+                            out2s.style.visibility= "visible";
+                            SecondChild.style.visibility= "visible";
+                            ThirdChild.style.visibility= "visible";
+                            out3s.style.visibility= "visible";
+                            out4s.style.visibility= "hidden";
+                            out4s.value = "-";
+                            out4.style.visibility= "hidden";
+                  			
+							Partner1.style.visibility= "visible";
+							PartnerLabel1.style.visibility= "visible";
+							Partner2.style.visibility= "visible";
+							PartnerLabel2.style.visibility= "visible";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+
+                            Partogram1.style.visibility= "visible";
+							PartogramLabel1.style.visibility= "visible";
+                            Partogram2.style.visibility= "visible";
+							PartogramLabel2.style.visibility= "visible";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "visible";
+							AmnioticBurstingLabel1.style.visibility= "visible";
+							AmnioticBursting2.style.visibility= "visible";
+							AmnioticBurstingLabel2.style.visibility= "visible";
+							AmnioticBursting3.style.visibility= "visible";
+							AmnioticBurstingLabel3.style.visibility= "visible";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "visible";
+                            PartogramFacility_Label.style.visibility= "visible";
+                            AmnioticBursting_Label.style.visibility= "visible";
+                            DeliveryMethodID_Label.style.visibility= "visible";
+                            DeliveryTypeID_Label.style.visibility= "visible";
+                            deliveryDeliveryMethodID.style.visibility= "visible";
+                            deliveryDeliveryTypeID.style.visibility= "visible";
+                            PartnDelAll.style.visibility= "visible";
+                            PartogrDelAll.style.visibility= "visible";
+                            AmnioticBurstingAll.style.visibility= "visible";
+						}
+				}
+		// кінець якщо трійня
+		// якщо двійня
+			if(document.delivery.NrChildren.value == 2)
+				{
+					if(out1s.value == 4)
+						{
+							out2.style.visibility= "hidden";
+                            out3.style.visibility= "hidden";
+							out4.style.visibility= "hidden";
+                            out2s.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out4s.style.visibility= "hidden";
+                                
+                            SecondChild.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+                    		
+							Partner1.style.visibility= "hidden";
+							PartnerLabel1.style.visibility= "hidden";
+							Partner2.style.visibility= "hidden";
+							PartnerLabel2.style.visibility= "hidden";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+							Partogram1.style.visibility= "hidden";
+							PartogramLabel1.style.visibility= "hidden";
+                            Partogram2.style.visibility= "hidden";
+							PartogramLabel2.style.visibility= "hidden";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "hidden";
+							AmnioticBurstingLabel1.style.visibility= "hidden";
+							AmnioticBursting2.style.visibility= "hidden";
+							AmnioticBurstingLabel2.style.visibility= "hidden";
+							AmnioticBursting3.style.visibility= "hidden";
+							AmnioticBurstingLabel3.style.visibility= "hidden";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                            PartogramFacility_Label.style.visibility= "hidden";
+                            AmnioticBursting_Label.style.visibility= "hidden";
+                            DeliveryMethodID_Label.style.visibility= "hidden";
+                            DeliveryTypeID_Label.style.visibility= "hidden";
+                            deliveryDeliveryMethodID.style.visibility= "hidden";
+                            deliveryDeliveryTypeID.style.visibility= "hidden";
+                            PartnDelAll.style.visibility= "hidden";
+                            PartogrDelAll.style.visibility= "hidden";
+                            AmnioticBurstingAll.style.visibility= "hidden";
+						}
+					else if(out1s.value == 3)
+						{
+							out2.style.visibility= "hidden";
+                            out3.style.visibility= "hidden";
+                            out4.style.visibility= "hidden";
+                            out2s.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out4s.style.visibility= "hidden";
+                            SecondChild.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+                			Partner1.style.visibility= "hidden";
+							PartnerLabel1.style.visibility= "hidden";
+							Partner2.style.visibility= "hidden";
+							PartnerLabel2.style.visibility= "hidden";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+							Partogram1.style.visibility= "hidden";
+							PartogramLabel1.style.visibility= "hidden";
+                            Partogram2.style.visibility= "hidden";
+							PartogramLabel2.style.visibility= "hidden";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "hidden";
+							AmnioticBurstingLabel1.style.visibility= "hidden";
+							AmnioticBursting2.style.visibility= "hidden";
+							AmnioticBurstingLabel2.style.visibility= "hidden";
+							AmnioticBursting3.style.visibility= "hidden";
+							AmnioticBurstingLabel3.style.visibility= "hidden";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                            PartogramFacility_Label.style.visibility= "hidden";
+                            AmnioticBursting_Label.style.visibility= "hidden";
+                            DeliveryMethodID_Label.style.visibility= "hidden";
+                            DeliveryTypeID_Label.style.visibility= "hidden";
+                            deliveryDeliveryMethodID.style.visibility= "hidden";
+                            deliveryDeliveryTypeID.style.visibility= "hidden";
+                            PartnDelAll.style.visibility= "hidden";
+                            PartogrDelAll.style.visibility= "hidden";
+                            AmnioticBurstingAll.style.visibility= "hidden";
+						}
+					else if(out1s.value < 3)
+						{
+                            out2s.style.visibility= "visible";
+                            out3.style.visibility= "hidden";
+                            out4.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out3s.value = "-1";
+                            out4s.style.visibility= "hidden";
+                            out4s.value = "-";
+                                                        
+                            SecondChild.style.visibility= "visible";
+
+                            Partner1.style.visibility= "visible";
+							PartnerLabel1.style.visibility= "visible";
+							Partner2.style.visibility= "visible";
+							PartnerLabel2.style.visibility= "visible";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+                      		Partogram1.style.visibility= "visible";
+							PartogramLabel1.style.visibility= "visible";
+                            Partogram2.style.visibility= "visible";
+							PartogramLabel2.style.visibility= "visible";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "visible";
+							AmnioticBurstingLabel1.style.visibility= "visible";
+							AmnioticBursting2.style.visibility= "visible";
+							AmnioticBurstingLabel2.style.visibility= "visible";
+							AmnioticBursting3.style.visibility= "visible";
+							AmnioticBurstingLabel3.style.visibility= "visible";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "visible";
+                            PartogramFacility_Label.style.visibility= "visible";
+                            AmnioticBursting_Label.style.visibility= "visible";
+                            DeliveryMethodID_Label.style.visibility= "visible";
+                            DeliveryTypeID_Label.style.visibility= "visible";
+                            deliveryDeliveryMethodID.style.visibility= "visible";
+                            deliveryDeliveryTypeID.style.visibility= "visible";
+                            PartnDelAll.style.visibility= "visible";
+                            PartogrDelAll.style.visibility= "visible";
+                            AmnioticBurstingAll.style.visibility= "visible";
+						}
+				}
+		// кінець якщо двійня
+		// якщо одна дитина
+			else if(document.delivery.NrChildren.value == 1)
+				{
+					if(out1s.value == 4)
+						{
+							out2.style.visibility= "hidden";
+                            out3.style.visibility= "hidden";
+                            out4.style.visibility= "hidden";
+                            out2s.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out4s.style.visibility= "hidden";                        
+                                
+                            SecondChild.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+           					
+							Partner1.style.visibility= "hidden";
+							PartnerLabel1.style.visibility= "hidden";
+							Partner2.style.visibility= "hidden";
+							PartnerLabel2.style.visibility= "hidden";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+							Partogram1.style.visibility= "hidden";
+							PartogramLabel1.style.visibility= "hidden";
+                            Partogram2.style.visibility= "hidden";
+							PartogramLabel2.style.visibility= "hidden";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "hidden";
+							AmnioticBurstingLabel1.style.visibility= "hidden";
+							AmnioticBursting2.style.visibility= "hidden";
+							AmnioticBurstingLabel2.style.visibility= "hidden";
+							AmnioticBursting3.style.visibility= "hidden";
+							AmnioticBurstingLabel3.style.visibility= "hidden";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                            PartogramFacility_Label.style.visibility= "hidden";
+                            AmnioticBursting_Label.style.visibility= "hidden";
+                            DeliveryMethodID_Label.style.visibility= "hidden";
+                            DeliveryTypeID_Label.style.visibility= "hidden";
+                            deliveryDeliveryMethodID.style.visibility= "hidden";
+                            deliveryDeliveryTypeID.style.visibility= "hidden";
+                            PartnDelAll.style.visibility= "hidden";
+                            PartogrDelAll.style.visibility= "hidden";
+                            AmnioticBurstingAll.style.visibility= "hidden";                        
+						}
+					else if(out1s.value == 3)
+						{
+							out2.style.visibility= "hidden";
+                            out3.style.visibility= "hidden";
+                            out4.style.visibility= "hidden";
+                            out2s.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out4s.style.visibility= "hidden";
+                            SecondChild.style.visibility= "hidden";
+                            ThirdChild.style.visibility= "hidden";
+                 			
+							Partner1.style.visibility= "hidden";
+							PartnerLabel1.style.visibility= "hidden";
+							Partner2.style.visibility= "hidden";
+							PartnerLabel2.style.visibility= "hidden";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+							Partogram1.style.visibility= "hidden";
+							PartogramLabel1.style.visibility= "hidden";
+                            Partogram2.style.visibility= "hidden";
+							PartogramLabel2.style.visibility= "hidden";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "hidden";
+							AmnioticBurstingLabel1.style.visibility= "hidden";
+							AmnioticBursting2.style.visibility= "hidden";
+							AmnioticBurstingLabel2.style.visibility= "hidden";
+							AmnioticBursting3.style.visibility= "hidden";
+							AmnioticBurstingLabel3.style.visibility= "hidden";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "hidden";
+                            PartogramFacility_Label.style.visibility= "hidden";
+                            AmnioticBursting_Label.style.visibility= "hidden";
+                            DeliveryMethodID_Label.style.visibility= "hidden";
+                            DeliveryTypeID_Label.style.visibility= "hidden";
+                            deliveryDeliveryMethodID.style.visibility= "hidden";
+                            deliveryDeliveryTypeID.style.visibility= "hidden";
+                            PartnDelAll.style.visibility= "hidden";
+                            PartogrDelAll.style.visibility= "hidden";
+                            AmnioticBurstingAll.style.visibility= "hidden";
+						}
+				else if(out1s.value < 3)
+						{
+							out2.style.visibility= "hidden";
+                            out2s.style.visibility= "hidden";
+                            out2s.value = "-1";
+                            out3.style.visibility= "hidden";
+                            out4.style.visibility= "hidden";
+                            out3s.style.visibility= "hidden";
+                            out3s.value = "-1";
+                            out4s.style.visibility= "hidden";
+                            out4s.value = "-";
+                                                        
+                            Partner1.style.visibility= "visible";
+							PartnerLabel1.style.visibility= "visible";
+							Partner2.style.visibility= "visible";
+							PartnerLabel2.style.visibility= "visible";
+							Partner3.style.visibility= "hidden";
+							PartnerLabel3.style.visibility= "hidden";
+                      		Partogram1.style.visibility= "visible";
+							PartogramLabel1.style.visibility= "visible";
+                            Partogram2.style.visibility= "visible";
+							PartogramLabel2.style.visibility= "visible";
+							Partogram3.style.visibility= "hidden";
+							PartogramLabel3.style.visibility= "hidden";
+                            AmnioticBursting1.style.visibility= "visible";
+							AmnioticBurstingLabel1.style.visibility= "visible";
+							AmnioticBursting2.style.visibility= "visible";
+							AmnioticBurstingLabel2.style.visibility= "visible";
+							AmnioticBursting3.style.visibility= "visible";
+							AmnioticBurstingLabel3.style.visibility= "visible";
+							AmnioticBursting4.style.visibility= "hidden";
+							AmnioticBurstingLabel4.style.visibility= "hidden";
+
+                            deliveryPartnerDelivery_Label.style.visibility= "visible";
+                            PartogramFacility_Label.style.visibility= "visible";
+                            AmnioticBursting_Label.style.visibility= "visible";
+                            DeliveryMethodID_Label.style.visibility= "visible";
+                            DeliveryTypeID_Label.style.visibility= "visible";
+                            deliveryDeliveryMethodID.style.visibility= "visible";
+                            deliveryDeliveryTypeID.style.visibility= "visible";
+                            PartogrDelAll.style.visibility= "visible";
+                            AmnioticBurstingAll.style.visibility= "visible";
+						}
+				}
+// кінець якщо одна дитина
+		}
+// not defined should not be possible to select, rather make it empty and oblige the user to choose
+        if(out4.style.visibility == "" && out4s.value == "-") 
+                out4s.value = "";
+                
+        if(out3.style.visibility == "") 
+                out3s.remove(1);
+
+        if(out2.style.visibility == "") 
+                out2s.remove(1);
+        
+        out1s.remove(1); // 1st child is always there so we always remove the non-defined       
+
+}
+//delivery_OnLoad @234-DA882017
+function delivery_OnLoad(form)
+{
+    var result = true;
+//End delivery_OnLoad
+
+//Custom Code @332-2A29BDB7
+    // -------------------------
+        addToolTipsSelect('ListofProcedures[]');
+        addToolTipsSelect('SelectedProcedures[]');
+    addToolTipsSelect('ListofAnesthesia[]');
+        addToolTipsSelect('SelectedAnesthesia[]');
+        addToolTipsSelect('ListofComplications[]');
+        addToolTipsSelect('SelectedComplications[]');
+        addToolTipsSelect('ListofPComplications[]');
+        addToolTipsSelect('SelectedPComplications[]');
+
+    SteroidsShowHide();
+        CacheValues('available_comp',available_comp_all);
+        CacheValues('available_pcomp',available_pcomp_all);
+        
+        OutcomesShowHide();
+                
+    // -------------------------
+//End Custom Code
+
+//Close delivery_OnLoad @234-BC33A33A
+    return result;
+}
+//End Close delivery_OnLoad
+
+
+//deliveryButton_Cancel_OnClick @8-9ACDA213
+function deliveryButton_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End deliveryButton_Cancel_OnClick
+
+//deliveryEmployeeIDPTDependentListBox1 Start @469-BD6D4D76
+function deliveryEmployeeIDPTDependentListBox1_start(sender) {
+    var dependentElement = $("deliveryEmployeeID" + sender.id.substring(18));
+    var selectedValue = null;
+    if (addEventHandler.isOnLoad)
+        selectedValue = dependentElement.value;
+    new Ajax.Request("services/delivery_maint_delivery_EmployeeID_PTDependentListBox1.php?keyword=" + sender.value, {
+        method: "get",
+        requestHeaders: ['If-Modified-Since', new Date(0)],
+        onSuccess: function(transport) {
+            for (var i = dependentElement.options.length - 1; i > 0; i--) {
+                var currentOption = dependentElement.options.item(i);
+                if (currentOption.value != "") {
+                    dependentElement.remove(i);
+                }
+            }
+            var valueRows = eval(transport.responseText);
+            for (var i = 0; i < valueRows.length; i++) {
+                var newOption = new Option(valueRows[i]["1"], valueRows[i]["0"]);
+                dependentElement.options[dependentElement.options.length] = newOption;
+            } 
+            if (CCGetParam(sender.name) == sender.value) {
+                dependentElement.value = CCGetParam(dependentElement.name);
+            }
+            if (selectedValue)
+                dependentElement.value = selectedValue;
+        }, 
+        onFailure: function(transport) {
+            alert(transport.responseText);
+        }
+    });
+}
+//End deliveryEmployeeIDPTDependentListBox1 Start
+
+//bind_events @1-6154DCBA
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+    addEventHandler("deliveryFacilityID", "change", deliveryEmployeeIDPTDependentListBox1_start);
+    addEventHandler("deliveryFacilityID", "load", deliveryEmployeeIDPTDependentListBox1_start);
+    addEventHandler("deliveryButton_Delete", "click", deliveryButton_Delete_OnClick);
+    addEventHandler("deliveryRightButton_procedure", "click", deliveryRightButton_procedure_OnClick);
+    addEventHandler("deliveryLeftButton_procedure", "click", deliveryLeftButton_procedure_OnClick);
+    addEventHandler("deliveryRightButtonAnesthesia", "click", deliveryRightButtonAnesthesia_OnClick);
+    addEventHandler("deliveryLeftButtonAnesthesia", "click", deliveryLeftButtonAnesthesia_OnClick);
+    addEventHandler("deliverySteroidsYesNo", "click", deliverySteroidsYesNo_OnClick);
+    addEventHandler("deliveryRightButton_comp", "click", deliveryRightButton_comp_OnClick);
+    addEventHandler("deliveryLeftButton_comp", "click", deliveryLeftButton_comp_OnClick);
+    addEventHandler("deliveryRightButton_pcomp", "click", deliveryRightButton_pcomp_OnClick);
+    addEventHandler("deliveryLeftButton_pcomp", "click", deliveryLeftButton_pcomp_OnClick);
+    addEventHandler("deliveryPregnancyOutcome1ID", "change", deliveryPregnancyOutcome1ID_OnChange);
+    addEventHandler("deliveryDeliveryMethodID", "load", deliveryDeliveryMethodID_OnLoad);
+    addEventHandler("deliveryDeliveryMethodID", "change", deliveryDeliveryMethodID_OnChange);
+    addEventHandler("delivery", "submit", delivery_OnSubmit);
+    addEventHandler("delivery", "load", delivery_OnLoad);
+    addEventHandler("deliveryButton_Cancel", "click", deliveryButton_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+function CacheValues(selectboxID,Backup)
+{
+    var l =  document.getElementById(selectboxID);
+    for (var i=0; i < l.options.length; i++)
+    {
+              Backup[i] = l.options[i];
+    }
+}
+
+function SearchList(selectboxID,searchTextID,Backup)
+{
+        var l =  document.getElementById(selectboxID);
+        var tb = document.getElementById(searchTextID);
+   
+    l.options.length=0;
+ 
+    if(tb.value == "")
+    {
+      for (var i=0; i < Backup.length; i++)
+      {
+        l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+      }
+    }
+    else{
+ 
+      for (var i=0; i <Backup.length; i++)
+      {
+        if (Backup[i].text.toLowerCase().indexOf(tb.value.toLowerCase()) != -1)
+        {
+          l.options[l.options.length] = new Option(Backup[i].text, Backup[i].value);
+        }
+      }
+    }
+}
+  function ClearSelection(lb)
+  {
+    lb.selectedIndex = -1;
+  }
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record pregnancy_header -->
+<form id="pregnancy_header" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{FirstName}&nbsp;{FamiliyName}&nbsp;({BirthDate})</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_headerPatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header --></p>
+<p>
+<!-- BEGIN Record pregnancy_header1 -->
+<form id="pregnancy_header1" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:pregnancy}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td>{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td>{res:PregnancyRecNr}: {PregnancyRecNr}</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td>{res:PatientID}: <a href="{PatientID_Src}" id="pregnancy_header1PatientID">{PatientID}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record pregnancy_header1 --></p>
+<p>
+<!-- BEGIN Record delivery -->
+<form id="delivery" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_RecordFormPrefix} {res:deliverymal}</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="11">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="deliveryHospitalAdmData">{res:NumberOfDelivery}</label>&nbsp;</td> 
+            <td colspan="9"><label for="deliveryNumberOfDelivery" style="display: none;">&nbsp;</label><input id="deliveryNumberOfDelivery" value="{NumberOfDelivery}" size="10" name="{NumberOfDelivery_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="deliveryHospitalAdmData">{res:HospitalAdmData}</label></td> 
+            <td colspan="9"><input id="deliveryHospitalAdmData" value="{HospitalAdmData}" maxlength="100" size="8" name="{HospitalAdmData_Name}">
+              <!-- BEGIN DatePicker DatePicker_HospitalAdmData --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="deliveryDatePicker_HospitalAdmData"><img id="deliveryDatePicker_HospitalAdmData_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;<!-- END DatePicker DatePicker_HospitalAdmData --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="deliveryFacilityID">{res:FacilityID}</label></td> 
+            <td colspan="9">
+              <select id="deliveryFacilityID" name="{FacilityID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {FacilityID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="deliveryEmployeeID"><label for="visitEmployeeID"><label for="deliveryEmployeeID"><label for="visitEmployeeID">{res:Doctor}</label></label></label></label></td> 
+            <td colspan="9">
+              <select id="deliveryEmployeeID" name="{EmployeeID_Name}">
+                <option selected value="">{res:CCS_SelectValue}</option>
+                {EmployeeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="pregnancyGestationAge">{res:GestationAge}</label></td> 
+            <td colspan="9"><label for="deliveryGestationAge" style="display: none;">&nbsp;</label><input id="deliveryGestationAge" value="{GestationAge}" size="3" name="{GestationAge_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2">{res:PregnancyOutcomeID}</td> 
+            <td colspan="9">
+              <table>
+                <tr>
+                  <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">
+                    <select id="deliveryPregnancyOutcome1ID" name="{PregnancyOutcome1ID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+                      {PregnancyOutcome1ID_Options}
+                    </select>
+ </td> 
+                  <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none" id="PregnancyOutcome1IDlabel">({res:FirstChild})</td>
+                </tr>
+ 
+                <tr id="PregnancyOutcome2IDboth">
+                  <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">
+                    <select id="deliveryPregnancyOutcome2ID" name="{PregnancyOutcome2ID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+                      {PregnancyOutcome2ID_Options}
+                    </select>
+ </td> 
+                  <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none" id="SecondChild_Label">({res:SecondChild})</td>
+                </tr>
+ 
+                <tr id="PregnancyOutcome3IDboth">
+                  <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">
+                    <select id="deliveryPregnancyOutcome3ID" name="{PregnancyOutcome3ID_Name}">
+                      <option selected value="">{res:CCS_SelectValue}</option>
+                      {PregnancyOutcome3ID_Options}
+                    </select>
+ </td> 
+                  <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none" id="ThirdChild_Label">({res:ThirdChild})</td>
+                </tr>
+ 
+                <tr id="PregnancyOutcome4IDboth">
+                  <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none"><textarea style="WIDTH: 200px; HEIGHT: 54px" id="deliveryPregnancyOutcome4ID" rows="3" cols="10" name="{PregnancyOutcome4ID_Name}">{PregnancyOutcome4ID}</textarea></td> 
+                  <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none" id="FurtherChildren_Label">({res:FurtherChildren})</td>
+                </tr>
+              </table>
+            </td></td>
+        </tr>
+ 
+        <tr class="Controls">
+          <td class="th" colspan="2"><label for="deliveryPartnerDelivery" id="deliveryPartnerDelivery_Label">{res:PartnerDelivery}</label></td> 
+          <td colspan="9">
+            <div id="PartnDelAll">
+              <!-- BEGIN RadioButton PartnerDelivery --><input id="deliveryPartnerDelivery_{PartnerDelivery:optionNumber}" value="{Value}" type="radio" name="{PartnerDelivery_Name}" {Check}><label for="deliveryPartnerDelivery_{PartnerDelivery:optionNumber}" id="labelDeliveryPartnerDelivery_{PartnerDelivery:optionNumber}">{Description}</label>&nbsp;<!-- END RadioButton PartnerDelivery -->
+            </div>
+          </td>
+ 
+        </tr>
+ 
+        <tr class="Controls">
+          <td class="th" colspan="2"><label for="deliveryPartogram" id="PartogramFacility_Label">{res:PartogramFacility}</label></td> 
+          <td colspan="9">
+            <div id="PartogrDelAll">
+              <!-- BEGIN RadioButton Partogram --><input id="deliveryPartogram_{Partogram:optionNumber}" value="{Value}" type="radio" name="{Partogram_Name}" {Check}><label for="deliveryPartogram_{Partogram:optionNumber}" id="LabelPartogramDelivery_{Partogram:optionNumber}">{Description}</label>&nbsp;<!-- END RadioButton Partogram -->
+            </div>
+          </td>
+        </tr>
+ 
+        <tr class="Controls">
+          <td class="th" colspan="2"><label for="AmnioticBursting" id="AmnioticBursting_Label">{res:AmnioticBursting}</label></td> 
+          <td colspan="9">
+            <div id="AmnioticBurstingAll">
+              <!-- BEGIN RadioButton AmnioticBursting --><input id="deliveryAmnioticBursting_{AmnioticBursting:optionNumber}" value="{Value}" type="radio" name="{AmnioticBursting_Name}" {Check}><label for="deliveryAmnioticBursting_{AmnioticBursting:optionNumber}" id="LabelAmnioticBursting_{AmnioticBursting:optionNumber}">{Description}</label>&nbsp;<!-- END RadioButton AmnioticBursting -->&nbsp; 
+            </div>
+          </td>
+        </tr>
+ 
+        <tr class="Controls">
+          <td class="th" colspan="2">{res:MedicationsApplied}</td> 
+          <td colspan="9">
+            <table>
+              <tr>
+                <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">{res:Steroids}&nbsp;</td> 
+                <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">
+                  <!-- BEGIN RadioButton SteroidsYesNo --><input id="deliverySteroidsYesNo_{SteroidsYesNo:optionNumber}" value="{Value}" type="radio" name="{SteroidsYesNo_Name}" {Check}><label for="deliverySteroidsYesNo_{SteroidsYesNo:optionNumber}">{Description}</label><!-- END RadioButton SteroidsYesNo -->&nbsp;&nbsp; <input id="deliverySteroids" value="{Steroids}" maxlength="30" size="6" name="{Steroids_Name}"><label for="deliverySteroids" id="deliveryMg_Label">&nbsp;{Mg_Label}</label> </td>
+              </tr>
+ 
+              <tr>
+                <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">{res:Antibiotics}&nbsp;</td> 
+                <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">
+                  <!-- BEGIN RadioButton Antibiotics --><input id="deliveryAntibiotics_{Antibiotics:optionNumber}" value="{Value}" type="radio" name="{Antibiotics_Name}" {Check}><label for="deliveryAntibiotics_{Antibiotics:optionNumber}">{Description}</label><!-- END RadioButton Antibiotics -->&nbsp;&nbsp;</td>
+              </tr>
+ 
+              <tr>
+                <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">{res:ART}</td> 
+                <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">
+                  <!-- BEGIN RadioButton ART --><input id="deliveryART_{ART:optionNumber}" value="{Value}" type="radio" name="{ART_Name}" {Check}><label for="deliveryART_{ART:optionNumber}">{Description}</label><!-- END RadioButton ART --></td></td>
+            </tr>
+ 
+            <tr>
+              <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">{res:Uterotoics}</td> 
+              <td style="BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: none; BORDER-LEFT-STYLE: none">
+                <!-- BEGIN RadioButton Uterotoics --><input id="deliveryUterotoics_{Uterotoics:optionNumber}" value="{Value}" type="radio" name="{Uterotoics_Name}" {Check}><label for="deliveryUterotoics_{Uterotoics:optionNumber}">{Description}</label><!-- END RadioButton Uterotoics --></td></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+ 
+    <tr class="Controls">
+      <td class="th" colspan="2"><label for="DeliveryMethodID" id="DeliveryMethodID_Label">{res:DeliveryMethodID}</label></td> 
+      <td colspan="9">
+        <select id="deliveryDeliveryMethodID" name="{DeliveryMethodID_Name}">
+          <option selected value="">{res:CCS_SelectValue}</option>
+          {DeliveryMethodID_Options}
+        </select>
+ </td>
+    </tr>
+ 
+    <tr class="Controls">
+      <td class="th" colspan="2"><label for="deliveryindications" id="deliveryIndications_Label">{res:indications}</label></td> 
+      <td colspan="9"><textarea style="WIDTH: 304px; HEIGHT: 54px" id="deliveryTextArea1" rows="3" cols="28" name="{TextArea1_Name}">{TextArea1}</textarea></td>
+    </tr>
+ 
+    <tr class="Controls">
+      <td class="th" colspan="2"><label for="DeliveryTypeID" id="DeliveryTypeID_Label">{res:DeliveryTypeID}</label></td> 
+      <td colspan="9">
+        <select id="deliveryDeliveryTypeID" name="{DeliveryTypeID_Name}">
+          <option selected value="">{res:CCS_SelectValue}</option>
+          {DeliveryTypeID_Options}
+        </select>
+ </td>
+    </tr>
+ 
+    <tr class="Controls">
+      <td class="th" colspan="2"><label for="deliveryDeliveryMethodID"><label for="deliveryDeliveryMethodID"><label for="delivery1DataDelivery">{res:DataDelivery}</label></label></label></td> 
+      <td colspan="9"><input id="deliveryDataDelivery" value="{DataDelivery}" maxlength="100" size="8" name="{DataDelivery_Name}">
+        <!-- BEGIN DatePicker DatePicker_DataDelivery1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="deliveryDatePicker_DataDelivery1"><img id="deliveryDatePicker_DataDelivery1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;<!-- END DatePicker DatePicker_DataDelivery1 --></td>
+    </tr>
+ 
+    <tr class="Controls">
+      <td class="th">
+        <p>{res:Procedures_List}</p>
+ 
+        <p>
+        <select style="OVERFLOW-X: auto; WIDTH: 250px; HEIGHT: 150px" id="available_procedures" multiple size="8" name="{ListofProcedures_Name}">
+          {ListofProcedures_Options}
+        </select>
+ </p>
+      </td> 
+      <td class="th">
+        <p align="center">&nbsp;</p>
+ 
+        <p align="center">&nbsp;</p>
+ 
+        <p align="center">{res:CCS_Insert}<br>
+        <!-- BEGIN Button RightButton_procedure --><input id="deliveryRightButton_procedure" value=">>" alt="Button1" type="button" name="{Button_Name}"><!-- END Button RightButton_procedure --><br>
+        <br>
+        {res:CCS_Delete}<br>
+        <!-- BEGIN Button LeftButton_procedure --><input id="deliveryLeftButton_procedure" value="<<" alt="Button1" type="button" name="{Button_Name}"><!-- END Button LeftButton_procedure --></p>
+      </td> 
+      <td colspan="9">
+        <p>{res:Procedures_Applied}</p>
+ 
+        <p>
+        <select style="WIDTH: 250px; HEIGHT: 150px" id="linked_procedures" multiple size="8" name="{SelectedProcedures_Name}">
+          {SelectedProcedures_Options}
+        </select>
+ </p>
+      </td>
+    </tr>
+ 
+    <tr class="Controls">
+      <td class="th">
+        <p>{res:Anesthesia_list}</p>
+ 
+        <p>
+        <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 150px" id="available_anesthesia" multiple size="8" name="{ListofAnesthesia_Name}">
+          {ListofAnesthesia_Options}
+        </select>
+ </p>
+      </td> 
+      <td class="th">
+        <p align="center">&nbsp;</p>
+ 
+        <p align="center">&nbsp;</p>
+ 
+        <p align="center">{res:CCS_Insert}<br>
+        <!-- BEGIN Button RightButtonAnesthesia --><input id="deliveryRightButtonAnesthesia" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButtonAnesthesia --></p>
+ 
+        <p align="center">{res:CCS_Delete}<br>
+        <!-- BEGIN Button LeftButtonAnesthesia --><input id="deliveryLeftButtonAnesthesia" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButtonAnesthesia --></p>
+      </td> 
+      <td colspan="9">
+        <p>{res:Anesthesia_applied}</p>
+ 
+        <p>
+        <select style="WIDTH: 250px; HEIGHT: 150px" id="linked_anesthesia" multiple size="8" name="{SelectedAnesthesia_Name}">
+          {SelectedAnesthesia_Options}
+        </select>
+ </p>
+      </td>
+    </tr>
+ 
+    <tr class="Controls">
+      <td class="th">
+        <p>{res:ComplicationDiseasesList}</p>
+ 
+        <p><input style="WIDTH: 246px" id="deliveryFilterofComplications" onkeyup="javascript:SearchList('available_comp','deliveryFilterofComplications',available_comp_all);addToolTipsSelect('ListofComplications[]');" value="{deliveryFilterofComplications}" name="{deliveryFilterofComplications_Name}"><br>
+        <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 150px" id="available_comp" multiple size="8" name="{ListofComplications_Name}">
+          {ListofComplications_Options}
+        </select>
+ </p>
+      </td> 
+      <td class="th">
+        <p align="center">&nbsp;</p>
+ 
+        <p align="center">&nbsp;</p>
+ 
+        <p align="center">{res:CCS_Insert} </p>
+ 
+        <p align="center">
+        <!-- BEGIN Button RightButton_comp --><input id="deliveryRightButton_comp" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButton_comp --></p>
+ 
+        <p align="center">{res:CCS_Delete}<br>
+        <!-- BEGIN Button LeftButton_comp --><input id="deliveryLeftButton_comp" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButton_comp --></p>
+      </td> 
+      <td colspan="9">
+        <p align="left">{res:DiagnosedComplicationPatientDiseases}</p>
+        <select style="WIDTH: 250px; HEIGHT: 172px" id="linked_comp" multiple size="8" name="{SelectedComplications_Name}">
+          {SelectedComplications_Options}
+        </select>
+ </td>
+    </tr>
+ 
+    <tr class="Controls">
+      <td class="th">
+        <p align="left">{res:PComplicationDiseasesList}</p>
+        <input style="WIDTH: 246px" id="deliveryFilterofPComplications" onkeyup="javascript:SearchList('available_pcomp','deliveryFilterofPComplications',available_pcomp_all);addToolTipsSelect('ListofPComplications[]');" value="{deliveryFilterofPComplications}" name="{deliveryFilterofPComplications_Name}"><br>
+        <select style="OVERFLOW-X: scroll; WIDTH: 250px; HEIGHT: 150px" id="available_pcomp" multiple size="8" name="{ListofPComplications_Name}">
+          {ListofPComplications_Options}
+        </select>
+ 
+        <td class="th">
+          <p>&nbsp;</p>
+ 
+          <p>&nbsp;</p>
+ 
+          <p align="center"><br>
+          {res:CCS_Insert} </p>
+ 
+          <p align="center">
+          <!-- BEGIN Button RightButton_pcomp --><input id="deliveryRightButton_pcomp" value=">>" type="button" name="{Button_Name}"><!-- END Button RightButton_pcomp --></p>
+ 
+          <p align="center">{res:CCS_Delete}<br>
+          <!-- BEGIN Button LeftButton_pcomp --><input id="deliveryLeftButton_pcomp" value="<<" type="button" name="{Button_Name}"><!-- END Button LeftButton_pcomp --></p>
+        </td> 
+        <td colspan="9">
+          <p align="left">{res:DiagnosedPComplicationPatientDiseases}</p>
+ 
+          <p>
+          <select style="WIDTH: 250px; HEIGHT: 174px" id="linked_pcomp" multiple size="8" name="{SelectedPComplications_Name}">
+            {SelectedPComplications_Options}
+          </select>
+ </p>
+        </td></td>
+    </tr>
+ 
+    <tr class="Bottom">
+      <td colspan="9" align="right">
+        <p align="left"><label for="deliveryHospitalDischDate">{res:HospitalDischDate}</label>&nbsp;</p>
+      </td> 
+      <td colspan="2">
+        <p align="left"><input id="deliveryHospitalDischDate" value="{HospitalDischDate}" maxlength="100" size="8" name="{HospitalDischDate_Name}">
+        <!-- BEGIN DatePicker DatePicker_HospitalDischDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="deliveryDatePicker_HospitalDischDate"><img id="deliveryDatePicker_HospitalDischDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a>&nbsp;&nbsp;<!-- END DatePicker DatePicker_HospitalDischDate -->&nbsp;&nbsp;</p>
+      </td>
+    </tr>
+ 
+    <tr class="Bottom">
+      <td colspan="11" align="right">
+        <p align="left"><input id="deliveryCurrentUser" value="{CurrentUser}" type="hidden" name="{CurrentUser_Name}">{res:LastUpdated}&nbsp;{lastmodified}&nbsp; ({user})</p>
+      </td>
+    </tr>
+ 
+    <tr class="Bottom">
+      <td colspan="11" align="right"><input id="deliveryNrChildren" value="{NrChildren}" type="hidden" name="{NrChildren_Name}"><input id="deliveryReloaded" value="{Reloaded}" type="hidden" name="{Reloaded_Name}"><input id="deliveryPregnancyID" value="{PregnancyID}" type="hidden" name="{PregnancyID_Name}"><input id="LinkedID_Comp" value="{LinkedID_Comp}" type="hidden" name="{LinkedID_Comp_Name}"><input id="LinkedID_Procedures" value="{LinkedID_Procedures}" type="hidden" name="{LinkedID_Procedures_Name}"><input id="LinkedID_Anesthesia" value="{LinkedID_Anesthesia}" type="hidden" name="{LinkedID_Anesthesia_Name}"><input id="LinkedID_PComp" value="{LinkedID_PComp}" type="hidden" name="{LinkedID_PComp_Name}">
+        <!-- BEGIN Button Button_Insert --><input id="deliveryButton_Insert" class="Button" value="{res:CCS_Insert}" alt="{res:CCS_Insert}" type="submit" name="{Button_Name}"><!-- END Button Button_Insert -->
+        <!-- BEGIN Button Button_Update --><input id="deliveryButton_Update" class="Button" value="{res:CCS_Update}" alt="{res:CCS_Update}" type="submit" name="{Button_Name}"><!-- END Button Button_Update -->
+        <!-- BEGIN Button ButtonUpdateAddNewBorn --><input id="deliveryButtonUpdateAddNewBorn" class="Button" value="{res:CCS_Insert} {res:NewBorn}" alt="Button1" type="submit" name="{Button_Name}"><!-- END Button ButtonUpdateAddNewBorn -->
+        <!-- BEGIN Button Button_Delete --><input id="deliveryButton_Delete" class="Button" value="{res:CCS_Delete}" alt="{res:CCS_Delete}" type="submit" name="{Button_Name}"><!-- END Button Button_Delete -->
+        <!-- BEGIN Button Button_Cancel --><input id="deliveryButton_Cancel" class="Button" value="{res:CCS_Cancel}" alt="{res:CCS_Cancel}" type="submit" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+    </tr>
+  </table>
+</td>
+</tr>
+</table>
+</form>
+&nbsp;<!-- END Record delivery -->
+<!-- BEGIN Grid newborn -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_GridFormPrefix} {res:newborn1} {res:CCS_GridFormSuffix} </strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="5">{res:CCS_TotalRecords}&nbsp;{newborn_TotalRecords}</td>
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_NewBornN --><a href="{Sort_URL}" id="newbornSorter_NewBornN">{res:NewBornN}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_NewBornN --></th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_Sex --><a href="{Sort_URL}" id="newbornSorter_Sex">{res:Sex}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_Sex --></th>
+ 
+          <th colspan="2" scope="col">
+          <!-- BEGIN Sorter Sorter_BirthDateTime --><a href="{Sort_URL}" id="newbornSorter_BirthDateTime">{res:BirthDateTime}</a> 
+          <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_BirthDateTime --></th>
+ 
+          <td>{res:Edit}</td>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td>{NewBornN}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">{Sex}&nbsp;</td> 
+          <td>{BirthDateTime}&nbsp;&nbsp; {BirthDateTime1}</td> 
+          <td colspan="2"><a href="{ImageLink1}" id="newbornImageLink1_{newborn:rowNumber}"><img style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px" alt="{ImageLink1}" src="gen_images/b_edit.png"></a>&nbsp;</td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="5">{res:CCS_NoRecords}</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="5">
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input value="{Value}" type="hidden" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option selected value="">-</option>
+ {PageSize_Options}
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}"><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/First.gif"></a> <!-- END First_On -->
+            <!-- BEGIN First_Off --><img border="0" alt="{First_URL}" src="Styles/{CCS_Style}/Images/FirstOff.gif"><!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}"><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/Prev.gif"></a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off --><img border="0" alt="{Prev_URL}" src="Styles/{CCS_Style}/Images/PrevOff.gif"><!-- END Prev_Off -->&nbsp;{Page_Number} {res:CCS_Of}&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}"><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/Next.gif"></a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off --><img border="0" alt="{Next_URL}" src="Styles/{CCS_Style}/Images/NextOff.gif"><!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}"><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/Last.gif"></a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off --><img border="0" alt="{Last_URL}" src="Styles/{CCS_Style}/Images/LastOff.gif"><!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid newborn --><br>
+</p>
+</body>
+</html>

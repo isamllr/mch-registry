@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:obstetrical}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-5EE331D4
+
+var delivery_procedures_proce_DatePicker_s_DataDelivery = new Object(); 
+delivery_procedures_proce_DatePicker_s_DataDelivery.format           = "ShortDate";
+delivery_procedures_proce_DatePicker_s_DataDelivery.style            = "Styles/{CCS_Style}/Style.css";
+delivery_procedures_proce_DatePicker_s_DataDelivery.relativePathPart = "";
+delivery_procedures_proce_DatePicker_s_DataDelivery.themeVersion = "3.0";
+
+var delivery_procedures_proce_DatePicker_s_DataDelivery1 = new Object(); 
+delivery_procedures_proce_DatePicker_s_DataDelivery1.format           = "ShortDate";
+delivery_procedures_proce_DatePicker_s_DataDelivery1.style            = "Styles/{CCS_Style}/Style.css";
+delivery_procedures_proce_DatePicker_s_DataDelivery1.relativePathPart = "";
+delivery_procedures_proce_DatePicker_s_DataDelivery1.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record delivery_procedures_proce -->
+<form id="delivery_procedures_proce" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp;</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="delivery_procedures_proces_DataDelivery">{res:DataDelivery}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from} </label><input id="delivery_procedures_proces_DataDelivery" value="{s_DataDelivery}" maxlength="100" size="8" name="{s_DataDelivery_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_DataDelivery --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="delivery_procedures_proceDatePicker_s_DataDelivery"><img id="delivery_procedures_proceDatePicker_s_DataDelivery_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_DataDelivery -->&nbsp; <label for="delivery_patient_pregnancs_Calc_DeliveryDate"><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}</label></label> <input id="delivery_procedures_proces_DataDelivery1" value="{s_DataDelivery1}" maxlength="100" size="8" name="{s_DataDelivery1_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_DataDelivery1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="delivery_procedures_proceDatePicker_s_DataDelivery1"><img id="delivery_procedures_proceDatePicker_s_DataDelivery1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_DataDelivery1 --></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="delivery_procedures_proceButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record delivery_procedures_proce --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print -->
+<p></p>
+<p>
+<!-- BEGIN Report delivery_procedures_proce1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:obstetrical}</strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">&nbsp;{res:ProcedureName}</th>
+ 
+          <th scope="col">#</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tr class="Footer">
+          <td style="TEXT-ALIGN: right" colspan="2">{Report_CurrentDate}&nbsp;&nbsp; {res:CCS_ReportPageNumber1} {Report_CurrentPage} {res:CCS_ReportPageNumber2} {Report_TotalPages} 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+        </tr>
+ 
+        <!-- BEGIN Panel PageBreak -->
+      </table>
+    </td>
+  </tr>
+</table>
+</p>
+<p style="PAGE-BREAK-AFTER: always">&nbsp;</p>
+<p>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td style="BACKGROUND-COLOR: #ffffff; FONT-STYLE: normal" class="text">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- END Panel PageBreak --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section ProcedureName_Header -->
+        <tr style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" class="GroupCaption">
+          <td style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" scope="col">{ProcedureName}</td> 
+          <td style="BACKGROUND-COLOR: #ffffff; FONT-WEIGHT: normal" class="text">&nbsp;{Count_delivery_DeliveryID}</td>
+        </tr>
+ <!-- END Section ProcedureName_Header -->
+        <!-- BEGIN Section Detail --><!-- END Section Detail -->
+        <!-- BEGIN Section ProcedureName_Footer --><!-- END Section ProcedureName_Footer -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="2">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td>{res:CCS_ReportTotal}&nbsp; </td> 
+          <td style="TEXT-ALIGN: left" valign="baseline">&nbsp;{TotalCount_delivery_DeliveryID} </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report delivery_procedures_proce1 --><br>
+</p>
+</body>
+</html>

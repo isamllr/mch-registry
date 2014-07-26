@@ -1,0 +1,1224 @@
+/* CCSTheme v 3.x */
+/* General */
+
+/* Colors */
+.PageBgColorSwiss_TPH1 {
+	background-color: #30353b;
+	}
+
+.FormTitleBgColorSwiss_TPH1 {
+	background-color: #525a63;
+	}
+
+.FormTitleFontColorSwiss_TPH1 {
+	color: #e3e9f2;
+	}
+
+.CaptionBgColorSwiss_TPH1 {
+	background-color: #b4bbc5;
+	}
+
+.CaptionFontColorSwiss_TPH1 {
+	color: #000000;
+	}
+
+.DataBgColorSwiss_TPH1 {
+	background-color: #edeff1;
+	}
+
+.AltDataBgColorSwiss_TPH1 {
+	background-color: #cfd3da;
+	}
+
+.DataFontColorSwiss_TPH1 {
+	color: #000000;
+	}
+
+.LinkColorSwiss_TPH1 {
+	color: #0000ff;
+	}
+
+.VisitedLinkColorSwiss_TPH1 {
+	color: #2197be;
+	}
+
+.HoverLinkColorSwiss_TPH1 {
+	color: #8000ff;
+	}
+
+.ColorBgButtonSwiss_TPH1 {
+	background-color: #525a63;
+}
+
+.ColorFontButtonSwiss_TPH1 {
+	color: #e3e9f2;
+}
+
+.ColorBgButtonPassiveSwiss_TPH1 {
+	background-color: #8d9299;
+}
+
+.ColorFontButtonPassiveSwiss_TPH1 {
+	color: #f7faff;
+}
+
+
+
+.HeaderSwiss_TPH1 {
+	width: 100%;
+	}
+
+.HeaderSwiss_TPH1 th { 
+	font-family: Verdana; font-size: 110%; font-weight: bold; text-align: left;
+	padding: 3px;
+	background-color: #525a63; color: #e3e9f2;
+	width: 100%;
+	white-space: nowrap;
+	
+	}
+
+
+html>body .HeaderSwiss_TPH1 th {
+	font-family: Verdana; font-size: 140%; font-weight: bold; text-align: left;
+}
+
+
+/*ie6*/
+* html body .HeaderSwiss_TPH1 th {
+	font-family: Verdana; font-size: 140%; font-weight: bold; text-align: left;
+}
+/*end*/
+
+.HeaderSwiss_TPH1 a:link { 
+	color: #e3e9f2;
+	}
+
+.HeaderSwiss_TPH1 a:visited { 
+	color: #e3e9f2;
+	}
+
+.HeaderSwiss_TPH1 a:hover, .CaptionSwiss_TPH1 a:active { 
+	color: #e3e9f2; text-decoration: none;
+	}
+
+.HeaderLeftSwiss_TPH1 { 
+	background-image: url('Images/HeaderLeft.gif');
+	}
+
+.HeaderRightSwiss_TPH1 { 
+	background-image: url('Images/HeaderRight.gif');
+	background-position: right top;
+	}
+
+.HeaderLeftSwiss_TPH1 img{
+	width: 9px;
+	}
+
+.HeaderRightSwiss_TPH1 img{
+	width: 9px;
+	}
+
+
+/* Grid Options */
+.GridSwiss_TPH1 { 
+	border: 1px solid #525a63;
+	width: 100%;
+	}
+
+.CaptionSwiss_TPH1 th { 
+	font-family: Verdana; font-size: 80%; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #b4bbc5; color: #000000;
+	white-space: nowrap;
+	}
+
+.CaptionSwiss_TPH1 td { 
+	font-family: Verdana; font-size: 80%; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #b4bbc5; color: #000000;
+	white-space: nowrap;
+	}
+
+
+html>body .CaptionSwiss_TPH1 th, html>body .CaptionSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%; text-align: left; vertical-align: top;
+}
+
+
+/*ie6*/
+* html body .CaptionSwiss_TPH1 th, * html body .CaptionSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%; text-align: left; vertical-align: top;
+}
+/*end*/
+
+.CaptionSwiss_TPH1 a:link { 
+	color: #000000;
+	}
+
+.CaptionSwiss_TPH1 a:visited { 
+	color: #000000;
+	}
+
+.CaptionSwiss_TPH1 a:hover, .CaptionSwiss_TPH1 a:active { 
+	color: #8000ff;
+	}
+
+.CaptionSwiss_TPH1 img {
+	margin: 2px; 
+	vertical-align: middle;
+	}
+
+.CaptionSwiss_TPH1 input {
+	vertical-align: middle;
+	}
+
+.RowSwiss_TPH1 th { 
+	font-family: Verdana; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #edeff1; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.RowSwiss_TPH1 td { 
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	vertical-align: top;
+	background-color: #edeff1; 
+	color: #000000;
+	}
+	
+
+html>body .RowSwiss_TPH1 th, html>body .RowSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .RowSwiss_TPH1 th, * html body .RowSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+caption.RowSwiss_TPH1 { 
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border: 1px solid #525a63; border-bottom: 0px;
+	text-align: left;
+	vertical-align: top;
+	background-color: #edeff1; 
+	color: #000000;
+	}
+
+
+html>body caption.RowSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body caption.RowSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.RowSwiss_TPH1 a:link { 
+	color: #0000ff;
+	}
+
+.RowSwiss_TPH1 a:visited { 
+	color: #2197be;
+	}
+
+.RowSwiss_TPH1 a:hover, .RowSwiss_TPH1 a:active { 
+	color: #8000ff;
+	}
+
+.SeparatorSwiss_TPH1{
+	color: #525a63;
+	}
+
+.SeparatorSwiss_TPH1 td{
+	height: 1px;
+	}
+
+
+.AltRowSwiss_TPH1 th { 
+	font-family: Verdana; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #edeff1; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.AltRowSwiss_TPH1 td { 
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	vertical-align: top;
+	background-color: #cfd3da; 
+	color: #000000;
+	}
+
+
+html>body .AltRowSwiss_TPH1 th, html>body .AltRowSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .AltRowSwiss_TPH1 th, * html body .AltRowSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.AltRowSwiss_TPH1 a:link { 
+	color: #0000ff;
+	}
+
+.AltRowSwiss_TPH1 a:visited { 
+	color: #2197be;
+	}
+
+.AltRowSwiss_TPH1 a:hover, .AltRowSwiss_TPH1 a:active { 
+	color: #8000ff;
+	}
+
+.NoRecordsSwiss_TPH1 td { 
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	background-color: #edeff1; 
+	color: #000000;
+	vertical-align: top;
+	}
+
+.FooterSwiss_TPH1 td { 
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border: 1px solid #b4bbc5; border-left: 0px none;
+	background-color: #b4bbc5; color: #000000;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+
+html>body .NoRecordsSwiss_TPH1 td, html>body .FooterSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .NoRecordsSwiss_TPH1 td, * html body .FooterSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.FooterSwiss_TPH1 a:link { 
+	color: #0000ff;
+	}
+
+.FooterSwiss_TPH1 a:visited { 
+	color: #2197be;
+	}
+
+.FooterSwiss_TPH1 a:hover, .FooterSwiss_TPH1 a:active { 
+	color: #8000ff;
+	}
+
+.FooterSwiss_TPH1 img {
+	margin: 2px; 
+	vertical-align: middle;
+	}
+
+.FooterSwiss_TPH1 input {
+	margin: 2px;
+	vertical-align: middle;
+	}
+
+/* Record Options */
+.RecordSwiss_TPH1 { 
+	border: 1px solid #525a63;
+	width: 100%;
+	}
+
+.ErrorSwiss_TPH1 td { 
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	color: #FF0000;
+	vertical-align: top;
+	background-color: #edeff1; 
+	}
+
+
+* html>body .ErrorSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .ErrorSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.ControlsSwiss_TPH1 th { 
+	font-family: Verdana; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #edeff1; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+.ControlsSwiss_TPH1 td { 
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	vertical-align: top;
+	background-color: #edeff1; 
+	color: #000000;
+	}
+	
+.BottomSwiss_TPH1 td { 
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border: 1px solid #b4bbc5; border-left: 0px none;
+	background-color: #b4bbc5; color: #000000;
+	text-align: right;
+	vertical-align: middle;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+
+html>body .ControlsSwiss_TPH1 th, html>body .ControlsSwiss_TPH1 td, html>body .BottomSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .ControlsSwiss_TPH1 th, * html body .ControlsSwiss_TPH1 td, * html body .BottomSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.BottomSwiss_TPH1 a:link { 
+	color: #0000ff;
+	}
+
+.BottomSwiss_TPH1 a:visited { 
+	color: #2197be;
+	}
+
+.BottomSwiss_TPH1 a:hover, .CaptionSwiss_TPH1 a:active { 
+	color: #8000ff;
+	}
+
+.BottomSwiss_TPH1 img {
+	margin: 2px;
+	vertical-align: middle; 
+	}
+
+.BottomSwiss_TPH1 input {
+	margin: 2px;
+	vertical-align: middle;
+	}
+
+/* Report */
+.GroupCaptionSwiss_TPH1 th{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	white-space: nowrap;
+	text-align: left;
+	vertical-align: top;
+	font-weight: bold;
+	background-color: #cfd3da; 
+	color: #000000;
+	}
+
+.GroupCaptionSwiss_TPH1 td{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	vertical-align: top;
+	font-weight: bold;
+	background-color: #edeff1; 
+	color: #000000;
+	}
+
+
+html>body .GroupCaptionSwiss_TPH1 th, html>body .GroupCaptionSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .GroupCaptionSwiss_TPH1 th, * html body .GroupCaptionSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.GroupCaptionSwiss_TPH1 a:link {
+	color: #000000;
+	}
+
+.GroupCaptionSwiss_TPH1 a:visited{
+	color: #000000;
+	}
+
+.GroupCaptionSwiss_TPH1 a:hover, .GroupCaptionSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+.GroupFooterSwiss_TPH1 td{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border: 1px solid #b4bbc5; border-left: 0px none;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	background-color: #b4bbc5; 
+	color: #000000;
+	}
+
+
+html>body .GroupFooterSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .GroupFooterSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.GroupFooterSwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.GroupFooterSwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.GroupFooterSwiss_TPH1 a:hover, .GroupFooterSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+.GroupFooterSwiss_TPH1 img {
+	margin: 2px; 
+	vertical-align: middle;
+	}
+
+.GroupFooterSwiss_TPH1 input {
+	margin: 2px;
+	vertical-align: middle;
+	}
+
+.SubTotalSwiss_TPH1 td{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	vertical-align: top;
+	font-weight: bold;
+	background-color: #cfd3da; 
+	color: #000000;
+	border-bottom: 2px solid #525a63;
+	}
+
+
+html>body .SubTotalSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .SubTotalSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.SubTotalSwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.SubTotalSwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.SubTotalSwiss_TPH1 a:hover, .SubTotalSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+.TotalSwiss_TPH1 td{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	vertical-align: top;
+	white-space: nowrap;
+	font-weight: bold;
+	background-color: #cfd3da; 
+	color: #000000;
+	}
+
+
+html>body .TotalSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .TotalSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.TotalSwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.TotalSwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.TotalSwiss_TPH1 a:hover, .TotalSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Form Options */
+.ButtonSwiss_TPH1 { 
+	background-color: #525a63; color: #e3e9f2; border-left: solid 1px #EDEDED; border-top: solid 1px #EDEDED; border-right: solid 1px #848284; border-bottom: solid 1px #848284; padding: 2px; font-weight: bold; font-family: Tahoma; font-size: 11px; font-weight: bold;
+	}
+
+/* Calendar */
+
+.CalendarSwiss_TPH1 { 
+	border: 1px solid #525a63;
+	width: 100%;
+	}
+
+.CalendarWeekdayNameSwiss_TPH1{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: center; 
+	vertical-align: top;
+	white-space: nowrap;
+	background-color: #cfd3da; 
+	color: #000000;
+	font-weight: normal;
+	}
+
+
+html>body .CalendarWeekdayNameSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarWeekdayNameSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarWeekdayNameSwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.CalendarWeekdayNameSwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.CalendarWeekdayNameSwiss_TPH1 a:hover, .CalendarWeekdayNameSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+.CalendarWeekendNameSwiss_TPH1{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	white-space: nowrap;
+	text-align: center; 
+	vertical-align: top;
+	background-color: #cfd3da;	
+	color: #000000;
+	font-weight: normal;
+	}
+
+
+html>body .CalendarWeekendNameSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarWeekendNameSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarWeekendNameSwiss_TPH1 a:link {
+	color: #000000;
+	}
+
+.CalendarWeekendNameSwiss_TPH1 a:visited{
+	color: #000000;
+	}
+
+.CalendarWeekendNameSwiss_TPH1 a:link, .CalendarWeekendNameSwiss_TPH1 a:visited{
+	color: #8000ff;
+	}
+
+/* Calendar Day */
+.CalendarDaySwiss_TPH1{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: center;
+	background-color: #edeff1;	
+	color: #000000;
+	}
+
+
+html>body .CalendarDaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarDaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarDaySwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.CalendarDaySwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.CalendarDaySwiss_TPH1 a:hover, .CalendarDaySwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Calendar Weekend */
+.CalendarWeekendSwiss_TPH1{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: center;
+	background-color: #cfd3da;	
+	color: #000000;
+	}
+
+
+html>body .CalendarWeekendSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarWeekendSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarWeekendSwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.CalendarWeekendSwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.CalendarWeekendSwiss_TPH1 a:hover, .CalendarWeekendSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Calendar Today */
+.CalendarTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 80%;
+	padding: 1px;
+	border: 2px solid #525a63;
+	text-align: center;
+	background-color: #edeff1;	
+	color: #000000;
+	}
+
+
+html>body .CalendarTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarTodaySwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.CalendarTodaySwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.CalendarTodaySwiss_TPH1 a:hover, .CalendarTodaySwiss_TPH1 a:active {
+	color: #8000ff;
+	}
+
+/* Calendar Weekend Today */
+.CalendarWeekendTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 80%;
+	padding: 1px;
+	border: 2px solid #525a63;
+	text-align: center;
+	background-color: #cfd3da;	
+	color: #000000;
+	}
+
+
+html>body .CalendarWeekendTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarWeekendTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarWeekendTodaySwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.CalendarWeekendTodaySwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.CalendarWeekendTodaySwiss_TPH1 a:hover, .CalendarWeekendTodaySwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Calendar Other Month's Day */
+.CalendarOtherMonthDaySwiss_TPH1{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: center;
+	background-color: #edeff1;	
+	color: #525a63;
+	}
+
+
+html>body .CalendarOtherMonthDaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarOtherMonthDaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarOtherMonthDaySwiss_TPH1 a:link {
+	color: #525a63;
+	}
+
+.CalendarOtherMonthDaySwiss_TPH1 a:visited{
+	color: #525a63;
+	}
+
+.CalendarOtherMonthDaySwiss_TPH1 a:hover, .CalendarOtherMonthDaySwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Calendar Other Month's Today */
+.CalendarOtherMonthTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 80%;
+	padding: 1px;
+	border: 2px solid #525a63;
+	text-align: center;
+	background-color: #edeff1;	
+	color: #525a63;
+	}
+
+
+html>body .CalendarOtherMonthTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarOtherMonthTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarOtherMonthTodaySwiss_TPH1 a:link {
+	color: #525a63;
+	}
+
+.CalendarOtherMonthTodaySwiss_TPH1 a:visited{
+	color: #525a63;
+	}
+
+.CalendarOtherMonthTodaySwiss_TPH1 a:hover, .CalendarOtherMonthTodaySwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Calendar Other Month's Weekend */
+.CalendarOtherMonthWeekendSwiss_TPH1 {
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: center;
+	background-color: #cfd3da;	
+	color: #525a63;
+	}
+
+
+html>body .CalendarOtherMonthWeekendSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarOtherMonthWeekendSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarOtherMonthWeekendSwiss_TPH1 a:link {
+	color: #525a63;
+	}
+
+.CalendarOtherMonthWeekendSwiss_TPH1 a:visited{
+	color: #525a63;
+	}
+
+.CalendarOtherMonthWeekendSwiss_TPH1 a:hover, .CalendarOtherMonthWeekendSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Calendar Other Month's Weekend Today */
+.CalendarOtherMonthWeekendTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 80%;
+	padding: 1px;
+	border: 2px solid #525a63;
+	text-align: center;
+	color: #525a63;
+	background-color: #cfd3da;	
+	}
+	
+
+html>body .CalendarOtherMonthWeekendTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarOtherMonthWeekendTodaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarOtherMonthWeekendTodaySwiss_TPH1 a:link {
+	color: #525a63;
+	}
+
+.CalendarOtherMonthWeekendTodaySwiss_TPH1 a:visited{
+	color: #525a63;
+	}
+
+.CalendarOtherMonthWeekendTodaySwiss_TPH1 a:hover, .CalendarOtherMonthWeekendTodaySwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Calendar Selected Day (for DatePicker) */
+.CalendarSelectedDaySwiss_TPH1{
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #b4bbc5;
+	color: #000000;
+	text-align: center;
+	font-weight: bold;
+	}
+	
+
+html>body .CalendarSelectedDaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarSelectedDaySwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarSelectedDaySwiss_TPH1 a:link {
+	color: #000000;
+	}
+
+.CalendarSelectedDaySwiss_TPH1 a:visited{
+	color: #000000;
+	}
+
+.CalendarSelectedDaySwiss_TPH1 a:hover, .CalendarSelectedDaySwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Calendar Navigator */
+.CalendarNavigatorSwiss_TPH1 {
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	background-color: #b4bbc5; color: #000000;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	color: #000000;
+	}
+
+
+html>body .CalendarNavigatorSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarNavigatorSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarNavigatorSwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.CalendarNavigatorSwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.CalendarNavigatorSwiss_TPH1 a:hover, .CalendarNavigatorSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+.CalendarNavigatorSwiss_TPH1 img{
+	margin: 2px;
+	vertical-align: middle; 	
+	}
+
+.CalendarNavigatorSwiss_TPH1 td {
+	font-family: Verdana; font-size: 80%;
+	}
+
+.CalendarNavigatorSwiss_TPH1 th {
+	font-family: Verdana; font-size: 80%;
+	}
+
+
+html>body .CalendarNavigatorSwiss_TPH1 th, html>body .CalendarNavigatorSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarNavigatorSwiss_TPH1 th, * html body .CalendarNavigatorSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+/* Calendar Extra */
+.CalendarEventSwiss_TPH1{
+	font-family: Verdana; font-size: 80%;
+	text-align: left;
+	}
+
+
+html>body .CalendarEventSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .CalendarEventSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+/*end*/
+
+.CalendarEventSwiss_TPH1 a:link {
+	color: #0000ff;
+	}
+
+.CalendarEventSwiss_TPH1 a:visited{
+	color: #2197be;
+	}
+
+.CalendarEventSwiss_TPH1 a:hover, .CalendarEventSwiss_TPH1 a:active{
+	color: #8000ff;
+	}
+
+/* Changes for Section508 */
+table tr td strong {
+	padding: 0px;
+	margin: 0px;
+}
+
+.thSwiss_TPH1 { 
+	font-family: Verdana; font-size: 80%;
+	font-weight: bold;
+}
+
+
+html>body .thSwiss_TPH1 {
+	font-size: 100%;
+}
+
+
+/*ie6*/
+* html body .thSwiss_TPH1 {
+	font-size: 100%;
+}
+/*end*/
+
+.HeaderSwiss_TPH1 .thSwiss_TPH1 { 
+	font-family: Verdana; font-size: 110%; font-weight: bold; text-align: left;
+	padding: 3px;
+	background-color: #525a63; color: #e3e9f2;
+	width: 100%;
+	white-space: nowrap;
+}
+
+
+html>body .HeaderSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 140%; font-weight: bold; text-align: left;
+}
+
+
+/*ie6*/
+* html body .HeaderSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 140%; font-weight: bold; text-align: left;
+}
+/*end*/
+
+.CaptionSwiss_TPH1 .thSwiss_TPH1 { 
+	font-family: Verdana; font-size: 80%; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #b4bbc5; color: #000000;
+	white-space: nowrap;
+}
+
+
+html>body .CaptionSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%; text-align: left; vertical-align: top;
+}
+
+
+/*ie6*/
+* html body .CaptionSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%; text-align: left; vertical-align: top;
+}
+/*end*/
+
+.RowSwiss_TPH1 .thSwiss_TPH1 { 
+	font-family: Verdana; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #edeff1; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+}
+
+.AltRowSwiss_TPH1 .thSwiss_TPH1 { 
+	font-family: Verdana; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #edeff1; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+}
+
+.ControlsSwiss_TPH1 .thSwiss_TPH1 { 
+	font-family: Verdana; font-size: 80%; font-weight: normal; text-align: left; vertical-align: top;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	background-color: #edeff1; color: #000000;
+	white-space: nowrap;
+	color: #000000;
+}
+
+.GroupCaptionSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 80%;
+	padding: 3px;
+	border-top: 1px solid #b4bbc5; border-right: 1px solid #b4bbc5;
+	text-align: left;
+	white-space: nowrap;
+	vertical-align: top;
+	font-weight: bold;
+	background-color: #cfd3da; 
+	color: #000000;
+}
+
+
+html>body .GroupCaptionSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+html>body .RowSwiss_TPH1 .thSwiss_TPH1, html>body .AltRowSwiss_TPH1 .thSwiss_TPH1, html>body .ControlsSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%; font-weight: normal; text-align: left; vertical-align: top;
+}
+
+
+/*ie6*/
+* html body .GroupCaptionSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%;
+}
+
+* html body .RowSwiss_TPH1 .thSwiss_TPH1, * html body .AltRowSwiss_TPH1 .thSwiss_TPH1, * html body .ControlsSwiss_TPH1 .thSwiss_TPH1 {
+	font-family: Verdana; font-size: 100%; font-weight: normal; text-align: left; vertical-align: top;
+}
+/*end*/
+
+/* Class for Application Builder Menu */
+.simpleMenuSwiss_TPH1 td {
+	font-family: Verdana; font-size: 80%;
+}
+
+
+html>body .simpleMenuSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+} 
+
+
+/*ie6*/
+* html body .simpleMenuSwiss_TPH1 td {
+	font-family: Verdana; font-size: 100%;
+} 
+/*end*/

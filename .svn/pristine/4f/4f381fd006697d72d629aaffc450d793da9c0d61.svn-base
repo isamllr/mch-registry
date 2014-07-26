@@ -1,0 +1,5 @@
+{
+    "require": {
+        "arcturial/clickatell": "dev-master"
+    }
+}

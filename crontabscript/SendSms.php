@@ -164,8 +164,6 @@ class SendSMS {
 			
 			// Find all messages that need to be sent now
 			$lastFullHalfHour = $this->getlastFullHalfHour();
-			$tempDate = new datetime(date('Y-m-d'));
-			$todayDate = $tempDate->format('Y-m-d');
 			
 			$sql = "SELECT NotificationQueueID,
 					MobilePhone,
@@ -174,7 +172,8 @@ class SendSMS {
 					LatestBy
 					FROM notificationqueue
 					WHERE 
-					Date(LatestBY) >= '". $todayDate ."'
+					(MobileApp = 0  OR MobileApp IS NULL)
+					AND Date(LatestBY) >= curdate()
 					AND ((DateTimeToSend >= '" . $lastFullHalfHour . "' AND  DateTimeToSend <=  ADDTIME('" . $lastFullHalfHour . "', '00:30:00'))
 					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 1 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 1 DAY))
 					OR (DateTimeToSend >= DATE_SUB('" . $lastFullHalfHour . "', INTERVAL 2 DAY) AND DateTimeToSend <=  DATE_SUB(ADDTIME('" . $lastFullHalfHour . "', '00:30:00'), INTERVAL 2 DAY))
@@ -206,15 +205,17 @@ class SendSMS {
 					
 					try {
 						// Move notification to history
-						$rowCount = $dbConn->exec ( "REPLACE INTO notificationqueuehistory
+						$rowCount = $dbConn->exec ( 'REPLACE INTO notificationqueuehistory
 											SELECT 	NotificationQueueID,
 													MobilePhone,
 													NotificationText, 
 													DateTimeToSend,
 													1 as SucessfullySent,
-													'" . date ( "Y-m-d H:i:s" ) . "' as DateTimeSent
+													NOW() as DateTimeSent,
+													NotificationTypeID,
+													MobileApp
 											FROM notificationqueue
-											WHERE NotificationQueueID = " . $row->NotificationQueueID . ";");
+											WHERE NotificationQueueID = ' . $row->NotificationQueueID . ';' );
 						// echo date("Y-m-d H:i:s") . ' Records added to history: ', $rowCount;
 						
 						$rowCount = $dbConn->exec ( 'DELETE FROM notificationqueue

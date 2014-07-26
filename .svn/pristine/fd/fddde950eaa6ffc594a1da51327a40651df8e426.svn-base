@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>{res:patientpregnancydelivery}</title>
+<meta name="GENERATOR" content="CodeCharge Studio 4.3.00.7676">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-1FE3896E
+
+var patient_DatePicker_s_Calc_DeliveryDate = new Object(); 
+patient_DatePicker_s_Calc_DeliveryDate.format           = "ShortDate";
+patient_DatePicker_s_Calc_DeliveryDate.style            = "Styles/{CCS_Style}/Style.css";
+patient_DatePicker_s_Calc_DeliveryDate.relativePathPart = "";
+patient_DatePicker_s_Calc_DeliveryDate.themeVersion = "3.0";
+
+var patient_DatePicker_s_Calc_DeliveryDate1 = new Object(); 
+patient_DatePicker_s_Calc_DeliveryDate1.format           = "ShortDate";
+patient_DatePicker_s_Calc_DeliveryDate1.style            = "Styles/{CCS_Style}/Style.css";
+patient_DatePicker_s_Calc_DeliveryDate1.relativePathPart = "";
+patient_DatePicker_s_Calc_DeliveryDate1.themeVersion = "3.0";
+
+var patient_DatePicker_s_DataDelivery = new Object(); 
+patient_DatePicker_s_DataDelivery.format           = "ShortDate";
+patient_DatePicker_s_DataDelivery.style            = "Styles/{CCS_Style}/Style.css";
+patient_DatePicker_s_DataDelivery.relativePathPart = "";
+patient_DatePicker_s_DataDelivery.themeVersion = "3.0";
+
+var patient_DatePicker_s_DataDelivery1 = new Object(); 
+patient_DatePicker_s_DataDelivery1.format           = "ShortDate";
+patient_DatePicker_s_DataDelivery1.style            = "Styles/{CCS_Style}/Style.css";
+patient_DatePicker_s_DataDelivery1.relativePathPart = "";
+patient_DatePicker_s_DataDelivery1.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-1900C903
+function bind_events() {
+    if (functionExists("topmenu_bind_events")) topmenu_bind_events();
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/{CCS_Style}/Style_doctype.css">
+</head>
+<body>
+<p>{topmenu}</p>
+<p>
+<!-- BEGIN Record patient -->
+<form id="patient" method="post" name="{HTMLFormName}" action="{Action}">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+            <td class="th"><strong>{res:CCS_SearchFormPrefix}&nbsp;</strong></td> 
+            <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="delivery_facilities_paties_Calc_DeliveryDate">{res:PregRegDate}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from}&nbsp;</label><input id="patients_PregRegDate" value="{s_PregRegDate}" maxlength="100" size="8" name="{s_PregRegDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_Calc_DeliveryDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="patientDatePicker_s_Calc_DeliveryDate"><img id="patientDatePicker_s_Calc_DeliveryDate_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_Calc_DeliveryDate -->&nbsp; <label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}&nbsp;</label><input id="patients_PregRegDate1" value="{s_PregRegDate1}" maxlength="100" size="8" name="{s_PregRegDate1_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_Calc_DeliveryDate1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="patientDatePicker_s_Calc_DeliveryDate1"><img id="patientDatePicker_s_Calc_DeliveryDate1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_Calc_DeliveryDate1 --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="delivery_facilities_paties_DataDelivery">{res:Calc_DeliveryDate}</label></td> 
+            <td><label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:from} </label><input id="patients_DataDelivery" value="{s_DataDelivery}" maxlength="100" size="8" name="{s_DataDelivery_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_DataDelivery --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="patientDatePicker_s_DataDelivery"><img id="patientDatePicker_s_DataDelivery_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_DataDelivery -->&nbsp; <label for="delivery_patient_pregnancs_Calc_DeliveryDate">{res:to}</label> <input id="patients_DataDelivery1" value="{s_DataDelivery1}" maxlength="100" size="8" name="{s_DataDelivery1_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_DataDelivery1 --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="patientDatePicker_s_DataDelivery1"><img id="patientDatePicker_s_DataDelivery1_Image" border="0" alt="Show Date Picker" src="Styles/{CCS_Style}/Images/DatePicker.gif"></a><!-- END DatePicker DatePicker_s_DataDelivery1 -->&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patients_FamilyName"><label for="delivery_facilities_paties_FamilyName"><label for="employees_patient_pregnans_FamilyName">{res:LastNamePatient1}</label></label></label></td> 
+            <td><input id="patients_FamilyName" value="{s_FamilyName}" size="50" name="{s_FamilyName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patients_GivenName"><label for="delivery_facilities_paties_GivenName">{res:FirstNamePatient1}</label></label></td> 
+            <td><input id="patients_GivenName" value="{s_GivenName}" size="50" name="{s_GivenName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="patients_Town">{res:Town}</label></td> 
+            <td><input id="patients_Town" value="{s_Town}" maxlength="50" size="50" name="{s_Town_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td colspan="2" align="right">
+              <!-- BEGIN Button Button_DoSearch --><input id="patientButton_DoSearch" class="Button" value="{res:CCS_Search}" alt="{res:CCS_Search}" type="submit" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record patient --><br>
+<br>
+<!-- BEGIN Link Report_Print1 -->
+<p align="right"><a href="{Report_Print1_Src}" id="Report_Print1" target="_blank">{res:CCS_ReportPrintLink}</a></p>
+<!-- END Link Report_Print1 -->
+<p></p>
+<p>
+<!-- BEGIN Report patient_pregnancy_deliver1 -->
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="HeaderLeft"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td> 
+          <td class="th"><strong>{res:CCS_ReportFormPrefix} {res:patientpregnancydelivery} </strong></td> 
+          <td class="HeaderRight"><img border="0" alt="" src="Styles/{CCS_Style}/Images/Spacer.gif"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">{res:CCS_TotalRecords}&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <thead style="DISPLAY: table-header-group">
+          <tr class="Caption">
+            <th scope="col">{res:Town} &nbsp;</th>
+ 
+            <th scope="col"># &nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_PregnancyRecNr --><a href="{Sort_URL}">{res:PregnancyRecNr}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_PregnancyRecNr -->&nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_PregnancyRecNr1 --><a href="{Sort_URL}">{res:LastNamePatient1}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_PregnancyRecNr1 -->&nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter2 --><a href="{Sort_URL}" id="patient_pregnancy_deliver1Page_HeaderSorter2">{res:FirstNamePatient1}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter2 -->&nbsp;</th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter PregRegDate --><a href="{Sort_URL}" id="patient_pregnancy_deliver1Page_HeaderPregRegDate">{res:PregRegDate}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter PregRegDate --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter3 --><a href="{Sort_URL}" id="patient_pregnancy_deliver1Page_HeaderSorter3">{res:Calc_DeliveryDate}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter3 --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter1 --><a href="{Sort_URL}" id="patient_pregnancy_deliver1Page_HeaderSorter1">{res:DateDelivery}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="{res:CCS_ASC}" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="{res:CCS_DESC}" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter1 --></th>
+ 
+            <th scope="col">
+            <!-- BEGIN Sorter Sorter_MobilePhone --><a href="{Sort_URL}">{res:MobilePhone}</a> 
+            <!-- BEGIN Asc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Asc.gif"><!-- END Asc_On -->
+            <!-- BEGIN Desc_On --><img border="0" alt="" src="Styles/{CCS_Style}/Images/Desc.gif"><!-- END Desc_On --><!-- END Sorter Sorter_MobilePhone -->&nbsp;</th>
+          </tr>
+ 
+        </thead>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tfoot style="DISPLAY: table-footer-group">
+          <tr class="Footer">
+            <td>{Report_CurrentDate}</td> 
+            <td colspan="8">
+              <!-- BEGIN Navigator Navigator -->
+              <!-- BEGIN First_On --><a href="{First_URL}">{res:CCS_First}</a> <!-- END First_On -->
+              <!-- BEGIN First_Off -->{res:CCS_First} <!-- END First_Off -->
+              <!-- BEGIN Prev_On --><a href="{Prev_URL}">{res:CCS_Previous}</a> <!-- END Prev_On -->
+              <!-- BEGIN Prev_Off -->{res:CCS_Previous} <!-- END Prev_Off -->&nbsp; 
+              <!-- BEGIN Pages -->
+              <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+              <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->{res:CCS_Of} &nbsp;{Total_Pages}&nbsp; 
+              <!-- BEGIN Next_On --><a href="{Next_URL}">{res:CCS_Next}</a> <!-- END Next_On -->
+              <!-- BEGIN Next_Off -->{res:CCS_Next} <!-- END Next_Off -->
+              <!-- BEGIN Last_On --><a href="{Last_URL}">{res:CCS_Last}</a> <!-- END Last_On -->
+              <!-- BEGIN Last_Off -->{res:CCS_Last} <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+          </tr>
+        </tfoot>
+ <!-- END Section Page_Footer -->
+        <!-- BEGIN Section Town_Header --><!-- END Section Town_Header -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td>{Town}<strong></strong></td> 
+          <td>{Report_Row_Number} </td> 
+          <td>
+            <div>
+<a href="{PregnancyRecNr_Src}" id="patient_pregnancy_deliver1DetailPregnancyRecNr_{patient_pregnancy_deliver1:rowNumber}">{PregnancyRecNr}</a> 
+            </div>
+          </td> 
+          <td><a href="{FamilyName_Src}" id="patient_pregnancy_deliver1DetailFamilyName_{patient_pregnancy_deliver1:rowNumber}">{FamilyName}</a> </td> 
+          <td>{GivenName} </td> 
+          <td>{ReportLabel1}</td> 
+          <td>{Calc_DeliveryDate}&nbsp;</td> 
+          <td>{DateDelivery}</td> 
+          <td>{MobilePhone}</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Town_Footer -->
+        <tr class="SubTotal">
+          <td colspan="3">{res:CCS_ReportSubTotal}:&nbsp; {Count_PatientID}</td> 
+          <td><em>&nbsp;</em></td> 
+          <td><em>&nbsp; </em></td> 
+          <td style="TEXT-ALIGN: right" valign="baseline"><em>&nbsp;</em></td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td> 
+          <td style="TEXT-ALIGN: right" valign="baseline"><em>&nbsp;</em></td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Town_Footer -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="9">{res:CCS_NoRecords}</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline" colspan="3">{res:CCS_ReportTotal}:&nbsp; {TotalCount_PatientID}<font size="2"><em></em></font></td> 
+          <td><font size="2"><em></em></font></td> 
+          <td><font size="2"><em>&nbsp; </em></font></td> 
+          <td style="TEXT-ALIGN: right" valign="baseline"><font size="2"><em>&nbsp;</em></font></td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td> 
+          <td style="TEXT-ALIGN: right" valign="baseline"><font size="2"><em>&nbsp;</em></font></td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">&nbsp;</td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report patient_pregnancy_deliver1 --></p>
+</body>
+</html>
