@@ -1,3 +1,13 @@
+CREATE TABLE `notificationappregistration` (
+  `NotificationAppRegistrationID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `GCMRegistrationID` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `PregnancyID` int(10) DEFAULT NULL,
+  `MobilePhoneVerified` tinyint(1) DEFAULT NULL,
+  `ActivationCode` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `MobilePhone` VARCHAR(45) NULL
+  PRIMARY KEY (`NotificationAppRegistrationID`)
+);
+
 ALTER TABLE `registry`.`pregnancy` 
 ADD COLUMN `MobileApp` TINYINT(1) NULL AFTER `RecommendationNotifications`;
 

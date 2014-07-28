@@ -263,9 +263,9 @@ class SendSMS {
 		} else {
 			$lastFullHalfHour = strtotime ( "$day $hour:30:00" );
 			if (++ $hour > 23) {
-				// past midnight set the hour to 00
+				// past midnight set the hour to 00 and add a day
 				$day = date ( 'Y-m-d', $timestamp + (24 * 60 * 60) );
-				$hour = '00';
+				$lastFullHalfHour = strtotime ( "$day 00:30:00" );
 			}
 		}
 		
