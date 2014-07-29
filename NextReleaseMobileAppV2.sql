@@ -1,8 +1,7 @@
 CREATE TABLE `notificationappregistration` (
   `NotificationAppRegistrationID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `GCMRegistrationID` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `GCMRegistrationID` varchar(1500) COLLATE utf8_bin DEFAULT NULL,
   `PregnancyID` int(10) DEFAULT NULL,
-  `MobilePhoneVerified` tinyint(1) DEFAULT NULL,
   `ActivationCode` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `MobilePhone` VARCHAR(45) NULL
   PRIMARY KEY (`NotificationAppRegistrationID`)
