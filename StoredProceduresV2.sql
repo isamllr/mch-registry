@@ -1,4 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `registry` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
 USE `registry`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
@@ -16,10 +15,6 @@ USE `registry`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Dumping events for database 'registry'
---
 
 --
 -- Dumping routines for database 'registry'
@@ -108,11 +103,11 @@ BEGIN
 
 CREATE TEMPORARY TABLE IF NOT EXISTS `tempQueueHRO` (
   `MobilePhone` varchar(13) COLLATE utf8_bin NOT NULL,
-  `NotificationText` varchar(2500) COLLATE utf8_bin DEFAULT NULL,
+  `NotificationText` varchar(2500) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
   `DateTimeToSend` datetime DEFAULT NULL,
   `LatestBy` date DEFAULT NULL,
-   HighRiskPregnancySummary varchar(2500),
-   doctorName varchar(250)
+   HighRiskPregnancySummary varchar(2500) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   doctorName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL
 );
 
 INSERT INTO tempQueueHRO
@@ -188,13 +183,13 @@ BEGIN
 
 CREATE TEMPORARY TABLE IF NOT EXISTS `tempQueueD` (
   `MobilePhone` varchar(13) COLLATE utf8_bin NOT NULL,
-  `NotificationText` varchar(2500) COLLATE utf8_bin DEFAULT NULL,
+  `NotificationText` varchar(2500) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
   `DateTimeToSend` datetime DEFAULT NULL,
   `LatestBy` date DEFAULT NULL,
    visitDate varchar(10),
-   facilityName varchar(250),
-   doctorName varchar(250),
-   patientName varchar(250)
+   facilityName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   doctorName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   patientName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL
 );
 
 INSERT INTO tempQueueD
@@ -271,14 +266,14 @@ BEGIN
 
 CREATE TEMPORARY TABLE IF NOT EXISTS `tempQueueD` (
   `MobilePhone` varchar(13) COLLATE utf8_bin NOT NULL,
-  `NotificationText` varchar(2500) COLLATE utf8_bin DEFAULT NULL,
+  `NotificationText` varchar(2500) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
   `DateTimeToSend` datetime DEFAULT NULL,
   `LatestBy` date DEFAULT NULL,
    dischargeDate varchar(10),
-   facilityName varchar(250),
-   doctorName varchar(250),
-   patientName varchar(250)
-);
+   facilityName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   doctorName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   patientName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL
+); 
 
 INSERT INTO tempQueueD
 				   SELECT
@@ -308,6 +303,7 @@ INSERT INTO tempQueueD
 					AND DATEDIFF(DATE_ADD(p.Calc_DeliveryDate, INTERVAL 31 DAY), nCurrentDate) > 0
 					AND pat.Discharged = 0
 					AND d.DeliveryID IS NULL
+					AND p.FacilityID <> h.FacilityID
 					ORDER BY DateTimeToSend ASC;
 
 INSERT IGNORE INTO notificationqueue
@@ -400,12 +396,12 @@ BEGIN
 
 CREATE TEMPORARY TABLE IF NOT EXISTS `tempQueueSub` (
   `MobilePhone` varchar(13) COLLATE utf8_bin NOT NULL,
-  `NotificationText` varchar(2500) COLLATE utf8_bin DEFAULT NULL,
+  `NotificationText` varchar(2500) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
   `DateTimeToSend` datetime DEFAULT NULL,
   `LatestBy` date DEFAULT NULL,
-   facilityName varchar(250),
-   doctorName varchar(250),
-   patientName varchar(250)
+   facilityName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   doctorName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   patientName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL
 );
 
 INSERT INTO tempQueueSub
@@ -478,12 +474,12 @@ BEGIN
 
 CREATE TEMPORARY TABLE IF NOT EXISTS `tempQueueUnsub` (
   `MobilePhone` varchar(13) COLLATE utf8_bin NOT NULL,
-  `NotificationText` varchar(2500) COLLATE utf8_bin DEFAULT NULL,
+  `NotificationText` varchar(2500) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
   `DateTimeToSend` datetime DEFAULT NULL,
   `LatestBy` date DEFAULT NULL,
-   facilityName varchar(250),
-   doctorName varchar(250),
-   patientName varchar(250)
+   facilityName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   doctorName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   patientName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL
 );
 
 INSERT INTO tempQueueUnsub
@@ -512,6 +508,7 @@ INSERT INTO tempQueueUnsub
 					AND DATEDIFF(DATE_ADD(p.Calc_DeliveryDate, INTERVAL 31 DAY), nCurrentDate) > 0
 					AND pat.Discharged = 0
 					AND d.DeliveryID IS NULL
+					AND p.PregRegDate <> DATE_SUB(nCurrentDate, INTERVAL IFNULL(nc.DaysBeforeOrAfter, nDaysAfter) day)
 					AND DATE(p.created) = DATE_SUB(nCurrentDate, INTERVAL IFNULL(nc.DaysBeforeOrAfter, nDaysAfter) day)
 					ORDER BY DateTimeToSend ASC;
 
@@ -557,14 +554,14 @@ BEGIN
 
 CREATE TEMPORARY TABLE IF NOT EXISTS `tempQueueVRH` (
   `MobilePhone` varchar(13) COLLATE utf8_bin NOT NULL,
-  `NotificationText` varchar(2500) COLLATE utf8_bin DEFAULT NULL,
+  `NotificationText` varchar(2500) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
   `DateTimeToSend` datetime DEFAULT NULL,
   `LatestBy` date DEFAULT NULL,
    NotificationTypeID TINYINT(10) DEFAULT NULL,
    MobileApp TINYINT(1) DEFAULT NULL,
-   visitDate varchar(10),
-   facilityName varchar(250),
-   patientName varchar(250)
+   visitDate varchar(10) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   facilityName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   patientName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL
 );
 
 INSERT INTO tempQueueVRH
@@ -640,15 +637,15 @@ BEGIN
 
 CREATE TEMPORARY TABLE IF NOT EXISTS `tempQueueP` (
   `MobilePhone` varchar(13) COLLATE utf8_bin NOT NULL,
-  `NotificationText` varchar(2500) COLLATE utf8_bin DEFAULT NULL,
+  `NotificationText` varchar(2500) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
   `DateTimeToSend` datetime DEFAULT NULL,
   `LatestBy` date DEFAULT NULL,
    NotificationTypeID TINYINT(10) DEFAULT NULL,
    MobileApp TINYINT(1) DEFAULT NULL,
    visitDate varchar(10),
-   facilityName varchar(250),
-   doctorName varchar(250),
-   patientName varchar(250)
+   facilityName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   doctorName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL,
+   patientName varchar(250) CHARACTER SET 'utf8' COLLATE 'utf8_bin' NULL
 );
 
 INSERT INTO tempQueueP
@@ -752,4 +749,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-26 22:25:05
+-- Dump completed on 2014-08-06 22:30:40
